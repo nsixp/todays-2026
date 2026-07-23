@@ -42,7 +42,8 @@ border-hutan-aksen
 ```
 
 ### Routing
-- SvelteKit file-based routing
+- SvelteKit folder-based routing: setiap route adalah folder dengan `+page.svelte`
+- Contoh: `/onboarding` → `src/routes/onboarding/+page.svelte`
 - `goto()` for programmatic navigation
 - Guard: `/home`, `/quiz`, `/group` harus cek store sebelum render
 
@@ -65,8 +66,9 @@ border-hutan-aksen
 
 - Avatar user berdiri di tengah persimpangan hutan
 - 3 signpost (papan penunjuk arah) menunjuk ke 3 menu
+- Signpost menampilkan nama hutan (besar) + nama asli (kecil) sebagai label
 - Signpost bisa diklik → navigasi / modal unlock
-- Background: layered forest scene (CSS + SVG, zero images)
+- Background: layered forest scene (CSS + SVG + CSS pattern)
 - Progress: 3 totem/lentera di atas scene
 - Status per signpost: Open / Locked 🔒 / Done ✅
 
@@ -87,18 +89,18 @@ border-hutan-aksen
 [{ "page": 1, "title": "...", "content": "...", "illustration": "compass" }]
 ```
 
-## State Shape (progress.ts)
+## State Shape (progress.ts — menggunakan `writable` dari svelte/store)
 
-```typescript
-avatar: $state<string | null>(null)
-nim: $state<string | null>(null)
-guidebookDone: $state(false)
-quizUnlocked: $state(false)
-quizDone: $state(false)
-groupUnlocked: $state(false)
-groupDone: $state(false)
-allDone: $derived(guidebookDone && quizDone && groupDone)
-reset(): void
+```
+avatar: writable(null)
+nim: writable(null)
+guidebookDone: writable(false)
+quizUnlocked: writable(false)
+quizDone: writable(false)
+groupUnlocked: writable(false)
+groupDone: writable(false)
+allDone: derived([guidebookDone, quizDone, groupDone], ...)
+reset(): fungsi untuk reset semua store ke default
 ```
 
 ## Deployment

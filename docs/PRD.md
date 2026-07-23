@@ -13,57 +13,63 @@ Mahasiswa baru perlu mengenal TODAYS dan mencari kelompok ospek mereka. Website 
 ```
 Splash Screen (logo + sambutan, auto-redirect 3s)
   → Onboarding (pilih avatar + input NIM, validasi ke DB)
-    → Home (3 menu: guidebook, quiz, cari kelompok)
-      ├── Guidebook   → ✅ terbuka dari awal
-      ├── Quiz        → 🔒 unlock: 3x klik ATAU password "RIMBA2026"
-      └── Cari Kelompok → 🔒 unlock: 3x klik ATAU password "RIMBA2026"
+    → Home (3 signpost: guidebook, quiz, cari kelompok)
+      ├── Kitab Penjelajah (Guidebook) → ✅ terbuka dari awal
+      ├── Ujian Rimba (Quiz)           → 🔒 unlock: password "RIMBA2026"
+      └── Temukan Suku (Cari Kelompok) → 🔒 unlock: password "RIMBA2026"
 ```
 
-**Completion condition:** Guidebook selesai ✅ + Quiz selesai ✅ + Kelompok ditemukan ✅ → Pop-up sukses dengan link WA pembimbing.
+**Completion condition:** Guidebook selesai ✅ + Quiz selesai ✅ + Kelompok ditemukan ✅ → Pop-up sukses dengan informasi WA pembimbing.
 
 ## 3. Functional Requirements
 
 ### F1: Splash Screen
 - Animasi logo TODAYS (fade-in + scale)
 - Teks sambutan setelah logo muncul
-- Auto-redirect ke onboarding setelah 3 detik
+- Auto-redirect ke onboarding setelah 4 detik
 
 ### F2: Onboarding
 - Grid 6 avatar hewan hutan (pilih salah satu)
+- Preview lingkaran avatar yang dipilih di atas grid
 - Input NIM dengan validasi 10-12 digit angka
 - Cek NIM terhadap database (groups.json)
 - Error state jika NIM tidak terdaftar
+- Hint teks NIM dummy (2410100001-2410100009)
 - Simpan avatar + NIM ke store
 
-### F3: Home
-- Tampilkan avatar + NIM user
-- 3 kartu menu: Guidebook, Quiz, Cari Kelompok
-- Status per menu: Terbuka / Terkunci / Selesai
-- Progress bar (tanaman merambat)
-- Unlock modal: input password ATAU 3x klik di luar modal
+### F3: Home — Forest Crossroads
+- Full viewport forest scene (h-screen)
+- Avatar user berdiri di tengah persimpangan
+- 3 signpost (papan penunjuk arah): guidebook, quiz, cari kelompok
+- Setiap signpost menampilkan nama hutan (besar) + nama asli (kecil)
+- Status per signpost: Terbuka / Terkunci 🔒 / Selesai ✅
+- 3 totem/lentera di atas scene sebagai progress indicator
+- Floating leaves + kunang-kunang (CSS particles)
+- Unlock modal: password "RIMBA2026" — tidak ada easter egg. Klik luar = tutup.
 
-### F4: Guidebook
+### F4: Guidebook (Kitab Penjelajah)
 - Layout buku digital dengan halaman flip
 - 4 halaman konten (info TODAYS, jadwal, struktur, tips)
 - Password "RIMBA2026" tersembunyi di halaman 2
 - Tombol "Selesai Membaca" di halaman terakhir
 
-### F5: Quiz
+### F5: Quiz (Ujian Rimba)
 - 5 soal pilihan ganda
-- Jika terkunci: unlock modal (password / 3x klik)
+- Jika terkunci: unlock modal (password only)
 - Feedback per jawaban (benar/salah)
 - Skor di akhir
 
-### F6: Cari Kelompok
-- Loading animation (~1.5 detik)
-- Tampilkan: nomor + nama kelompok, pembimbing + WA, daftar anggota (nama, NIM, prodi)
+### F6: Cari Kelompok (Temukan Suku)
+- Loading animation kompas (~1.5 detik)
+- Tampilkan: nomor + nama kelompok, pembimbing + nomor WA (teks), daftar anggota (nama, NIM, prodi)
 - Ambil data berdasarkan NIM dari store
 
 ### F7: Completion Popup
 - Muncul otomatis di Home saat 3/3 misi selesai
 - Animasi confetti (CSS)
-- Tampilkan link WA pembimbing
-- Tombol "Hubungi Pembimbing" dan "Tutup"
+- Tombol ✕ di pojok kanan atas
+- Tampilkan nama kelompok, pembimbing + nomor WA
+- Tombol "Hubungi Pembimbing" (link WA) dan "Tutup"
 
 ## 4. Data Requirements
 
@@ -99,13 +105,16 @@ Splash Screen (logo + sambutan, auto-redirect 3s)
 ```
 
 ## 5. Non-Functional Requirements
-- Desktop-first, responsive ke mobile
+- Desktop-first, responsive ke mobile & tablet
+- Full viewport (h-screen) untuk splash, onboarding, home
 - Bundle ringan (< 100KB JS)
 - Zero server (static site)
-- Animasi smooth di perangkat mid-range
-- Font: Poppins (heading), Inter (body)
+- Animasi CSS smooth di perangkat mid-range
+- Font: Barlow Condensed (heading), Sora (body)
+- Asset hybrid: CSS + SVG inline + pattern gratis. Hanya favicon sebagai file gambar.
 
 ## 6. Success Metrics
 - User dapat menyelesaikan flow dari splash → popup sukses
 - Semua state unlock/complete persist selama session
 - NIM validasi akurat terhadap data
+- Tampilan full viewport di semua device tanpa ada area putih

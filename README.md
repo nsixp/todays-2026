@@ -1,6 +1,6 @@
 # TODAYS 2026
 
-Website Telkom Orientation Days 2026 untuk memandu para calon mahasiswa baru Telkom University Purwokerto sebelum PKKMB dimulai.
+Website Telkom Orientation Days 2026 untuk memandu para calon mahasiswa baru Telkom University Purwokerto mengenal TODAYS dan mencari kelompok mereka sebelum PKKMB dimulai.
 
 ## Tech Stack
 

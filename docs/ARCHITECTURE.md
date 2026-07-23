@@ -8,9 +8,9 @@
 | Adapter | `@sveltejs/adapter-static` | Static site, zero server, deploy anywhere |
 | Styling | Tailwind CSS v4 | Utility-first, design tokens, responsive mudah |
 | Animations | Svelte transitions + CSS keyframes | Ringan, tanpa library tambahan |
-| State | Svelte `$state()` + `$derived()` | Built-in, no Redux/Zustand needed |
+| State | Svelte `writable` + `derived` from `svelte/store` | Simple, cukup untuk global state |
 | Data | Static JSON imports | Zero backend, bisa diganti API nanti |
-| Font | Google Fonts: Poppins + Inter | CDN, cached |
+| Font | Google Fonts: Barlow Condensed + Sora | Anti-slop, cocok tema petualangan |
 | Deploy | Vercel / Netlify | Free tier, static hosting |
 
 ## 2. File Structure
@@ -111,20 +111,18 @@ stores/progress.ts:
 
 ## 5. State Shape
 
-```typescript
-// Core user state
-avatar: string | null        // avatar ID
-nim: string | null           // NIM user
+Semua state menggunakan `writable` dari `svelte/store` di `src/lib/stores/progress.ts`.
 
-// Progress flags
-guidebookDone: boolean
-quizUnlocked: boolean
-quizDone: boolean
-groupUnlocked: boolean
-groupDone: boolean
-
-// Derived
-allDone: boolean             // guidebookDone && quizDone && groupDone
+```
+avatar: writable(null)           // avatar ID
+nim: writable(null)              // NIM user
+guidebookDone: writable(false)
+quizUnlocked: writable(false)
+quizDone: writable(false)
+groupUnlocked: writable(false)
+groupDone: writable(false)
+allDone: derived(...)            // guidebookDone && quizDone && groupDone
+reset()                          // reset semua ke default
 ```
 
 ## 6. Route Design
@@ -143,4 +141,5 @@ allDone: boolean             // guidebookDone && quizDone && groupDone
 - **CSS animations over JS** — floating leaves, confetti, page transitions
 - **No runtime animation library** — Svelte built-in transitions + CSS keyframes cukup
 - **Static JSON import** — zero network request untuk data
-- **No images** — semua asset pake emoji/SVG inline (kecuali favicon)
+- **Hybrid assets** — emoji + SVG inline + CSS pattern (heropatterns.com). Hanya favicon sebagai file gambar.
+- **Full viewport** — `h-screen` untuk splash/onboarding/home, `min-h-screen` untuk halaman konten
