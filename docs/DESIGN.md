@@ -1,5 +1,3 @@
-# DESIGN: TODAYS 2026
-
 **Theme:** Hutan Rimba. Warm, immersive, adventurous.
 
 ## 1. Color Palette

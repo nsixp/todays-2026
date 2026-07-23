@@ -1,34 +1,43 @@
 # TODAYS 2026
 
-Telkom Orientation Days 2026 website. It guides new students of Telkom University Purwokerto to learn about TODAYS and find their groups before PKKMB starts.
+Interactive orientation companion for new students of Telkom University Purwokerto. Explore a jungle-themed guidebook, test your TODAYS knowledge, and find your group.
 
-## Tech Stack
+## Features
 
-- **SvelteKit 5** as framework
-- **Tailwind CSS v4** for styling
-- **@sveltejs/adapter-static** for static site generation
+- **Splash Intro.** A cinematic clip-path animation that feels like stepping into a forest.
+- **Avatar Picker.** Choose from 6 forest animals.
+- **Kitab Penjelajah (Guidebook).** A digital flip book with 4 chapters of TODAYS info.
+- **Ujian Rimba (Quiz).** 5 questions with instant feedback on each answer.
+- **Temukan Suku (Find Group).** Enter your NIM to find your orientation group.
+- **Password Unlock.** The quiz and group finder stay locked until you find the password in the guidebook.
+- **Progress Tracking.** 3 carved totems show how far you have come.
+- **Completion Popup.** Confetti and a WA contact button appear when all missions are done.
 
-## Commands
+## Design
 
-```bash
-npm run dev      # Development server
-npm run build    # Build static site (output in build/)
-npm run preview  # Preview production build
-```
+A warm forest aesthetic with wood textures, organic shapes, and glow accents. All visuals are pure CSS and inline SVG with no external image files.
+
+## Built With
+
+SvelteKit 5, Tailwind CSS v4, deployed as a static site.
 
 ## Project Structure
 
 ```
 src/
-├── routes/        # Pages (splash, onboarding, home, guidebook, quiz, group)
+├── routes/          # Pages
 ├── lib/
 │   ├── components/  # UI components
-│   ├── stores/      # Svelte stores (progress state)
+│   ├── stores/      # State management
 │   └── data/        # Static JSON data
-├── app.css        # Tailwind + custom theme
-└── app.html       # Entry HTML
+├── app.css          # Global styles
+└── app.html         # Entry HTML
 ```
 
-## Theme
+## Development
 
-Immersive forest experience with floating leaves, signposts at a crossroads, and password based unlock mechanics.
+```bash
+npm run dev      # Start dev server
+npm run build    # Build for production (output: build/)
+npm run preview  # Preview production build
+```

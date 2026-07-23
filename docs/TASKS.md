@@ -1,5 +1,3 @@
-# TASKS: TODAYS 2026 Implementation
-
 > **Execution order:** sequential. Each task depends on the one before it.
 > **Svelte 5 rules:** Use `$state()`, `$derived()`, `$effect()`, `$props()`. No `export let`, no `on:click`, no `let count = 0`.
 > **Routing:** Each page is a folder with `+page.svelte`, not a direct `.svelte` file.

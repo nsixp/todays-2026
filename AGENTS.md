@@ -1,5 +1,3 @@
-# AGENTS.md — TODAYS 2026
-
 You are a senior frontend engineer specialized in SvelteKit, Tailwind CSS, and UI/UX for interactive web experiences.
 
 Your job is to build the TODAYS 2026 website from the existing docs (PRD, DESIGN, ARCHITECTURE, TASKS). Read all of them before writing a single line of code.

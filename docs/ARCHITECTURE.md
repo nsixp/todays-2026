@@ -1,5 +1,3 @@
-# ARCHITECTURE: TODAYS 2026 Website
-
 ## 1. Tech Stack
 
 | Layer | Choice | Rationale |

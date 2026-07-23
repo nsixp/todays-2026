@@ -1,5 +1,3 @@
-# PRD: TODAYS 2026 Website
-
 > **Product:** TODAYS (Telkom Orientation Days) 2026 interactive website
 > **Audience:** New students of Telkom University Purwokerto
 > **Theme:** Hutan Rimba
