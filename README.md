@@ -31,4 +31,4 @@ src/
 
 ## Theme
 
-Hutan Rimba — immersive forest experience dengan animasi dedaunan, signposts di persimpangan hutan, dan mekanisme unlock berbasis password.
+Immersive forest experience dengan animasi dedaunan, signposts di persimpangan hutan, dan mekanisme unlock berbasis password.
