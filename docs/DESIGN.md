@@ -1,24 +1,78 @@
-# DESIGN: TODAYS 2026 — Visual & Interaction Design
+# DESIGN: TODAYS 2026
 
-**Theme:** Hutan Rimba — immersive, warm, adventurous
+**Theme:** Hutan Rimba. Warm, immersive, adventurous.
 
 ## 1. Color Palette
 
+### Background
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--hutan-bg` | `#0D2818` | Background utama |
-| `--hutan-card` | `#1A4A2E` | Kartu/elevasi |
-| `--hutan-aksen` | `#6BAA3D` | Tombol, aksen aktif |
-| `--hutan-terang` | `#F5C542` | Highlight, heading |
-| `--hutan-cokelat` | `#5C3A21` | Kayu, divider |
-| `--hutan-teks` | `#F0F0E8` | Teks utama |
-| `--hutan-teks-sekunder` | `#A8C5A0` | Teks kedua |
+| `--hutan-bg` | `#0D2818` | Main page background |
+| `--hutan-bg-gelap` | `#071A10` | Deeper layer, overlays, bottom gradient |
+| `--hutan-bg-langit` | `#0F331E` | Sky fade, splash gradient top |
+| `--hutan-bg-overlay` | `rgba(7, 26, 16, 0.6)` | Modal backdrop, scrim |
+
+### Surface
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--hutan-card` | `#1A4A2E` | Card, panel, elevated surface |
+| `--hutan-card-hover` | `#205738` | Card hover state |
+| `--hutan-card-terang` | `#23663E` | Highlighted card, active panel |
+| `--hutan-card-border` | `#163D26` | Card inner border |
+
+### Accent
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--hutan-aksen` | `#6BAA3D` | Primary accent, buttons, active |
+| `--hutan-aksen-hover` | `#5C9632` | Accent hover, button hover |
+| `--hutan-aksen-ringan` | `#8FCF5C` | Light accent, subtle highlights |
+| `--hutan-aksen-bg` | `rgba(107, 170, 61, 0.15)` | Accent background, tag, badge |
+
+### State
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--hutan-sukses` | `#2ECC71` | Success, correct answer |
+| `--hutan-error` | `#E74C3C` | Error, wrong answer, alert |
+| `--hutan-info` | `#3498DB` | Info, hint |
+| `--hutan-warning` | `#F39C12` | Warning, caution |
+
+### Text
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--hutan-teks` | `#F0F0E8` | Primary text, headings |
+| `--hutan-teks-sekunder` | `#A8C5A0` | Secondary text, labels |
+| `--hutan-teks-tertiary` | `#7A9A75` | Muted text, captions |
+| `--hutan-teks-aksen` | `#D4A853` | Accent text, gold highlights |
+| `--hutan-teks-cokelat` | `#C4956A` | Wood text, warm labels |
+
+### Border
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--hutan-border` | `#2A5E3E` | Default border |
+| `--hutan-border-ringan` | `#1F4A2E` | Subtle border |
+| `--hutan-border-aksen` | `#6BAA3D` | Accent border, focus ring |
+
+### Nature
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--hutan-cokelat` | `#5C3A21` | Wood texture, signpost post |
+| `--hutan-cokelat-ringan` | `#8B5E3C` | Light wood, signpost board |
+| `--hutan-cokelat-gelap` | `#3E2615` | Dark wood, divider |
+| `--hutan-terang` | `#F5C542` | Sunlight, heading highlight |
+| `--hutan-terang-gelap` | `#D4A530` | Golden accent hover |
 
 ## 2. Typography
 
-- **Heading:** Barlow Condensed (600, 700, 800) — bold, condensed, adventurous
-- **Body:** Sora (400, 500, 600) — geometric warm, clean, readable
-- Keduanya dari Google Fonts, variable weight, ringan
+- **Heading:** Barlow Condensed (600, 700, 800). Bold, condensed, adventurous.
+- **Body:** Sora (400, 500, 600). Geometric warm, clean, readable.
+- Both are variable-weight Google Fonts, lightweight.
 
 ### Heading Scale (Barlow Condensed 700)
 
@@ -37,22 +91,22 @@
 | body | 14px / 0.875rem | 15px / 0.9375rem | 16px / 1rem |
 | small | 11px / 0.6875rem | 12px / 0.75rem | 13px / 0.8125rem |
 
-### Spacing & Size Tokens
+### Spacing and Size Tokens
 
 | Token | Value |
 |-------|-------|
 | Section padding | `p-4` `md:p-6` `lg:p-8` |
 | Card padding | `p-5` `md:p-6` |
-| Gap antar elemen | `gap-3` `md:gap-4` |
-| Max width konten | `max-w-lg` (512px) `md:max-w-xl` (576px) |
+| Element gap | `gap-3` `md:gap-4` |
+| Max content width | `max-w-lg` (512px) `md:max-w-xl` (576px) |
 
 ### Border Radius
 
-| Elemen | Tailwind |
-|--------|----------|
-| Cards, panel | `rounded-xl` (12px) |
+| Element | Tailwind |
+|---------|----------|
+| Cards, panels | `rounded-xl` (12px) |
 | Modal, popup | `rounded-2xl` (16px) |
-| Tombol | `rounded-lg` (8px) |
+| Buttons | `rounded-lg` (8px) |
 | Avatar circle | `rounded-full` |
 
 ### Shadows
@@ -61,40 +115,40 @@
 |-------|-------|
 | Card | `shadow-lg shadow-black/30` |
 | Modal | `shadow-2xl` |
-| Glow aksen | `shadow-[0_0_20px_rgba(107,170,61,0.4)]` |
+| Accent glow | `shadow-[0_0_20px_rgba(107,170,61,0.4)]` |
 | Signpost | `shadow-md` |
 
-## 3. Full Viewport & Responsive
+## 3. Full Viewport and Responsive
 
-### Prinsip
+### Principles
 
-| Halaman | Layout | Alasan |
-|---------|--------|--------|
-| **Splash, Onboarding, Home** | `h-screen` (100vh) | Immersive, gak ada scroll, semua elemen dalam 1 layar |
-| **Guidebook, Quiz, Group** | `min-h-screen` | Konten mungkin melebihi layar, scroll kalau perlu |
+| Page | Layout | Reason |
+|------|--------|--------|
+| **Splash, Onboarding, Home** | `h-screen` (100vh) | No scroll, all elements in one screen |
+| **Guidebook, Quiz, Group** | `min-h-screen` | Content may exceed screen |
 
-Semua halaman menggunakan `h-screen` atau `min-h-screen` + `bg-hutan-bg` agar tidak ada area putih di manapun.
+All pages use `h-screen` or `min-h-screen` with `bg-hutan-bg` so there are no white gaps.
 
 ### Splash (`/`)
-- `h-screen` — center horizontal + vertikal
-- Logo TODAYS: lingkaran hijau 80px (mobile) / 100px (tablet) / 130px (desktop) di tengah
-- Teks sambutan di bawah logo
-- Background: gradient `#0D2818 → #0F331E → #0D2818`
-- Floating glow di belakang logo
+- `h-screen` centered both axes
+- TODAYS logo: green circle, 80px mobile / 100px tablet / 130px desktop
+- Teks sambutan below the logo
+- Background gradient: `#0D2818 → #0F331E → #0D2818`
+- Floating glow behind the logo
 
 ### Onboarding (`/onboarding`)
-- `h-screen` — center horizontal + vertikal
-- Preview avatar: lingkaran 72px di atas grid
-- Grid avatar: 3×2, max 3 kolom
-- Input NIM + tombol di bawah grid
-- Scroll otomatis kebawah saat keyboard muncul (mobile)
-- Max width: 360px (mobile) / 400px (tablet) / 420px (desktop)
+- `h-screen` centered both axes
+- Avatar preview: 72px circle above grid
+- Avatar grid: 3 by 2, max 3 columns
+- Input NIM + button below grid
+- Auto-scroll down when keyboard appears (mobile)
+- Max width: 360px mobile / 400px tablet / 420px desktop
 
-### Home (`/home`) — Forest Crossroads
-- **`h-screen`** — forest scene penuh layar, tidak ada scroll
-- Elemen diposisikan dengan flex/grid/absolute agar memenuhi viewport
+### Home (`/home`) (Forest Crossroads)
+- `h-screen`, full-screen forest scene, no scroll
+- Elements positioned with flex/grid/absolute to fill viewport
 
-**Layout desktop (lg, ≥1024px):**
+**Desktop layout (lg, 1024px and up):**
 ```
 ┌──────────────────────────────────────┐
 │    🌲🌲🌲  Canopy  🌲🌲🌲           │ ~10%
@@ -105,75 +159,91 @@ Semua halaman menggunakan `h-screen` atau `min-h-screen` + `bg-hutan-bg` agar ti
 │           ╱                          │
 │  🧠 Ujian ─── 🧑 ─── 🔍 Temukan     │ ~30%
 │  Rimba           │    Suku           │
-│            (tiang kayu)               │
+│            (wooden post)              │
 │                                      │
 │    🌿🌿  Ground / rumput  🌿🌿       │ ~35%
 └──────────────────────────────────────┘
 ```
 
-**Layout tablet (md, 768-1023px):**
-- Signpost mengerut proporsional (font lebih kecil)
-- Jarak antar papan dikurangi
-- Scene hutan tetap penuh, layer pohon mengecil
+**Tablet (md, 768 to 1023px):**
+- Signposts scale down with smaller font
+- Board gaps reduced
+- Forest stays full, tree layer shrinks
 
-**Layout mobile (<768px):**
-- Scene hutan disederhanakan (2 layer instead of 3)
-- Signpost berubah jadi **vertical stack** (atas ke bawah)
-- Avatar di atas, 3 signpost di bawah dalam format kartu lebar penuh
-- Kunang-kunang dihilangkan (performace), floating leaves dikurangi
+**Mobile (under 768px):**
+- Forest simplified to 2 layers instead of 3
+- Signposts become a vertical stack (top to bottom)
+- Avatar on top, 3 signposts as full-width cards below
+- Fireflies removed for performance, floating leaves reduced
 
 **Signpost design:**
-- Tiang: gradient cokelat `linear-gradient(90deg, #5C3A21, #8B5E3C, #5C3A21)`
-- Papan: div dengan border-radius, bayangan, transform rotate()
-- Label: nama hutan (Barlow Condensed h3) di baris atas, nama asli (Sora small) di baris bawah
-- Paku: bulatan kecil (#C0C0C0) di setiap ujung papan
-- Setiap papan bisa diklik → navigasi / modal unlock
+- Post: brown gradient `linear-gradient(90deg, #5C3A21, #8B5E3C, #5C3A21)`
+- Board: div with wood grain gradient (same as Card pattern), border radius, shadow, transform rotate
+- Label: forest name (Barlow Condensed h3) on top, real name (Sora small) on bottom
+- Nails: small circles (#C0C0C0) at each board end, same style as card corner nails
+- Each board is clickable for navigation or unlock modal
 
-**State visual per signpost:**
+**Signpost state visual:**
 
-| State | Tampilan |
-|-------|----------|
-| Open | Papan hijau terang (`bg-hutan-aksen/20` `border-hutan-aksen`), jalur bersih |
-| Locked | Papan gelap (`bg-hutan-card/50 opacity-60`), 🔒 di samping nama |
-| Done | Papan hijau glow (`shadow-[0_0_15px_rgba(107,170,61,0.5)]`), ✅ di samping nama |
+| State | Appearance |
+|-------|------------|
+| Open | Light green board (`bg-hutan-aksen/20` `border-hutan-aksen`), clear path |
+| Locked | Dark board (`bg-hutan-card/50 opacity-60`), 🔒 next to name |
+| Done | Green glow board (`shadow-[0_0_15px_rgba(107,170,61,0.5)]`), ✅ next to name |
 
 ### Guidebook (`/guidebook`)
-- `min-h-screen` — background penuh layar, konten tengah
-- Max width: 100% (mobile) / 520px (tablet) / 600px (desktop)
-- Card guidebook: `bg-hutan-card` dengan border, padding 24px
-- Navigasi Previous/Next di bawah card
+- `min-h-screen`, full background, content centered
+- Max width: 100% mobile / 520px tablet / 600px desktop
+- Guidebook card: `bg-hutan-card` with border, 24px padding
+- Previous/Next navigation below the card
 
 ### Quiz (`/quiz`)
-- `min-h-screen` — background penuh layar, konten tengah
-- Max width sama dengan guidebook
-- Soal di card, opsi jawaban stacked
-- Progress bar tipis di atas card
+- `min-h-screen`, full background, content centered
+- Max width same as guidebook
+- Question in card, answer options stacked
+- Thin progress bar above the card
 
 ### Group (`/group`)
-- `min-h-screen` — background penuh
-- Loading state: center horizontal + vertikal (memenuhi layar)
-- Hasil: card tengah, max width 600px desktop
+- `min-h-screen`, full background
+- Loading state fills the screen
+- Result card centered, max width 600px desktop
 
 ## 4. Interaction Design
 
+### Philosophy
+
+No external animation library. CSS keyframes + Svelte built-in transitions are enough. The splash screen should feel like stepping into a video intro, not a loading bar.
+
+### Splash Intro (video-like sequence)
+
+The splash is a choreographed CSS sequence, no JavaScript animation lib:
+1. Start with black screen (0 to 0.3s)
+2. Circle `clip-path: circle(0)` grows to full screen, revealing the forest gradient (0.3 to 0.8s)
+3. TODAYS logo scales up with a soft glow `box-shadow` behind it (0.3 to 1.2s)
+4. Teks sambutan sweeps in via `clip-path: inset(0 100% 0 0)` to `inset(0)` (1.2 to 2s)
+5. Background gradient subtly shifts position (continuous)
+6. Auto-redirect at 4s
+
 ### Animations
 
-| Element | Teknik | Durasi |
-|---------|--------|--------|
-| Logo splash | CSS scale + opacity | 1.2s |
-| Page transition | Daun CSS overlay (12 partikel) | 0.6s |
-| Signpost muncul | Svelte fly + stagger per papan | 0.5s + 0.15s |
+| Element | Technique | Duration |
+|---------|-----------|----------|
+| Splash lens open | `clip-path: circle()` expanding | 0.5s |
+| Splash logo | CSS scale + glow | 1.2s |
+| Teks sambutan | `clip-path: inset()` sweep | 0.8s |
+| Page transition | Leaf bush overlay, CSS clip-path sweep covering screen | 0.6s |
+| Signpost appear | Svelte fly + stagger per board | 0.5s + 0.15s |
 | Signpost hover | CSS scale(1.05) + brightness | 0.2s |
 | Unlock modal | Scale + backdrop blur | 0.2s |
 | Loading kelompok | CSS bounce infinite | 1.5s |
-| Progress totem | CSS scale-up per lentera | 0.5s |
+| Progress totem | CSS scale-up per lantern | 0.5s |
 | Confetti popup | CSS keyframe fall | 2-4s |
 | Floating leaves | CSS keyframe float | 6-14s infinite |
 | Kunang-kunang | CSS keyframe float + glow pulse | 3-7s infinite |
 
 ### Menu Names
 
-| Nama Hutan (imersif) | Nama Asli | Ikon |
+| Forest Name (immersive) | Real Name | Icon |
 |----------------------|-----------|------|
 | Kitab Penjelajah | Guidebook | 📖 |
 | Ujian Rimba | Quiz | 🧠 |
@@ -181,70 +251,222 @@ Semua halaman menggunakan `h-screen` atau `min-h-screen` + `bg-hutan-bg` agar ti
 
 ### Unlock Mechanism
 
-- Modal muncul saat klik signpost terkunci
-- Satu-satunya cara unlock: password `RIMBA2026` (ditemukan di guidebook halaman 2)
-- Klik di luar modal = tutup (gak unlock)
+- Modal appears when clicking a locked signpost
+- Only way to unlock: password `RIMBA2026` (found on guidebook page 2)
+- Clicking outside the modal closes it without unlocking
 
 ### State Visual
 
 | State | Signpost Style |
 |-------|----------------|
-| Open | Papan hijau terang (`bg-hutan-aksen/20`), border glow |
-| Locked | Papan gelap (`bg-hutan-card/50 opacity-60`), 🔒 |
-| Done | Papan hijau glow (`bg-hutan-aksen/30 ring-2`), ✅ |
+| Open | Light green board (`bg-hutan-aksen/20`), border glow |
+| Locked | Dark board (`bg-hutan-card/50 opacity-60`), 🔒 |
+| Done | Green glow board (`bg-hutan-aksen/30 ring-2`), ✅ |
 
-## 5. Forest Scene — Layer Composition (z-index)
+## 5. Forest Scene Layer Composition (z-index)
 
-Home page menggunakan layered scene untuk efek hutan yang immersive. Urutan z-index dari belakang ke depan:
+Home uses layered scenes for an immersive forest. Z-index from back to front:
 
-| z-index | Layer | Isi | Teknik |
-|---------|-------|-----|--------|
-| 0 | **Sky/Background** | Gradasi hijau tua ke biru samar | `radial-gradient` |
-| 1 | **Far trees** | Siluet pohon tipis transparan | SVG inline / CSS pseudo |
-| 2 | **Mid trees** | Pohon lebih solid di kiri-kanan | SVG inline / CSS pseudo |
-| 3 | **Ground** | Jalan tanah + rumput di bawah | `linear-gradient` horizontal |
-| 4 | **Canopy** | Daun frame atas (overflow hidden) | CSS shapes / SVG |
-| 5 | **Totem progress** | 3 lentera di atas scene | Div absolute |
-| 10 | **Signpost** | Tiang + 3 papan arah | Div + CSS transform |
-| 15 | **Avatar** | Emoji user + nama + nama asli | Div relative/flex |
-| 20 | **Floating leaves** | Partikel daun jatuh | CSS keyframe fixed |
-| 25 | **Kunang-kunang** | Partikel cahaya kuning | CSS keyframe fixed |
+| z-index | Layer | Content | Technique |
+|---------|-------|---------|-----------|
+| 0 | **Sky/Background** | Dark green to faint blue gradient | `radial-gradient` |
+| 1 | **Far trees** | Transparent thin tree silhouettes | SVG inline / CSS pseudo |
+| 2 | **Mid trees** | Solid trees on left and right | SVG inline / CSS pseudo |
+| 3 | **Ground** | Dirt path + grass below | `linear-gradient` horizontal |
+| 4 | **Canopy** | Top leaf frame (overflow hidden) | CSS shapes / SVG |
+| 5 | **Totem progress** | 3 lanterns above the scene | Absolute divs |
+| 10 | **Signpost** | Post + 3 direction boards | Div + CSS transform |
+| 15 | **Avatar** | User emoji + name + real name | Relative/flex div |
+| 20 | **Floating leaves** | Falling leaf particles | CSS keyframe fixed |
+| 25 | **Kunang-kunang** | Yellow light particles | CSS keyframe fixed |
 
 **Responsive simplification (mobile):**
-- Far trees + Mid trees digabung jadi 1 layer
-- Kunang-kunang dihilangkan
-- Floating leaves dikurangi jadi 3 partikel
+- Far trees and Mid trees merged into 1 layer
+- Fireflies removed
+- Floating leaves reduced to 3 particles
 
 **Asset approach (hybrid):**
-- Siluet pohon: SVG inline, bisa digenerate AI atau dari undraw.co
-- Texture daun (ground): CSS pattern dari heropatterns.com
-- Ikon signpost: emoji bawaan
-- Pattern kayu: CSS gradient (tanpa gambar)
-- Avatar: emoji (versi awal), nanti bisa diganti ilustrasi dari humaaans.com
-- Hanya favicon sebagai file gambar (.png)
+- Tree silhouettes: SVG inline, AI generated or from undraw.co
+- Leaf texture (ground): CSS pattern from heropatterns.com
+- Signpost icons: built-in emoji
+- Wood pattern: CSS gradient, no images
+- Avatar: emoji for v1, can upgrade to humaaans.com later
+- Only favicon as image file (.png)
 
 ## 6. Immersive Elements
 
-- **Floating leaves:** 6 partikel CSS keyframe dengan posisi/acak/kecepatan acak. Mobile: 3 partikel.
-- **Kunang-kunang:** Partikel CSS kecil warna `#F5C542` dengan glow + float acak. Desktop only.
-- **Semak duri (locked):** CSS pseudo-elements + emoji 🌵🔒 di jalur terkunci (desktop) / badge (mobile).
-- **Vines dekoratif:** SVG inline di sisi kiri-kanan layout (desktop). Mobile: simplified.
-- **Texture noise:** Background pattern subtle via CSS dari heropatterns.com.
-- **Glow effect:** `text-shadow` hijau lembut di logo splash (0 0 40px #6BAA3D) dan signpost aktif.
-- **Totem progress:** 3 lentera/tiang kayu — scale + glow saat misi selesai.
-- **Avatar bounce:** Animasi float ringan (translateY -3px) infinite di home.
+- **Floating leaves:** 6 CSS keyframe particles with random position and speed. Mobile: 3.
+- **Kunang-kunang:** Small CSS particles in `#F5C542` with glow and random float. Desktop only.
+- **Semak duri (locked):** CSS pseudo-elements + emoji 🌵🔒 on locked paths (desktop) or badge (mobile).
+- **Vines:** SVG inline on left and right sides of layout (desktop). Simplified on mobile.
+- **Noise texture:** Subtle background pattern via CSS from heropatterns.com.
+- **Glow effect:** `text-shadow` soft green on splash logo (0 0 40px #6BAA3D) and active signpost.
+- **Totem progress:** 3 carved wooden totems with ring details (see Forest Themed Components).
+- **Avatar bounce:** Gentle translateY(-3px) float animation, infinite on home.
 
 ## 7. Asset Strategy
 
-| Asset | Type | Source | Implementasi |
-|-------|------|--------|-------------|
-| Siluet pohon | SVG inline | AI generate atau undraw.co | Inline di komponen Home |
-| Ikon menu | Emoji | Built-in | 📖 🧠 🔍 |
-| Background pattern | CSS | heropatterns.com | `background-image` di app.css |
-| Font | Google Fonts | fonts.google.com | `<link>` di app.html |
-| Avatar hewan | Emoji (v1) | Built-in | Nanti bisa upgrade ke ilustrasi dari humaaans.com |
-| Pattern kayu | CSS gradient | Built-in | `linear-gradient` tanpa gambar |
-| Favicon | .png file | Dibuat sendiri | `static/favicon.png` |
-| Dekorasi vines | SVG inline | AI generate atau lucide.dev | Inline di komponen layout |
+| Asset | Type | Source | Implementation |
+|-------|------|--------|----------------|
+| Tree silhouettes | SVG inline | AI generate or undraw.co | Inline in Home component |
+| Menu icons | Emoji | Built-in | 📖 🧠 🔍 |
+| Background pattern | CSS | heropatterns.com | `background-image` in app.css |
+| Font | Google Fonts | fonts.google.com | `<link>` in app.html |
+| Animal avatars | Emoji (v1) | Built-in | Can upgrade to humaaans.com later |
+| Wood pattern | CSS gradient | Built-in | `linear-gradient` without images |
+| Favicon | .png file | Self-made | `static/favicon.png` |
+| Vines decorative | SVG inline | AI generate or lucide.dev | Inline in layout component |
 
-**Catatan:** Semua asset SVG/code ditaruh inline di komponen Svelte (bukan file eksternal), kecuali favicon. Tidak ada file gambar eksternal (png/jpg) selain favicon.
+**Note:** All SVG and code assets are inline in Svelte components, not external files. Only the favicon is an image file.
+
+## 8. Forest Themed Components
+
+Each component is designed to feel carved from the forest, not borrowed from a generic design system. No standard rounded rectangles. No flat white cards. Everything should look like it belongs in a jungle clearing.
+
+### Card (Papan Kayu)
+
+Cards look like wooden planks lashed together.
+
+```
+┌──────────────────────────────┐
+│  ═══  ═══  ═══  ═══  ═══    │  ← wood grain (subtle CSS gradient)
+│  ┌──────────────────────┐    │
+│  │                      │    │
+│  │     Content here     │    │
+│  │                      │    │
+│  └──────────────────────┘    │
+│  ●                    ●      │  ← nail heads at corners
+└──────────────────────────────┘
+```
+
+- Background: `linear-gradient(135deg, #1A4A2E, #205738)` with a subtle repeating `linear-gradient` for wood grain stripes (1px, < 5% opacity)
+- Border: `border-hutan-border`, `rounded-xl`
+- Corner nails: two small circles via `::before` / `::after` pseudo-elements (8px, `bg-zinc-400`, `rounded-full`, positioned top-left and bottom-right)
+- Inner content area: slightly inset, `bg-hutan-bg/30`
+- Hover: grain stripes shift position slightly via `background-position` transition (0.4s)
+- No generic `shadow-lg` alone. Shadow is tinted green: `box-shadow: 0 4px 20px rgba(6, 26, 16, 0.5)`
+
+### Popup / Modal (Ranting Frame)
+
+Modal looks like a clearing surrounded by branches. No standard blurred glass.
+
+```
+       ╱╲        ╱╲
+      ╱  ╲──────╱  ╲              ← corner branches (SVG inline)
+     │    Modal    │
+     │   content   │
+     │    ────     │
+     │  [close]    │
+     ╲  ╱──────╲  ╱
+      ╲╱        ╲╱
+```
+
+- Backdrop: `bg-hutan-bg-gelap` at 70% opacity, not a blur overlay (blur is fine but secondary)
+- Four corner vines rendered as inline SVG paths (drawn once, reused via `<use>`)
+- Modal body: same wood plank treatment as Card, but with `rounded-2xl` and a subtle `clip-path: polygon(2% 0, 98% 0, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0 98%, 0 2%)` that slightly indents the corners for an organic feel
+- Close button (✕): sits on a small leaf-shaped badge (`clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%)`), green background
+- Entrance: CSS `scale(0.9)` + `opacity(0)` to `scale(1)` + `opacity(1)`, 0.25s, cubic-bezier spring
+
+### Button (Kayu / Daun)
+
+Two variants, picked by context:
+
+**Wood button (primary):**
+- Background: `linear-gradient(135deg, #5C3A21, #8B5E3C)` with subtle wood grain overlay
+- Text: `text-hutan-teks`, Barlow Condensed 600
+- Hover: brightness increase, slight scale
+- Active: `translateY(1px)` + darker shadow
+- Shape: `rounded-lg` with `clip-path` that gives a hand-carved irregular edge: `polygon(4% 0, 96% 0, 100% 20%, 100% 80%, 96% 100%, 4% 100%, 0 80%, 0 20%)`
+
+**Leaf button (accent / secondary):**
+- Background: `bg-hutan-aksen`, no grain
+- Bottom edge: pointed like a leaf tip via `clip-path: polygon(5% 0, 95% 0, 100% 100%, 50% 85%, 0 100%)`
+- Hover: glow `shadow-[0_0_15px_rgba(107,170,61,0.4)]`
+- Shape width: shorter than wood button (leaf proportions)
+
+### Form Input (Ukiran Kayu)
+
+Inputs look like text carved into a wooden surface.
+
+- Background: `bg-hutan-card` (recessed)
+- Inner shadow: `box-shadow: inset 0 2px 4px rgba(0,0,0,0.3)` (carved feel)
+- Border: `border-hutan-border-ringan`
+- Focus: glow ring using `ring-hutan-aksen/40`, not a thick solid color
+- Placeholder: `text-hutan-teks-tertiary`, italic
+- The input surface has a subtle wood grain (same as card, but darker)
+- Cursor: styled `caret-color: #6BAA3D` (green glow, like a firefly)
+
+### Progress Indicator (Totem Ukir)
+
+Three wooden totems, each carved with rings. Replaces generic dots or progress bars.
+
+```
+    ┌──┐    ┌──┐    ┌──┐
+    │▓▓│    │  │    │  │         ← carved rings on each totem
+    │▓▓│    │  │    │  │
+    │▓▓│    │  │    │  │
+    └──┘    └──┘    └──┘
+   (done)  (curr)  (locked)
+```
+
+- Each totem is a narrow vertical rectangle (`w-5 h-16`), `rounded-sm`
+- Base color: `bg-hutan-cokelat` with vertical grain stripe
+- Horizontal carved rings: 3 `box-shadow: inset` stripes (1px, darker brown, evenly spaced)
+- Done state: top section glows green (`box-shadow: 0 -4px 12px rgba(107,170,61,0.5)`), filled with `bg-hutan-aksen`
+- Active state: middle section has pulsing glow animation
+- Locked: completely dark, `opacity-40`
+- Spacing: `gap-4` between totems, connected at the base by a horizontal wooden beam (`w-full h-2 bg-hutan-cokelat-gelap` underneath)
+
+### Divider (Akar / Ranting)
+
+Dividers between sections look like exposed roots or fallen branches, not `<hr>` lines.
+
+- `height: 4px`, full width
+- Background: `linear-gradient(90deg, transparent, #5C3A21, #8B5E3C, #5C3A21, transparent)` (fades in from edges)
+- Before/after pseudo: small branch knots (6px circles) at 25% and 75% position
+- Alternative: wavy variant via `clip-path: polygon(0 40%, 10% 60%, 20% 35%, 30% 65%, ...)` repeating
+
+### Badge / Tag (Daun Kecil)
+
+Status badges (open, locked, done) are small leaf shapes, not rectangles.
+
+- Background: `bg-hutan-card`
+- Shape: `clip-path: polygon(0 50%, 15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%)` (oval leaf with pointed ends)
+- Rotated slightly (-5deg to 5deg, random per instance)
+- Done badge: green fill `bg-hutan-sukses`
+- Locked badge: dark fill with 🔒 emoji
+- Text: 11px, uppercase, tighter tracking
+
+### Avatar Frame
+
+The avatar preview is not a plain circle. It sits inside a wooden medallion.
+
+```
+    ┌────┐
+   ╱ .  . ╲              ← wooden ring frame
+  │  (🐒)  │
+   ╲      ╱
+    └────┘
+    ═══════               ← small name plaque below
+     Monyet
+```
+
+- Outer ring: `border-4 border-hutan-cokelat-ringan`, `rounded-full`, with a carved inner ring (`box-shadow: inset 0 0 0 3px #3E2615`)
+- Plaque below: rectangle with pointed bottom (`clip-path: polygon(5% 0, 95% 0, 100% 100%, 50% 85%, 0 100%)`), background `bg-hutan-cokelat`, text Barlow Condensed
+- Selected avatar: ring glows green (`box-shadow: 0 0 12px rgba(107,170,61,0.5)`)
+
+### Glass / Container Cards
+
+For cards that need to show background forest scene through them (e.g., guidebook page on home):
+
+```
+  ┌─── translucent ───┐
+  │  forest visible   │
+  │  through card     │
+  │                   │
+  └───────────────────┘
+```
+
+- Background: `rgba(13, 40, 24, 0.85)` instead of `backdrop-blur` (avoids performance hit and glassmorphism cliché)
+- Border: thin, `1px solid rgba(107, 170, 61, 0.2)`
+- This is NOT frosted glass. It is a thin layer of forest mist.

@@ -1,8 +1,18 @@
 # AGENTS.md — TODAYS 2026
 
+You are a senior frontend engineer specialized in SvelteKit, Tailwind CSS, and UI/UX for interactive web experiences.
+
+Your job is to build the TODAYS 2026 website from the existing docs (PRD, DESIGN, ARCHITECTURE, TASKS). Read all of them before writing a single line of code.
+
+Core principles:
+- Write code as simply as possible, like a real senior would. A 1-line solution beats 10 lines. No comments on obvious things.
+- If a pattern already exists in the codebase, follow it. Don't reinvent.
+- Svelte 5 components use runes ($state, $derived, $props). .ts files use writable/derived from svelte/store.
+- No TypeScript. No test libraries. `npm run build` is your only verification.
+
 ## Project Overview
 
-Website interaktif untuk TODAYS 2026 (Telkom Orientation Days) dengan tema Hutan Rimba. Membantu mahasiswa baru mengenal TODAYS dan mencari kelompok ospek mereka.
+Interactive website for TODAYS 2026 (Telkom Orientation Days) with a Hutan Rimba jungle theme. Helps new students learn about TODAYS and find their orientation group.
 
 **Tech:** SvelteKit 5 + Tailwind CSS v4 + Static Adapter
 **Data:** Static JSON (groups.json, quiz.json, guidebook.json)
@@ -20,10 +30,10 @@ npm run check        # TypeScript check
 ## Key Conventions
 
 ### Code Style
-- **No TypeScript types** — use `.svelte` with `<script>` (no lang=ts) for simplicity
-- **No comments** except `ponytail:` annotations
-- **One component per file**, file named same as component
-- **Svelte 5 runes:** use `$state()`, `$derived()`, `$effect()`, `$props()` — NO `let count = 0` (reactive not needed), NO `export let`, NO `on:click` (use `onclick`)
+- **No TypeScript types.** Use `.svelte` with `<script>` (no lang=ts) for simplicity.
+- **No comments** except `ponytail:` annotations.
+- **One component per file**, file named same as component.
+- **Svelte 5 runes:** use `$state()`, `$derived()`, `$effect()`, `$props()`. No `let count = 0` (reactive not needed), no `export let`, no `on:click` (use `onclick`).
 
 ### Data Files
 - Static JSON imported directly: `import groups from '$lib/data/groups.json'`
@@ -34,42 +44,48 @@ npm run check        # TypeScript check
 - Custom theme in `app.css` using `@theme` directive
 - Breakpoints: `md:` for tablet (768px), `lg:` for desktop (1024px)
 
+### Animation
+- No external animation library. CSS keyframes + clip-path + Svelte transitions only.
+- Splash intro: choreographed clip-path circle expand + text sweep.
+- Page transition: leaf bush overlay covering the screen.
+
 ### Color Tokens
+Full palette in DESIGN.md. Most used tokens:
 ```
-bg-hutan-bg, bg-hutan-card, bg-hutan-aksen, bg-hutan-terang
-text-hutan-teks, text-hutan-teks-sekunder
-border-hutan-aksen
+bg-hutan-bg, bg-hutan-card, bg-hutan-aksen, bg-hutan-bg-gelap
+text-hutan-teks, text-hutan-teks-sekunder, text-hutan-aksen
+border-hutan-aksen, border-hutan-border
 ```
 
 ### Routing
-- SvelteKit folder-based routing: setiap route adalah folder dengan `+page.svelte`
-- Contoh: `/onboarding` → `src/routes/onboarding/+page.svelte`
+- SvelteKit folder-based routing: each route is a folder with `+page.svelte`
+- Example: `/onboarding` to `src/routes/onboarding/+page.svelte`
 - `goto()` for programmatic navigation
-- Guard: `/home`, `/quiz`, `/group` harus cek store sebelum render
+- Guard: `/home`, `/quiz`, `/group` must check store before render
 
 ## Menu Names
 
-| Nama Hutan | Nama Asli | Ikon |
+| Forest Name | Real Name | Icon |
 |-----------|-----------|------|
 | Kitab Penjelajah | Guidebook | 📖 |
 | Ujian Rimba | Quiz | 🧠 |
 | Temukan Suku | Cari Kelompok | 🔍 |
 
-## Unlock Logic (PENTING)
+## Unlock Logic (IMPORTANT)
 
-- Quiz (Ujian Rimba) dan Cari Kelompok (Temukan Suku) terkunci dari awal
-- Satu-satunya cara unlock: password "RIMBA2026"
-- Guidebook (Kitab Penjelajah) terbuka dari awal
-- Setelah semua 3 selesai → popup completion
+- Quiz (Ujian Rimba) and Cari Kelompok (Temukan Suku) start locked
+- Only way to unlock: password "RIMBA2026"
+- Guidebook (Kitab Penjelajah) starts open
+- After all 3 are done, the completion popup appears
 
-## Home Page — Forest Crossroads
+## Home Page (Forest Crossroads)
 
-- Avatar user berdiri di tengah persimpangan hutan
-- 3 signpost (papan penunjuk arah) menunjuk ke 3 menu
-- Signpost menampilkan nama hutan (besar) + nama asli (kecil) sebagai label
-- Signpost bisa diklik → navigasi / modal unlock
+- User avatar stands at a forest crossroads
+- 3 signposts point to the 3 menus
+- Each signpost shows the forest name (large) and real name (small) as labels
+- Clicking a signpost triggers navigation or an unlock modal
 - Background: layered forest scene (CSS + SVG + CSS pattern)
-- Progress: 3 totem/lentera di atas scene
+- Progress: 3 totems or lanterns above the scene
 - Status per signpost: Open / Locked 🔒 / Done ✅
 
 ## Data Structure
@@ -89,7 +105,7 @@ border-hutan-aksen
 [{ "page": 1, "title": "...", "content": "...", "illustration": "compass" }]
 ```
 
-## State Shape (progress.ts — menggunakan `writable` dari svelte/store)
+## State Shape (progress.ts — uses `writable` from svelte/store)
 
 ```
 avatar: writable(null)
@@ -100,19 +116,35 @@ quizDone: writable(false)
 groupUnlocked: writable(false)
 groupDone: writable(false)
 allDone: derived([guidebookDone, quizDone, groupDone], ...)
-reset(): fungsi untuk reset semua store ke default
+reset(): resets all stores to defaults
 ```
 
 ## Deployment
 
 ```bash
 npm run build
-# Output di build/ — deploy ke Vercel/Netlify
+# Output in build/, deploy to Vercel or Netlify
 ```
 
-## Referenced Skills (gunakan saat implementasi)
+## Skill Usage During Development
 
-1. **tailwind-design-system** — untuk proper Tailwind v4 tokens
-2. **design-taste-frontend** — untuk styling yang gak keliatan AI-generated
-3. **ponytail** — minimal code, no over-engineering
-4. **full-output-enforcement** — complete code, no placeholders
+Before any coding task, check which skill applies. Use `ask-matt` if unsure.
+
+| Skill | When to Use |
+|-------|-------------|
+| **ponytail** | Every coding task. Keep code minimal, no over-engineering. |
+| **full-output-enforcement** | When generating complete component files. Prevents truncation. |
+| **tailwind-design-system** | When defining color tokens, responsive breakpoints, Tailwind v4 config. |
+| **design-taste-frontend** | When building visual components. Anti-AI-slop design enforcement. |
+| **impeccable** | After building a component. Polish animations, check accessibility, refine spacing. |
+| **humanizer** | For website copy (button labels, error messages, guidebook content). Remove AI patterns. |
+| **apple-design** | For animation patterns: spring curves, clip-path transitions, reduced motion handling. |
+| **brainstorming** | Before starting any feature or creative work. Clarify intent first. |
+| **ask-matt** | When unsure which skill fits the current task. Routes to the right approach. |
+| **review-animations** | Final audit of all animations before deploy. Checks easing, duration, origin, reduced motion, and Emil Kowalski craft standards. |
+
+### Animation Rules (already agreed)
+
+- No external animation library. CSS keyframes + clip-path + Svelte transitions only.
+- Splash intro: choreographed clip-path circle expand + text sweep.
+- Page transition: leaf bush overlay covering the screen.

@@ -1,87 +1,88 @@
 # TASKS: TODAYS 2026 Implementation
 
-> **Execution order:** sequential. Setiap task dependen pada task sebelumnya.
-> **Svelte 5 rules:** Gunakan `$state()`, `$derived()`, `$effect()`, `$props()`. NO `export let`, NO `on:click`, NO `let count = 0`.
-> **Routing:** Setiap halaman = folder + `+page.svelte`, bukan file `.svelte` langsung.
+> **Execution order:** sequential. Each task depends on the one before it.
+> **Svelte 5 rules:** Use `$state()`, `$derived()`, `$effect()`, `$props()`. No `export let`, no `on:click`, no `let count = 0`.
+> **Routing:** Each page is a folder with `+page.svelte`, not a direct `.svelte` file.
 
 ---
 
 ## Task 1: Project Scaffold + Tailwind CSS
 
-**Goal:** SvelteKit project running with Tailwind CSS v4.
+**Goal:** Get SvelteKit running with Tailwind CSS v4.
 
 **Files:**
 - Create: `package.json`, `svelte.config.js`, `vite.config.js`, `src/app.css`, `src/app.html`
 
 **Steps:**
-1. `npm create svelte@latest todays-2026 -- --template minimal` atau manual buat package.json
+1. Run `npm create svelte@latest` or manually create package.json
 2. `npm install -D @tailwindcss/vite @sveltejs/adapter-static`
-3. Config `vite.config.js` with Tailwind plugin
-4. Config `svelte.config.js` with static adapter
-5. Create `src/app.css` with `@import "tailwindcss"` + `@theme` (all color tokens: hutan-bg, hutan-card, hutan-aksen, hutan-terang, hutan-cokelat, hutan-teks, hutan-teks-sekunder)
-6. Update `src/app.html` with Google Fonts link (Barlow Condensed + Sora)
-7. Create `src/routes/+layout.svelte` — basic wrapper
-8. `npm run dev` → verify blank green page
+3. Configure `vite.config.js` with the Tailwind plugin
+4. Configure `svelte.config.js` with the static adapter
+5. Create `src/app.css` with `@import "tailwindcss"` and `@theme` (all color tokens: hutan-bg, hutan-card, hutan-aksen, hutan-terang, hutan-cokelat, hutan-teks, hutan-teks-sekunder)
+6. Update `src/app.html` with Google Fonts (Barlow Condensed + Sora)
+7. Create `src/routes/+layout.svelte` as a basic wrapper
+8. Run `npm run dev` and verify a blank green page
 
 ---
 
-## Task 2: Data Layer — JSON + Store
+## Task 2: Data Layer (JSON + Store)
 
-**Goal:** All data files and global store.
+**Goal:** Create all data files and the global store.
 
 **Files:**
 - Create: `src/lib/data/groups.json`, `src/lib/data/quiz.json`, `src/lib/data/guidebook.json`
 - Create: `src/lib/stores/progress.ts`
 
 **Steps:**
-1. `groups.json` — 3 groups, 9 total members (3 each), NIM 2410100001-2410100009
-2. `quiz.json` — 5 questions about TODAYS/hutan
-3. `guidebook.json` — 4 pages, password "RIMBA2026" on page 2 (footer note)
-4. `progress.ts` — `writable` stores: `avatar(null)`, `nim(null)`, `guidebookDone(false)`, `quizUnlocked(false)`, `quizDone(false)`, `groupUnlocked(false)`, `groupDone(false)`. Export `derived` `allDone` and `reset()` function.
+1. `groups.json`: 3 groups, 9 total members (3 each), NIM 2410100001 through 2410100009
+2. `quiz.json`: 5 questions about TODAYS and the jungle (in Indonesian)
+3. `guidebook.json`: 4 pages, password "RIMBA2026" on page 2 (footer note)
+4. `progress.ts`: `writable` stores for `avatar(null)`, `nim(null)`, `guidebookDone(false)`, `quizUnlocked(false)`, `quizDone(false)`, `groupUnlocked(false)`, `groupDone(false)`. Export a `derived` `allDone` and a `reset()` function.
 
 ---
 
 ## Task 3: Splash Page
 
-**Goal:** Logo animation + welcome text → auto-redirect.
+**Goal:** Video-like intro using only CSS clip-path and keyframes.
 
 **File:** `src/routes/+page.svelte`
 
 **Steps:**
-1. Logo TODAYS (div lingkaran hijau dengan teks) — muncul dengan scale animation after 300ms
-2. Welcome text — fade in after 1.8s
-3. Auto-redirect to `/onboarding` after 4s via `goto()`
-4. Use `setTimeout`
+1. Start with black screen, a circle `clip-path: circle(0)` at center expands to full screen, revealing the forest gradient background (0 to 0.8s)
+2. TODAYS logo scales up with `box-shadow` glow behind it (0.3 to 1.2s)
+3. Teks sambutan sweeps in with `clip-path: inset(0 100% 0 0)` transitioning to `inset(0)` (1.2 to 2s)
+4. Background gradient subtly shifts position via keyframe (continuous)
+5. Auto-redirect to `/onboarding` after 4s using `goto()` and `setTimeout`
 
 ---
 
 ## Task 4: Onboarding Page
 
-**Goal:** Pilih avatar + input NIM with validation.
+**Goal:** Let users pick an avatar and enter their NIM with validation.
 
 **Files:**
 - Create: `src/routes/onboarding/+page.svelte`
 - Create: `src/lib/components/AvatarPicker.svelte`
 
 **Steps:**
-1. `AvatarPicker.svelte` — 6 avatars (monkey, tiger, deer, bird, butterfly, elephant) as emoji buttons in 3×2 grid. Props: `selected`, `onSelect`.
-2. `onboarding/+page.svelte` — render AvatarPicker, plus preview circle di atas grid (lingkaran besar dengan emoji avatar yang dipilih + label nama hewan). Kalau belum pilih, tampilkan ❓"Belum dipilih".
-3. Input field for NIM — placeholder "Masukkan NIM kamu"
-4. Hint text di bawah input: "Contoh: 2410100001 — 2410100009"
-5. Validation: NIM must be 10-12 digit angka, must exist in groups.json
-6. On success: set `avatar` + `nim` stores, `goto('/home')`
-7. Error state: merah "NIM tidak terdaftar" / "Pilih avatar dulu" / "NIM harus 10-12 digit"
+1. `AvatarPicker.svelte`: 6 avatars (monyet, harimau, rusa, burung, kupu-kupu, gajah) as emoji buttons in a 3 by 2 grid. Props: `selected`, `onSelect`.
+2. `onboarding/+page.svelte`: render AvatarPicker with a preview circle above the grid. If nothing is selected, show "Belum dipilih" with ❓.
+3. NIM input with placeholder "Masukkan NIM kamu"
+4. Hint text: "Contoh: 2410100001 - 2410100009"
+5. Validation: NIM must be 10-12 digits and must exist in groups.json
+6. On success, set `avatar` and `nim` stores, then `goto('/home')`
+7. Error states: "NIM tidak terdaftar", "Pilih avatar dulu", "NIM harus 10-12 digit"
 
 ---
 
-## Task 5: Home Page — Forest Crossroads
+## Task 5: Home Page (Forest Crossroads)
 
-**Goal:** Full-screen forest scene dengan avatar di persimpangan + 3 signpost + progress totem.
+**Goal:** Full-screen forest scene with avatar at the crossroads, 3 signposts, and a progress totem.
 
 **Menu names:**
 
-| Nama Hutan (label) | Nama Asli (subtitle) | Ikon | Route |
-|--------------------|----------------------|------|-------|
+| Forest Name (label) | Real Name (subtitle) | Icon | Route |
+|---------------------|----------------------|------|-------|
 | Kitab Penjelajah | Guidebook | 📖 | `/guidebook` |
 | Ujian Rimba | Quiz | 🧠 | `/quiz` |
 | Temukan Suku | Cari Kelompok | 🔍 | `/group` |
@@ -97,70 +98,70 @@
 ### 5a: Signpost.svelte
 Props: `icon`, `title` (nama hutan), `subtitle` (nama asli), `status` ('open'|'locked'|'done'), `onclick`, `direction` ('up'|'left'|'right')
 
-Render sebagai papan kayu dengan tiang — papan di-rotate sesuai arah:
-- `up`: rotate(0deg), tanda panah ↑
-- `left`: rotate(-20deg), tanda panah ↖
-- `right`: rotate(20deg), tanda panah ↗
+A wooden board with a post. The board rotates based on direction:
+- `up`: rotate(0deg) with arrow ↑
+- `left`: rotate(-20deg) with arrow ↖
+- `right`: rotate(20deg) with arrow ↗
 
-Visual papan:
-- Tiang: gradient cokelat vertikal
-- Papan: rounded, bayangan, border
-- Paku: bulatan kecil di ujung papan
-- Status open: background hijau, badge "Terbuka"
-- Status locked: background abu-abu gelap, badge "🔒 Terkunci"
-- Status done: background hijau glow, badge "✅ Selesai"
+Visual details:
+- Post: vertical brown gradient
+- Board: rounded with shadow and border
+- Nails: small circles at board ends
+- Open: green background, badge "Terbuka"
+- Locked: dark gray background, badge "🔒 Terkunci"
+- Done: green glow, badge "✅ Selesai"
 
 ### 5b: UnlockModal.svelte
 Props: `show`, `onUnlock`, `onClose`
 
-- Modal dengan input password
-- Password yang benar: `RIMBA2026`
-- Error state jika salah: "Password salah!"
-- Tombol ✕ di pojok kanan atas untuk nutup
-- Klik backdrop (di luar modal) = panggil `onClose` (gak unlock)
-- Satu-satunya cara unlock: password. Tidak ada easter egg.
+- Modal with a password input
+- Correct password: `RIMBA2026`
+- Wrong password: show "Password salah!"
+- ✕ button on the top right to close
+- Clicking the backdrop calls `onClose` without unlocking
+- No easter egg. Password is the only way.
 
 ### 5c: TotemProgress.svelte
 Props: `current`, `total` (default 3)
 
-- Render 3 totem/lentera secara horizontal
-- Setiap totem nyala (glow + scale up) jika sudah selesai
-- Animasi CSS scale-up per lentera
+- Renders 3 totems or lanterns horizontally
+- Each totem lights up (glow + scale) when completed
+- CSS scale-up animation per lantern
 
 ### 5d: home/+page.svelte
-Full-viewport forest scene dengan layer:
+Full-viewport forest scene with these layers:
 
-1. **Sky background** — radial gradient hijau gelap
-2. **Siluet pohon** — pseudo-elements / SVG inline di kiri-kanan
-3. **Ground** — gradient horizontal warna tanah
-4. **Avatar** — emoji user di tengah persimpangan, dengan nama depan (dari data JSON) + nama asli di bawahnya
-5. **3 Signposts** — guidebook di atas (arah up), quiz di kiri (arah left), cari kelompok di kanan (arah right)
-6. **TotemProgress** — di atas scene, menunjukkan progress
-7. **Floating leaves + kunang-kunang** — CSS keyframe particles
+1. **Sky background:** dark green radial gradient
+2. **Tree silhouettes:** pseudo-elements or SVG inline on left and right
+3. **Ground:** horizontal earth tone gradient
+4. **Avatar:** user emoji at center of the crossroads, with first name (from JSON) and real name below
+5. **3 Signposts:** guidebook on top (up), quiz on left, cari kelompok on right
+6. **TotemProgress** above the scene
+7. **Floating leaves and kunang-kunang:** CSS keyframe particles
 
-Interaksi:
-- Klik signpost guidebook → `goto('/guidebook')`
-- Klik signpost quiz/group yang **terkunci** → show UnlockModal
-- Klik signpost quiz/group yang **sudah di-unlock** → `goto('/quiz')` / `goto('/group')`
-- Jika `allDone` true → render CompletionPopup (delay 500ms)
+Interactions:
+- Click guidebook: `goto('/guidebook')`
+- Click a locked quiz or group signpost: show UnlockModal
+- Click an unlocked quiz or group signpost: `goto('/quiz')` or `goto('/group')`
+- If `allDone` is true, render CompletionPopup after a 500ms delay
 
-Guard: jika `$avatar` atau `$nim` null saat mount → redirect ke `/onboarding`
+Guard: if `$avatar` or `$nim` is null on mount, redirect to `/onboarding`
 
 ---
 
 ## Task 6: Guidebook Page
 
-**Goal:** Flip page guidebook with "Selesai" button.
+**Goal:** A flip-page guidebook with a "Selesai" button.
 
 **File:** `src/routes/guidebook/+page.svelte`
 
 **Steps:**
-1. Render pages from `guidebook.json` — one page at a time
-2. Show page number: "Halaman X dari Y"
-3. Previous/Next navigation buttons
-4. Last page: "Selesai Membaca" button → set `guidebookDone = true` → `goto('/home')`
-5. Back button → `/home`
-6. Content ditampilkan dengan `white-space: pre-line` (karena ada newline di konten)
+1. Render pages from `guidebook.json` one at a time
+2. Show "Halaman X dari Y"
+3. Previous and Next navigation buttons
+4. On the last page, show "Selesai Membaca" button. Clicking it sets `guidebookDone = true` and goes to `/home`
+5. Back button goes to `/home`
+6. Use `white-space: pre-line` for content (it has newlines)
 
 ---
 
@@ -172,36 +173,36 @@ Guard: jika `$avatar` atau `$nim` null saat mount → redirect ke `/onboarding`
 
 **Steps:**
 1. Render questions from `quiz.json` one at a time
-2. Progress bar per soal
-3. Click option → highlight selected → "Jawab" button
-4. After answer: show green feedback on correct option, red on wrong selected → "Selanjutnya" button
-5. Last question → "Lihat Skor" → set `quizDone = true`
+2. Show a progress bar per question
+3. Click an option, it highlights, then click "Jawab"
+4. After answering, green on the correct option, red on the wrong one. Then "Selanjutnya"
+5. On the last question, show "Lihat Skor". Sets `quizDone = true`.
 6. Score screen: 🏆, "Skor kamu: X/5", "Kembali ke Home" button
-7. Back button → `/home`
-8. Guard: jika `$quizUnlocked` false saat mount → redirect ke `/home`
+7. Back button goes to `/home`
+8. Guard: if `$quizUnlocked` is false on mount, redirect to `/home`
 
 ---
 
 ## Task 8: Group Page
 
-**Goal:** Loading animation → show group data by NIM.
+**Goal:** Loading animation, then show group data by NIM.
 
 **File:** `src/routes/group/+page.svelte`
 
 **Steps:**
-1. On mount: jika `$groupUnlocked` false → redirect ke `/home`
-2. Show loading state: 🧭 bouncing + "Mencari kelompokmu di hutan..." (1.5 detik)
-3. After 1.5s: cari data kelompok dari `groups.json` berdasarkan `$nim`
-4. Tampilkan: nama kelompok, pembimbing + nomor WhatsApp (teks, bukan link), daftar anggota (nama + NIM + prodi)
+1. On mount, if `$groupUnlocked` is false, redirect to `/home`
+2. Show a bouncing 🧭 with "Mencari kelompokmu di hutan..." for 1.5 seconds
+3. After 1.5s, find the group from `groups.json` by `$nim`
+4. Show group name, mentor name + WhatsApp number (text, not a link), and member list (nama + NIM + prodi)
 5. Set `groupDone = true`
-6. Back button → `/home`
-7. Jika NIM tidak ditemukan: tampilkan pesan error
+6. Back button goes to `/home`
+7. If NIM is not found, show an error message
 
 ---
 
 ## Task 9: Completion Popup + Global Effects
 
-**Goal:** Popup confetti when all 3 done, page transition leaves overlay.
+**Goal:** Confetti popup when all 3 missions are done, plus a page transition with leaf overlay.
 
 **Files:**
 - Create: `src/lib/components/CompletionPopup.svelte`
@@ -212,19 +213,19 @@ Guard: jika `$avatar` atau `$nim` null saat mount → redirect ke `/onboarding`
 ### 9a: CompletionPopup.svelte
 Props: `onClose`
 
-- Modal dengan backdrop blur
-- Confetti: 20 partikel CSS keyframe `fall` (warna acak dari palet hutan)
+- Modal with backdrop blur
+- Confetti: 20 CSS keyframe fall particles (random colors from the forest palette)
 - 🎉 "Misi Selesai!" heading
 - "Selamat! Kamu telah menyelesaikan semua misi TODAYS 2026!"
-- Tampilkan data kelompok: nama kelompok, nama pembimbing, nomor WA (teks)
-- Tombol "📱 Hubungi Pembimbing" dengan link WA
-- Tombol ✕ di pojok kanan atas
-- Tombol "Tutup" di bawah
+- Show group name, mentor name, and WA number (text)
+- "📱 Hubungi Pembimbing" button with a WA link
+- ✕ button on top right
+- "Tutup" button below
 
 ### 9b: +layout.svelte
-- Floating leaf particles (6-8 partikel CSS keyframe)
-- Kunang-kunang particles (3-4 partikel CSS keyframe, warna #F5C542)
-- Page transition: dedaunan nutup layar saat navigasi (via `beforeNavigate`)
+- Floating leaf particles: 6 to 8 CSS keyframe particles
+- Kunang-kunang: 3 to 4 CSS keyframe particles in `#F5C542`
+- Page transition: leaves cover the screen during navigation (via `beforeNavigate`)
 
 ---
 
@@ -234,6 +235,6 @@ Props: `onClose`
 - Modify: `src/routes/home/+page.svelte`, `src/routes/quiz/+page.svelte`, `src/routes/group/+page.svelte`
 
 **Steps:**
-1. `home/+page.svelte` — guard: jika `$avatar` atau `$nim` null, redirect ke `/onboarding`
-2. `quiz/+page.svelte` — guard: jika `$quizUnlocked` false, redirect ke `/home`
-3. `group/+page.svelte` — guard: jika `$groupUnlocked` false, redirect ke `/home`
+1. `home/+page.svelte`: if `$avatar` or `$nim` is null, redirect to `/onboarding`
+2. `quiz/+page.svelte`: if `$quizUnlocked` is false, redirect to `/home`
+3. `group/+page.svelte`: if `$groupUnlocked` is false, redirect to `/home`

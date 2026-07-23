@@ -1,18 +1,18 @@
 # TODAYS 2026
 
-Website Telkom Orientation Days 2026 untuk memandu para calon mahasiswa baru Telkom University Purwokerto mengenal TODAYS dan mencari kelompok mereka sebelum PKKMB dimulai.
+Telkom Orientation Days 2026 website. It guides new students of Telkom University Purwokerto to learn about TODAYS and find their groups before PKKMB starts.
 
 ## Tech Stack
 
-- **SvelteKit 5** — framework
-- **Tailwind CSS v4** — styling
-- **@sveltejs/adapter-static** — static site generation
+- **SvelteKit 5** as framework
+- **Tailwind CSS v4** for styling
+- **@sveltejs/adapter-static** for static site generation
 
 ## Commands
 
 ```bash
 npm run dev      # Development server
-npm run build    # Build static site (output: build/)
+npm run build    # Build static site (output in build/)
 npm run preview  # Preview production build
 ```
 
@@ -20,7 +20,7 @@ npm run preview  # Preview production build
 
 ```
 src/
-├── routes/        # Halaman (splash, onboarding, home, guidebook, quiz, group)
+├── routes/        # Pages (splash, onboarding, home, guidebook, quiz, group)
 ├── lib/
 │   ├── components/  # UI components
 │   ├── stores/      # Svelte stores (progress state)
@@ -31,4 +31,4 @@ src/
 
 ## Theme
 
-Immersive forest experience dengan animasi dedaunan, signposts di persimpangan hutan, dan mekanisme unlock berbasis password.
+Immersive forest experience with floating leaves, signposts at a crossroads, and password based unlock mechanics.

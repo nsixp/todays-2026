@@ -4,20 +4,20 @@
 
 | Layer | Choice | Rationale |
 |-------|--------|-----------|
-| Framework | SvelteKit 5 | Bundle terkecil, built-in animations, file-based routing |
+| Framework | SvelteKit 5 | Small bundle, built-in animations, file-based routing |
 | Adapter | `@sveltejs/adapter-static` | Static site, zero server, deploy anywhere |
-| Styling | Tailwind CSS v4 | Utility-first, design tokens, responsive mudah |
-| Animations | Svelte transitions + CSS keyframes | Ringan, tanpa library tambahan |
-| State | Svelte `writable` + `derived` from `svelte/store` | Simple, cukup untuk global state |
-| Data | Static JSON imports | Zero backend, bisa diganti API nanti |
-| Font | Google Fonts: Barlow Condensed + Sora | Anti-slop, cocok tema petualangan |
+| Styling | Tailwind CSS v4 | Utility-first, design tokens, responsive out of the box |
+| Animations | Svelte transitions + CSS keyframes | Lightweight, no extra libraries |
+| State | Svelte `writable` + `derived` from `svelte/store` | Simple, enough for global state |
+| Data | Static JSON imports | Zero backend, can swap to API later |
+| Font | Google Fonts: Barlow Condensed + Sora | Suits the adventure theme |
 | Deploy | Vercel / Netlify | Free tier, static hosting |
 
 ## 2. File Structure
 
 ```
 todays-2026/
-├── docs/                           # Dokumentasi
+├── docs/                           # Documentation
 │   ├── PRD.md
 │   ├── DESIGN.md
 │   ├── ARCHITECTURE.md
@@ -25,17 +25,17 @@ todays-2026/
 │   └── TASKS.md
 ├── src/
 │   ├── routes/
-│   │   ├── +layout.svelte          # Layout global (forest background, page transitions)
+│   │   ├── +layout.svelte          # Global layout (forest background, page transitions)
 │   │   ├── +page.svelte            # Splash screen (/)
-│   │   ├── onboarding/             # Pilih avatar + input NIM
+│   │   ├── onboarding/             # Pick avatar + input NIM
 │   │   │   └── +page.svelte
-│   │   ├── home/                   # Forest Crossroads — avatar + 3 signpost
+│   │   ├── home/                   # Forest Crossroads: avatar + 3 signposts
 │   │   │   └── +page.svelte
 │   │   ├── guidebook/              # Guidebook flip pages
 │   │   │   └── +page.svelte
-│   │   ├── quiz/                   # Quiz pilihan ganda
+│   │   ├── quiz/                   # Multiple choice quiz
 │   │   │   └── +page.svelte
-│   │   └── group/                  # Data kelompok by NIM
+│   │   └── group/                  # Group data by NIM
 │   │       └── +page.svelte
 │   ├── lib/
 │   │   ├── components/
@@ -64,12 +64,12 @@ todays-2026/
 
 ```
 +layout.svelte
-├── Floating leaves + kunang-kunang (decorative)
+├── Floating leaves + fireflies (decorative)
 ├── Page transition overlay (animated leaves)
 └── <slot> (page content)
     │
     ├── +page.svelte (splash)
-    │   └── Logo animation + welcome text
+    │   └── Logo animation + greeting text
     │
     ├── onboarding/+page.svelte
     │   └── AvatarPicker.svelte
@@ -77,7 +77,7 @@ todays-2026/
     ├── home/+page.svelte
     │   ├── Forest background (CSS/SVG layers)
     │   ├── TotemProgress.svelte
-    │   ├── Signpost.svelte (×3 — up, left, right)
+    │   ├── Signpost.svelte (x3: up, left, right)
     │   ├── UnlockModal.svelte
     │   └── CompletionPopup.svelte
     │
@@ -94,35 +94,35 @@ todays-2026/
 ## 4. Data Flow
 
 ```
-groups.json ──→ onboarding (validasi NIM)
-             ──→ group (tampilkan data berdasarkan NIM)
+groups.json ──→ onboarding (NIM validation)
+             ──→ group (show data by NIM)
 
-quiz.json   ──→ quiz (soal)
+quiz.json   ──→ quiz (questions)
 
-guidebook.json ──→ guidebook (halaman konten)
+guidebook.json ──→ guidebook (content pages)
 
 stores/progress.ts:
-  avatar, nim           ← di-set dari onboarding
-  guidebookDone          ← di-set dari guidebook
-  quizUnlocked, quizDone ← di-set dari quiz
-  groupUnlocked, groupDone ← di-set dari group
-  allDone (derived)      ← digunakan oleh home untuk trigger popup
+  avatar, nim           ← set from onboarding
+  guidebookDone          ← set from guidebook
+  quizUnlocked, quizDone ← set from quiz
+  groupUnlocked, groupDone ← set from group
+  allDone (derived)      ← used by home to trigger popup
 ```
 
 ## 5. State Shape
 
-Semua state menggunakan `writable` dari `svelte/store` di `src/lib/stores/progress.ts`.
+All state uses `writable` from `svelte/store` in `src/lib/stores/progress.ts`.
 
 ```
 avatar: writable(null)           // avatar ID
-nim: writable(null)              // NIM user
+nim: writable(null)              // user NIM
 guidebookDone: writable(false)
 quizUnlocked: writable(false)
 quizDone: writable(false)
 groupUnlocked: writable(false)
 groupDone: writable(false)
 allDone: derived(...)            // guidebookDone && quizDone && groupDone
-reset()                          // reset semua ke default
+reset()                          // reset all to defaults
 ```
 
 ## 6. Route Design
@@ -131,15 +131,15 @@ reset()                          // reset semua ke default
 |-------|------|------------|-------|
 | `/` | Splash | None | Auto-redirect to /onboarding after 3s |
 | `/onboarding` | Onboarding | None | Sets avatar + nim stores |
-| `/home` | Home | avatar + nim required | Jika tidak ada, redirect ke /onboarding |
+| `/home` | Home | avatar + nim required | Redirect to /onboarding if missing |
 | `/guidebook` | Guidebook | None (open) | Set guidebookDone on finish |
-| `/quiz` | Quiz | quizUnlocked | Jika locked, redirect ke /home |
-| `/group` | Group | groupUnlocked | Jika locked, redirect ke /home |
+| `/quiz` | Quiz | quizUnlocked | Redirect to /home if locked |
+| `/group` | Group | groupUnlocked | Redirect to /home if locked |
 
 ## 7. Performance Notes
 
-- **CSS animations over JS** — floating leaves, confetti, page transitions
-- **No runtime animation library** — Svelte built-in transitions + CSS keyframes cukup
-- **Static JSON import** — zero network request untuk data
-- **Hybrid assets** — emoji + SVG inline + CSS pattern (heropatterns.com). Hanya favicon sebagai file gambar.
-- **Full viewport** — `h-screen` untuk splash/onboarding/home, `min-h-screen` untuk halaman konten
+- **CSS animations over JS** for floating leaves, confetti, page transitions
+- **No runtime animation library.** Svelte transitions + CSS keyframes (clip-path, scale, inset) handle everything including the splash video-like intro.
+- **Static JSON import** means zero network requests for data
+- **Hybrid assets:** emoji + SVG inline + CSS pattern (heropatterns.com). Only favicon as image file.
+- **Full viewport:** `h-screen` for splash, onboarding, home. `min-h-screen` for content pages.
