@@ -1,0 +1,10 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#FBF7EE"/>
+  <path d="M100 200 Q150 150 200 180 Q250 210 300 170 Q350 130 380 180" stroke="#D5D7C8" stroke-width="2" fill="none"/>
+  <path d="M80 250 Q160 200 240 230 Q320 260 380 220" stroke="#D5D7C8" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <circle cx="200" cy="150" r="30" fill="#8EA98D" opacity="0.2"/>
+  <circle cx="300" cy="180" r="20" fill="#4E7053" opacity="0.15"/>
+  <rect x="140" y="120" width="120" height="80" rx="8" fill="none" stroke="#D5D7C8" stroke-width="1.5"/>
+  <text x="200" y="165" text-anchor="middle" fill="#8EA98D" font-family="serif" font-size="14">Galeri</text>
+  <text x="200" y="380" text-anchor="middle" fill="#D5D7C8" font-family="sans-serif" font-size="10">Foto menyusul</text>
+</svg>
