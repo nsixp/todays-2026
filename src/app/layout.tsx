@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Sora } from "next/font/google";
 import "./globals.css";
+import LayoutWrapper from "@/components/layout-wrapper";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -27,7 +28,9 @@ export default function RootLayout({
       lang="id"
       className={`${sora.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-dvh flex flex-col">{children}</body>
+      <body className="min-h-dvh flex flex-col">
+        <LayoutWrapper>{children}</LayoutWrapper>
+      </body>
     </html>
   );
 }

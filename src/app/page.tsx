@@ -1,65 +1,94 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
+
+const LEAVES = [
+  { x: 10, y: 20, r: 15, delay: 0.2, dur: 3 },
+  { x: 75, y: 15, r: 10, delay: 0.8, dur: 4 },
+  { x: 85, y: 70, r: 12, delay: 1.5, dur: 3.5 },
+  { x: 20, y: 80, r: 8, delay: 0.5, dur: 2.8 },
+  { x: 50, y: 10, r: 6, delay: 1.2, dur: 3.2 },
+]
+
+export default function SplashPage() {
+  const router = useRouter()
+
+  useEffect(() => {
+    const hasProgress = (() => {
+      try {
+        const raw = localStorage.getItem("todays-progress")
+        if (!raw) return false
+        const p = JSON.parse(raw)
+        return p.nim?.length > 0
+      } catch {
+        return false
+      }
+    })()
+
+    const timer = setTimeout(() => {
+      router.replace(hasProgress ? "/hub" : "/welcome")
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [router])
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="fixed inset-0 flex items-center justify-center bg-warm-cream overflow-hidden">
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative z-10 text-center"
+        >
+          <h1 className="font-heading text-5xl sm:text-6xl text-jungle-deep tracking-tight">
+            TODAYS
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-2 text-sm text-moss font-sans tracking-widest uppercase">
+            Telkom University Purwokerto
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          <p className="mt-1 text-xs text-sage font-sans">
+            2026
+          </p>
+        </motion.div>
+      </AnimatePresence>
+
+      {LEAVES.map((leaf, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-4 h-4 rounded-full bg-fern-mist/40"
+          style={{ left: `${leaf.x}%`, top: `${leaf.y}%` }}
+          animate={{
+            x: [0, 20, -10, 0],
+            y: [0, -15, 10, 0],
+            opacity: [0.3, 0.7, 0.3, 0],
+            scale: [1, 1.2, 0.8, 0],
+          }}
+          transition={{
+            duration: leaf.dur,
+            delay: leaf.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
+      <button
+        onClick={() => {
+          try {
+            const raw = localStorage.getItem("todays-progress")
+            const hasProg = raw ? JSON.parse(raw).nim?.length > 0 : false
+            router.replace(hasProg ? "/hub" : "/welcome")
+          } catch {
+            router.replace("/welcome")
+          }
+        }}
+        className="absolute bottom-10 text-xs text-sage font-sans tracking-wider underline underline-offset-4 hover:text-moss transition-colors"
+      >
+        Skip
+      </button>
     </div>
-  );
+  )
 }

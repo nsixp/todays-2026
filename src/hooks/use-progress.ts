@@ -33,7 +33,7 @@ function subscribe(callback: () => void): () => void {
 }
 
 export function useProgress() {
-  const progress = useSyncExternalStore(subscribe, getSnapshot)
+  const progress = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
 
   const save = useCallback((update: Partial<Progress>) => {
     const current = getSnapshot()
