@@ -1,4 +1,4 @@
-import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem } from "@/types"
+import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem, GalleryItem } from "@/types"
 
 import participantsData from "@/../data/participants.json"
 import guidebookData from "@/../data/guidebook.json"
@@ -6,6 +6,7 @@ import quizData from "@/../data/quiz.json"
 import faqData from "@/../data/faq.json"
 import scheduleData from "@/../data/schedule.json"
 import junglepediaData from "@/../data/junglepedia.json"
+import galleryData from "@/../data/gallery.json"
 
 export function getParticipants(): Participant[] {
   return participantsData as Participant[]
@@ -33,4 +34,8 @@ export function getSchedule(): ScheduleItem[] {
 
 export function getJunglePedia(): JunglePediaItem[] {
   return junglepediaData as JunglePediaItem[]
+}
+
+export function getGallery(): GalleryItem[] {
+  return galleryData as GalleryItem[]
 }

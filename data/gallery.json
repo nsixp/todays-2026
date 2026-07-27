@@ -1,0 +1,10 @@
+[
+  { "id": 1, "src": "/images/gallery/placeholder.svg", "alt": "Suasana Kampus Telkom University Purwokerto", "kategori": "kampus" },
+  { "id": 2, "src": "/images/gallery/placeholder.svg", "alt": "Gedung Kuliah Bersama", "kategori": "fasilitas" },
+  { "id": 3, "src": "/images/gallery/placeholder.svg", "alt": "Laboratorium Komputer", "kategori": "fasilitas" },
+  { "id": 4, "src": "/images/gallery/placeholder.svg", "alt": "Perpustakaan Kampus", "kategori": "fasilitas" },
+  { "id": 5, "src": "/images/gallery/placeholder.svg", "alt": "Kegiatan UKM Mahasiswa", "kategori": "kegiatan" },
+  { "id": 6, "src": "/images/gallery/placeholder.svg", "alt": "Masjid Kampus", "kategori": "fasilitas" },
+  { "id": 7, "src": "/images/gallery/placeholder.svg", "alt": "Ruang Kelas", "kategori": "fasilitas" },
+  { "id": 8, "src": "/images/gallery/placeholder.svg", "alt": "Area Hijau Kampus", "kategori": "kampus" }
+]

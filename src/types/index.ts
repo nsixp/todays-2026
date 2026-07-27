@@ -43,6 +43,13 @@ export interface JunglePediaItem {
   icon: string
 }
 
+export interface GalleryItem {
+  id: number
+  src: string
+  alt: string
+  kategori?: string
+}
+
 export interface Progress {
   nim: string
   nama: string
