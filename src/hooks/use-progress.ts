@@ -17,11 +17,17 @@ const DEFAULT_PROGRESS: Progress = {
   easterEggs: {},
 }
 
+let lastJson: string | null | undefined
+let lastSnapshot: Progress = DEFAULT_PROGRESS
+
 function getSnapshot(): Progress {
   if (typeof window === "undefined") return DEFAULT_PROGRESS
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? (JSON.parse(raw) as Progress) : DEFAULT_PROGRESS
+    if (raw === lastJson) return lastSnapshot
+    lastJson = raw
+    lastSnapshot = raw ? (JSON.parse(raw) as Progress) : DEFAULT_PROGRESS
+    return lastSnapshot
   } catch {
     return DEFAULT_PROGRESS
   }
