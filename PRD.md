@@ -71,14 +71,14 @@ Diurutkan berdasarkan prioritas:
 | FR-6  | Guidebook ditampilkan per section/halaman dengan progress tracker (X dari Y halaman terbaca)                                                                               | P1  |
 | FR-7  | Signpost Minigame/Quiz berstatus locked secara default, berubah unlocked otomatis setelah guidebook selesai dibaca                                                         | P1  |
 | FR-8  | Quiz: 5-10 soal pilihan ganda seputar isi guidebook, skor dihitung otomatis di akhir                                                                                       | P1  |
-| FR-9  | Badge generator: memanggil Anthropic API untuk menghasilkan judul gelar unik + deskripsi singkat berdasarkan skor quiz, dirender sebagai SVG                               | P2  |
+| FR-9  | Badge generator: judul gelar unik berdasarkan skor quiz, dipilih dari array predefined — ditampilkan sebagai card + ikon hewan + skor                                       | P2  |
 | FR-10 | Signpost Cari Kelompok berstatus locked secara default, berubah unlocked otomatis setelah quiz selesai dikerjakan                                                          | P1  |
 | FR-11 | Fitur Cari Kelompok: input NIM menampilkan nama kelompok, nomor gugus, lokasi, dan info mentor/kating terkait                                                              | P1  |
 | FR-12 | Easter egg: jika user mengklik signpost yang masih locked sebanyak 3 kali, tampilkan pesan rahasia dan unlock fitur tersebut tanpa syarat normal — tanpa hint apapun di UI | P2  |
 | FR-13 | Halaman jadwal kegiatan PKKMB yang bisa diakses terpisah dari alur utama                                                                                                   | P2  |
 | FR-14 | Halaman FAQ (accordion) untuk pertanyaan umum seputar PKKMB                                                                                                                | P3  |
 | FR-15 | Tombol unduh/screenshot badge hasil quiz                                                                                                                                   | P3  |
-| FR-16 | Error handling: pesan yang jelas ketika API badge generator gagal dipanggil (fallback badge default tanpa AI)                                                              | P2  |
+| FR-16 | Error handling: tampilkan pesan jelas jika data peserta gagal dimuat atau NIM tidak ditemukan                                                                              | P2  |
 
 ---
 
@@ -105,7 +105,7 @@ Diurutkan berdasarkan prioritas:
 - Hub utama jungle scene dengan 3 signpost interaktif
 - Guidebook dengan progress tracker
 - Quiz pilihan ganda dengan skor otomatis
-- Badge generator berbasis AI (dengan fallback jika API gagal)
+- Badge generator berbasis skor (title local, tanpa AI)
 - Fitur Cari Kelompok berbasis NIM
 - Logic unlock antar-fitur + easter egg tersembunyi
 - Halaman jadwal kegiatan
@@ -135,7 +135,7 @@ Diurutkan berdasarkan prioritas:
 | Styling | Tailwind CSS v4 | Mobile-first, utility-first |
 | Component Library | shadcn/ui | Komponen fungsional siap pakai (button, progress, accordion, card, dialog) |
 | Animasi | Framer Motion (saja) | Transisi antar-state + scroll-storytelling via `useScroll` + `useTransform`. GSAP tidak dipakai — overkill untuk 2-3 babak scroll |
-| State Persistence | localStorage | Satu object JSON: `{ nim, avatar, pagesRead, quizDone, quizScore, easterEggs }` |
+| State Persistence | localStorage | Satu object JSON: `{ nim, avatar, pagesRead, quizDone, quizScore, badgeTitle, easterEggs }` |
 | Package Manager | npm | Zero config, standar Next.js |
 
 ### 8.2 Typography
@@ -174,7 +174,7 @@ Detail tiap halaman:
 
 | Route | Konten | Animasi Transisi |
 |-------|--------|------------------|
-| `/` | Splash: logo TODAYS + kabut/daun (SVG) | Fade out 1.5s, auto ke `/hub` jika sudah punya progress, ke `/welcome` jika baru |
+| `/` | Splash: logo TODAYS + kabut/daun (SVG) | Fade out 1.5s, auto redirect setelah 3 detik (atau klik skip) — ke `/hub` jika sudah punya progress, ke `/welcome` jika baru |
 | `/welcome` | 3 babak scroll-storytelling (siluet hutan, jalur setapak, 3 titik cahaya) | Framer Motion `whileInView` |
 | `/avatar` | Pilih 1 dari 6 ikon hewan hutan SVG + input NIM + lookup ke JSON | Slide up |
 | `/hub` | Jungle scene: avatar di tengah, 3 signpost (Guidebook ✅, Quiz 🔒, Kelompok 🔒) | Stagger children |
@@ -210,15 +210,20 @@ Detail tiap halaman:
 - **Jumlah soal:** 8 pilihan ganda (4 opsi per soal)
 - **Feedback:** Skor total di akhir (`X/8` + persentase) — tidak ada feedback per soal
 - **Passing threshold:** Tidak ada — selesai = unlock Cari Kelompok
+- **Retake:** Tidak bisa. Sekali submit → redirect ke `/badge`. Revisit `/quiz` → redirect ke `/badge`.
 - **Trigger badge:** Segera setelah submit, tampilkan `/badge`
 
 ### 8.8 Badge Generator
 
-- **AI:** Anthropic API (`/v1/messages`, model claude-sonnet-4-6), dipanggil dari server action Next.js
-- **Prompt:** Skor user → minta generate 1 title kreatif dalam Bahasa Indonesia, tema jungle
-- **Response format:** `{ title: string }`
-- **Display:** Card dengan ikon hewan (salah satu dari 6, dipilih random atau berdasarkan skor) + title badge + skor
-- **Fallback:** Jika API gagal / tidak ada key → title default "Penjelajah Belantara"
+- **Method:** Local title generator — predefined array of titles per score range. Zero external API calls.
+- **Title tiers (skor → opsi title):**
+  - 8/8: "Maharaja Rimba", "Sang Penguasa Hutan", "Raja Belantara"
+  - 6-7/8: "Penjelajah Sejati", "Ksatria Hutan", "Perantau Rimba"
+  - 4-5/8: "Petualang Tangguh", "Sang Penemu", "Pejalan Hijau"
+  - 0-3/8: "Penghuni Baru", "Si Mata Elang", "Pelajar Rimba"
+- **Icon tiers (score → animal):** 8/8 = harimau, 6-7/8 = rusa, 4-5/8 = burung, 0-3/8 = monyet
+- **Selection:** Title dipilih berdasarkan hash `nama` user agar konsisten tiap revisit
+- **Persistence:** Title + icon disimpan ke `localStorage.badgeTitle` + `localStorage.badgeIcon`
 - **Catatan:** Hanya title, tanpa SVG/deskripsi di v1.0
 
 ### 8.9 Cari Kelompok Spec
@@ -242,17 +247,26 @@ Detail tiap halaman:
 - **Efek:** Langsung unlock fitur tersebut tanpa syarat normal
 - **Hint di UI:** Tidak ada — harus organic discovery
 
-### 8.12 Navbar
+### 8.12 Loading & Error States
 
-- **Muncul di:** Semua halaman kecuali splash
+| Skenario | State | Behavior |
+|----------|-------|----------|
+| NIM lookup (avatar page) | Error | Tampilkan "NIM tidak ditemukan" — input tetap bisa diedit |
+| Data JSON loading | Loading | Tidak perlu skeleton — data lokal, instan (<10ms) |
+| Halaman tidak dikenal | 404 | Next.js default not-found page — tidak perlu kustomisasi |
+
+### 8.13 Navbar
+
+- **Muncul di:** Semua halaman kecuali splash, guidebook, dan quiz
 - **Item:** Jadwal | FAQ
-- **Posisi:** Fixed top atau static tergantung halaman
+- **Posisi:** Fixed top (kecuali di halaman welcome yang full-screen)
 
 ### 8.13 Revisit Behavior
 
-- Cek localStorage saat `/` di-load
-- Jika ada progress → splash cepat (1 detik) → redirect ke `/hub`
-- Jika tidak ada progress → splash → `/welcome`
+- Cek localStorage saat `/` di-load.
+- Durasi splash tetap sama (3 detik / klik skip) untuk semua user.
+- Jika **tidak ada progress** (belum input NIM/avatar) → setelah splash → `/welcome`.
+- Jika **ada progress** (sudah punya NIM + avatar) → setelah splash → `/hub`.
 
 ### 8.14 NIM Validation
 
@@ -265,7 +279,7 @@ Detail tiap halaman:
 | File | Isi |
 |------|-----|
 | `data/participants.json` | 30+ peserta: `{ nim, nama, nomor_kelompok, nama_kelompok, mentor }` |
-| `data/guidebook.json` | 6 section: `{ id, title, content }` |
+| `data/guidebook.json` | 6 section: `{ id, title, content: string[] }` — content adalah array of paragraphs |
 | `data/quiz.json` | 8 soal: `{ id, question, options[], correctIndex }` |
 | `data/faq.json` | 6-8 FAQ: `{ id, question, answer }` |
 | `data/schedule.json` | Jadwal kegiatan |
