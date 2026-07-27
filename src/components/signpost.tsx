@@ -30,13 +30,29 @@ export default function Signpost({ icon, label, href, locked, index, onLockedCli
       transition={{ delay: 0.12 * index, duration: 0.5, ease: "easeOut" }}
       onClick={handleClick}
       className={`relative flex flex-col items-center transition-all duration-300 ${
-        locked ? "grayscale cursor-pointer" : "cursor-pointer"
+        locked ? "cursor-pointer" : "cursor-pointer"
       }`}
     >
-      <div
+      <motion.div
+        animate={
+          locked
+            ? {}
+            : {
+                boxShadow: [
+                  "0 0 0 0 rgba(243,196,107,0)",
+                  "0 0 12px 2px rgba(243,196,107,0.25)",
+                  "0 0 0 0 rgba(243,196,107,0)",
+                ],
+              }
+        }
+        transition={
+          locked
+            ? {}
+            : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+        }
         className={`flex flex-col items-center gap-2 px-5 py-4 rounded-2xl border-2 transition-all duration-300 ${
           locked
-            ? "border-fern-mist/50 bg-white/40 opacity-60"
+            ? "border-fern-mist/50 bg-white/40 opacity-50 grayscale"
             : "border-fern-mist bg-white/60 hover:border-sunlit-gold hover:shadow-lg hover:shadow-sunlit-gold/10"
         }`}
       >
@@ -55,7 +71,7 @@ export default function Signpost({ icon, label, href, locked, index, onLockedCli
             {locked ? "Terkunci" : "Buka"}
           </p>
         </div>
-      </div>
+      </motion.div>
       <div className="w-0.5 h-5 bg-fern-mist/60 rounded-full" />
     </motion.button>
   )

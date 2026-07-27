@@ -105,3 +105,9 @@
     @apply font-sans;
   }
 }
+
+@keyframes dash-move {
+  to {
+    background-position: 16px 0;
+  }
+}

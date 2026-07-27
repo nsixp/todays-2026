@@ -195,9 +195,6 @@
 - [ ] **14.1** Badge screenshot — tambah tombol "Simpan Badge"
   - Gunakan `html-to-image` atau canvas native untuk screenshot card badge
   - Download sebagai PNG
-- [ ] **14.2** Reset progress button — di halaman hub atau footer
-  - Konfirmasi dialog (shadcn Dialog) sebelum reset
-  - Hapus semua key localStorage → reload ke `/welcome`
-- [ ] **14.3** `npm run build` — fix any type/build errors
-- [ ] **14.4** Responsive final pass — test all pages at 375px, 768px, 1024px
-- [ ] **14.5** Final review — verify all unlock flow, Jejak Rimba, loading screen, lightbox work end-to-end
+- [ ] **14.2** `npm run build` — fix any type/build errors
+- [ ] **14.3** Responsive final pass — test all pages at 375px, 768px, 1024px
+- [ ] **14.4** Final review — verify all unlock flow, Jejak Rimba, loading screen, lightbox work end-to-end
