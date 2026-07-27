@@ -1,10 +1,11 @@
-import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem } from "@/types"
+import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem } from "@/types"
 
 import participantsData from "@/../data/participants.json"
 import guidebookData from "@/../data/guidebook.json"
 import quizData from "@/../data/quiz.json"
 import faqData from "@/../data/faq.json"
 import scheduleData from "@/../data/schedule.json"
+import junglepediaData from "@/../data/junglepedia.json"
 
 export function getParticipants(): Participant[] {
   return participantsData as Participant[]
@@ -28,4 +29,8 @@ export function getFAQ(): FAQItem[] {
 
 export function getSchedule(): ScheduleItem[] {
   return scheduleData as ScheduleItem[]
+}
+
+export function getJunglePedia(): JunglePediaItem[] {
+  return junglepediaData as JunglePediaItem[]
 }

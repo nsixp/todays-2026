@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "kategori": "fasilitas",
+    "judul": "Gedung Kuliah",
+    "deskripsi": "Kampus utama Telkom University Purwokerto memiliki gedung perkuliahan yang nyaman dengan ruang kelas ber-AC dan proyektor di setiap ruangan.",
+    "icon": "🏛️"
+  },
+  {
+    "id": 2,
+    "kategori": "fasilitas",
+    "judul": "Laboratorium",
+    "deskripsi": "Lab komputer, lab jaringan, dan lab multimedia tersedia untuk mendukung praktik perkuliahan mahasiswa.",
+    "icon": "🔬"
+  },
+  {
+    "id": 3,
+    "kategori": "fasilitas",
+    "judul": "Perpustakaan",
+    "deskripsi": "Perpustakaan dengan koleksi buku akademik, jurnal, dan area baca yang nyaman untuk belajar mandiri.",
+    "icon": "📚"
+  },
+  {
+    "id": 4,
+    "kategori": "fasilitas",
+    "judul": "Masjid",
+    "deskripsi": "Masjid kampus yang luas dan representatif untuk kegiatan ibadah dan keagamaan mahasiswa.",
+    "icon": "🕌"
+  },
+  {
+    "id": 5,
+    "kategori": "fasilitas",
+    "judul": "Unit Kesehatan Mahasiswa",
+    "deskripsi": "UKS menyediakan layanan kesehatan dasar dan pertolongan pertama bagi mahasiswa.",
+    "icon": "🏥"
+  },
+  {
+    "id": 6,
+    "kategori": "ukm",
+    "judul": "UKM Olahraga",
+    "deskripsi": "Futsal, basket, voli, bulu tangkis, dan berbagai cabang olahraga untuk mengembangkan bakat atletik.",
+    "icon": "⚽"
+  },
+  {
+    "id": 7,
+    "kategori": "ukm",
+    "judul": "UKM Seni & Budaya",
+    "deskripsi": "Tari tradisional, musik, teater, dan paduan suara sebagai wadah ekspresi seni mahasiswa.",
+    "icon": "🎭"
+  },
+  {
+    "id": 8,
+    "kategori": "ukm",
+    "judul": "BEM",
+    "deskripsi": "Badan Eksekutif Mahasiswa sebagai organisasi kemahasiswaan tertinggi di tingkat universitas.",
+    "icon": "📋"
+  },
+  {
+    "id": 9,
+    "kategori": "ukm",
+    "judul": "HIMA",
+    "deskripsi": "Himpunan Mahasiswa per program studi untuk mewadahi minat dan bakat akademik mahasiswa.",
+    "icon": "👥"
+  },
+  {
+    "id": 10,
+    "kategori": "ukm",
+    "judul": "UKM Kerohanian",
+    "deskripsi": "Wadah pengembangan spiritual dan kegiatan keagamaan bagi mahasiswa dari berbagai latar belakang.",
+    "icon": "🙏"
+  },
+  {
+    "id": 11,
+    "kategori": "platform",
+    "judul": "EduRoom",
+    "deskripsi": "Platform e-learning utama untuk akses materi kuliah, tugas, dan diskusi online antar mahasiswa dan dosen.",
+    "icon": "💻"
+  },
+  {
+    "id": 12,
+    "kategori": "platform",
+    "judul": "Portal Akademik",
+    "deskripsi": "Sistem informasi akademik untuk cek KHS, KRS, jadwal kuliah, dan informasi akademik lainnya.",
+    "icon": "📊"
+  },
+  {
+    "id": 13,
+    "kategori": "platform",
+    "judul": "Email Kampus",
+    "deskripsi": "Email resmi mahasiswa Telkom University untuk komunikasi akademik dan layanan kampus.",
+    "icon": "📧"
+  }
+]

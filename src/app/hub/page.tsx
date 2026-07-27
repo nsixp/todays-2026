@@ -14,7 +14,37 @@ import Ular from "@/components/icons/ular"
 import type { AvatarId } from "@/types"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
-import type { ScheduleItem, FAQItem } from "@/types"
+import type { ScheduleItem, FAQItem, JunglePediaItem } from "@/types"
+import junglepediaData from "@/../data/junglepedia.json"
+
+const junglepedia = junglepediaData as JunglePediaItem[]
+
+const JUNGLEPEDIA_CATEGORIES = [
+  {
+    icon: "🏛️",
+    label: "Fasilitas",
+    desc: "Gedung kuliah, laboratorium, perpustakaan, masjid, dan UKS",
+    count: junglepedia.filter((i) => i.kategori === "fasilitas").length,
+    color: "border-l-moss",
+    bg: "bg-moss/10",
+  },
+  {
+    icon: "👥",
+    label: "UKM & Organisasi",
+    desc: "UKM, BEM, HIMA, dan organisasi kemahasiswaan lainnya",
+    count: junglepedia.filter((i) => i.kategori === "ukm").length,
+    color: "border-l-sunlit-gold",
+    bg: "bg-sunlit-gold/10",
+  },
+  {
+    icon: "💻",
+    label: "Platform Akademik",
+    desc: "E-learning, portal akademik, dan email kampus",
+    count: junglepedia.filter((i) => i.kategori === "platform").length,
+    color: "border-l-jungle-deep",
+    bg: "bg-jungle-deep/10",
+  },
+]
 
 const AVATAR_ICONS: Record<AvatarId, typeof Monyet> = {
   monyet: Monyet,
@@ -43,30 +73,6 @@ const FALLING_LEAVES = [
   { x: 88, dur: 10, delay: 2, rot: -20 },
   { x: 5, dur: 7, delay: 4, rot: 45 },
   { x: 92, dur: 9, delay: 6, rot: -35 },
-]
-
-const JUNGLEPEDIA_ITEMS = [
-  {
-    icon: "🏛️",
-    label: "Fasilitas",
-    desc: "Gedung kuliah, laboratorium, perpustakaan, masjid, dan UKS",
-    color: "border-l-moss",
-    bg: "bg-moss/10",
-  },
-  {
-    icon: "👥",
-    label: "UKM & Organisasi",
-    desc: "UKM, BEM, HIMA, dan organisasi kemahasiswaan lainnya",
-    color: "border-l-sunlit-gold",
-    bg: "bg-sunlit-gold/10",
-  },
-  {
-    icon: "💻",
-    label: "Platform Akademik",
-    desc: "E-learning, portal akademik, dan email kampus",
-    color: "border-l-jungle-deep",
-    bg: "bg-jungle-deep/10",
-  },
 ]
 
 const GALLERY_PLACEHOLDERS = [
@@ -477,7 +483,7 @@ export default function HubPage() {
       <SectionBody>
         <SectionHeader title="JunglePedia" subtitle="Kenali lebih dekat kampus Telkom University Purwokerto" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {JUNGLEPEDIA_ITEMS.map((item, i) => (
+          {JUNGLEPEDIA_CATEGORIES.map((item, i) => (
             <motion.div
               key={item.label}
               whileInView={{ opacity: 1, y: 0 }}

@@ -35,6 +35,14 @@ export interface ScheduleItem {
 
 export type AvatarId = "monyet" | "burung" | "rusa" | "harimau" | "kupu-kupu" | "ular"
 
+export interface JunglePediaItem {
+  id: number
+  kategori: "fasilitas" | "ukm" | "platform"
+  judul: string
+  deskripsi: string
+  icon: string
+}
+
 export interface Progress {
   nim: string
   nama: string
