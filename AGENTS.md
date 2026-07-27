@@ -33,6 +33,25 @@ You are a senior Front-End Developer for this project.
 - **Design reference:** `docs/agents/DESIGN-SYSTEM.md` (palette tokens, fonts, visual spec)
 - **Architecture reference:** `docs/agents/ARCHITECTURE.md` (routes, data, component structure)
 
+## Skills to use
+
+Load these skills automatically when the task matches:
+
+| Skill | When to use |
+|-------|-------------|
+| **shadcn** | Adding or configuring shadcn/ui components |
+| **subagent-driven-development** | Multiple independent tasks that can run in parallel |
+| **verification-before-completion** | Before claiming any task is done — run `npm run build` first |
+| **executing-plans** | Following TASKS.md phase-by-phase with checkpoint review |
+| **design-taste-frontend** | Every UI component — ensures it avoids AI slop |
+| **tailwind-design-system** | Implementing palette tokens, CSS variables, responsive layout |
+| **vercel-react-best-practices** | Every React/Next.js component — Server Components, data fetching, perf |
+| **code-review** | Reviewing changes before moving to next ticket |
+| **ponytail-review** | After each phase — check for over-engineering |
+| **triage** | Managing issues on the tracker |
+| **to-tickets** | Breaking work into tickets when needed |
+| **brainstorming** | Before any creative work or design decisions |
+
 ## Standards
 
 Follow these rules for all code you write:
@@ -61,3 +80,17 @@ Follow these rules for all code you write:
 - ✅ **Always:** Write to `src/` and `data/`, reference PRD.md Section 8 for decisions, use Framer Motion for transitions, follow the jungle design palette
 - ⚠️ **Ask first:** Adding new dependencies, changing route structure, modifying unlock logic, changing the color palette
 - 🚫 **Never:** Use GSAP, add images to `public/` without WebP format, use Inter/Roboto/Open Sans fonts
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles use default label names. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "question": "Apa itu PKKMB?",
+    "answer": "PKKMB (Pengenalan Kehidupan Kampus bagi Mahasiswa Baru) adalah program wajib bagi seluruh mahasiswa baru untuk mengenal lingkungan kampus, sistem akademik, dan nilai-nilai yang dianut oleh Telkom University Purwokerto."
+  },
+  {
+    "id": 2,
+    "question": "Apakah PKKMB wajib diikuti?",
+    "answer": "Ya, PKKMB wajib diikuti oleh seluruh mahasiswa baru. Ketidakhadiran tanpa keterangan yang sah akan mempengaruhi status kemahasiswaan."
+  },
+  {
+    "id": 3,
+    "question": "Apa yang harus dibawa saat PKKMB?",
+    "answer": "Bawa atribut lengkap (baju putih, celana/rok hitam, topi, name tag), alat tulis, air minum, dan jas almamater untuk upacara."
+  },
+  {
+    "id": 4,
+    "question": "Bagaimana jika NIM saya tidak ditemukan di sistem?",
+    "answer": "Hubungi panitia PKKMB melalui kontak WhatsApp yang tersedia di halaman Kontak Penting pada guidebook."
+  },
+  {
+    "id": 5,
+    "question": "Apakah quiz bisa diulang?",
+    "answer": "Quiz hanya bisa dikerjakan satu kali. Setelah submit, kamu tidak bisa mengerjakan ulang. Pastikan jawabanmu sudah yakin sebelum menekan tombol kumpulkan."
+  },
+  {
+    "id": 6,
+    "question": "Bagaimana cara mengetahui kelompok PKKMB saya?",
+    "answer": "Setelah menyelesaikan quiz, fitur Cari Kelompok akan terbuka. Masukkan NIM kamu untuk melihat nomor kelompok, nama kelompok, dan mentor."
+  },
+  {
+    "id": 7,
+    "question": "Apa yang dimaksud dengan badge?",
+    "answer": "Badge adalah gelar unik yang diberikan berdasarkan skor quiz kamu. Badge juga menampilkan ikon hewan hutan yang berbeda sesuai pencapaian skor."
+  }
+]

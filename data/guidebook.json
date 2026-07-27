@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Sambutan",
+    "content": [
+      "Selamat datang, Mahasiswa Baru Telkom University Purwokerto!",
+      "Selamat kamu telah bergabung dalam keluarga besar Telkom University Purwokerto. Kampus ini bukan sekadar tempat belajar, tapi rumah kedua yang akan menemani perjalananmu selama kurang lebih 4 tahun ke depan.",
+      "PKKMB (Pengenalan Kehidupan Kampus bagi Mahasiswa Baru) adalah gerbang awal kamu memulai petualangan di dunia perkuliahan. Selama kegiatan ini, kamu akan mengenal lingkungan kampus, bertemu teman baru, dan memahami nilai-nilai dasar yang dijunjung tinggi oleh almamater kita.",
+      "Selamat menjelajah, Rimbawan Muda!"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Rundown",
+    "content": [
+      "Berikut adalah jadwal kegiatan PKKMB yang perlu kamu ketahui:",
+      "Hari 1: Upacara pembukaan, pengenalan fakultas, dan campus tour.",
+      "Hari 2: Seminar wawasan kebangsaan, moderasi beragama, dan anti-radikalisme.",
+      "Hari 3: Pengenalan organisasi mahasiswa (UKM, BEM, DPM) dan kegiatan sosial.",
+      "Hari 4: Penutupan dan pengumuman kelompok PKKMB.",
+      "Pastikan kamu hadir tepat waktu setiap hari dan mengikuti seluruh rangkaian acara."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Atribut",
+    "content": [
+      "Setiap mahasiswa baru wajib memakai atribut berikut selama PKKMB:",
+      "1. Baju putih polos dan celana/rok hitam formal.",
+      "2. Topi anyaman hitam dengan logo Telkom University.",
+      "3. Name tag peserta (akan dibagikan saat registrasi).",
+      "4. Sepatu hitam pantofel/olahraga hitam (sesuai ketentuan fakultas).",
+      "5. Jas almamater dipakai saat upacara pembukaan dan penutupan.",
+      "Ketentuan atribut dapat berbeda antar fakultas. Cek pengumuman resmi untuk detail lebih lanjut."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Tata Tertib",
+    "content": [
+      "Selama kegiatan PKKMB, setiap mahasiswa baru wajib mematuhi tata tertib berikut:",
+      "1. Datang tepat waktu sesuai jadwal yang ditentukan.",
+      "2. Menjaga ketertiban dan tidak membuat keributan.",
+      "3. Tidak merokok selama kegiatan berlangsung.",
+      "4. Mengisi daftar hadir setiap hari.",
+      "5. Menjaga kebersihan lingkungan kampus.",
+      "6. Tidak meninggalkan lokasi kegiatan tanpa izin dari panitia.",
+      "Pelanggaran terhadap tata tertib akan mendapat sanksi sesuai kebijakan panitia."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Peta Kampus",
+    "content": [
+      "Kampus Telkom University Purwokerto terdiri dari beberapa zona utama:",
+      "Gedung Utama (A): Ruang administrasi, rektorat, dan ruang serbaguna.",
+      "Gedung Fakultas (B-E): Ruang kuliah, laboratorium, dan ruang dosen.",
+      "Perpustakaan: Tersedia di lantai dasar Gedung Utama.",
+      "Kantin: Terletak di sisi timur kampus, dekat area parkir.",
+      "Masjid: Berada di pusat kampus, mudah dijangkau dari semua gedung.",
+      "Parkir: Tersedia area parkir khusus untuk motor dan mobil di pintu masuk utama."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Kontak Penting",
+    "content": [
+      "Simpan kontak-kontak penting berikut untuk kebutuhan selama PKKMB:",
+      "Panitia PKKMB: 0812-3456-7890 (WhatsApp)",
+      "Kantor Kemahasiswaan: (0281) 123-4567",
+      "Email resmi: pkkmb@telkomuniversity.ac.id",
+      "Akun Instagram: @telkomuniversity_pwt",
+      "Website: www.telkomuniversity.ac.id",
+      "Untuk keadaan darurat, hubungi Satpam kampus di 0812-9876-5432."
+    ]
+  }
+]

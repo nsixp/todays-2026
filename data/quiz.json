@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "question": "Apa tema PKKMB Telkom University Purwokerto tahun ini?",
+    "options": ["Hutan Rimba", "Samudera Biru", "Gunung Es", "Bumi Pertiwi"],
+    "correctIndex": 0
+  },
+  {
+    "id": 2,
+    "question": "Berapa hari durasi kegiatan PKKMB?",
+    "options": ["2 hari", "3 hari", "4 hari", "5 hari"],
+    "correctIndex": 2
+  },
+  {
+    "id": 3,
+    "question": "Apa warna baju yang wajib dipakai saat PKKMB?",
+    "options": ["Biru polos", "Putih polos", "Hitam polos", "Abu-abu polos"],
+    "correctIndex": 1
+  },
+  {
+    "id": 4,
+    "question": "Siapa yang menyelenggarakan PKKMB?",
+    "options": [
+      "BEM",
+      "Panitia PKKMB",
+      "UKM",
+      "DPM"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 5,
+    "question": "Dimana lokasi perpustakaan kampus?",
+    "options": [
+      "Gedung Fakultas",
+      "Lantai dasar Gedung Utama",
+      "Gedung parkir",
+      "Samping kantin"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 6,
+    "question": "Apa sanksi jika melanggar tata tertib PKKMB?",
+    "options": [
+      "Dikeluarkan dari kampus",
+      "Sanksi sesuai kebijakan panitia",
+      "Denda uang",
+      "Skorsing 1 semester"
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": 7,
+    "question": "Apa yang wajib diisi peserta setiap hari selama PKKMB?",
+    "options": ["Foto", "Daftar hadir", "Tugas harian", "Laporan kegiatan"],
+    "correctIndex": 1
+  },
+  {
+    "id": 8,
+    "question": "Apa yang harus dilakukan jika ingin meninggalkan lokasi kegiatan?",
+    "options": [
+      "Langsung pulang",
+      "Izin dari panitia",
+      "Kabur diam-diam",
+      "Titip pesan ke teman"
+    ],
+    "correctIndex": 1
+  }
+]

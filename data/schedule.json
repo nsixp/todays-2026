@@ -1,0 +1,30 @@
+[
+  {
+    "hari": 1,
+    "tanggal": "12 Agustus 2026",
+    "kegiatan": "Pembukaan PKKMB + Campus Tour",
+    "waktu": "07:00 - 16:00",
+    "lokasi": "Gedung Utama & Lapangan Kampus"
+  },
+  {
+    "hari": 2,
+    "tanggal": "13 Agustus 2026",
+    "kegiatan": "Seminar Wawasan Kebangsaan & Moderasi Beragama",
+    "waktu": "07:00 - 15:00",
+    "lokasi": "Auditorium Gedung Utama"
+  },
+  {
+    "hari": 3,
+    "tanggal": "14 Agustus 2026",
+    "kegiatan": "Pengenalan Organisasi Mahasiswa & Bakti Sosial",
+    "waktu": "07:00 - 16:00",
+    "lokasi": "Area Kampus & Sekitar Kampus"
+  },
+  {
+    "hari": 4,
+    "tanggal": "15 Agustus 2026",
+    "kegiatan": "Penutupan & Pengumuman Kelompok",
+    "waktu": "07:00 - 12:00",
+    "lokasi": "Lapangan Kampus"
+  }
+]

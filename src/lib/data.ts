@@ -1,0 +1,31 @@
+import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem } from "@/types"
+
+import participantsData from "@/../data/participants.json"
+import guidebookData from "@/../data/guidebook.json"
+import quizData from "@/../data/quiz.json"
+import faqData from "@/../data/faq.json"
+import scheduleData from "@/../data/schedule.json"
+
+export function getParticipants(): Participant[] {
+  return participantsData as Participant[]
+}
+
+export function getParticipantByNim(nim: string): Participant | undefined {
+  return getParticipants().find((p) => p.nim === nim)
+}
+
+export function getGuidebook(): GuidebookSection[] {
+  return guidebookData as GuidebookSection[]
+}
+
+export function getQuiz(): QuizQuestion[] {
+  return quizData as QuizQuestion[]
+}
+
+export function getFAQ(): FAQItem[] {
+  return faqData as FAQItem[]
+}
+
+export function getSchedule(): ScheduleItem[] {
+  return scheduleData as ScheduleItem[]
+}
