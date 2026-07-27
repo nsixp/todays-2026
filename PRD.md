@@ -100,24 +100,33 @@ Diurutkan berdasarkan prioritas:
 ## SECTION 7 — Scope (In/Out)
 
 **In Scope v1.0**
-- Splash screen + welcome page dengan animasi jungle
+- Splash screen + cinematic loading screen dengan progress bar
+- Welcome page dengan parallax scroll-storytelling (4 babak full-screen)
 - Input avatar + NIM dengan validasi ke data peserta
-- Hub utama jungle scene dengan 3 signpost interaktif
+- Hub utama jungle scene dengan 4 signpost interaktif + animated kabut/fireflies
 - Guidebook dengan progress tracker
 - Quiz pilihan ganda dengan skor otomatis
 - Badge generator berbasis skor (title local, tanpa AI)
 - Fitur Cari Kelompok berbasis NIM
 - Logic unlock antar-fitur + easter egg tersembunyi
 - Halaman jadwal kegiatan
+- Halaman FAQ (accordion)
+- Halaman JunglePedia (info kampus: fasilitas, UKM, platform akademik)
+- Halaman Galeri dengan responsive grid + lightbox
+- Halaman Jejak Rimba (interactive fiction game dengan UI kartu, 3 ending)
+- Navbar expanded (JunglePedia, Galeri, Jadwal, FAQ)
+- Footer lengkap (sitemap, kontak, sosial media, credit)
+- Global page transitions
 - Responsif mobile-first
 
 **Out of Scope v1.0 (Ditunda/Tidak Dikerjakan)**
 - Sistem login/akun penuh dengan password
 - Fitur chat/forum antar-mahasiswa
 - Dashboard admin kompleks (data peserta cukup dikelola via file JSON/spreadsheet manual)
-- Galeri foto/dokumentasi acara (baru relevan setelah acara berlangsung)
-- Integrasi pihak ketiga (kalender, notifikasi push, dsb)
+- Foto real di galeri (placeholder SVG dulu — foto menyusul dari panitia)
+- Notifikasi push
 - Multi-bahasa
+- Multiplayer game
 
 *Catatan: dokumen ini masih bisa berkembang — beberapa bagian (data pendukung problem statement, baseline metrik G4) sengaja ditandai TBD dan bisa diisi begitu tersedia datanya.*
 
@@ -167,35 +176,43 @@ Diurutkan berdasarkan prioritas:
 / (splash) → /welcome → /avatar → /hub → /guidebook → /quiz → /badge → bebas
                                   ├── /jadwal
                                   ├── /faq
-                                  └── /kelompok (unlocked setelah quiz)
+                                  ├── /kelompok (unlocked setelah quiz)
+                                  ├── /junglepedia (bebas)
+                                  ├── /galeri (bebas)
+                                  └── /jejak-rimba (unlocked setelah badge)
 ```
 
 Detail tiap halaman:
 
 | Route | Konten | Animasi Transisi |
 |-------|--------|------------------|
-| `/` | Splash: logo TODAYS + kabut/daun (SVG) | Fade out 1.5s, auto redirect setelah 3 detik (atau klik skip) — ke `/hub` jika sudah punya progress, ke `/welcome` jika baru |
-| `/welcome` | 3 babak scroll-storytelling (siluet hutan, jalur setapak, 3 titik cahaya) | Framer Motion `whileInView` |
+| `/` | Splash: loading screen progress bar + logo + fog background | Progress 0→100%, fade out 1s, auto redirect ~2s — ke `/hub` jika sudah punya progress, ke `/welcome` jika baru |
+| `/welcome` | 4 babak full-screen scroll-storytelling dengan parallax depth (kanopi hutan, jalur setapak, titik cahaya, CTA) | Framer Motion `useScroll` + `useTransform`, parallax depth |
 | `/avatar` | Pilih 1 dari 6 ikon hewan hutan SVG + input NIM + lookup ke JSON | Slide up |
-| `/hub` | Jungle scene: avatar di tengah, 3 signpost (Guidebook ✅, Quiz 🔒, Kelompok 🔒) | Stagger children |
+| `/hub` | Jungle scene: 4 signpost + animated kabut + fireflies + daun jatuh | Stagger children, glow pulse |
 | `/guidebook` | 6 section, Next/Prev, progress bar | Slide horizontal |
 | `/quiz` | 8 soal pilihan ganda, skor di akhir | Fade |
-| `/badge` | Card + ikon hewan + title AI (Anthropic) + skor | Scale in |
-| `/kelompok` | Input NIM → tampilkan nomor+nama kelompok + mentor | Fade |
-| `/jadwal` | Tabel jadwal kegiatan | Fade |
+| `/badge` | Card + ikon hewan + title generator lokal + skor | Scale in |
+| `/kelompok` | Info nomor kelompok, nama kelompok, mentor | Fade |
+| `/jadwal` | Card jadwal kegiatan | Fade |
 | `/faq` | Accordion FAQ | Accordion expand |
+| `/junglepedia` | Filterable card grid: Fasilitas, UKM, Platform Akademik | Stagger card entrance |
+| `/galeri` | Responsive grid + lightbox preview | Fade + scale |
+| `/jejak-rimba` | Interactive fiction dengan UI kartu (pilih petualangan) | Flip card, slide narasi |
 
 ### 8.5 Hub Jungle Scene — Visual Spec
 
-- **Approach:** CSS illustration + SVG dekoratif (siluet daun floating)
-- **Background:** Gradien Warm Cream → Sage tipis
+- **Approach:** CSS illustration + SVG dekoratif + animated particles
+- **Background:** Gradien Warm Cream → Sage dengan lapisan kabut bergerak (CSS pseudo-element + Framer Motion)
 - **Avatar:** Posisi tengah bawah
-- **3 Signpost:** Menyebar (kiri, tengah atas, kanan), dihubungkan jalur setapak putus-putus (`border-dashed`)
-- **Status locked:** Grayscale
-- **Status unlocked:** Warna penuh + glow halus
-- **Desktop:** Horizontal
-- **Mobile (HP):** Grid 2-1-2 (baris 1: 2 signpost, baris 2: avatar, baris 3: 1 signpost)
-- **Animasi:** Signpost muncul staggered saat pertama kali render
+- **4 Signpost:** Guidebook, Quiz, Cari Kelompok, Jejak Rimba
+- **Layout:** Menyebar (kiri atas, kanan atas, kiri bawah, kanan bawah), dihubungkan jalur setapak putus-putus (`border-dashed` dengan animated dash offset)
+- **Status locked:** Grayscale + opacity rendah
+- **Status unlocked:** Warna penuh + glow pulse halus (animasi box-shadow loop)
+- **Desktop:** Grid horizontal dengan center avatar
+- **Mobile (HP):** Grid 2-2 dengan avatar di tengah
+- **Animasi:** Signpost staggered saat render, glow pulse saat unlocked
+- **Particles:** Fireflies (5-7 titik cahaya bergerak acak via Framer Motion), daun jatuh (3-4 di sisi)
 
 ### 8.6 Guidebook Spec
 
@@ -258,8 +275,10 @@ Detail tiap halaman:
 ### 8.13 Navbar
 
 - **Muncul di:** Semua halaman kecuali splash, guidebook, dan quiz
-- **Item:** Jadwal | FAQ
+- **Item:** JunglePedia | Galeri | Jadwal | FAQ
 - **Posisi:** Fixed top (kecuali di halaman welcome yang full-screen)
+- **Active state:** Link yang sesuai halaman aktif di-highlight (gunakan `usePathname()`)
+- **Style:** bg-warm-cream/80 backdrop-blur, border-bottom fern-mist
 
 ### 8.13 Revisit Behavior
 
@@ -283,6 +302,9 @@ Detail tiap halaman:
 | `data/quiz.json` | 8 soal: `{ id, question, options[], correctIndex }` |
 | `data/faq.json` | 6-8 FAQ: `{ id, question, answer }` |
 | `data/schedule.json` | Jadwal kegiatan |
+| `data/junglepedia.json` | Konten JunglePedia: `{ id, kategori, judul, deskripsi, icon }` |
+| `data/gallery.json` | Metadata galeri: `{ id, src, alt, kategori? }` |
+| `data/jejak-rimba.json` | Node cerita: `{ id, narasi, pilihan[], ending? }` |
 
 ### 8.16 File Structure
 
@@ -293,11 +315,14 @@ todays-2026/
 │   ├── guidebook.json
 │   ├── quiz.json
 │   ├── faq.json
-│   └── schedule.json
+│   ├── schedule.json
+│   ├── junglepedia.json
+│   ├── gallery.json
+│   └── jejak-rimba.json
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx
-│   │   ├── page.tsx          (splash)
+│   │   ├── page.tsx              (splash)
 │   │   ├── globals.css
 │   │   ├── welcome/page.tsx
 │   │   ├── avatar/page.tsx
@@ -307,8 +332,12 @@ todays-2026/
 │   │   ├── badge/page.tsx
 │   │   ├── kelompok/page.tsx
 │   │   ├── jadwal/page.tsx
-│   │   └── faq/page.tsx
+│   │   ├── faq/page.tsx
+│   │   ├── junglepedia/page.tsx
+│   │   ├── galeri/page.tsx
+│   │   └── jejak-rimba/page.tsx
 │   ├── components/
+│   │   ├── loading-screen.tsx
 │   │   ├── splash-screen.tsx
 │   │   ├── welcome-section.tsx
 │   │   ├── avatar-selector.tsx
@@ -318,7 +347,11 @@ todays-2026/
 │   │   ├── guidebook-viewer.tsx
 │   │   ├── quiz-view.tsx
 │   │   ├── badge-result.tsx
-│   │   └── navbar.tsx
+│   │   ├── navbar.tsx
+│   │   ├── footer.tsx
+│   │   ├── junglepedia-card.tsx
+│   │   ├── lightbox.tsx
+│   │   ├── jejak-rimba-card.tsx
 │   │   └── icons/
 │   │       ├── monyet.tsx
 │   │       ├── burung.tsx
@@ -327,15 +360,115 @@ todays-2026/
 │   │       ├── kupu-kupu.tsx
 │   │       └── ular.tsx
 │   ├── hooks/
-│   │   └── use-progress.ts
+│   │   ├── use-progress.ts
+│   │   └── use-jejak-rimba.ts
 │   ├── lib/
 │   │   ├── data.ts
 │   │   └── badge.ts
 │   └── types/
 │       └── index.ts
 ├── public/
-│   └── images/
+│   ├── images/
+│   │   ├── hero/
+│   │   ├── gallery/
+│   │   └── guidebook/
+├── docs/
+│   ├── agents/
+│   │   ├── PROGRESSION.md
+│   │   ├── DESIGN-SYSTEM.md
+│   │   ├── ARCHITECTURE.md
+│   │   ├── JEJAK-RIMBA.md
+│   │   └── JUNGLEPEDIA.md
 ├── tailwind.config.ts
 ├── tsconfig.json
 └── package.json
 ```
+
+### 8.17 Jejak Rimba — Interactive Fiction Spec
+
+- **Route:** `/jejak-rimba` (signpost ke-4 di Hub, unlocked setelah badge)
+- **Type:** Interactive fiction / choose-your-own-adventure
+- **Theme:** Petualangan mahasiswa baru di "hutan" kampus hari pertama
+- **Babak:** 6-8 node cerita dengan cabang pilihan
+- **Ending:** 3 berbeda (good, neutral, hidden)
+- **UI Layout:**
+  - Atas (60%): narasi cerita dengan background suasana jungle
+  - Bawah (40%): 3-4 kartu pilihan melengkung seperti pegangan kartu remi
+- **Kartu pilihan:**
+  - Ikon hewan (salah satu dari 6) — kartu dengan avatar user muncul lebih sering
+  - Warna border sesuai hewan
+  - Judul aksi pendek (2-4 kata)
+  - Animasi: Framer Motion spring saat masuk, hover scale, flip saat dipilih
+- **Data:** `data/jejak-rimba.json` — array of nodes
+- **State persistence:** localStorage key `todays-jejak-rimba` — `{ currentNodeId, history, ending }`
+- **Replay:** Tombol "Main Lagi" di layar ending, reset progress
+- **Unlock:** Setelah quiz badge (quizDone === true). Easter egg support.
+- **Animasi:** Slide narasi baru setelah pilih, kartu flip, fade ending card
+
+### 8.18 JunglePedia Spec
+
+- **Route:** `/junglepedia` (bebas, tidak terkunci)
+- **Konten:** Informasi kampus untuk mahasiswa baru
+- **Kategori (3):**
+  - `fasilitas`: Gedung kuliah, lab, perpustakaan, masjid, UKS
+  - `ukm`: UKM, BEM, HIMA, organisasi kampus
+  - `platform`: e-learning (EduRoom/iBird), portal akademik, email kampus
+- **UI:**
+  - Hero section: judul + deskripsi
+  - Filter tabs: Semua | Fasilitas | UKM | Platform Akademik
+  - Card grid: 2 kolom mobile, 3 kolom desktop
+  - Card: icon SVG + judul + deskripsi singkat
+- **Data:** `data/junglepedia.json` — `{ id, kategori, judul, deskripsi, icon }`
+- **Animasi:** Staggered card entrance via Framer Motion
+
+### 8.19 Galeri Spec
+
+- **Route:** `/galeri` (bebas, tidak terkunci)
+- **Konten:** Foto kegiatan kampus / PKKMB
+- **UI:**
+  - Hero section: judul + deskripsi
+  - Responsive grid: 2 kolom mobile, 3 tablet, 4 desktop
+  - Thumbnail: aspect-ratio square
+  - Lightbox: overlay full-screen, navigasi prev/next, close via backdrop click + escape
+- **Placeholder:** SVG ilustrasi hutan sebagai placeholder sampai foto real tersedia
+- **Data:** `data/gallery.json` — `{ id, src, alt, kategori? }`
+- **Gambar:** Simpan di `public/images/gallery/`
+- **Animasi:** Fade-in on scroll, lightbox scale + fade
+
+### 8.20 Loading Screen Spec
+
+- **Komponen:** `src/components/loading-screen.tsx`
+- **Kemunculan:** Di halaman splash (`/`)
+- **Durasi:** ~2 detik
+- **Visual:**
+  - Logo TODAYS di tengah layar
+  - Progress bar horizontal (warna sunlit-gold) dari 0% → 100%
+  - Background: floating leaves (sama seperti sekarang)
+  - Framer Motion exit transition setelah complete
+- **Skip:** Tombol "Skip" di pojok kanan bawah — langsung redirect
+- **After complete:** Redirect ke `/hub` (hasProgress) atau `/welcome` (new user)
+
+### 8.21 Footer Spec
+
+- **Komponen:** `src/components/footer.tsx`
+- **Kemunculan:** Semua halaman kecuali splash, guidebook, quiz, dan jejak-rimba
+- **Tampilan:**
+  - Background: bg-jungle-deep
+  - Text: warm-cream
+  - Font: sans (Sora)
+- **Sections:**
+  - Kiri: Logo TODAYS + tagline
+  - Tengah: Sitemap (Hub, Guidebook, JunglePedia, Galeri, Jadwal, FAQ)
+  - Kanan: Kontak panitia + sosial media (Instagram, YouTube — placeholder links)
+- **Bawah:** Copyright line — "TODAYS 2026 — PKKMB Telkom University Purwokerto"
+
+### 8.22 New CSS Tokens
+
+Token tambahan untuk mendukung visual depth cinematic:
+
+| Token | Hex | Role |
+|-------|-----|------|
+| `--jungle-mist` | `#A3C4B5` | Fog/mist overlay, parallax depth layers |
+| `--jungle-glow` | `#F5D590` | Signpost glow, fireflies, light accents |
+| `--jungle-shadow` | `#0F241A` | Deep shadow, overlay gelap |
+| `--jungle-canopy` | `#2D5A3A` | Canopy/dark leaf gradient layer |

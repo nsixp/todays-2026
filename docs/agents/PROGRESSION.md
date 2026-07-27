@@ -1,4 +1,4 @@
-# Game Logic
+# Progression
 
 ## Unlock Flow
 
@@ -8,12 +8,13 @@ Guidebook completed (view all 6 pages)
 
 Quiz submitted (any score)
   → Cari Kelompok signpost unlocks
+  → Jejak Rimba signpost unlocks
 ```
 
 - Quiz has 8 multiple-choice questions. Score shown at end as `X/8`.
 - No passing threshold — completing the quiz is enough to unlock Cari Kelompok.
 - **Quiz cannot be retaken.** Once submitted → redirect to `/badge`. Revisit `/quiz` → redirect to `/badge`.
-- Badge (title via Anthropic API) shown after quiz, then user free to explore.
+- Badge (title generator lokal) shown after quiz, then user free to explore.
 
 ## Easter Egg
 
@@ -24,9 +25,9 @@ Quiz submitted (any score)
 ## Revisit Behavior
 
 - Cek localStorage saat `/` di-load.
-- Durasi splash tetap sama (3 detik / klik skip) untuk semua user.
-- Jika **tidak ada progress** (belum input NIM/avatar) → setelah splash → `/welcome`.
-- Jika **ada progress** (sudah punya NIM + avatar) → setelah splash → `/hub`.
+- Jika **tidak ada progress** (belum input NIM/avatar) → splash 3 detik → `/welcome`.
+- Jika **ada progress** (sudah punya NIM + avatar) → splash 1 detik → `/hub`.
+- Skip link tersedia di kedua kasus.
 
 ## Badge
 

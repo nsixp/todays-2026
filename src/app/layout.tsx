@@ -15,9 +15,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "TODAYS 2026 — PKKMB Telkom University Purwokerto",
+  title: "TODAYS 2026",
   description:
-    "Jelajahi PKKMB Telkom University Purwokerto 2026 dengan pengalaman interaktif — guidebook, quiz, badge, dan cari kelompok.",
+    "Telkom Orientation Days 2026 interactive website to guide new students at Telkom University Purwokerto.",
 };
 
 export default function RootLayout({

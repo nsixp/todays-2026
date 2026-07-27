@@ -29,9 +29,11 @@ You are a senior Front-End Developer for this project.
 - **Dev:** `npm run dev` (starts Next.js dev server)
 - **Build:** `npm run build` (compiles TypeScript, checks for type errors)
 - **Components:** `npx shadcn@latest add <component>` (add shadcn components)
-- **Game logic reference:** `docs/agents/GAME-LOGIC.md` (unlock flow, easter egg, revisit rules)
+- **Progression reference:** `docs/agents/PROGRESSION.md` (unlock flow, quiz, badge, easter egg, revisit rules)
 - **Design reference:** `docs/agents/DESIGN-SYSTEM.md` (palette tokens, fonts, visual spec)
 - **Architecture reference:** `docs/agents/ARCHITECTURE.md` (routes, data, component structure)
+- **Jejak Rimba reference:** `docs/agents/JEJAK-RIMBA.md` (game design, node structure, card mechanics)
+- **JunglePedia reference:** `docs/agents/JUNGLEPEDIA.md` (content categories, JSON structure, card spec)
 
 ## Skills to use
 
