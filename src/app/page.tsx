@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 
 const LEAVES = [
   { x: 10, y: 20, r: 15, delay: 0.2, dur: 3 },
@@ -29,31 +29,29 @@ export default function SplashPage() {
 
     const timer = setTimeout(() => {
       router.replace(hasProgress ? "/hub" : "/welcome")
-    }, 3000)
+    }, hasProgress ? 1000 : 3000)
 
     return () => clearTimeout(timer)
   }, [router])
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-warm-cream overflow-hidden">
-      <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative z-10 text-center"
-        >
-          <h1 className="font-heading text-5xl sm:text-6xl text-jungle-deep tracking-tight">
-            TODAYS
-          </h1>
-          <p className="mt-2 text-sm text-moss font-sans tracking-widest uppercase">
-            Telkom University Purwokerto
-          </p>
-          <p className="mt-1 text-xs text-sage font-sans">
-            2026
-          </p>
-        </motion.div>
-      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 text-center"
+      >
+        <h1 className="font-heading text-5xl sm:text-6xl text-jungle-deep tracking-tight">
+          TODAYS
+        </h1>
+        <p className="mt-2 text-sm text-moss font-sans tracking-widest uppercase">
+          Telkom University Purwokerto
+        </p>
+        <p className="mt-1 text-xs text-sage font-sans">
+          2026
+        </p>
+      </motion.div>
 
       {LEAVES.map((leaf, i) => (
         <motion.div

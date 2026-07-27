@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
+import { getQuiz } from "@/lib/data"
 import type { AvatarId } from "@/types"
 import Monyet from "@/components/icons/monyet"
 import Burung from "@/components/icons/burung"
@@ -33,7 +34,7 @@ export default function BadgePage() {
   if (!mounted || !progress.quizDone) return null
 
   const Icon = ICON_MAP[progress.badgeIcon]
-  const total = 8
+  const total = getQuiz().length
   const pct = Math.round((progress.quizScore / total) * 100)
 
   return (
