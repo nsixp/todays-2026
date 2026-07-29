@@ -98,7 +98,7 @@ function SectionBody({ children, className = "" }: { children: React.ReactNode; 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`snap-start flex-shrink-0 px-6 py-20 sm:py-28 ${className}`}
+      className={`snap-start shrink-0 px-6 py-20 sm:py-28 ${className}`}
     >
       <div className="mx-auto max-w-4xl w-full">{children}</div>
     </motion.section>
@@ -165,7 +165,7 @@ export default function HubPage() {
 
   if (!mounted) {
     return (
-      <div className="min-h-dvh bg-gradient-to-b from-jungle-deep/10 via-warm-cream to-sage/30 flex items-center justify-center">
+      <div className="min-h-dvh bg-linear-to-b from-jungle-deep/10 via-warm-cream to-sage/30 flex items-center justify-center">
         <div className="w-6 h-6 rounded-full border-2 border-fern-mist border-t-jungle-deep animate-spin" />
       </div>
     )
@@ -174,8 +174,8 @@ export default function HubPage() {
   return (
     <div className="relative h-dvh overflow-y-auto snap-y snap-mandatory scroll-pt-14 bg-warm-cream">
       {/* ============ HERO ============ */}
-      <section className="relative snap-start min-h-dvh flex-shrink-0 flex flex-col items-center justify-center overflow-hidden px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-jungle-deep/10 via-warm-cream to-sage/30 pointer-events-none" />
+      <section className="relative snap-start min-h-dvh shrink-0 flex flex-col items-center justify-center overflow-hidden px-6">
+        <div className="absolute inset-0 bg-linear-to-b from-jungle-deep/10 via-warm-cream to-sage/30 pointer-events-none" />
 
         {/* Kabut */}
         <motion.div
@@ -286,7 +286,7 @@ export default function HubPage() {
               >
                 <span className="relative z-10 group-hover:opacity-0 transition-opacity duration-300">Mulai Petualangan</span>
                 <span className="absolute inset-0 flex items-center justify-center bg-sunlit-gold text-jungle-deep opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
-                  Jelajahi →
+                  Jelajahi Hutan
                 </span>
               </button>
             </motion.div>
@@ -312,7 +312,7 @@ export default function HubPage() {
                     transform: "scale(1.12)",
                   }}
                 />
-                <div className="relative w-full h-full rounded-full bg-gradient-to-br from-warm-cream to-white border-2 border-sunlit-gold/40 flex items-center justify-center shadow-lg shadow-sunlit-gold/10">
+                <div className="relative w-full h-full rounded-full bg-linear-to-br from-warm-cream to-white border-2 border-sunlit-gold/40 flex items-center justify-center shadow-lg shadow-sunlit-gold/10">
                   <AvatarIcon className="w-20 h-20 sm:w-24 sm:h-24" />
                 </div>
               </div>
@@ -354,7 +354,7 @@ export default function HubPage() {
       <div id="jelajahi" className="scroll-mt-20">
       <SectionBody>
         <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5">
           {[
             {
               icon: (
@@ -399,6 +399,22 @@ export default function HubPage() {
               unlocked: quizDone || progress.easterEggs["Cari Kelompok"] || false,
               locked: !quizDone && !progress.easterEggs["Cari Kelompok"],
               onLockedClick: () => handleLockedClick("Cari Kelompok", "/kelompok"),
+            },
+            {
+              icon: (
+                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
+                  <path d="M12 3 3 9l9 6 9-6-9-6Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                  <path d="M3 15 12 21 21 15" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                  <path d="M3 12 12 18 21 12" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                  <circle cx="12" cy="9" r="1.5" fill="currentColor" />
+                </svg>
+              ),
+              label: "Jejak Rimba",
+              href: "/jejak-rimba",
+              desc: "Game petualangan interaktif",
+              unlocked: quizDone || progress.easterEggs["Jejak Rimba"] || false,
+              locked: !quizDone && !progress.easterEggs["Jejak Rimba"],
+              onLockedClick: () => handleLockedClick("Jejak Rimba", "/jejak-rimba"),
             },
           ].map((item, i) => {
             const isLocked = "locked" in item ? (item as any).locked : false
@@ -457,7 +473,7 @@ export default function HubPage() {
               transition={{ duration: 0.4 }}
               className="flex items-start gap-4 p-4 rounded-xl border border-fern-mist/60 bg-white/50"
             >
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-moss/10 flex items-center justify-center">
+              <div className="shrink-0 w-12 h-12 rounded-full bg-moss/10 flex items-center justify-center">
                 <span className="font-heading text-sm text-moss">H{item.hari}</span>
               </div>
               <div className="flex-1 min-w-0">
@@ -522,7 +538,7 @@ export default function HubPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="aspect-square rounded-xl bg-gradient-to-br from-sage/20 to-fern-mist/30 border border-fern-mist/60 flex items-center justify-center"
+              className="aspect-square rounded-xl bg-linear-to-br from-sage/20 to-fern-mist/30 border border-fern-mist/60 flex items-center justify-center"
             >
               <div className="text-center p-2">
                 <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8 text-sage/60 mx-auto mb-1">
@@ -561,7 +577,7 @@ export default function HubPage() {
             >
               <summary className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer text-sm font-heading text-jungle-deep hover:text-jungle-deep/80 transition-colors [&::-webkit-details-marker]:hidden">
                 {item.question}
-                <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0 text-moss transition-transform duration-200 group-open:rotate-180">
+                <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-moss transition-transform duration-200 group-open:rotate-180">
                   <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </summary>

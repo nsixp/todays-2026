@@ -8,7 +8,7 @@ const faq = getFAQ()
 
 export default function FAQPage() {
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 pt-24 pb-20">
+    <div className="min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 pt-24 pb-20">
       <div className="mx-auto max-w-2xl px-6">
         {/* Hero */}
         <motion.div

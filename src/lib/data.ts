@@ -1,4 +1,4 @@
-import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem, GalleryItem } from "@/types"
+import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem, GalleryItem, JejakRimbaNode } from "@/types"
 
 import participantsData from "@/../data/participants.json"
 import guidebookData from "@/../data/guidebook.json"
@@ -7,6 +7,7 @@ import faqData from "@/../data/faq.json"
 import scheduleData from "@/../data/schedule.json"
 import junglepediaData from "@/../data/junglepedia.json"
 import galleryData from "@/../data/gallery.json"
+import jejakRimbaData from "@/../data/jejak-rimba.json"
 
 export function getParticipants(): Participant[] {
   return participantsData as Participant[]
@@ -38,4 +39,8 @@ export function getJunglePedia(): JunglePediaItem[] {
 
 export function getGallery(): GalleryItem[] {
   return galleryData as GalleryItem[]
+}
+
+export function getJejakRimba(): JejakRimbaNode[] {
+  return jejakRimbaData as JejakRimbaNode[]
 }

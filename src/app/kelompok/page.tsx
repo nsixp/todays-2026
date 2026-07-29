@@ -20,7 +20,7 @@ export default function KelompokPage() {
   const participant = getParticipantByNim(progress.nim)
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 px-6 py-8">
+    <div className="min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 px-6 py-8">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

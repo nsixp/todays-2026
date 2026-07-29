@@ -50,6 +50,26 @@ export interface GalleryItem {
   kategori?: string
 }
 
+export interface JejakRimbaPilihan {
+  text: string
+  icon: AvatarId
+  nextId: string
+}
+
+export interface JejakRimbaEnding {
+  title: string
+  deskripsi: string
+  tier: "good" | "neutral" | "hidden"
+}
+
+export interface JejakRimbaNode {
+  id: string
+  narasi: string
+  latar?: "canopy" | "river" | "cave" | "clearing" | "ruins"
+  pilihan: JejakRimbaPilihan[]
+  ending?: JejakRimbaEnding
+}
+
 export interface Progress {
   nim: string
   nama: string

@@ -56,7 +56,7 @@ export default function AvatarPage() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col justify-center bg-gradient-to-b from-warm-cream via-warm-cream to-fern-mist/20 overflow-hidden">
+    <div className="min-h-dvh flex flex-col justify-center bg-linear-to-b from-warm-cream via-warm-cream to-fern-mist/20 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
         <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-sunlit-gold/15 blur-3xl" />
         <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-fern-mist/25 blur-3xl" />

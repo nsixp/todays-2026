@@ -38,7 +38,7 @@ export default function BadgePage() {
   const pct = Math.round((progress.quizScore / total) * 100)
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 flex items-center justify-center px-6 py-16">
+    <div className="min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 flex items-center justify-center px-6 py-16">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

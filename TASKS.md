@@ -194,7 +194,7 @@
 
 - [ ] **14.1** Badge screenshot — tambah tombol "Simpan Badge"
   - Gunakan `html-to-image` atau canvas native untuk screenshot card badge
-  - Download sebagai PNG
+  - Download sebagai **PNG**
 - [ ] **14.2** `npm run build` — fix any type/build errors
 - [ ] **14.3** Responsive final pass — test all pages at 375px, 768px, 1024px
 - [ ] **14.4** Final review — verify all unlock flow, Jejak Rimba, loading screen, lightbox work end-to-end

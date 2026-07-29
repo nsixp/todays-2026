@@ -1,0 +1,97 @@
+[
+  {
+    "id": "node-1",
+    "narasi": "Kabut pagi masih menyelimuti rimbunnya pepohonan. Kamu terbangun di bawah kanopi raksasa, dikelilingi suara dedaunan berbisik dan aroma tanah basah. Enam jalur membentang di hadapanmu, masing-masing dihiasi cahaya temaram yang menari-nari. Sebuah suara bergema pelan: 'Pilih jalanku, Pejuang Rimba.' Roh hewan apa yang akan menuntun langkah pertamamu?",
+    "latar": "canopy",
+    "pilihan": [
+      { "text": "Ikuti Cahaya", "icon": "rusa", "nextId": "node-2" },
+      { "text": "Daki Tebing", "icon": "harimau", "nextId": "node-3" },
+      { "text": "Telusuri Gua", "icon": "ular", "nextId": "node-8" },
+      { "text": "Terbang ke Atas", "icon": "burung", "nextId": "node-4" }
+    ]
+  },
+  {
+    "id": "node-2",
+    "narasi": "Cahaya keemasan menembus dedaunan, membimbingmu menyusuri jalan setapak berbatu. Rusa berlari di kejauhan, sesekali menoleh seolah memastikan kamu masih mengikutinya. Di depanmu muncul dua jalur: satu menuju padang rumput yang disinari mentari, satu lagi memasuki lembah yang diselimuti embun.",
+    "latar": "clearing",
+    "pilihan": [
+      { "text": "Terus ke Padang", "icon": "kupu-kupu", "nextId": "node-4" },
+      { "text": "Istirahat Sejenak", "icon": "monyet", "nextId": "node-3" }
+    ]
+  },
+  {
+    "id": "node-3",
+    "narasi": "Tebing curam menjulang di hadapanmu, lumut hijau membalut setiap celah bebatuan. Dari ketinggian, samar-samar terlihat atap bangunan kampus di kejauhan. Harimau besar muncul di bibir tebing, mengaum pelan — seolah memberi isyarat. Di sisi lain, Rusa berdiri diam di jalur setapak yang melingkar.",
+    "latar": "river",
+    "pilihan": [
+      { "text": "Terjang Tebing", "icon": "harimau", "nextId": "node-5" },
+      { "text": "Ikuti Jalur Aman", "icon": "rusa", "nextId": "node-4" }
+    ]
+  },
+  {
+    "id": "node-4",
+    "narasi": "Selepas kabut, kamu tiba di sebuah padang rumput luas. Di tengahnya berdiri monumen batu kuno dengan ukiran simbol-simbol aneh. Burung-burung beterbangan di atas, membentuk pola yang seolah membacakan pesan. 'Bacalah,' bisik angin. 'Atau tunggulah — pertolongan akan datang bagi mereka yang sabar.'",
+    "latar": "clearing",
+    "pilihan": [
+      { "text": "Baca Ukiran Batu", "icon": "burung", "nextId": "node-6" },
+      { "text": "Duduk dan Bertahan", "icon": "monyet", "nextId": "node-7" }
+    ]
+  },
+  {
+    "id": "node-5",
+    "narasi": "Sungai deras mengalir di antara dua tebing. Airnya jernih kebiruan, memperlihatkan bebatuan halus di dasarnya. Kupu-kupu biru beterbangan di atas permukaan air, menari-nari mengikuti arus. Sebuah jembatan akar melintas di satu sisi, sementara di sisi lain arus terlihat lebih tenang dan dangkal.",
+    "latar": "river",
+    "pilihan": [
+      { "text": "Seberangi Jembatan", "icon": "ular", "nextId": "node-6" },
+      { "text": "Ikuti Arus ke Hilir", "icon": "kupu-kupu", "nextId": "node-7" }
+    ]
+  },
+  {
+    "id": "node-8",
+    "narasi": "Gelap. Lorong gua menyempit, hanya diterangi oleh kristal-kristal kecil yang berpendar hijau kebiruan. Ular melingkar di atas batu di hadapanmu, matanya bersinar tenang. Dari kedalaman, terdengar suara gemuruh lembut — seolah sesuatu menunggumu di dalam. 'Jangan takut,' bisik ular itu, 'hanya mereka yang berani yang menemukan apa yang tersembunyi.'",
+    "latar": "cave",
+    "pilihan": [
+      { "text": "Masuk Lebih Dalam", "icon": "ular", "nextId": "node-9" },
+      { "text": "Kembali ke Terang", "icon": "rusa", "nextId": "node-4" }
+    ]
+  },
+  {
+    "id": "node-9",
+    "narasi": "Di ujung gua, sebuah ruangan megah terbentang. Dindingnya dihiasi lukisan kuno yang menceritakan legenda hutan rimba — tentang keseimbangan antara manusia dan alam. Di tengah ruangan, sebuah altar batu menyimpan mahkota daun yang bercahaya. Ular di bahumu mendesis pelan: 'Ini yang kau cari, Pejuang Rimba. Rahasia hutan yang hanya terbuka bagi mereka yang setia pada jalannya.'",
+    "latar": "ruins",
+    "pilihan": [
+      { "text": "Ambil Mahkota", "icon": "harimau", "nextId": "node-ending-hidden" },
+      { "text": "Abadikan Lukisan", "icon": "burung", "nextId": "node-5" }
+    ]
+  },
+  {
+    "id": "node-6",
+    "narasi": "Ukiran batu itu berbicara — bukan dalam kata-kata, melainkan dalam gambaran yang mengalir ke dalam pikiranmu. Kamu melihat seluruh peta hutan rimba beserta jalan keluarnya. 'Kebijaksanaan adalah cahaya di tengah kegelapan.' Sebutir cahaya turun dari langit, membentuk jalan setapak keemasan menuju gerbang kampus. Roh harimau muncul di sisimu, mengangguk hormat.",
+    "latar": "clearing",
+    "ending": {
+      "title": "Penjelajah Bijaksana",
+      "deskripsi": "Dengan kebijaksanaan sebagai kompas dan keberanian sebagai pedang, kamu berhasil menaklukkan hutan rimba tanpa kehilangan arah. Gerbang kampus terbuka lebar, menyambutmu sebagai mahasiswa baru yang siap menghadapi tantangan PKKMB. Roh harimau akan terus menuntunmu selama masa orientasi — selama kamu tetap percaya pada instingmu.",
+      "tier": "good"
+    }
+  },
+  {
+    "id": "node-7",
+    "narasi": "Waktu berlalu. Daun-daun berguguran di sekitarmu. Tidak ada yang datang — atau mungkin selama ini kamu hanya perlu percaya pada dirimu sendiri. Langit mulai gelap, dan perlahan-lahan lampu-lampu kampus menyala di kejauhan. Rusa yang setia masih menemanimu, menunjukkan jalan pulang meskipun dengan langkah yang lebih lambat.",
+    "latar": "canopy",
+    "ending": {
+      "title": "Pengikut Arus",
+      "deskripsi": "Kamu selamat dan akhirnya tiba di kampus — meskipun bukan yang pertama, dan bukan dengan cara yang paling heroik. Tapi kau belajar satu hal: kadang, bertahan dan percaya pada proses adalah keberanian tersendiri. PKKMB menunggumu, dan rusa di sampingmu mengingatkan bahwa perjalanan masih panjang.",
+      "tier": "neutral"
+    }
+  },
+  {
+    "id": "node-ending-hidden",
+    "narasi": "Saat mahkota menyentuh kepalamu, seluruh gua berkilauan — dinding-dindingnya berubah menjadi cermin besar yang merefleksikan jutaan kemungkinan. Waktu seolah berhenti. Kamu melihat dirimu sendiri di berbagai masa depan yang berbeda-beda, dan salah satunya... yang paling gemilang... menunggumu di ujung lorong yang baru terbuka. Hutan rimba telah memberimu anugerah terbesarnya: pengetahuan tentang potensi dirimu sendiri.",
+    "latar": "ruins",
+    "ending": {
+      "title": "Penjaga Rimba",
+      "deskripsi": "Kamu menemukan rahasia terdalam hutan — dan rahasia itu adalah dirimu sendiri. Mahkota daun bercahaya kini menjadi milikmu, simbol bahwa kamu bukan sekadar pengunjung di hutan ini, melainkan bagian dari rimba itu sendiri. Selamat, Pejuang Rimba! Kamu telah membuktikan bahwa keberanian untuk memilih jalan yang tak biasa akan membawa pada penemuan terbesar dalam hidupmu. PKKMB hanyalah permulaan.",
+      "tier": "hidden"
+    }
+  }
+]

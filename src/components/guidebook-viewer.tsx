@@ -52,7 +52,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
   }
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 flex flex-col">
+    <div className="min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 flex flex-col">
       <div className="flex-1 flex flex-col max-w-lg mx-auto w-full px-6 py-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="flex-1 h-1.5 rounded-full bg-fern-mist/50 overflow-hidden">
