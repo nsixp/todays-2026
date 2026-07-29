@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useSyncExternalStore } from "react"
-import type { Progress, AvatarId } from "@/types"
+import type { Progress } from "@/types"
 
 const STORAGE_KEY = "todays-progress"
 

@@ -3,6 +3,8 @@
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
 import { motion, useScroll, useTransform } from "framer-motion"
+import DappledLight from "@/components/dappled-light"
+import AmbientParticles from "@/components/ambient-particles"
 
 const containerVariants = {
   visible: {
@@ -158,6 +160,7 @@ function BabakTiga() {
       ref={ref}
       className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-gradient-to-b from-fern-mist/30 to-warm-cream"
     >
+      <DappledLight count={3} color="#A3C4B5" />
       <motion.div style={{ y: orbY }} className="absolute inset-0 pointer-events-none">
         {[
           { x: "20%", y: "25%", s: 1, d: 0 },
@@ -222,6 +225,7 @@ export default function WelcomePage() {
       <BabakTiga />
       <section className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-warm-cream">
         <div className="absolute inset-0 bg-gradient-to-b from-sunlit-gold/5 via-transparent to-transparent pointer-events-none" />
+        <AmbientParticles count={4} colors={["#F3C46B", "#F5D590", "#C47A22"]} />
         <motion.div
           variants={containerVariants}
           initial="hidden"

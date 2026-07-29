@@ -41,7 +41,7 @@ export default function Navbar() {
 
       <button
         onClick={() => setSidebarOpen(true)}
-        className="sm:hidden flex items-center justify-center w-8 h-8 text-moss hover:text-jungle-deep transition-colors"
+        className="sm:hidden flex items-center justify-center w-11 h-11 text-moss hover:text-jungle-deep transition-colors"
         aria-label="Buka menu"
       >
         <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">

@@ -77,7 +77,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="flex-1 flex flex-col"
           >
-            <h1 className="font-heading text-3xl text-jungle-deep mb-6">
+            <h1 className="font-heading text-2xl sm:text-3xl text-jungle-deep mb-6">
               {currentSection.title}
             </h1>
             <div className="space-y-4">

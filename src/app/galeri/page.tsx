@@ -4,7 +4,6 @@ import { useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import { getGallery } from "@/lib/data"
 import Lightbox from "@/components/lightbox"
-import type { GalleryItem } from "@/types"
 
 const items = getGallery()
 

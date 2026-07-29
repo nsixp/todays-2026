@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -11,6 +11,7 @@ import Rusa from "@/components/icons/rusa"
 import Harimau from "@/components/icons/harimau"
 import KupuKupu from "@/components/icons/kupu-kupu"
 import Ular from "@/components/icons/ular"
+import DappledLight from "@/components/dappled-light"
 import type { AvatarId } from "@/types"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
@@ -132,9 +133,6 @@ export default function HubPage() {
   const { progress, save } = useProgress()
   const [easterClicks, setEasterClicks] = useState<Record<string, number>>({})
   const [easterModal, setEasterModal] = useState<{ label: string; href: string } | null>(null)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => { setMounted(true) }, [])
 
   const pagesRead = progress.pagesRead.length
   const guidebookDone = pagesRead >= 6
@@ -163,19 +161,12 @@ export default function HubPage() {
     document.getElementById("jelajahi")?.scrollIntoView({ behavior: "smooth" })
   }
 
-  if (!mounted) {
-    return (
-      <div className="min-h-dvh bg-linear-to-b from-jungle-deep/10 via-warm-cream to-sage/30 flex items-center justify-center">
-        <div className="w-6 h-6 rounded-full border-2 border-fern-mist border-t-jungle-deep animate-spin" />
-      </div>
-    )
-  }
-
   return (
     <div className="relative h-dvh overflow-y-auto snap-y snap-mandatory scroll-pt-14 bg-warm-cream">
       {/* ============ HERO ============ */}
       <section className="relative snap-start min-h-dvh shrink-0 flex flex-col items-center justify-center overflow-hidden px-6">
         <div className="absolute inset-0 bg-linear-to-b from-jungle-deep/10 via-warm-cream to-sage/30 pointer-events-none" />
+        <DappledLight />
 
         {/* Kabut */}
         <motion.div
@@ -328,18 +319,18 @@ export default function HubPage() {
               <div className="grid grid-cols-3 gap-2.5">
                 <div className="rounded-xl border border-fern-mist/60 bg-white/70 p-3 text-center backdrop-blur-sm hover:bg-white/90 transition-colors">
                   <p className="text-base font-heading text-jungle-deep">{pagesRead}/6</p>
-                  <p className="text-[9px] text-moss font-sans tracking-wider uppercase mt-0.5">Guidebook</p>
+                  <p className="text-[10px] text-moss font-sans tracking-wider uppercase mt-0.5">Guidebook</p>
                   <div className="mt-2 h-1 rounded-full bg-fern-mist/40 overflow-hidden">
                     <div className="h-full rounded-full bg-sunlit-gold transition-all duration-500" style={{ width: `${(pagesRead / 6) * 100}%` }} />
                   </div>
                 </div>
                 <div className="rounded-xl border border-fern-mist/60 bg-white/70 p-3 text-center backdrop-blur-sm hover:bg-white/90 transition-colors">
                   <p className={`text-base font-heading ${quizDone ? "text-moss" : "text-sage"}`}>{quizDone ? "✓" : "—"}</p>
-                  <p className="text-[9px] text-moss font-sans tracking-wider uppercase mt-0.5">Quiz</p>
+                  <p className="text-[10px] text-moss font-sans tracking-wider uppercase mt-0.5">Quiz</p>
                 </div>
                 <div className="rounded-xl border border-fern-mist/60 bg-white/70 p-3 text-center backdrop-blur-sm hover:bg-white/90 transition-colors">
                   <p className={`text-base font-heading truncate ${hasBadge ? "text-sunlit-gold" : "text-sage"}`}>{hasBadge ? progress.badgeTitle : "—"}</p>
-                  <p className="text-[9px] text-moss font-sans tracking-wider uppercase mt-0.5">Badge</p>
+                  <p className="text-[10px] text-moss font-sans tracking-wider uppercase mt-0.5">Badge</p>
                 </div>
               </div>
             </motion.div>
@@ -417,7 +408,7 @@ export default function HubPage() {
               onLockedClick: () => handleLockedClick("Jejak Rimba", "/jejak-rimba"),
             },
           ].map((item, i) => {
-            const isLocked = "locked" in item ? (item as any).locked : false
+            const isLocked = "locked" in item ? (item as { locked?: boolean }).locked : false
             return (
               <motion.div
                 key={item.label}
@@ -596,6 +587,43 @@ export default function HubPage() {
           </Link>
         </div>
       </SectionBody>
+
+      {/* Easter egg modal */}
+      <AnimatePresence>
+        {easterModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-jungle-shadow/60 backdrop-blur-sm px-6"
+            onClick={() => setEasterModal(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-sm bg-warm-cream rounded-2xl border border-fern-mist p-8 text-center shadow-xl"
+            >
+              <div className="text-4xl mb-4">🌿</div>
+              <h3 className="font-heading text-xl text-jungle-deep mb-3">
+                Jalan Rahasia Terbuka!
+              </h3>
+              <p className="text-sm text-moss font-sans leading-relaxed mb-6">
+                Kamu menemukan jalan rahasia di balik dedaunan...{" "}
+                <span className="font-medium text-jungle-deep">{easterModal.label}</span> telah terbuka!
+              </p>
+              <button
+                onClick={handleEasterGo}
+                className="rounded-full bg-sunlit-gold text-jungle-deep px-8 py-3 text-sm font-sans font-medium tracking-wide hover:bg-ember transition-colors"
+              >
+                Lanjutkan
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
@@ -14,6 +14,7 @@ export default function QuizPage() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
     if (progress.quizDone) router.replace("/badge")
   }, [progress.quizDone, router])

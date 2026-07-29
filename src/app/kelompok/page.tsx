@@ -1,8 +1,10 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
+import AmbientParticles from "@/components/ambient-particles"
 import { getParticipantByNim } from "@/lib/data"
 
 export default function KelompokPage() {
@@ -11,6 +13,7 @@ export default function KelompokPage() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
     if (!progress.quizDone) router.replace("/hub")
   }, [progress.quizDone, router])
@@ -20,7 +23,8 @@ export default function KelompokPage() {
   const participant = getParticipantByNim(progress.nim)
 
   return (
-    <div className="min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 px-6 py-8">
+    <div className="relative min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 px-6 py-8 overflow-hidden">
+      <AmbientParticles count={3} colors={["#F5D590", "#A3C4B5"]} />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

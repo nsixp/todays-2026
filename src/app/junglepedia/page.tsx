@@ -15,12 +15,6 @@ const CATEGORIES: { key: string; label: string }[] = [
   { key: "platform", label: "Platform Akademik" },
 ]
 
-const KATEGORI_LABEL: Record<string, string> = {
-  fasilitas: "Fasilitas Kampus",
-  ukm: "UKM & Organisasi",
-  platform: "Platform Akademik",
-}
-
 export default function JunglePediaPage() {
   const [activeCategory, setActiveCategory] = useState("semua")
 
