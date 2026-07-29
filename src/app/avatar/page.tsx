@@ -145,7 +145,7 @@ export default function AvatarPage() {
   const SelectedIcon = selectedIcon?.Icon ?? null
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center bg-gradient-to-b from-warm-cream via-warm-cream to-fern-mist/20 overflow-hidden relative">
+    <div className="min-h-dvh flex flex-col items-center justify-center bg-linear-to-b from-warm-cream via-warm-cream to-fern-mist/20 overflow-hidden relative">
       <BackgroundFoliage variant="canopy-top" opacity={0.06} />
       <DappledLight count={3} color="#F3C46B" />
 
