@@ -1,6 +1,5 @@
 "use client"
 
-import { useId } from "react"
 import { motion } from "framer-motion"
 
 const DAPPLED_POSITIONS = [
@@ -18,15 +17,12 @@ export default function DappledLight({
   count?: number
   color?: string
 }) {
-  const id = useId()
   const positions = DAPPLED_POSITIONS.slice(0, count)
 
   return (
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
       {positions.map((pos, i) => (
-        <motion.div
-          key={`dapple-${id}-${i}`}
-          className="absolute rounded-full"
+        <motion.div key={i} className="absolute rounded-full"
           style={{
             left: `${pos.x}%`,
             top: `${pos.y}%`,

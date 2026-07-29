@@ -1,7 +1,5 @@
 "use client"
 
-import { useId } from "react"
-
 type Variant = "canopy-top" | "vines-side" | "leaves-corner"
 
 const CANOPY_TOP = (
@@ -46,15 +44,9 @@ export default function BackgroundFoliage({
   variant: Variant
   opacity?: number
 }) {
-  const id = useId()
-
   if (variant === "canopy-top") {
     return (
-      <div
-        key={`foliage-${id}`}
-        className="absolute inset-x-0 top-0 pointer-events-none z-0 overflow-hidden"
-        style={{ opacity, color: "#1A3A2B" }}
-      >
+      <div className="absolute inset-x-0 top-0 pointer-events-none z-0 overflow-hidden" style={{ opacity, color: "#1A3A2B" }}>
         {CANOPY_TOP}
       </div>
     )
@@ -65,20 +57,12 @@ export default function BackgroundFoliage({
   return (
     <>
       {sides.left && (
-        <div
-          key={`foliage-left-${id}`}
-          className="absolute inset-y-0 left-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32"
-          style={{ opacity, color: "#1A3A2B" }}
-        >
+        <div className="absolute inset-y-0 left-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32" style={{ opacity, color: "#1A3A2B" }}>
           {sides.left}
         </div>
       )}
       {sides.right && (
-        <div
-          key={`foliage-right-${id}`}
-          className="absolute inset-y-0 right-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32"
-          style={{ opacity, color: "#1A3A2B" }}
-        >
+        <div className="absolute inset-y-0 right-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32" style={{ opacity, color: "#1A3A2B" }}>
           {sides.right}
         </div>
       )}

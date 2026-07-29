@@ -1,7 +1,14 @@
 "use client"
 
-import { useId } from "react"
 import { motion } from "framer-motion"
+
+const DEFAULT_PARTICLES = [
+  { x: 15, y: 20, size: 3, dur: 4, delay: 0, driftX: 15, driftY: -12 },
+  { x: 75, y: 30, size: 2, dur: 5, delay: 0.5, driftX: -20, driftY: 10 },
+  { x: 40, y: 70, size: 4, dur: 3.5, delay: 1, driftX: 12, driftY: -15 },
+  { x: 85, y: 50, size: 2.5, dur: 6, delay: 1.5, driftX: -10, driftY: 8 },
+  { x: 20, y: 60, size: 3.5, dur: 4.5, delay: 0.8, driftX: 18, driftY: -8 },
+]
 
 export default function AmbientParticles({
   count = 4,
@@ -10,34 +17,20 @@ export default function AmbientParticles({
   count?: number
   colors?: string[]
 }) {
-  const id = useId()
-  const defaultColors = ["#F5D590", "#F3C46B", "#8EA98D", "#A3C4B5"]
-  const palette = colors ?? defaultColors
-
-  const particles = Array.from({ length: count }, (_, i) => ({
-    x: 10 + Math.random() * 80,
-    y: 10 + Math.random() * 80,
-    size: 2 + Math.random() * 3,
-    color: palette[i % palette.length],
-    dur: 3 + Math.random() * 4,
-    delay: Math.random() * 2,
-    driftX: (Math.random() - 0.5) * 40,
-    driftY: (Math.random() - 0.5) * 30,
-  }))
+  const palette = colors ?? ["#F5D590", "#F3C46B", "#8EA98D", "#A3C4B5"]
+  const positions = DEFAULT_PARTICLES.slice(0, count)
 
   return (
     <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-      {particles.map((p, i) => (
-        <motion.div
-          key={`ambient-${id}-${i}`}
-          className="absolute rounded-full"
+      {positions.map((p, i) => (
+        <motion.div key={i} className="absolute rounded-full"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
             width: p.size,
             height: p.size,
-            backgroundColor: p.color,
-            boxShadow: `0 0 6px 2px ${p.color}44`,
+            backgroundColor: palette[i % palette.length],
+            boxShadow: `0 0 6px 2px ${palette[i % palette.length]}44`,
           }}
           animate={{
             x: [0, p.driftX * 0.5, p.driftX, 0],

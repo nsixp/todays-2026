@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -131,8 +131,11 @@ function ScrollIndicator() {
 export default function HubPage() {
   const router = useRouter()
   const { progress, save } = useProgress()
+  const [mounted, setMounted] = useState(false)
   const [easterClicks, setEasterClicks] = useState<Record<string, number>>({})
   const [easterModal, setEasterModal] = useState<{ label: string; href: string } | null>(null)
+
+  useEffect(() => { setMounted(true) }, [])
 
   const pagesRead = progress.pagesRead.length
   const guidebookDone = pagesRead >= 6
@@ -257,7 +260,7 @@ export default function HubPage() {
                 Selamat Datang,
               </h1>
               <p className="font-heading text-2xl sm:text-3xl md:text-4xl text-jungle-deep/70 -mt-1">
-                {progress.nama || "Pejuang Rimba"}
+                {mounted ? (progress.nama || "Pejuang Rimba") : "Pejuang Rimba"}
               </p>
               <p className="mt-3 text-sm text-moss font-sans max-w-xs leading-relaxed lg:mx-0">
                 Jelajahi hutan rimba PKKMB, baca guidebook, kerjakan quiz, dan dapatkan badge eksklusif.
