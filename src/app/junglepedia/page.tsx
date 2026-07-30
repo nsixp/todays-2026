@@ -1,101 +1,130 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { Buildings, CompassRose, Laptop, UsersThree } from "@phosphor-icons/react"
 import { getJunglePedia } from "@/lib/data"
 import type { JunglePediaItem } from "@/types"
 import JunglepediaCard from "@/components/junglepedia-card"
 
 const items = getJunglePedia()
 
-const CATEGORIES: { key: string; label: string }[] = [
-  { key: "semua", label: "Semua" },
-  { key: "fasilitas", label: "Fasilitas" },
-  { key: "ukm", label: "UKM" },
-  { key: "platform", label: "Platform Akademik" },
+const CATEGORIES = [
+  { key: "semua", label: "Semua catatan", icon: CompassRose },
+  { key: "fasilitas", label: "Fasilitas", icon: Buildings },
+  { key: "ukm", label: "UKM", icon: UsersThree },
+  { key: "platform", label: "Platform akademik", icon: Laptop },
 ]
 
 export default function JunglePediaPage() {
+  const reduceMotion = useReducedMotion()
   const [activeCategory, setActiveCategory] = useState("semua")
 
   const filtered: JunglePediaItem[] =
     activeCategory === "semua"
       ? items
-      : items.filter((i) => i.kategori === activeCategory)
+      : items.filter((item) => item.kategori === activeCategory)
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 pt-24 pb-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Hero */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40 mb-4">
-            TODAYS 2026
-          </span>
-          <h1 className="font-heading text-4xl sm:text-5xl text-jungle-deep leading-tight mb-3">
-            JunglePedia
-          </h1>
-          <p className="text-sm text-moss font-sans max-w-lg mx-auto leading-relaxed">
-            Kenali lebih dekat kampus Telkom University Purwokerto — fasilitas,
-            organisasi kemahasiswaan, dan platform akademik yang akan menunjang
-            perkuliahanmu.
-          </p>
-        </motion.div>
-
-        {/* Filter Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex flex-wrap justify-center gap-2 mb-10"
-        >
-          {CATEGORIES.map((cat) => {
-            const isActive = activeCategory === cat.key
-            return (
-              <button
-                key={cat.key}
-                onClick={() => setActiveCategory(cat.key)}
-                className={`px-5 py-2 rounded-full text-xs font-sans tracking-wider uppercase transition-all duration-300 ${
-                  isActive
-                    ? "bg-jungle-deep text-warm-cream shadow-md"
-                    : "bg-white/60 text-moss border border-fern-mist/60 hover:bg-white hover:text-jungle-deep"
-                }`}
-              >
-                {cat.label}
-              </button>
-            )
-          })}
-        </motion.div>
-
-        {/* Grid */}
-        <AnimatePresence mode="wait">
+    <div className="junglepedia-surface min-h-dvh pb-24 pt-24">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section className="grid min-h-[20rem] items-center gap-8 py-8 md:grid-cols-[1.2fr_0.8fr] md:py-10">
           <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 16 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            {filtered.length === 0 ? (
-              <div className="text-center py-16">
-                <p className="text-sage font-sans text-sm">
-                  Belum ada data untuk kategori ini.
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                {filtered.map((item, i) => (
-                  <JunglepediaCard key={item.id} item={item} index={i} />
-                ))}
-              </div>
-            )}
+            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-ember">
+              Arsip orientasi kampus
+            </span>
+            <h1 className="mt-4 max-w-2xl font-heading text-4xl leading-[1.02] text-jungle-deep sm:text-5xl lg:text-6xl">
+              Kompas kecil untuk kehidupan kampus.
+            </h1>
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-moss sm:text-base">
+              Temukan fasilitas, komunitas mahasiswa, dan platform akademik dalam catatan yang mudah dipindai.
+            </p>
           </motion.div>
-        </AnimatePresence>
-      </div>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.9, rotate: 4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: 0.12, duration: reduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mx-auto hidden aspect-square w-full max-w-60 sm:block"
+            aria-hidden="true"
+          >
+            <div className="archive-compass absolute inset-[5%] rounded-full">
+              <div className="absolute inset-[14%] rounded-full border border-dashed border-jungle-deep/20" />
+              <div className="absolute left-1/2 top-[8%] h-[84%] w-px -translate-x-1/2 bg-jungle-deep/15" />
+              <div className="absolute left-[8%] top-1/2 h-px w-[84%] -translate-y-1/2 bg-jungle-deep/15" />
+              <CompassRose className="absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 text-jungle-deep" weight="duotone" />
+              <span className="absolute left-1/2 top-[6%] -translate-x-1/2 font-heading text-lg text-ember">F</span>
+              <span className="absolute bottom-[7%] left-1/2 -translate-x-1/2 font-heading text-lg text-moss">P</span>
+              <span className="absolute left-[7%] top-1/2 -translate-y-1/2 font-heading text-lg text-moss">U</span>
+              <span className="absolute right-[7%] top-1/2 -translate-y-1/2 font-heading text-4xl text-jungle-deep/20">{items.length}</span>
+            </div>
+          </motion.div>
+        </section>
+
+        <section className="grid gap-6 border-t border-jungle-deep/15 pt-6 lg:grid-cols-[12.5rem_1fr] lg:gap-8">
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <h2 className="font-heading text-xl text-jungle-deep">Pilih kategori</h2>
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible">
+              {CATEGORIES.map((category) => {
+                const Icon = category.icon
+                const isActive = activeCategory === category.key
+
+                return (
+                  <button
+                    key={category.key}
+                    type="button"
+                    onClick={() => setActiveCategory(category.key)}
+                    className={`flex shrink-0 items-center gap-2.5 rounded-xl border px-3 py-2.5 text-left text-xs font-semibold transition-all active:translate-y-px lg:w-full ${
+                      isActive
+                        ? "border-jungle-deep bg-jungle-deep text-warm-cream"
+                        : "border-jungle-deep/12 bg-warm-cream/60 text-moss hover:border-moss/35 hover:text-jungle-deep"
+                    }`}
+                  >
+                    <Icon size={17} weight="duotone" className={isActive ? "text-sunlit-gold" : "text-moss"} />
+                    <span className="flex-1 whitespace-nowrap">{category.label}</span>
+                    <span className={isActive ? "text-warm-cream/55" : "text-jungle-deep/35"}>
+                      {category.key === "semua"
+                        ? items.length
+                        : items.filter((item) => item.kategori === category.key).length}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
+              transition={{ duration: reduceMotion ? 0 : 0.3 }}
+            >
+              {filtered.length === 0 ? (
+                <div className="rounded-2xl border border-dashed border-jungle-deep/20 px-6 py-16 text-center">
+                  <CompassRose className="mx-auto size-9 text-sage" weight="duotone" />
+                  <p className="mt-3 text-sm text-moss">Belum ada catatan untuk kategori ini.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {filtered.map((item, index) => (
+                    <JunglepediaCard
+                      key={item.id}
+                      item={item}
+                      index={index}
+                    />
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </section>
+      </main>
     </div>
   )
 }

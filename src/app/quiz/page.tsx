@@ -70,7 +70,7 @@ export default function QuizPage() {
 
   if (!started) {
     return (
-      <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
+      <div className="forest-surface relative w-full min-h-dvh overflow-x-hidden flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,7 +86,7 @@ export default function QuizPage() {
             Uji pengetahuanmu tentang PKKMB Telkom University Purwokerto.
             Jawab semua soal dengan jujur dan dapatkan badge khusus!
           </p>
-          <div className="bg-white/60 rounded-xl border border-fern-mist p-4 mb-8 text-left">
+          <div className="forest-panel rounded-xl p-4 mb-8 text-left">
             <p className="text-xs font-sans text-moss font-medium mb-2">Informasi:</p>
             <ul className="space-y-1.5">
               <li className="text-xs font-sans text-moss/70 flex items-center gap-2">
@@ -119,7 +119,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col px-4 sm:px-6 lg:px-8 py-8">
+    <div className="forest-surface relative w-full min-h-dvh overflow-x-hidden flex flex-col px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex-1 flex flex-col mx-auto w-full max-w-lg">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
@@ -147,7 +147,7 @@ export default function QuizPage() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="flex-1 flex flex-col"
           >
-            <div className="bg-white/80 rounded-2xl border border-fern-mist p-6 mb-auto">
+            <div className="forest-panel rounded-2xl p-6 mb-auto">
               <p className="text-xs font-sans text-moss mb-2">{currentIndex + 1}</p>
               <h2 className="font-heading text-xl text-jungle-deep mb-5 leading-snug">
                 {currentQ.question}

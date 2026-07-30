@@ -1,51 +1,97 @@
 "use client"
 
+import { motion, useReducedMotion } from "framer-motion"
+
 type Variant = "canopy-top" | "vines-side" | "leaves-corner"
 
-const CANOPY_TOP = (
-  <svg viewBox="0 0 1440 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-    <path d="M0 160V80c60-20 140-30 220-10s160 30 240 10 140-30 220-10 160 30 240 10 140-30 220-10 160 30 240 10 140-30 220 0v80H0Z" fill="currentColor" />
-    <path d="M0 160V100c80-25 180-15 280 5s180 30 280 10 180-30 280-10 180 30 280 10 180-30 280 0v60H0Z" fill="currentColor" opacity="0.6" />
-    <path d="M0 160V120c120-20 200 0 320 10s200-10 320-10 200 10 320 0 200-10 320-10 200 20 320 10 200-10 320 0v40H0Z" fill="currentColor" opacity="0.3" />
-  </svg>
-)
+function LeafCluster({
+  mirrored = false,
+  className = "",
+}: {
+  mirrored?: boolean
+  className?: string
+}) {
+  return (
+    <svg
+      viewBox="0 0 360 250"
+      fill="none"
+      className={className}
+      style={{ transform: mirrored ? "scaleX(-1)" : undefined }}
+    >
+      <path
+        d="M-20 21c89 18 151 73 187 163M32-22c62 44 108 104 127 184M167 184c29-70 77-118 150-149"
+        stroke="currentColor"
+        strokeWidth="7"
+        strokeLinecap="round"
+        opacity=".52"
+      />
+      <g fill="currentColor">
+        <ellipse cx="42" cy="47" rx="65" ry="30" transform="rotate(31 42 47)" />
+        <ellipse cx="112" cy="83" rx="67" ry="31" transform="rotate(48 112 83)" opacity=".84" />
+        <ellipse cx="83" cy="8" rx="60" ry="27" transform="rotate(55 83 8)" opacity=".76" />
+        <ellipse cx="155" cy="31" rx="70" ry="32" transform="rotate(72 155 31)" opacity=".64" />
+        <ellipse cx="226" cy="115" rx="68" ry="30" transform="rotate(-42 226 115)" opacity=".72" />
+        <ellipse cx="290" cy="65" rx="76" ry="34" transform="rotate(-26 290 65)" />
+        <ellipse cx="322" cy="142" rx="68" ry="31" transform="rotate(-54 322 142)" opacity=".68" />
+      </g>
+    </svg>
+  )
+}
 
-const VINES_SIDE = (
-  <svg viewBox="0 0 120 1080" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-auto">
-    <path d="M0 0c20 60 30 140 10 220S-10 380 10 460s30 160 10 240-20 180 0 260 30 160 10 240-20 180 0 220v-20c-10-40-30-140-10-220s30-160 10-240-30-160-10-240 30-160 10-220S0 60 0 0Z" fill="currentColor" />
-    <path d="M40 0c15 50 25 120 8 190s-25 140-8 210 25 140 8 200-25 130-8 190 25 140 8 200-25 130-8 190 25 140 8 200-25 130-8 180V0Z" fill="currentColor" opacity="0.5" />
-  </svg>
-)
-
-const LEAVES_CORNER_LEFT = (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-full">
-    <path d="M0 200c20-40 50-80 100-90s80-20 100-40-20-30-50-40C120 30 100 10 80 0L0 0v200Z" fill="currentColor" />
-    <path d="M0 200c40-30 80-50 110-70s60-30 70-50-10-20-30-30c-20-10-50-20-70-30L0 0v200Z" fill="currentColor" opacity="0.4" />
-  </svg>
-)
-
-const LEAVES_CORNER_RIGHT = (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-full">
-    <path d="M200 200c-20-40-50-80-100-90S20 90 0 70s20-30 50-40C80 30 100 10 120 0l80 0v200Z" fill="currentColor" />
-    <path d="M200 200c-40-30-80-50-110-70s-60-30-70-50 10-20 30-30c20-10 50-20 70-30l80 0v200Z" fill="currentColor" opacity="0.4" />
-  </svg>
-)
-
-const FOLIAGE_MAP = {
-  "vines-side": { left: VINES_SIDE, right: VINES_SIDE },
-} as const
+function Vine() {
+  return (
+    <svg viewBox="0 0 130 900" fill="none" className="h-full w-auto">
+      <path
+        d="M18-20c57 110-15 178 37 281 47 93-19 167 26 257 42 85-17 165 25 261 19 44 22 90 13 141"
+        stroke="currentColor"
+        strokeWidth="6"
+        strokeLinecap="round"
+        opacity=".42"
+      />
+      <g fill="currentColor">
+        <ellipse cx="39" cy="91" rx="35" ry="17" transform="rotate(39 39 91)" />
+        <ellipse cx="30" cy="194" rx="39" ry="18" transform="rotate(-35 30 194)" opacity=".82" />
+        <ellipse cx="77" cy="302" rx="36" ry="17" transform="rotate(42 77 302)" opacity=".72" />
+        <ellipse cx="59" cy="417" rx="42" ry="19" transform="rotate(-38 59 417)" />
+        <ellipse cx="94" cy="555" rx="36" ry="17" transform="rotate(45 94 555)" opacity=".76" />
+        <ellipse cx="78" cy="682" rx="43" ry="19" transform="rotate(-31 78 682)" opacity=".84" />
+        <ellipse cx="111" cy="806" rx="36" ry="17" transform="rotate(48 111 806)" />
+      </g>
+    </svg>
+  )
+}
 
 export default function BackgroundFoliage({
   variant,
-  opacity = 0.06,
+  opacity = 0.08,
+  color = "var(--color-jungle-deep)",
 }: {
   variant: Variant
   opacity?: number
+  color?: string
 }) {
+  const reduceMotion = useReducedMotion()
+  const sway = reduceMotion ? undefined : { rotate: [-0.7, 0.8, -0.7], y: [0, 3, 0] }
+  const transition = { duration: 9, repeat: Infinity, ease: "easeInOut" as const }
   if (variant === "canopy-top") {
     return (
-      <div className="absolute inset-x-0 top-0 pointer-events-none z-0 overflow-hidden" style={{ opacity, color: "#1A3A2B" }}>
-        {CANOPY_TOP}
+      <div className="absolute inset-x-0 top-0 h-48 overflow-hidden pointer-events-none" aria-hidden="true">
+        <motion.div
+          className="absolute -left-16 -top-16 w-[28rem] max-w-[72vw] origin-top-left"
+          style={{ opacity, color }}
+          animate={sway}
+          transition={transition}
+        >
+          <LeafCluster className="h-auto w-full" />
+        </motion.div>
+        <motion.div
+          className="absolute -right-16 -top-14 w-[30rem] max-w-[76vw] origin-top-right"
+          style={{ opacity: opacity * 0.9, color }}
+          animate={reduceMotion ? undefined : { rotate: [0.8, -0.6, 0.8], y: [0, 4, 0] }}
+          transition={{ ...transition, duration: 11 }}
+        >
+          <LeafCluster mirrored className="h-auto w-full" />
+        </motion.div>
       </div>
     )
   }
@@ -53,36 +99,50 @@ export default function BackgroundFoliage({
   if (variant === "leaves-corner") {
     return (
       <>
-        <div
-          className="absolute top-0 left-0 size-24 sm:size-32 lg:size-40 pointer-events-none z-0 overflow-hidden"
-          style={{ opacity, color: "#1A3A2B" }}
+        <motion.div
+          className="absolute -left-20 -top-16 w-72 origin-top-left pointer-events-none sm:w-96"
+          style={{ opacity, color }}
+          animate={sway}
+          transition={transition}
+          aria-hidden="true"
         >
-          {LEAVES_CORNER_LEFT}
-        </div>
-        <div
-          className="absolute right-0 bottom-0 size-24 sm:size-32 lg:size-40 pointer-events-none z-0 overflow-hidden"
-          style={{ opacity, color: "#1A3A2B" }}
+          <LeafCluster className="h-auto w-full" />
+        </motion.div>
+        <motion.div
+          className="absolute -right-20 -bottom-16 w-72 origin-bottom-right rotate-180 pointer-events-none sm:w-96"
+          style={{ opacity: opacity * 0.8, color }}
+          animate={reduceMotion ? undefined : { rotate: [179.4, 180.7, 179.4] }}
+          transition={{ ...transition, duration: 10 }}
+          aria-hidden="true"
         >
-          {LEAVES_CORNER_RIGHT}
-        </div>
+          <LeafCluster className="h-auto w-full" />
+        </motion.div>
       </>
     )
   }
 
-  const sides = FOLIAGE_MAP[variant]
-
   return (
     <>
-      {sides.left && (
-        <div className="absolute inset-y-0 left-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32" style={{ opacity, color: "#1A3A2B" }}>
-          {sides.left}
+      <motion.div
+        className="absolute inset-y-0 left-0 w-16 origin-top-left overflow-hidden pointer-events-none sm:w-24 lg:w-28"
+        style={{ opacity, color }}
+        animate={reduceMotion ? undefined : { rotate: [-0.4, 0.5, -0.4] }}
+        transition={transition}
+        aria-hidden="true"
+      >
+        <Vine />
+      </motion.div>
+      <motion.div
+        className="absolute inset-y-0 right-0 flex w-16 origin-top-right justify-end overflow-hidden pointer-events-none sm:w-24 lg:w-28"
+        style={{ opacity: opacity * 0.88, color }}
+        animate={reduceMotion ? undefined : { rotate: [0.5, -0.4, 0.5] }}
+        transition={{ ...transition, duration: 10 }}
+        aria-hidden="true"
+      >
+        <div className="h-full -scale-x-100">
+          <Vine />
         </div>
-      )}
-      {sides.right && (
-        <div className="absolute inset-y-0 right-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32 flex justify-end" style={{ opacity, color: "#1A3A2B" }}>
-          {sides.right}
-        </div>
-      )}
+      </motion.div>
     </>
   )
 }

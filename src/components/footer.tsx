@@ -1,7 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUp } from "@phosphor-icons/react"
+import {
+  ArrowUp,
+  Compass,
+  EnvelopeSimple,
+  InstagramLogo,
+  MapPin,
+  YoutubeLogo,
+} from "@phosphor-icons/react"
+import BackgroundFoliage from "@/components/background-foliage"
+import { Button } from "@/components/ui/button"
 
 const SITEMAP = [
   { label: "Hub", href: "/hub" },
@@ -14,39 +23,16 @@ const SITEMAP = [
   { label: "Cari Kelompok", href: "/kelompok" },
 ]
 
-const SOSMED = [
+const SOCIALS = [
   {
     label: "Instagram",
     href: "https://instagram.com",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
-        <rect x="2" y="2" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="1.3" />
-        <circle cx="10" cy="10" r="3.5" stroke="currentColor" strokeWidth="1.3" />
-        <circle cx="15" cy="5" r="1" fill="currentColor" />
-      </svg>
-    ),
+    icon: InstagramLogo,
   },
   {
     label: "YouTube",
     href: "https://youtube.com",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
-        <rect x="1" y="4" width="18" height="12" rx="3" stroke="currentColor" strokeWidth="1.3" />
-        <path d="M8 7l6 3-6 3V7Z" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "TikTok",
-    href: "https://tiktok.com",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
-        <path d="M14 2v6a4 4 0 0 1-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-        <path d="M14 8a4 4 0 0 0 4-4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-        <circle cx="10" cy="12" r="4" stroke="currentColor" strokeWidth="1.3" />
-        <path d="M10 12V2h4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: YoutubeLogo,
   },
 ]
 
@@ -56,84 +42,89 @@ function scrollToTop() {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-jungle-deep text-warm-cream font-sans px-4 sm:px-6 lg:px-8 pb-8 pt-16 mt-auto overflow-hidden">
-      {/* Decorative top line */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/40 to-transparent" />
+    <footer className="relative mt-auto overflow-hidden bg-jungle-deep px-4 pb-6 pt-14 font-sans text-warm-cream sm:px-6 lg:px-8">
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-sunlit-gold/55 to-transparent" />
+      <BackgroundFoliage variant="canopy-top" opacity={0.045} color="var(--color-warm-cream)" />
 
-      {/* Decorative foliage */}
-      <div className="absolute top-0 left-0 right-0 h-12 pointer-events-none opacity-[0.04]" aria-hidden="true">
-        <svg className="w-full h-full" viewBox="0 0 1440 48" preserveAspectRatio="none">
-          <path d="M0 48V24c60 8 120 4 180-4s120-12 180-8 120 8 180 4 120-8 180-12 120 4 180 8 120 4 180-4 120-12 180-8 120 12 180 16v24H0Z" fill="#FBF7EE" />
-        </svg>
-      </div>
-
-      <div className="mx-auto max-w-5xl relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8">
-          {/* Brand */}
-          <div className="sm:col-span-1">
-            <h3 className="font-heading text-xl tracking-tight">TODAYS 2026</h3>
-            <p className="mt-2 text-sm text-warm-cream/60 leading-relaxed max-w-xs">
-              Telkom Orientation Days — PKKMB Telkom University Purwokerto.
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="grid gap-10 border-b border-warm-cream/10 pb-10 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-5">
+            <Link href="/hub" className="inline-flex items-center gap-3">
+              <span className="flex size-10 items-center justify-center rounded-xl bg-warm-cream/10 text-sunlit-gold ring-1 ring-warm-cream/12">
+                <Compass size={21} weight="duotone" />
+              </span>
+              <span className="font-heading text-2xl tracking-tight">TODAYS 2026</span>
+            </Link>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-warm-cream/58">
+              Panduan interaktif PKKMB Telkom University Purwokerto untuk memulai perjalanan kampusmu.
             </p>
-            <div className="mt-5 flex gap-3">
-              {SOSMED.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-warm-cream/10 flex items-center justify-center text-warm-cream/60 hover:bg-sunlit-gold hover:text-jungle-deep transition-all duration-200"
-                  aria-label={s.label}
-                >
-                  {s.icon}
-                </a>
-              ))}
+            <div className="mt-6 flex gap-2">
+              {SOCIALS.map((social) => {
+                const Icon = social.icon
+
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex size-9 items-center justify-center rounded-xl border border-warm-cream/12 bg-warm-cream/5 text-warm-cream/62 transition-colors hover:border-sunlit-gold/45 hover:bg-sunlit-gold hover:text-jungle-deep"
+                    aria-label={social.label}
+                  >
+                    <Icon size={17} />
+                  </a>
+                )
+              })}
             </div>
           </div>
 
-          {/* Sitemap */}
-          <div>
-            <h4 className="text-[10px] text-sunlit-gold/80 font-sans tracking-[0.2em] uppercase mb-4">Sitemap</h4>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+          <nav className="md:col-span-4" aria-label="Sitemap footer">
+            <h2 className="mb-4 text-xs font-semibold text-sunlit-gold">Jelajahi</h2>
+            <div className="grid grid-cols-2 gap-x-5 gap-y-2.5">
               {SITEMAP.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm text-warm-cream/60 hover:text-warm-cream transition-colors"
+                  className="text-sm text-warm-cream/58 transition-colors hover:text-warm-cream"
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
-          </div>
+          </nav>
 
-          {/* Kontak */}
-          <div>
-            <h4 className="text-[10px] text-sunlit-gold/80 font-sans tracking-[0.2em] uppercase mb-4">Kontak</h4>
-            <p className="text-sm text-warm-cream/60 leading-relaxed">
-              Panitia PKKMB
-              <br />
-              Telkom University Purwokerto
-            </p>
-            <p className="mt-3 text-sm text-warm-cream/50">
-              pkkmb@telkomuniversity.ac.id
-            </p>
+          <div className="rounded-2xl border border-warm-cream/12 bg-warm-cream/5 p-5 md:col-span-3">
+            <h2 className="text-xs font-semibold text-sunlit-gold">Kontak panitia</h2>
+            <div className="mt-4 space-y-3.5 text-sm text-warm-cream/58">
+              <p className="flex items-start gap-2.5 leading-relaxed">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-warm-cream/38" weight="duotone" />
+                Telkom University Purwokerto
+              </p>
+              <a
+                href="mailto:pkkmb@telkomuniversity.ac.id"
+                className="flex items-start gap-2.5 break-all leading-relaxed transition-colors hover:text-warm-cream"
+              >
+                <EnvelopeSimple size={16} className="mt-0.5 shrink-0 text-warm-cream/38" weight="duotone" />
+                pkkmb@telkomuniversity.ac.id
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-5 border-t border-warm-cream/8 flex items-center justify-between">
+        <div className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[11px] text-warm-cream/35">
-            TODAYS 2026 — PKKMB Telkom University Purwokerto
+            TODAYS 2026. PKKMB Telkom University Purwokerto.
           </p>
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-[11px] text-warm-cream/35 hover:text-warm-cream/70 transition-colors"
-            aria-label="Kembali ke atas"
+            className="w-fit gap-2 rounded-xl px-3 text-xs text-warm-cream/48 hover:bg-warm-cream/8 hover:text-warm-cream"
           >
-            <ArrowUp size={12} />
+            <ArrowUp size={13} />
             Kembali ke atas
-          </button>
+          </Button>
         </div>
       </div>
     </footer>

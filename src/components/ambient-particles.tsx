@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 const DEFAULT_PARTICLES = [
   { x: 15, y: 20, size: 3, dur: 4, delay: 0, driftX: 15, driftY: -12 },
@@ -17,6 +17,7 @@ export default function AmbientParticles({
   count?: number
   colors?: string[]
 }) {
+  const reduceMotion = useReducedMotion()
   const palette = colors ?? ["#F5D590", "#F3C46B", "#8EA98D", "#A3C4B5"]
   const positions = DEFAULT_PARTICLES.slice(0, count)
 
@@ -32,7 +33,7 @@ export default function AmbientParticles({
             backgroundColor: palette[i % palette.length],
             boxShadow: `0 0 6px 2px ${palette[i % palette.length]}44`,
           }}
-          animate={{
+          animate={reduceMotion ? { opacity: 0.35, scale: 0.8 } : {
             x: [0, p.driftX * 0.5, p.driftX, 0],
             y: [0, p.driftY * 0.5, p.driftY, 0],
             opacity: [0, 0.7, 0.3, 0],

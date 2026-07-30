@@ -47,7 +47,7 @@ export default function KelompokPage() {
 
   if (!started) {
     return (
-      <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
+      <div className="forest-surface relative w-full min-h-dvh overflow-x-hidden flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function KelompokPage() {
   }
 
   return (
-    <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 px-4 sm:px-6 lg:px-8 py-8">
+    <div className="forest-surface relative w-full min-h-dvh overflow-x-hidden px-4 sm:px-6 lg:px-8 py-8">
       <AmbientParticles count={3} colors={["#F5D590", "#A3C4B5"]} />
 
       <ForestLeaf
@@ -112,7 +112,7 @@ export default function KelompokPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08 }}
-              className="bg-white/70 rounded-2xl border border-fern-mist p-6 mb-4"
+              className="forest-panel rounded-2xl p-6 mb-4"
             >
               <p className="text-sm font-sans text-moss leading-relaxed italic">
                 &ldquo;{kelompokInfo.deskripsi}&rdquo;
@@ -125,11 +125,11 @@ export default function KelompokPage() {
               transition={{ delay: 0.12 }}
               className="grid grid-cols-2 gap-3 mb-4"
             >
-              <div className="bg-white/70 rounded-2xl border border-fern-mist p-5 text-center">
+              <div className="forest-panel rounded-2xl p-5 text-center">
                 <p className="text-[11px] font-sans text-moss mb-1">Anggota</p>
                 <p className="font-heading text-2xl text-jungle-deep">{anggota.length} Orang</p>
               </div>
-              <div className="bg-white/70 rounded-2xl border border-fern-mist p-5 text-center">
+              <div className="forest-panel rounded-2xl p-5 text-center">
                 <p className="text-[11px] font-sans text-moss mb-1">Nomor Kelompok</p>
                 <p className="font-heading text-2xl text-sunlit-gold">{kelompokInfo.nomor_kelompok}</p>
               </div>
@@ -139,7 +139,7 @@ export default function KelompokPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.16 }}
-              className="bg-white/70 rounded-2xl border border-fern-mist p-6 mb-4 space-y-3"
+              className="forest-panel rounded-2xl p-6 mb-4 space-y-3"
             >
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-sunlit-gold/20 flex items-center justify-center shrink-0">
@@ -167,7 +167,7 @@ export default function KelompokPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white/70 rounded-2xl border border-fern-mist p-6 mb-4"
+              className="forest-panel rounded-2xl p-6 mb-4"
             >
               <h2 className="font-heading text-lg text-jungle-deep mb-3">
                 Anggota Kelompok
@@ -224,7 +224,7 @@ export default function KelompokPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white/70 rounded-2xl border border-fern-mist p-8 text-center"
+            className="forest-panel rounded-2xl p-8 text-center"
           >
             <p className="text-base text-moss font-sans">
               Data kelompok tidak ditemukan. Hubungi panitia.

@@ -92,6 +92,10 @@
   --sidebar-accent-foreground: #1A3A2B;
   --sidebar-border: #D5D7C8;
   --sidebar-ring: #1A3A2B;
+  --jungle-panel-bg: color-mix(in srgb, var(--color-warm-cream) 76%, transparent);
+  --jungle-panel-border: color-mix(in srgb, var(--color-fern-mist) 85%, transparent);
+  --jungle-panel-shadow: 0 20px 55px -38px color-mix(in srgb, var(--color-jungle-shadow) 45%, transparent);
+  --jungle-panel-glow: 0 20px 55px -30px color-mix(in srgb, var(--color-sunlit-gold) 42%, transparent);
 }
 
 @layer base {
@@ -100,9 +104,20 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-sunlit-gold) 58%, transparent);
+    color: var(--color-jungle-shadow);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-sunlit-gold);
+    outline-offset: 3px;
   }
 }
 
@@ -143,6 +158,330 @@
   .border-3 {
     border-width: 3px;
   }
+
+  .forest-surface {
+    background:
+      radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--color-jungle-glow) 22%, transparent), transparent 28%),
+      radial-gradient(circle at 82% 22%, color-mix(in srgb, var(--color-jungle-mist) 20%, transparent), transparent 32%),
+      linear-gradient(180deg, color-mix(in srgb, var(--color-jungle-canopy) 10%, transparent), transparent 45%),
+      var(--color-warm-cream);
+  }
+
+  .forest-panel {
+    border: 1px solid var(--jungle-panel-border);
+    background: var(--jungle-panel-bg);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-warm-cream) 72%, transparent),
+      var(--jungle-panel-shadow);
+  }
+
+  .woodgrain {
+    background-image:
+      repeating-linear-gradient(
+        2deg,
+        transparent 0,
+        transparent 5px,
+        color-mix(in srgb, var(--color-jungle-shadow) 3.5%, transparent) 6px,
+        transparent 7px
+      );
+  }
+
+  .forest-hero {
+    background:
+      radial-gradient(circle at 68% 40%, color-mix(in srgb, var(--color-jungle-glow) 30%, transparent), transparent 24%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-jungle-canopy) 32%, transparent),
+        color-mix(in srgb, var(--color-warm-cream) 76%, transparent) 68%,
+        var(--color-warm-cream)
+      );
+  }
+
+  .loading-forest {
+    background:
+      radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--color-moss) 45%, transparent), transparent 32%),
+      linear-gradient(180deg, var(--color-jungle-shadow), var(--color-jungle-deep));
+  }
+
+  .scope-lens {
+    background:
+      radial-gradient(
+        circle at 44% 35%,
+        color-mix(in srgb, var(--color-warm-cream) 82%, transparent),
+        color-mix(in srgb, var(--color-jungle-mist) 54%, transparent) 54%,
+        color-mix(in srgb, var(--color-jungle-canopy) 34%, transparent)
+      );
+    border: 3px solid color-mix(in srgb, var(--color-jungle-deep) 55%, transparent);
+    box-shadow:
+      inset 0 0 0 7px color-mix(in srgb, var(--color-warm-cream) 45%, transparent),
+      inset 0 0 42px color-mix(in srgb, var(--color-jungle-shadow) 16%, transparent),
+      0 28px 70px -38px color-mix(in srgb, var(--color-jungle-shadow) 70%, transparent);
+  }
+
+  .game-deck-surface {
+    background:
+      linear-gradient(color-mix(in srgb, var(--color-jungle-mist) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-jungle-mist) 7%, transparent) 1px, transparent 1px),
+      radial-gradient(circle at 50% 118%, color-mix(in srgb, var(--color-sunlit-gold) 16%, transparent), transparent 45%),
+      linear-gradient(180deg, var(--color-jungle-deep), var(--color-jungle-shadow));
+    background-size: 28px 28px, 28px 28px, auto, auto;
+  }
+
+  .story-stage {
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 50% 14%, color-mix(in srgb, var(--color-sunlit-gold) 18%, transparent), transparent 26%),
+      linear-gradient(180deg, var(--color-sage), var(--color-warm-cream));
+  }
+
+  .story-stage::before {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-radial-gradient(
+        ellipse at 12% 30%,
+        transparent 0 18px,
+        color-mix(in srgb, var(--color-jungle-deep) 6%, transparent) 19px 20px
+      );
+    mask-image: linear-gradient(90deg, black, transparent 54%);
+    content: "";
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  .story-stage[data-latar="river"] {
+    background:
+      radial-gradient(ellipse at 72% 20%, rgb(147 197 253 / 24%), transparent 34%),
+      linear-gradient(150deg, #c7d8cf 0%, var(--color-warm-cream) 58%, #d7e8df 100%);
+  }
+
+  .story-stage[data-latar="cave"] {
+    background:
+      radial-gradient(circle at 55% 34%, color-mix(in srgb, var(--color-jungle-mist) 22%, transparent), transparent 24%),
+      linear-gradient(150deg, var(--color-jungle-shadow), var(--color-jungle-deep) 52%, #304e40);
+  }
+
+  .story-stage[data-latar="clearing"] {
+    background:
+      radial-gradient(circle at 48% 18%, color-mix(in srgb, var(--color-sunlit-gold) 42%, transparent), transparent 31%),
+      linear-gradient(155deg, #e2e5cd, var(--color-warm-cream) 62%, #e4d7ae);
+  }
+
+  .story-stage[data-latar="ruins"] {
+    background:
+      radial-gradient(circle at 72% 20%, color-mix(in srgb, var(--color-ember) 22%, transparent), transparent 26%),
+      linear-gradient(145deg, #aeb7a6, var(--color-warm-cream) 57%, #d1b990);
+  }
+
+  .narrative-journal {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 7px,
+        color-mix(in srgb, var(--color-jungle-deep) 3%, transparent) 8px
+      ),
+      color-mix(in srgb, var(--color-warm-cream) 90%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 70%),
+      0 30px 80px -48px color-mix(in srgb, var(--color-jungle-shadow) 78%, transparent);
+    backdrop-filter: blur(14px);
+  }
+
+  .hub-zone-map {
+    background:
+      repeating-radial-gradient(
+        ellipse at 50% 52%,
+        transparent 0 42px,
+        color-mix(in srgb, var(--color-moss) 7%, transparent) 43px 44px
+      ),
+      radial-gradient(circle at 50% 52%, color-mix(in srgb, var(--color-sunlit-gold) 15%, transparent), transparent 28%),
+      var(--color-warm-cream);
+  }
+
+  .hub-zone-itinerary {
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--color-moss) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(color-mix(in srgb, var(--color-moss) 5%, transparent) 1px, transparent 1px),
+      color-mix(in srgb, var(--color-sage) 15%, var(--color-warm-cream));
+    background-size: 32px 32px;
+  }
+
+  .hub-zone-archive {
+    background:
+      radial-gradient(circle at 90% 12%, color-mix(in srgb, var(--color-jungle-mist) 20%, transparent), transparent 27%),
+      linear-gradient(160deg, color-mix(in srgb, var(--color-jungle-canopy) 9%, var(--color-warm-cream)), var(--color-warm-cream) 56%);
+  }
+
+  .archive-tile::after {
+    position: absolute;
+    right: -2.5rem;
+    bottom: -3.5rem;
+    width: 9rem;
+    height: 9rem;
+    border: 1px dashed color-mix(in srgb, var(--color-jungle-deep) 12%, transparent);
+    border-radius: 999px;
+    content: "";
+  }
+
+  .hub-zone-gallery {
+    background:
+      linear-gradient(color-mix(in srgb, var(--color-jungle-mist) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-jungle-mist) 5%, transparent) 1px, transparent 1px),
+      radial-gradient(circle at 72% 18%, color-mix(in srgb, var(--color-sunlit-gold) 12%, transparent), transparent 29%),
+      var(--color-jungle-shadow);
+    background-size: 36px 36px, 36px 36px, auto, auto;
+  }
+
+  .contact-frame {
+    box-shadow:
+      0 20px 42px -26px color-mix(in srgb, var(--color-jungle-shadow) 80%, transparent),
+      inset 0 0 0 1px rgb(255 255 255 / 55%);
+  }
+
+  .hub-zone-faq {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 27px,
+        color-mix(in srgb, var(--color-fern-mist) 30%, transparent) 28px
+      ),
+      radial-gradient(circle at 14% 28%, color-mix(in srgb, var(--color-sunlit-gold) 13%, transparent), transparent 25%),
+      var(--color-warm-cream);
+  }
+
+  .junglepedia-surface {
+    background:
+      repeating-radial-gradient(
+        ellipse at 92% 14%,
+        transparent 0 31px,
+        color-mix(in srgb, var(--color-moss) 7%, transparent) 32px 33px
+      ),
+      radial-gradient(circle at 8% 18%, color-mix(in srgb, var(--color-jungle-mist) 20%, transparent), transparent 28%),
+      var(--color-warm-cream);
+  }
+
+  .archive-compass {
+    border: 1px solid color-mix(in srgb, var(--color-jungle-deep) 18%, transparent);
+    background:
+      radial-gradient(circle, transparent 0 26%, color-mix(in srgb, var(--color-sunlit-gold) 12%, transparent) 27% 27.5%, transparent 28%),
+      repeating-radial-gradient(
+        circle,
+        transparent 0 27px,
+        color-mix(in srgb, var(--color-jungle-deep) 7%, transparent) 28px 29px
+      ),
+      color-mix(in srgb, var(--color-warm-cream) 74%, transparent);
+    box-shadow:
+      inset 0 0 0 10px color-mix(in srgb, var(--color-warm-cream) 45%, transparent),
+      0 35px 80px -52px color-mix(in srgb, var(--color-jungle-shadow) 65%, transparent);
+  }
+
+  .gallery-dark-surface {
+    background:
+      linear-gradient(color-mix(in srgb, var(--color-jungle-mist) 4%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-jungle-mist) 4%, transparent) 1px, transparent 1px),
+      radial-gradient(circle at 72% 14%, color-mix(in srgb, var(--color-sunlit-gold) 14%, transparent), transparent 26%),
+      var(--color-jungle-shadow);
+    background-size: 40px 40px, 40px 40px, auto, auto;
+  }
+
+  .gallery-viewfinder {
+    border: 1px solid color-mix(in srgb, var(--color-warm-cream) 18%, transparent);
+    border-radius: 1.5rem;
+    background:
+      linear-gradient(90deg, transparent 49.8%, color-mix(in srgb, var(--color-warm-cream) 12%, transparent) 50%, transparent 50.2%),
+      linear-gradient(transparent 49.8%, color-mix(in srgb, var(--color-warm-cream) 12%, transparent) 50%, transparent 50.2%),
+      radial-gradient(circle, color-mix(in srgb, var(--color-jungle-deep) 75%, transparent), transparent 66%);
+    box-shadow: inset 0 0 0 9px color-mix(in srgb, var(--color-warm-cream) 3%, transparent);
+  }
+
+  .schedule-manifest-surface {
+    background:
+      linear-gradient(90deg, transparent 0 7%, color-mix(in srgb, var(--color-ember) 9%, transparent) 7% 7.1%, transparent 7.1%),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 31px,
+        color-mix(in srgb, var(--color-fern-mist) 28%, transparent) 32px
+      ),
+      radial-gradient(circle at 84% 17%, color-mix(in srgb, var(--color-sunlit-gold) 18%, transparent), transparent 26%),
+      var(--color-warm-cream);
+  }
+
+  .calendar-ticket::before,
+  .calendar-ticket::after {
+    position: absolute;
+    bottom: 2.4rem;
+    z-index: 2;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-sage) 15%, var(--color-warm-cream));
+    content: "";
+  }
+
+  .calendar-ticket::before {
+    left: -0.55rem;
+  }
+
+  .calendar-ticket::after {
+    right: -0.55rem;
+  }
+
+  .schedule-card {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 55%),
+      0 18px 42px -34px color-mix(in srgb, var(--color-jungle-shadow) 42%, transparent);
+  }
+
+  .faq-fielddesk-surface {
+    background:
+      radial-gradient(circle at 78% 13%, color-mix(in srgb, var(--color-sunlit-gold) 15%, transparent), transparent 24%),
+      linear-gradient(145deg, color-mix(in srgb, var(--color-sage) 13%, var(--color-warm-cream)), var(--color-warm-cream) 52%);
+  }
+
+  .faq-note {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 23px,
+        color-mix(in srgb, var(--color-fern-mist) 42%, transparent) 24px
+      ),
+      var(--color-warm-cream);
+    box-shadow: 0 30px 70px -48px color-mix(in srgb, var(--color-jungle-shadow) 60%, transparent);
+  }
+
+  .faq-paper-note {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 27px,
+        color-mix(in srgb, var(--color-fern-mist) 24%, transparent) 28px
+      );
+  }
+
+  .forest-nav {
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-warm-cream) 72%, transparent),
+      0 18px 45px -30px color-mix(in srgb, var(--color-jungle-shadow) 55%, transparent);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .forest-panel {
+    background: var(--color-warm-cream);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body::after {
@@ -155,5 +494,3 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 15H25L30 5Z' fill='%231A3A2B' opacity='0.3'/%3E%3Cpath d='M10 25L15 35H5L10 25Z' fill='%234E7053' opacity='0.2'/%3E%3Cpath d='M50 40L55 50H45L50 40Z' fill='%231A3A2B' opacity='0.15'/%3E%3Cpath d='M20 50L23 56H17L20 50Z' fill='%238EA98D' opacity='0.15'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
-
-

@@ -2,10 +2,11 @@
 
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion"
 import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
+import ForestSilhouettes from "@/components/forest-silhouettes"
 import { BookOpen, Question, User } from "@phosphor-icons/react"
 
 const containerVariants = {
@@ -34,6 +35,7 @@ const decorVariants = {
 
 function BabakSatu() {
   const ref = useRef(null)
+  const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const fogBgY = useTransform(scrollYProgress, [0, 1], [0, 50])
   const fogFgY = useTransform(scrollYProgress, [0, 1], [0, 120])
@@ -44,22 +46,25 @@ function BabakSatu() {
       ref={ref}
       className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden"
     >
-      <BackgroundFoliage variant="canopy-top" opacity={0.08} />
-      <motion.div style={{ scale: canopyScale }} className="absolute inset-0 bg-gradient-to-b from-jungle-canopy/50 via-jungle-deep/30 to-warm-cream pointer-events-none" />
-      <motion.div style={{ y: fogBgY }} className="absolute inset-0 bg-gradient-to-b from-jungle-mist/20 via-transparent to-transparent pointer-events-none" />
-      <motion.div style={{ y: fogFgY }} className="absolute inset-0 bg-gradient-to-t from-jungle-mist/15 via-transparent to-transparent pointer-events-none" />
+      <motion.div style={reduceMotion ? undefined : { scale: canopyScale }} className="absolute inset-0 bg-gradient-to-b from-jungle-canopy/50 via-jungle-deep/25 to-warm-cream pointer-events-none" />
+      <ForestSilhouettes className="opacity-80" />
+      <div className="absolute inset-0 hidden sm:block">
+        <BackgroundFoliage variant="canopy-top" opacity={0.12} />
+      </div>
+      <motion.div style={reduceMotion ? undefined : { y: fogBgY }} className="absolute inset-0 hidden sm:block bg-gradient-to-b from-jungle-mist/20 via-transparent to-transparent pointer-events-none" />
+      <motion.div style={reduceMotion ? undefined : { y: fogFgY }} className="absolute inset-0 hidden sm:block bg-gradient-to-t from-jungle-mist/15 via-transparent to-transparent pointer-events-none" />
 
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-jungle-mist/10 blur-3xl pointer-events-none"
+          className="absolute hidden sm:block rounded-full bg-jungle-mist/10 blur-3xl pointer-events-none"
           style={{
             width: 200 + i * 120,
             height: 200 + i * 120,
             left: `${15 + i * 30}%`,
             top: `${10 + i * 20}%`,
           }}
-          animate={{
+          animate={reduceMotion ? { opacity: 0.24 } : {
             x: [0, 20, -15, 0],
             y: [0, -15, 10, 0],
           }}
@@ -78,8 +83,8 @@ function BabakSatu() {
         viewport={{ once: true, margin: "-20px" }}
         className="relative z-10 text-center px-6 max-w-lg"
       >
-        <motion.span variants={childVariants} className="text-xs text-moss font-sans tracking-[0.2em] uppercase mb-3 block">
-          Babak 1
+        <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
+          Babak satu
         </motion.span>
         <motion.h2 variants={childVariants} className="font-heading text-4xl sm:text-5xl lg:text-6xl text-jungle-deep mb-4 leading-tight">
           Hutan Rimba
@@ -94,6 +99,7 @@ function BabakSatu() {
 
 function BabakDua() {
   const ref = useRef(null)
+  const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 40])
   const fgY = useTransform(scrollYProgress, [0, 1], [0, -60])
@@ -103,7 +109,7 @@ function BabakDua() {
       ref={ref}
       className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-gradient-to-b from-warm-cream to-fern-mist/30"
     >
-      <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none">
+      <motion.div style={reduceMotion ? undefined : { y: bgY }} className="absolute inset-0 pointer-events-none">
         {[
           { x: 28, y: 30, s: 10 },
           { x: 72, y: 25, s: 7 },
@@ -121,7 +127,7 @@ function BabakDua() {
               width: t.s,
               height: t.s,
             }}
-            animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.1, 1] }}
+            animate={reduceMotion ? { opacity: 0.35 } : { opacity: [0.2, 0.5, 0.2], scale: [1, 1.1, 1] }}
             transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
           />
         ))}
@@ -134,7 +140,7 @@ function BabakDua() {
             stroke="#8EA98D"
             strokeWidth="2.5"
             strokeLinecap="round"
-            initial={{ pathLength: 0 }}
+            initial={reduceMotion ? false : { pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 2, ease: "easeInOut" }}
@@ -144,7 +150,7 @@ function BabakDua() {
             stroke="#F3C46B"
             strokeWidth="1"
             strokeLinecap="round"
-            initial={{ pathLength: 0 }}
+            initial={reduceMotion ? false : { pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
@@ -153,15 +159,15 @@ function BabakDua() {
       </div>
 
       <motion.div
-        style={{ y: fgY }}
+        style={reduceMotion ? undefined : { y: fgY }}
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-20px" }}
         className="relative z-10 text-center px-6 max-w-lg"
       >
-        <motion.span variants={childVariants} className="text-xs text-moss font-sans tracking-[0.2em] uppercase mb-3 block">
-          Babak 2
+        <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
+          Babak dua
         </motion.span>
         <motion.h2 variants={childVariants} className="font-heading text-4xl sm:text-5xl lg:text-6xl text-jungle-deep mb-4 leading-tight">
           Jalur Setapak
@@ -176,6 +182,7 @@ function BabakDua() {
 
 function BabakTiga() {
   const ref = useRef(null)
+  const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const orbY = useTransform(scrollYProgress, [0, 1], [0, -80])
 
@@ -206,7 +213,7 @@ function BabakTiga() {
       className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-gradient-to-b from-fern-mist/30 to-warm-cream"
     >
       <DappledLight count={3} color="#A3C4B5" />
-      <motion.div style={{ y: orbY }} className="absolute inset-0 pointer-events-none">
+      <motion.div style={reduceMotion ? undefined : { y: orbY }} className="absolute inset-0 pointer-events-none">
         {orbs.map((orb, i) => (
           <motion.div
             key={i}
@@ -219,7 +226,7 @@ function BabakTiga() {
               background: `radial-gradient(circle at 30% 30%, rgba(243,196,107,0.6) 0%, rgba(245,213,144,0.3) 50%, transparent 70%)`,
               boxShadow: `0 0 ${50 + i * 20}px rgba(243,196,107,0.2)`,
             }}
-            animate={{
+            animate={reduceMotion ? { opacity: 0.68 } : {
               opacity: [0.4, 1, 0.4],
               scale: [1, 1.15, 1],
               y: [0, -15, 0],
@@ -232,7 +239,7 @@ function BabakTiga() {
             }}
           >
             <motion.div
-              animate={{ rotate: [0, 5, -5, 0] }}
+              animate={reduceMotion ? undefined : { rotate: [0, 5, -5, 0] }}
               transition={{ duration: 6, delay: i * 0.5, repeat: Infinity, ease: "easeInOut" }}
             >
               {orb.icon}
@@ -248,14 +255,14 @@ function BabakTiga() {
         viewport={{ once: true, margin: "-20px" }}
         className="relative z-10 text-center px-6 max-w-lg"
       >
-        <motion.span variants={childVariants} className="text-xs text-moss font-sans tracking-[0.2em] uppercase mb-3 block">
-          Babak 3
+        <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
+          Babak tiga
         </motion.span>
         <motion.h2 variants={childVariants} className="font-heading text-4xl sm:text-5xl lg:text-6xl text-jungle-deep mb-4 leading-tight">
           Tiga Titik Cahaya
         </motion.h2>
         <motion.p variants={childVariants} className="text-sm sm:text-base text-moss/80 leading-relaxed font-sans">
-          Guidebook, Quiz, dan Cari Kelompok — tiga pilar perjalananmu. Selesaikan satu per satu, dan hutan akan membuka jalannya.
+          Guidebook, Quiz, dan Cari Kelompok adalah tiga pilar perjalananmu. Selesaikan satu per satu, lalu hutan akan membuka jalan.
         </motion.p>
       </motion.div>
     </section>
@@ -264,6 +271,7 @@ function BabakTiga() {
 
 export default function WelcomePage() {
   const router = useRouter()
+  const reduceMotion = useReducedMotion()
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ container: containerRef })
   const fogOpacity = useTransform(
@@ -275,7 +283,7 @@ export default function WelcomePage() {
   return (
     <div ref={containerRef} className="relative h-dvh overflow-y-scroll snap-y snap-mandatory">
       <motion.div
-        style={{ opacity: fogOpacity }}
+        style={reduceMotion ? { opacity: 0 } : { opacity: fogOpacity }}
         className="fixed inset-0 pointer-events-none z-20 bg-gradient-to-b from-jungle-mist/40 via-jungle-mist/20 to-transparent"
       />
 
@@ -285,6 +293,7 @@ export default function WelcomePage() {
 
       <section className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-warm-cream">
         <div className="absolute inset-0 bg-gradient-to-b from-sunlit-gold/5 via-transparent to-transparent pointer-events-none" />
+        <ForestSilhouettes className="opacity-60" />
         <AmbientParticles count={4} colors={["#F3C46B", "#F5D590", "#C47A22"]} />
 
         {[
@@ -303,7 +312,7 @@ export default function WelcomePage() {
               backgroundColor: "#F3C46B",
               boxShadow: `0 0 6px 2px rgba(243,196,107,0.4)`,
             }}
-            animate={{
+            animate={reduceMotion ? { opacity: 0.45, scale: 0.8 } : {
               x: [0, 8, -8, 0],
               y: [0, -12, 4, 0],
               opacity: [0, 0.8, 0.3, 0],
@@ -325,8 +334,8 @@ export default function WelcomePage() {
           viewport={{ once: true, margin: "-20px" }}
           className="relative z-10 text-center px-6 max-w-lg"
         >
-          <motion.span variants={childVariants} className="text-xs text-moss font-sans tracking-[0.2em] uppercase mb-3 block">
-            Babak 4
+          <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
+            Babak empat
           </motion.span>
           <motion.h2 variants={childVariants} className="font-heading text-4xl sm:text-5xl lg:text-6xl text-jungle-deep mb-4 leading-tight">
             Petualanganmu Dimulai
@@ -336,8 +345,8 @@ export default function WelcomePage() {
           </motion.p>
           <motion.div variants={decorVariants}>
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => router.push("/avatar")}
               className="rounded-full bg-jungle-deep text-warm-cream px-10 py-3.5 text-sm font-sans font-medium tracking-wide hover:bg-moss transition-colors shadow-lg shadow-jungle-deep/20"
             >

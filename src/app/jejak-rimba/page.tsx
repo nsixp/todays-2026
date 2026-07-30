@@ -2,38 +2,33 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { useJejakRimba } from "@/hooks/use-jejak-rimba"
 import { useProgress } from "@/hooks/use-progress"
 import JejakRimbaCard from "@/components/jejak-rimba-card"
 import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
-import { CaretLeft } from "@phosphor-icons/react"
+import { CardsThree, CaretLeft, CompassRose, MapPinArea, Path, Quotes } from "@phosphor-icons/react"
 
-const LATAR_CONFIG: Record<string, { bg: string; overlay: string; label: string }> = {
+const LATAR_CONFIG: Record<string, { overlay: string; label: string }> = {
   canopy: {
-    bg: "from-jungle-deep/30 via-warm-cream to-sage/40",
     overlay: "bg-jungle-canopy/10",
     label: "Kanopi Hutan",
   },
   river: {
-    bg: "from-blue-900/15 via-warm-cream to-sage/30",
     overlay: "bg-blue-900/5",
     label: "Sungai Rimba",
   },
   cave: {
-    bg: "from-jungle-deep/60 via-jungle-deep/30 to-warm-cream",
     overlay: "bg-jungle-shadow/20",
     label: "Gua Misterius",
   },
   clearing: {
-    bg: "from-sunlit-gold/20 via-warm-cream to-sage/30",
     overlay: "bg-sunlit-gold/5",
     label: "Padang Cahaya",
   },
   ruins: {
-    bg: "from-jungle-deep/40 via-amber-900/15 to-warm-cream",
     overlay: "bg-jungle-deep/10",
     label: "Reruntuhan Kuno",
   },
@@ -45,18 +40,62 @@ const storyVariants = {
   exit: { opacity: 0, x: -80, filter: "blur(4px)" },
 }
 
+function renderNarrativeText(text: string) {
+  return text.split(/('[^']+')/g).map((part, index) =>
+    part.startsWith("'") && part.endsWith("'") ? (
+      <em key={`${part}-${index}`} className="font-heading text-[1.08em] not-italic text-jungle-deep">
+        {part.slice(1, -1)}
+      </em>
+    ) : (
+      part
+    )
+  )
+}
+
 function renderNarasiParagraphs(text: string) {
-  return text.split("\n\n").filter(Boolean).map((p, i) => (
-    <p key={i} className="text-sm sm:text-base text-jungle-deep font-sans leading-relaxed not-last:mb-3">
-      {p}
-    </p>
-  ))
+  const paragraphs = text.split("\n\n").filter(Boolean)
+
+  return paragraphs.map((paragraph, index) => {
+    const isOpening = index === 0
+    const isDecision = index === paragraphs.length - 1 && paragraph.trim().endsWith("?")
+    const containsVoice = paragraph.includes("'")
+
+    if (isDecision) {
+      return (
+        <div
+          key={`${paragraph}-${index}`}
+          className="mt-5 flex items-start gap-3 rounded-xl border border-sunlit-gold/35 bg-sunlit-gold/10 px-4 py-3"
+        >
+          <CompassRose className="mt-0.5 size-5 shrink-0 text-ember" weight="duotone" />
+          <p className="font-heading text-lg leading-snug text-jungle-deep">
+            {renderNarrativeText(paragraph)}
+          </p>
+        </div>
+      )
+    }
+
+    return (
+      <p
+        key={`${paragraph}-${index}`}
+        className={
+          isOpening
+            ? "font-heading text-xl leading-[1.38] text-jungle-deep sm:text-2xl"
+            : containsVoice
+              ? "border-l-2 border-sunlit-gold/55 pl-4 font-sans text-sm leading-relaxed text-moss sm:text-base"
+              : "font-sans text-sm leading-relaxed text-moss sm:text-base"
+        }
+      >
+        {renderNarrativeText(paragraph)}
+      </p>
+    )
+  })
 }
 
 export default function JejakRimbaPage() {
   const router = useRouter()
+  const reduceMotion = useReducedMotion()
   const { progress } = useProgress()
-  const { currentNode, isEnding, canGoBack, pilih, goBack, reset } = useJejakRimba()
+  const { state, currentNode, isEnding, canGoBack, pilih, goBack, reset } = useJejakRimba()
   const [selectedCard, setSelectedCard] = useState<string | null>(null)
   const [narrativeKey, setNarrativeKey] = useState(0)
   const [showEnding, setShowEnding] = useState(false)
@@ -94,12 +133,14 @@ export default function JejakRimbaPage() {
 
   const latar = currentNode.latar ?? "canopy"
   const latarCfg = LATAR_CONFIG[latar]
-  const bgGradient = latarCfg.bg
 
   return (
     <div className="min-h-dvh bg-jungle-deep flex flex-col overflow-x-hidden">
       {/* ============ NARRATIVE (60%) ============ */}
-      <div className={`relative flex-1 flex items-center justify-center bg-linear-to-b ${bgGradient} overflow-hidden`}>
+      <div
+        className="story-stage relative flex flex-1 items-center justify-center overflow-hidden"
+        data-latar={latar}
+      >
         {/* Decorative overlays */}
         <div className={`absolute inset-0 pointer-events-none ${latarCfg.overlay}`} />
         <BackgroundFoliage variant="canopy-top" opacity={0.06} />
@@ -142,33 +183,49 @@ export default function JejakRimbaPage() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 w-full max-w-lg mx-auto px-6"
+              className="relative z-10 mx-auto w-full max-w-2xl px-4 py-8 sm:px-6"
             >
-              {/* Step counter */}
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xs sm:text-xs text-jungle-deep font-sans tracking-[0.15em] uppercase">
-                  Langkah ke-{currentNode.id === "node-1" ? 1 : (currentNode.id.match(/\d+/)?.[0] ?? "?")}
-                </span>
-                <span className="flex-1 h-px bg-jungle-deep" />
-                <span className="text-xs sm:text-xs text-jungle-deep font-sans">{latarCfg.label}</span>
-              </div>
+              <div className="narrative-journal relative overflow-hidden rounded-[1.75rem] border border-warm-cream/70">
+                <div className="absolute inset-y-0 left-0 w-1.5 bg-linear-to-b from-sunlit-gold via-ember/70 to-moss" />
+                <div className="absolute -right-12 -top-12 size-40 rounded-full border border-jungle-deep/8" />
+                <div className="absolute -right-6 -top-6 size-28 rounded-full border border-dashed border-jungle-deep/10" />
 
-              {/* Narrative scroll/parchment */}
-              <div className="relative bg-white/70 backdrop-blur-sm rounded-2xl border border-fern-mist/60 p-5 sm:p-6 shadow-lg">
-                <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-linear-to-r from-sunlit-gold/40 via-sunlit-gold/20 to-transparent" />
+                <header className="relative flex items-center justify-between gap-4 border-b border-jungle-deep/10 px-5 py-4 sm:px-7">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-10 items-center justify-center rounded-full border border-jungle-deep/15 bg-jungle-deep/5 text-jungle-deep">
+                      <CompassRose size={22} weight="duotone" />
+                    </div>
+                    <div>
+                      <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-moss">
+                        Catatan perjalanan
+                      </p>
+                      <p className="font-heading text-lg leading-tight text-jungle-deep">{latarCfg.label}</p>
+                    </div>
+                  </div>
+                  <span className="font-heading text-3xl leading-none text-jungle-deep/20">
+                    {String(state.history.length + 1).padStart(2, "0")}
+                  </span>
+                </header>
 
-                {canGoBack && (
-                  <button
-                    onClick={goBack}
-                    className="mb-3 flex items-center gap-1.5 text-[10px] text-moss/60 font-sans tracking-wide uppercase hover:text-jungle-deep transition-colors"
-                  >
-                    <CaretLeft size={12} />
-                    Kembali
-                  </button>
-                )}
+                <div className="relative px-5 py-5 sm:px-7 sm:py-6">
+                  {canGoBack && (
+                    <button
+                      onClick={goBack}
+                      className="mb-4 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-moss transition-colors hover:text-jungle-deep"
+                    >
+                      <CaretLeft size={12} />
+                      Langkah sebelumnya
+                    </button>
+                  )}
 
-                <div className="space-y-0.5">
-                  {renderNarasiParagraphs(currentNode.narasi)}
+                  <div className="space-y-4">
+                    {renderNarasiParagraphs(currentNode.narasi)}
+                  </div>
+
+                  <div className="mt-5 flex items-center gap-2 border-t border-jungle-deep/10 pt-3 text-[10px] text-moss/70">
+                    <Quotes size={15} weight="duotone" />
+                    <span>Pilih kartu di bawah untuk menentukan kelanjutan kisah.</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -189,10 +246,12 @@ export default function JejakRimbaPage() {
           >
             <motion.div
               initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.4 }}
+              animate={reduceMotion ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1, rotate: 360 }}
+              transition={reduceMotion
+                ? { duration: 0 }
+                : { delay: 0.15, duration: 1, rotate: { repeat: Infinity, ease: "linear" } }
+              }
               className="w-12 h-12 rounded-full border-2 border-sunlit-gold/30 border-t-sunlit-gold"
-              style={{ animation: "spin 1s linear infinite" }}
             />
           </motion.div>
         )}
@@ -434,44 +493,51 @@ export default function JejakRimbaPage() {
 
       {/* ============ CARD HAND (40%) ============ */}
       {transitionPhase === "playing" && (
-        <div className="relative h-[40dvh] bg-linear-to-t from-jungle-deep/15 via-jungle-deep/5 to-transparent border-t border-fern-mist/15 flex items-center justify-center overflow-x-auto px-4 sm:px-6">
-          {/* Top glow */}
-          <div className="absolute top-0 left-0 right-0 h-12 bg-linear-to-b from-sunlit-gold/8 via-sunlit-gold/3 to-transparent pointer-events-none" />
-
-          {/* Ground mist at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-jungle-deep/12 to-transparent pointer-events-none" />
-
-          {/* Ambient glow behind cards */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-32 rounded-full bg-sunlit-gold/5 blur-[60px] pointer-events-none" />
-
-          {/* Leaf decor bottom corners */}
-          <div className="absolute bottom-0 left-0 w-20 h-20 pointer-events-none overflow-hidden opacity-[0.04]">
-            <svg viewBox="0 0 100 100" fill="#1A3A2B" className="w-full h-full">
-              <path d="M0 100C10 70 30 50 60 40s50-30 60-60L100 0v100H0Z" />
-              <path d="M0 100C20 80 40 65 65 55s45-25 55-50L100 0v100H0Z" opacity="0.5" />
-            </svg>
-          </div>
-          <div className="absolute bottom-0 right-0 w-20 h-20 pointer-events-none overflow-hidden opacity-[0.04] rotate-90">
-            <svg viewBox="0 0 100 100" fill="#1A3A2B" className="w-full h-full">
-              <path d="M0 100C10 70 30 50 60 40s50-30 60-60L100 0v100H0Z" />
-              <path d="M0 100C20 80 40 65 65 55s45-25 55-50L100 0v100H0Z" opacity="0.5" />
-            </svg>
+        <div className="game-deck-surface relative flex h-[44dvh] min-h-72 max-h-100 flex-col overflow-hidden border-t border-jungle-mist/20">
+          <div className="relative z-20 mx-auto flex h-14 w-full max-w-6xl shrink-0 items-center justify-between border-b border-warm-cream/10 px-4 sm:px-6">
+            <div className="flex items-center gap-2 text-warm-cream">
+              <CardsThree size={19} weight="duotone" className="text-sunlit-gold" />
+              <span className="text-xs font-semibold tracking-[0.12em]">Pilih langkah</span>
+            </div>
+            <div className="hidden items-center gap-2 text-warm-cream/55 sm:flex">
+              <MapPinArea size={15} />
+              <span className="text-xs">{latarCfg.label}</span>
+            </div>
+            <div className="flex items-center gap-3 text-[11px] text-warm-cream/55">
+              <span className="hidden items-center gap-1.5 sm:flex">
+                <Path size={14} />
+                Jejak {state.history.length + 1}
+              </span>
+              <span className="rounded-full border border-warm-cream/15 bg-warm-cream/5 px-2.5 py-1 text-warm-cream/75">
+                {currentNode.pilihan.length} pilihan
+              </span>
+            </div>
           </div>
 
-          <div className="relative flex items-end gap-3 sm:gap-4 pb-5 pt-3" style={{ perspective: "900px" }}>
-            <AnimatePresence mode="popLayout">
-              {currentNode.pilihan.map((p, i) => (
-                <JejakRimbaCard
-                  key={`${narrativeKey}-${p.nextId}`}
-                  pilihan={p}
-                  index={i}
-                  total={currentNode.pilihan.length}
-                  onSelect={() => handleSelect(p.nextId)}
-                  disabled={selectedCard !== null}
-                  selected={selectedCard === p.nextId}
-                />
-              ))}
-            </AnimatePresence>
+          <div className="relative flex flex-1 items-end overflow-x-auto overflow-y-hidden px-4 sm:justify-center sm:px-6">
+            <div className="pointer-events-none absolute inset-x-[8%] bottom-5 h-16 rounded-[50%] border border-sunlit-gold/10 bg-jungle-shadow/25" />
+            <div className="pointer-events-none absolute bottom-0 left-1/2 h-28 w-80 -translate-x-1/2 rounded-full bg-sunlit-gold/8 blur-[55px]" />
+
+            <div
+              className="relative flex min-w-max items-end gap-3 pb-6 pt-4 sm:gap-4"
+              style={{ perspective: "1000px" }}
+              role="group"
+              aria-label="Pilihan langkah petualangan"
+            >
+              <AnimatePresence mode="popLayout">
+                {currentNode.pilihan.map((p, i) => (
+                  <JejakRimbaCard
+                    key={`${narrativeKey}-${p.nextId}`}
+                    pilihan={p}
+                    index={i}
+                    total={currentNode.pilihan.length}
+                    onSelect={() => handleSelect(p.nextId)}
+                    disabled={selectedCard !== null}
+                    selected={selectedCard === p.nextId}
+                  />
+                ))}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       )}

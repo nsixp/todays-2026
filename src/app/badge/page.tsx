@@ -53,7 +53,7 @@ export default function BadgePage() {
   const pct = Math.round((progress.quizScore / total) * 100)
 
   return (
-    <div className="relative min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
+    <div className="forest-surface relative min-h-dvh flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
       <DappledLight count={3} />
       <AmbientParticles count={4} />
       <motion.div
@@ -61,7 +61,7 @@ export default function BadgePage() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative w-full max-w-sm bg-white/70 rounded-3xl border-3 border-sunlit-gold/60 p-10 text-center shadow-lg overflow-hidden"
+        className="forest-panel woodgrain relative w-full max-w-sm rounded-3xl border-3 border-sunlit-gold/60 p-10 text-center overflow-hidden"
       >
         {/* Ornamental corners */}
         <svg className="absolute top-0 left-0 w-6 h-6 text-sunlit-gold/20 pointer-events-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -112,7 +112,7 @@ export default function BadgePage() {
           </button>
           <button
             onClick={() => router.push("/hub")}
-            className="btn-jungle bg-jungle-deep text-warm-cream px-8 py-3 hover:bg-moss"
+            className="btn-jungle border border-jungle-deep/30 bg-transparent text-jungle-deep px-8 py-3 hover:border-jungle-deep/55 hover:bg-jungle-deep/6"
           >
             Kembali ke Jungle Hub
           </button>

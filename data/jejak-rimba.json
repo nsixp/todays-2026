@@ -21,7 +21,7 @@
   },
   {
     "id": "node-3",
-    "narasi": "Tebing curam menjulang di hadapanmu, lumut hijau membalut setiap celah bebatuan. Dari ketinggian, samar-samar terlihat atap bangunan kampus di kejauhan.\n\nHarimau besar muncul di bibir tebing, mengaum pelan — seolah memberi isyarat. Di sisi lain, Rusa berdiri diam di jalur setapak yang melingkar.\n\nSiapa yang akan kau percaya? Keberanian sang harimau, atau kesabaran rusa?",
+    "narasi": "Tebing curam menjulang di hadapanmu, lumut hijau membalut setiap celah bebatuan. Dari ketinggian, samar-samar terlihat atap bangunan kampus di kejauhan.\n\nHarimau besar muncul di bibir tebing, mengaum pelan seolah memberi isyarat. Di sisi lain, Rusa berdiri diam di jalur setapak yang melingkar.\n\nSiapa yang akan kau percaya? Keberanian sang harimau, atau kesabaran rusa?",
     "latar": "river",
     "pilihan": [
       { "text": "Terjang Tebing", "icon": "harimau", "nextId": "node-5" },
@@ -30,7 +30,7 @@
   },
   {
     "id": "node-4",
-    "narasi": "Selepas kabut, kamu tiba di sebuah padang rumput luas. Di tengahnya berdiri monumen batu kuno dengan ukiran simbol-simbol aneh.\n\nBurung-burung beterbangan di atas, membentuk pola yang seolah membacakan pesan.\n\n'Bacalah,' bisik angin. 'Atau tunggulah — pertolongan akan datang bagi mereka yang sabar.'",
+    "narasi": "Selepas kabut, kamu tiba di sebuah padang rumput luas. Di tengahnya berdiri monumen batu kuno dengan ukiran simbol-simbol aneh.\n\nBurung-burung beterbangan di atas, membentuk pola yang seolah membacakan pesan.\n\n'Bacalah,' bisik angin. 'Atau tunggulah. Pertolongan akan datang bagi mereka yang sabar.'",
     "latar": "clearing",
     "pilihan": [
       { "text": "Baca Ukiran Batu", "icon": "burung", "nextId": "node-6" },
@@ -48,7 +48,7 @@
   },
   {
     "id": "node-8",
-    "narasi": "Gelap. Lorong gua menyempit, hanya diterangi oleh kristal-kristal kecil yang berpendar hijau kebiruan.\n\nUlar melingkar di atas batu di hadapanmu, matanya bersinar tenang. Dari kedalaman, terdengar suara gemuruh lembut — seolah sesuatu menunggumu di dalam.\n\n'Jangan takut,' bisik ular itu, 'hanya mereka yang berani yang menemukan apa yang tersembunyi.'",
+    "narasi": "Gelap. Lorong gua menyempit, hanya diterangi oleh kristal-kristal kecil yang berpendar hijau kebiruan.\n\nUlar melingkar di atas batu di hadapanmu, matanya bersinar tenang. Dari kedalaman, terdengar suara gemuruh lembut, seolah sesuatu menunggumu di dalam.\n\n'Jangan takut,' bisik ular itu, 'hanya mereka yang berani yang menemukan apa yang tersembunyi.'",
     "latar": "cave",
     "pilihan": [
       { "text": "Masuk Lebih Dalam", "icon": "ular", "nextId": "node-9" },
@@ -57,7 +57,7 @@
   },
   {
     "id": "node-9",
-    "narasi": "Di ujung gua, sebuah ruangan megah terbentang. Dindingnya dihiasi lukisan kuno yang menceritakan legenda hutan rimba — tentang keseimbangan antara manusia dan alam.\n\nDi tengah ruangan, sebuah altar batu menyimpan mahkota daun yang bercahaya.\n\nUlar di bahumu mendesis pelan: 'Ini yang kau cari, Pejuang Rimba. Rahasia hutan yang hanya terbuka bagi mereka yang setia pada jalannya.'",
+    "narasi": "Di ujung gua, sebuah ruangan megah terbentang. Dindingnya dihiasi lukisan kuno yang menceritakan legenda hutan rimba tentang keseimbangan antara manusia dan alam.\n\nDi tengah ruangan, sebuah altar batu menyimpan mahkota daun yang bercahaya.\n\nUlar di bahumu mendesis pelan: 'Ini yang kau cari, Pejuang Rimba. Rahasia hutan yang hanya terbuka bagi mereka yang setia pada jalannya.'",
     "latar": "ruins",
     "pilihan": [
       { "text": "Ambil Mahkota", "icon": "harimau", "nextId": "node-ending-hidden" },
@@ -66,31 +66,31 @@
   },
   {
     "id": "node-6",
-    "narasi": "Ukiran batu itu berbicara — bukan dalam kata-kata, melainkan dalam gambaran yang mengalir ke dalam pikiranmu. Kamu melihat seluruh peta hutan rimba beserta jalan keluarnya.\n\n'Kebijaksanaan adalah cahaya di tengah kegelapan.'\n\nSebutir cahaya turun dari langit, membentuk jalan setapak keemasan menuju gerbang kampus. Roh harimau muncul di sisimu, mengangguk hormat.",
+    "narasi": "Ukiran batu itu berbicara, bukan dalam kata-kata, melainkan dalam gambaran yang mengalir ke dalam pikiranmu. Kamu melihat seluruh peta hutan rimba beserta jalan keluarnya.\n\n'Kebijaksanaan adalah cahaya di tengah kegelapan.'\n\nSebutir cahaya turun dari langit, membentuk jalan setapak keemasan menuju gerbang kampus. Roh harimau muncul di sisimu, mengangguk hormat.",
     "latar": "clearing",
     "ending": {
       "title": "Penjelajah Bijaksana",
-      "deskripsi": "Dengan kebijaksanaan sebagai kompas dan keberanian sebagai pedang, kamu berhasil menaklukkan hutan rimba tanpa kehilangan arah. Gerbang kampus terbuka lebar, menyambutmu sebagai mahasiswa baru yang siap menghadapi tantangan PKKMB. Roh harimau akan terus menuntunmu selama masa orientasi — selama kamu tetap percaya pada instingmu.",
+      "deskripsi": "Dengan kebijaksanaan sebagai kompas dan keberanian sebagai pedang, kamu berhasil menaklukkan hutan rimba tanpa kehilangan arah. Gerbang kampus terbuka lebar, menyambutmu sebagai mahasiswa baru yang siap menghadapi tantangan PKKMB. Roh harimau akan terus menuntunmu selama masa orientasi, selama kamu tetap percaya pada instingmu.",
       "tier": "good"
     }
   },
   {
     "id": "node-7",
-    "narasi": "Waktu berlalu. Daun-daun berguguran di sekitarmu. Tidak ada yang datang — atau mungkin selama ini kamu hanya perlu percaya pada dirimu sendiri.\n\nLangit mulai gelap, dan perlahan-lahan lampu-lampu kampus menyala di kejauhan. Rusa yang setia masih menemanimu, menunjukkan jalan pulang meskipun dengan langkah yang lebih lambat.",
+    "narasi": "Waktu berlalu. Daun-daun berguguran di sekitarmu. Tidak ada yang datang. Mungkin selama ini kamu hanya perlu percaya pada dirimu sendiri.\n\nLangit mulai gelap, dan perlahan-lahan lampu-lampu kampus menyala di kejauhan. Rusa yang setia masih menemanimu, menunjukkan jalan pulang meskipun dengan langkah yang lebih lambat.",
     "latar": "canopy",
     "ending": {
       "title": "Pengikut Arus",
-      "deskripsi": "Kamu selamat dan akhirnya tiba di kampus — meskipun bukan yang pertama, dan bukan dengan cara yang paling heroik. Tapi kau belajar satu hal: kadang, bertahan dan percaya pada proses adalah keberanian tersendiri. PKKMB menunggumu, dan rusa di sampingmu mengingatkan bahwa perjalanan masih panjang.",
+      "deskripsi": "Kamu selamat dan akhirnya tiba di kampus, meskipun bukan yang pertama dan bukan dengan cara yang paling heroik. Tapi kau belajar satu hal: kadang, bertahan dan percaya pada proses adalah keberanian tersendiri. PKKMB menunggumu, dan rusa di sampingmu mengingatkan bahwa perjalanan masih panjang.",
       "tier": "neutral"
     }
   },
   {
     "id": "node-ending-hidden",
-    "narasi": "Saat mahkota menyentuh kepalamu, seluruh gua berkilauan — dinding-dindingnya berubah menjadi cermin besar yang merefleksikan jutaan kemungkinan.\n\nWaktu seolah berhenti. Kamu melihat dirimu sendiri di berbagai masa depan yang berbeda-beda, dan salah satunya... yang paling gemilang... menunggumu di ujung lorong yang baru terbuka.\n\nHutan rimba telah memberimu anugerah terbesarnya: pengetahuan tentang potensi dirimu sendiri.",
+    "narasi": "Saat mahkota menyentuh kepalamu, seluruh gua berkilauan. Dinding-dindingnya berubah menjadi cermin besar yang merefleksikan jutaan kemungkinan.\n\nWaktu seolah berhenti. Kamu melihat dirimu sendiri di berbagai masa depan yang berbeda-beda, dan salah satunya... yang paling gemilang... menunggumu di ujung lorong yang baru terbuka.\n\nHutan rimba telah memberimu anugerah terbesarnya: pengetahuan tentang potensi dirimu sendiri.",
     "latar": "ruins",
     "ending": {
       "title": "Penjaga Rimba",
-      "deskripsi": "Kamu menemukan rahasia terdalam hutan — dan rahasia itu adalah dirimu sendiri. Mahkota daun bercahaya kini menjadi milikmu, simbol bahwa kamu bukan sekadar pengunjung di hutan ini, melainkan bagian dari rimba itu sendiri. Selamat, Pejuang Rimba! Kamu telah membuktikan bahwa keberanian untuk memilih jalan yang tak biasa akan membawa pada penemuan terbesar dalam hidupmu. PKKMB hanyalah permulaan.",
+      "deskripsi": "Kamu menemukan rahasia terdalam hutan, dan rahasia itu adalah dirimu sendiri. Mahkota daun bercahaya kini menjadi milikmu, simbol bahwa kamu bukan sekadar pengunjung di hutan ini, melainkan bagian dari rimba itu sendiri. Selamat, Pejuang Rimba! Kamu telah membuktikan bahwa keberanian untuk memilih jalan yang tak biasa akan membawa pada penemuan terbesar dalam hidupmu. PKKMB hanyalah permulaan.",
       "tier": "hidden"
     }
   }

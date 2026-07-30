@@ -3,21 +3,47 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
 import DappledLight from "@/components/dappled-light"
 import ForestSilhouettes from "@/components/forest-silhouettes"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
 import type { ScheduleItem, FAQItem, JunglePediaItem } from "@/types"
-import { ArrowRight, BookOpen, MegaphoneSimple, Crosshair, Stack, CaretDown, Image } from "@phosphor-icons/react"
+import {
+  ArrowRight,
+  BookOpen,
+  MegaphoneSimple,
+  Crosshair,
+  Stack,
+  CaretDown,
+  Image as ImageIcon,
+  Buildings,
+  UsersThree,
+  Laptop,
+  ArrowUpRight,
+  CalendarBlank,
+  Camera,
+  Clock,
+  Compass,
+  Leaf,
+  MapPin,
+  Question,
+} from "@phosphor-icons/react"
 import junglepediaData from "@/../data/junglepedia.json"
+import Monyet from "@/components/icons/monyet"
+import Burung from "@/components/icons/burung"
+import Rusa from "@/components/icons/rusa"
+import Harimau from "@/components/icons/harimau"
+import KupuKupu from "@/components/icons/kupu-kupu"
+import Ular from "@/components/icons/ular"
+import type { AvatarId } from "@/types"
 
 const junglepedia = junglepediaData as JunglePediaItem[]
 
 const JUNGLEPEDIA_CATEGORIES = [
   {
-    icon: "🏛️",
+    icon: <Buildings size={23} weight="duotone" className="text-jungle-deep" />,
     label: "Fasilitas",
     desc: "Gedung kuliah, laboratorium, perpustakaan, masjid, dan UKS",
     count: junglepedia.filter((i) => i.kategori === "fasilitas").length,
@@ -25,7 +51,7 @@ const JUNGLEPEDIA_CATEGORIES = [
     bg: "bg-moss/10",
   },
   {
-    icon: "👥",
+    icon: <UsersThree size={23} weight="duotone" className="text-jungle-deep" />,
     label: "UKM & Organisasi",
     desc: "UKM, BEM, HIMA, dan organisasi kemahasiswaan lainnya",
     count: junglepedia.filter((i) => i.kategori === "ukm").length,
@@ -33,7 +59,7 @@ const JUNGLEPEDIA_CATEGORIES = [
     bg: "bg-sunlit-gold/10",
   },
   {
-    icon: "💻",
+    icon: <Laptop size={23} weight="duotone" className="text-jungle-deep" />,
     label: "Platform Akademik",
     desc: "E-learning, portal akademik, dan email kampus",
     count: junglepedia.filter((i) => i.kategori === "platform").length,
@@ -69,6 +95,15 @@ const GALLERY_PLACEHOLDERS = [
   { id: 4, label: "Suasana PKKMB" },
 ]
 
+const AVATAR_ICONS: Record<AvatarId, typeof Monyet> = {
+  monyet: Monyet,
+  burung: Burung,
+  rusa: Rusa,
+  harimau: Harimau,
+  "kupu-kupu": KupuKupu,
+  ular: Ular,
+}
+
 function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="text-center mb-10 sm:mb-14">
@@ -79,21 +114,24 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }
 }
 
 function SectionBody({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <motion.section
-      initial={{ opacity: 0, y: 40 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`snap-start shrink-0 px-4 sm:px-6 lg:px-8 py-24 sm:py-28 ${className}`}
     >
-      <div className="mx-auto max-w-4xl w-full">{children}</div>
+      <div className="mx-auto w-full max-w-6xl">{children}</div>
     </motion.section>
   )
 }
 
 export default function HubPage() {
   const router = useRouter()
+  const reduceMotion = useReducedMotion()
   const { progress, save } = useProgress()
   const [easterClicks, setEasterClicks] = useState<Record<string, number>>({})
   const [easterModal, setEasterModal] = useState<{ label: string; href: string } | null>(null)
@@ -102,6 +140,7 @@ export default function HubPage() {
   const pagesRead = progress.pagesRead.length
   const guidebookDone = pagesRead >= 6
   const quizDone = progress.quizDone
+  const AvatarIcon = AVATAR_ICONS[progress.avatar] ?? Monyet
 
   function handleLockedClick(label: string, href: string) {
     const next = { ...easterClicks, [label]: (easterClicks[label] || 0) + 1 }
@@ -131,29 +170,31 @@ export default function HubPage() {
   return (
     <div className="relative h-dvh overflow-y-auto snap-y snap-mandatory scroll-pt-14 bg-warm-cream">
       {/* ============ HERO ============ */}
-      <section className="relative snap-start min-h-dvh shrink-0 flex flex-col items-center justify-center overflow-hidden px-6">
+      <section className="relative snap-start min-h-dvh shrink-0 flex items-center overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
         {/* Layer 1: Background gradient */}
-        <div className="absolute inset-0 bg-linear-to-b from-jungle-canopy/40 via-jungle-deep/20 to-transparent pointer-events-none" />
+        <div className="forest-hero absolute inset-0 pointer-events-none" />
         {/* Layer 2: Forest silhouettes */}
         <ForestSilhouettes />
         {/* Layer 3: Dappled light */}
-        <DappledLight count={5} />
+        <div className="absolute inset-0 hidden sm:block">
+          <DappledLight count={4} />
+        </div>
 
-        {/* Kabut — melayang perlahan */}
+        {/* Kabut melayang perlahan */}
         <motion.div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 hidden sm:block pointer-events-none"
           style={{
             background: "radial-gradient(ellipse at 50% 0%, rgba(163,196,181,0.35) 0%, transparent 60%)",
           }}
-          animate={{ opacity: [0.25, 0.5, 0.3, 0.5, 0.25], scale: [1, 1.05, 0.98, 1.03, 1] }}
+          animate={reduceMotion ? { opacity: 0.32 } : { opacity: [0.25, 0.5, 0.3, 0.5, 0.25], scale: [1, 1.05, 0.98, 1.03, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 hidden sm:block pointer-events-none"
           style={{
             background: "radial-gradient(ellipse at 60% 20%, rgba(245,213,144,0.1) 0%, transparent 50%)",
           }}
-          animate={{ opacity: [0, 0.3, 0, 0.2, 0] }}
+          animate={reduceMotion ? { opacity: 0.18 } : { opacity: [0, 0.3, 0, 0.2, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
 
@@ -161,14 +202,14 @@ export default function HubPage() {
         {FIREFLIES.map((f, i) => (
           <motion.div
             key={`ff-${i}`}
-            className="absolute w-1.5 h-1.5 rounded-full pointer-events-none z-10"
+            className={`absolute w-1.5 h-1.5 rounded-full pointer-events-none z-10 ${i > 2 ? "hidden sm:block" : ""}`}
             style={{
               left: `${f.x}%`,
               top: `${f.y}%`,
               backgroundColor: "#F5D590",
               boxShadow: "0 0 4px 2px rgba(245,213,144,0.4)",
             }}
-            animate={{
+            animate={reduceMotion ? { opacity: 0.5, scale: 0.8 } : {
               x: [0, 30, -20, 10, 0],
               y: [0, -25, 15, -10, 0],
               opacity: [0, 0.8, 0.3, 0.7, 0],
@@ -183,24 +224,16 @@ export default function HubPage() {
           />
         ))}
 
-        {/* Ground decorative layer */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 pointer-events-none z-2" aria-hidden="true">
-          <svg className="w-full h-full" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" fill="#1A3A2B" opacity={0.06}>
-            <path d="M0,120 C60,80 120,60 180,70 S300,90 360,80 S480,60 540,70 S660,90 720,75 S840,55 900,65 S1020,85 1080,70 S1200,50 1260,60 S1380,80 1440,65 L1440,120 Z" />
-            <path d="M0,120 C80,95 160,85 240,90 S400,100 480,90 S640,75 720,85 S880,100 960,88 S1120,72 1200,80 S1360,95 1440,82 L1440,120 Z" opacity="0.5" />
-          </svg>
-        </div>
-
         {/* Daun jatuh */}
         {FALLING_LEAVES.map((leaf, i) => (
           <motion.div
             key={`lf-${i}`}
-            className="absolute top-0 w-3 h-3 rounded-full pointer-events-none z-10"
+            className="absolute top-0 hidden sm:block w-3 h-3 rounded-full pointer-events-none z-10"
             style={{
               left: `${leaf.x}%`,
               backgroundColor: "rgba(78,112,83,0.3)",
             }}
-            animate={{
+            animate={reduceMotion ? { opacity: 0.25 } : {
               y: ["-5vh", "105vh"],
               x: [0, leaf.rot > 0 ? 20 : -20, 0],
               rotate: [0, leaf.rot, 0],
@@ -215,78 +248,70 @@ export default function HubPage() {
           />
         ))}
 
-        {/* Hero content — center */}
-        <div className="relative z-20 w-full flex flex-col items-center text-center max-w-3xl mx-auto">
-          {/* Brand badge — fade turun */}
+        <div className="relative z-20 mx-auto grid w-full max-w-6xl items-center gap-8 md:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] md:gap-12">
           <motion.div
-            initial={{ opacity: 0, y: -16, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
-            className="mb-5"
+            initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="order-2 text-center md:order-1 md:text-left"
           >
-            <span className="inline-block px-5 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40">
+            <span className="mb-5 inline-block rounded-full border border-jungle-deep/10 bg-warm-cream/55 px-4 py-1.5 text-[10px] font-semibold tracking-[0.2em] text-moss backdrop-blur-sm">
               TODAYS 2026
             </span>
-          </motion.div>
-
-          {/* Greeting — narasi bertahap */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.01 }}
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.25, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-4xl sm:text-5xl md:text-7xl text-jungle-deep leading-[1.1] text-wrap-balance"
-            >
-              Selamat Datang,
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-3xl sm:text-4xl md:text-6xl text-jungle-deep/70 -mt-1 sm:-mt-2 text-wrap-balance"
-            >
-              {progress.nama || "Pejuang Rimba"}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
-              className="mt-4 text-sm sm:text-base text-moss font-sans max-w-md leading-relaxed mx-auto text-wrap-pretty"
-            >
-              Jelajahi hutan rimba PKKMB. Baca guidebook, kerjakan quiz, dan dapatkan badge eksklusif.
-            </motion.p>
-          </motion.div>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
-            className="mt-8 sm:mt-9"
-          >
-            <button
-              onClick={scrollToJelajahi}
-              className="group relative overflow-hidden rounded-full bg-jungle-deep text-warm-cream px-10 py-3.5 sm:px-12 sm:py-4 text-sm sm:text-base font-sans font-medium tracking-wide transition-all duration-500 hover:bg-sunlit-gold hover:text-jungle-deep active:scale-[0.96]"
-              style={{
-                boxShadow: "0 4px 20px rgba(26,58,43,0.25), inset 0 1px 2px rgba(255,255,255,0.12)",
-              }}
-            >
-              <span className="relative z-10 flex items-center gap-2.5">
-                <span className="group-hover:hidden transition-all duration-300">Mulai Petualangan</span>
-                <span className="hidden group-hover:inline transition-all duration-300">Mulai Petualangan</span>
+            <h1 className="font-heading text-4xl leading-[1.04] text-jungle-deep text-wrap-balance sm:text-5xl lg:text-7xl">
+              Selamat datang di rimba, {progress.nama || "Pejuang Rimba"}
+            </h1>
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-moss text-wrap-pretty sm:text-base md:mx-0">
+              Baca panduan, uji pemahamanmu, lalu temukan kelompok PKKMB dalam satu perjalanan.
+            </p>
+            <div className="mt-7">
+              <button
+                onClick={scrollToJelajahi}
+                className="btn-jungle group inline-flex items-center gap-2.5 bg-jungle-deep px-7 py-3.5 text-warm-cream hover:bg-moss"
+              >
+                Mulai Petualangan
                 <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={reduceMotion ? undefined : { x: [0, 4, 0] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
                   className="inline-flex"
                 >
-                  <ArrowRight size={16} />
+                  <ArrowRight size={17} weight="bold" />
                 </motion.span>
-              </span>
-            </button>
+              </button>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.88, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.12, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="order-1 mx-auto w-full max-w-68 md:order-2 md:max-w-104"
+            aria-label={`Avatar ${progress.avatar}`}
+          >
+            <div className="relative aspect-square">
+              <div className="scope-lens absolute inset-[7%] rounded-full">
+                <div className="absolute inset-[11%] rounded-full border border-jungle-deep/30" />
+                <div className="absolute left-0 right-[61%] top-1/2 h-px bg-jungle-deep/55" />
+                <div className="absolute left-[61%] right-0 top-1/2 h-px bg-jungle-deep/55" />
+                <div className="absolute bottom-[61%] left-1/2 top-0 w-px bg-jungle-deep/55" />
+                <div className="absolute bottom-0 left-1/2 top-[61%] w-px bg-jungle-deep/55" />
+                <span className="absolute left-1/2 top-[3%] h-4 w-0.5 -translate-x-1/2 bg-jungle-deep/65" />
+                <span className="absolute bottom-[3%] left-1/2 h-4 w-0.5 -translate-x-1/2 bg-jungle-deep/65" />
+                <span className="absolute left-[3%] top-1/2 h-0.5 w-4 -translate-y-1/2 bg-jungle-deep/65" />
+                <span className="absolute right-[3%] top-1/2 h-0.5 w-4 -translate-y-1/2 bg-jungle-deep/65" />
+              </div>
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, -7, 0], rotate: [-1, 1, -1] }}
+                transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-[24%] flex items-center justify-center"
+              >
+                <AvatarIcon className="h-full w-full drop-shadow-[0_16px_18px_rgba(15,36,26,0.18)]" />
+              </motion.div>
+              <div className="absolute inset-x-[18%] bottom-[12%] h-8 rounded-[50%] bg-jungle-shadow/15 blur-lg" />
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full border border-fern-mist/70 bg-warm-cream/78 px-4 py-2 text-xs font-medium text-jungle-deep shadow-sm backdrop-blur-sm">
+                Penjelajah {progress.avatar}
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -294,22 +319,44 @@ export default function HubPage() {
 
 
       {/* ============ JELAJAHI ============ */}
-      <div id="jelajahi" className="scroll-mt-20 relative bg-[#F8F6F0]">
+      <div id="jelajahi" className="hub-zone-map scroll-mt-20 relative">
         {/* Decorative top */}
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/30 to-transparent" />
         {/* Trail paths SVG */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block" aria-hidden="true">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
           <svg className="w-full h-full mt-24" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice">
-            <path d="M120,120 L600,300" stroke="#D5D7C8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4" fill="none" />
-            <path d="M1080,180 L600,300" stroke="#D5D7C8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4" fill="none" />
-            <path d="M120,480 L600,300" stroke="#D5D7C8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4" fill="none" />
-            <path d="M1080,480 L600,300" stroke="#D5D7C8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.4" fill="none" />
+            {[
+              "M120,120 L600,300",
+              "M1080,180 L600,300",
+              "M120,480 L600,300",
+              "M1080,480 L600,300",
+            ].map((path) => (
+              <motion.path
+                key={path}
+                d={path}
+                stroke="var(--color-sage)"
+                strokeWidth="1.5"
+                strokeDasharray="8 7"
+                opacity="0.48"
+                fill="none"
+                animate={reduceMotion ? undefined : { strokeDashoffset: [0, -30] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              />
+            ))}
           </svg>
         </div>
 
       <SectionBody>
         <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto relative">
+        <div className="grid grid-cols-2 gap-10 sm:gap-12 md:gap-16 max-w-4xl mx-auto relative">
+          <motion.div
+            className="pointer-events-none absolute left-1/2 top-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-warm-cream bg-sunlit-gold/85 shadow-lg shadow-jungle-shadow/25 sm:size-20"
+            animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+            transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
+            aria-hidden="true"
+          >
+            <AvatarIcon className="size-10 sm:size-12" />
+          </motion.div>
           {[
             {
               icon: <BookOpen className="w-8 h-8" />,
@@ -370,18 +417,18 @@ export default function HubPage() {
                 {isLocked ? (
                   <button
                     onClick={item.onLockedClick}
-                    className={`w-full flex flex-col items-center gap-3 p-5 sm:p-7 rounded-2xl border-2 border-jungle-deep/15 bg-white/30 cursor-pointer relative overflow-hidden group ${
+                    className={`woodgrain w-full min-h-44 flex flex-col items-center justify-center gap-3 p-5 sm:p-7 rounded-2xl border-2 border-jungle-deep/15 bg-jungle-shadow/80 cursor-pointer relative overflow-hidden group grayscale ${
                       shakingCard === item.label ? "animate-[shake_200ms_ease-in-out]" : ""
                     }`}
                   >
-                    <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/50 to-jungle-shadow/30 pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/20 to-jungle-shadow/50 pointer-events-none" />
                     <div
                       className="absolute inset-0 opacity-10"
                       style={{ backgroundImage: pattern, backgroundSize: "8px 8px" }}
                     />
-                    <div className="relative w-12 h-12 flex items-center justify-center text-sage/60">{item.icon}</div>
+                    <div className="relative w-12 h-12 flex items-center justify-center text-fern-mist/55">{item.icon}</div>
                     <div className="text-center relative">
-                      <p className="text-base font-heading text-sage/60">{item.label}</p>
+                      <p className="text-xl font-heading text-fern-mist/65">{item.label}</p>
                       <p className="text-xs text-fern-mist/60 font-sans mt-1">Terkunci</p>
                     </div>
                   </button>
@@ -390,18 +437,28 @@ export default function HubPage() {
                     href={item.href}
                     className="block group"
                   >
-                    <div className="relative overflow-hidden flex flex-col items-center gap-3 p-5 sm:p-7 rounded-2xl border-2 border-fern-mist bg-white/60 hover:border-sunlit-gold hover:shadow-lg hover:shadow-sunlit-gold/10 transition-all duration-300">
+                    <motion.div
+                      animate={reduceMotion ? undefined : {
+                        boxShadow: [
+                          "var(--jungle-panel-shadow)",
+                          "var(--jungle-panel-glow)",
+                          "var(--jungle-panel-shadow)",
+                        ],
+                      }}
+                      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.18 }}
+                      className="forest-panel woodgrain relative min-h-40 overflow-hidden flex flex-col items-center justify-center gap-3 p-3 sm:min-h-44 sm:p-7 rounded-2xl border-2 hover:border-sunlit-gold hover:-translate-y-1 duration-300"
+                    >
                       <div
                         className="absolute inset-0 opacity-[0.35] group-hover:opacity-20 transition-opacity duration-300"
                         style={{ backgroundImage: pattern, backgroundSize: pattern.includes("radial") ? "8px 8px" : "12px 12px" }}
                       />
                       <div className="relative w-12 h-12 flex items-center justify-center text-jungle-deep group-hover:text-sunlit-gold transition-colors">{item.icon}</div>
                       <div className="text-center relative">
-                        <p className="text-base font-heading text-jungle-deep">{item.label}</p>
+                        <p className="text-xl font-heading text-jungle-deep">{item.label}</p>
                         <p className="text-xs text-moss font-sans mt-1">{item.desc}</p>
                         <p className="text-[10px] text-sage/70 font-sans mt-0.5">{item.status}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   </Link>
                 )}
               </motion.div>
@@ -413,146 +470,206 @@ export default function HubPage() {
 
 
       {/* ============ JADWAL ============ */}
-      <div className="bg-moss/3 relative">
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-moss/40 to-transparent" />
-      <SectionBody>
-        <SectionHeader title="Jadwal Kegiatan" subtitle="Rangkaian acara PKKMB Telkom University Purwokerto" />
-        <div className="space-y-4">
-          {schedule.slice(0, 3).map((item) => (
-            <motion.div
-              key={item.hari}
-              whileInView={{ opacity: 1, x: 0 }}
-              initial={{ opacity: 0, x: -20 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="flex items-start gap-4 p-4 rounded-xl border border-fern-mist/60 bg-white/50"
-            >
-              <div className="shrink-0 w-12 h-12 rounded-full bg-moss/10 flex items-center justify-center">
-                <span className="font-heading text-sm text-moss">H{item.hari}</span>
+      <div className="hub-zone-itinerary relative">
+        <SectionBody>
+          <div className="grid items-start gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+            <div className="lg:sticky lg:top-24">
+              <div className="mb-6 flex size-16 items-center justify-center rounded-2xl border border-moss/20 bg-moss/10 text-moss">
+                <CalendarBlank size={31} weight="duotone" />
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-heading text-jungle-deep">{item.kegiatan}</p>
-                <p className="text-xs text-moss font-sans mt-0.5">{item.tanggal} · {item.waktu}</p>
-                <p className="text-xs text-sage font-sans mt-0.5">{item.lokasi}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Link
-            href="/jadwal"
-            className="inline-flex items-center rounded-full border border-moss text-moss px-5 py-2 text-xs font-sans tracking-wider uppercase hover:bg-moss hover:text-warm-cream transition-all"
-          >
-            Lihat Semua Jadwal
-          </Link>
-        </div>
-      </SectionBody>
-      </div>
+              <h2 className="max-w-sm font-heading text-4xl leading-[1.05] text-jungle-deep sm:text-5xl">
+                Manifest perjalanan PKKMB
+              </h2>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-moss sm:text-base">
+                Empat hari kegiatan, tersusun seperti rute ekspedisi agar waktu dan lokasi mudah dipindai.
+              </p>
+              <Link
+                href="/jadwal"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-jungle-deep transition-colors hover:text-ember"
+              >
+                Buka jadwal lengkap
+                <ArrowUpRight size={16} weight="bold" />
+              </Link>
+            </div>
 
+            <div className="relative border-l border-moss/20 pl-5 sm:pl-8">
+              {schedule.slice(0, 3).map((item, index) => (
+                <motion.article
+                  key={item.hari}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={reduceMotion ? false : { opacity: 0, x: 24 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08, duration: reduceMotion ? 0 : 0.45 }}
+                  className="group relative grid gap-3 border-b border-moss/15 py-7 first:pt-0 sm:grid-cols-[5rem_1fr]"
+                >
+                  <span className="absolute left-[-1.58rem] top-8 size-3 rounded-full border-2 border-warm-cream bg-sunlit-gold sm:left-[-2.45rem]" />
+                  <div>
+                    <span className="font-heading text-4xl leading-none text-jungle-deep/20">
+                      0{item.hari}
+                    </span>
+                    <p className="mt-1 text-xs font-semibold text-ember">{item.tanggal}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-2xl leading-tight text-jungle-deep">{item.kegiatan}</h3>
+                    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-moss">
+                      <span className="inline-flex items-center gap-1.5"><Clock size={14} />{item.waktu}</span>
+                      <span className="inline-flex items-center gap-1.5"><MapPin size={14} />{item.lokasi}</span>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </SectionBody>
+      </div>
 
       {/* ============ JUNGLEPEDIA SPOTLIGHT ============ */}
-      <div className="bg-jungle-canopy/3 relative">
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-jungle-canopy/30 to-transparent" />
-      <SectionBody>
-        <SectionHeader title="JunglePedia" subtitle="Kenali lebih dekat kampus Telkom University Purwokerto" />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {JUNGLEPEDIA_CATEGORIES.map((item, i) => (
-            <motion.div
-              key={item.label}
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl border border-fern-mist/60 bg-white/50 p-6 text-center hover:shadow-md transition-shadow"
-            >
-              <div className={`w-12 h-12 rounded-full ${item.bg} flex items-center justify-center mx-auto mb-3`}>
-                <span className="text-xl">{item.icon}</span>
-              </div>
-              <p className="text-base font-heading text-jungle-deep">{item.label}</p>
-              <p className="text-xs text-moss font-sans mt-1 leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Link
-            href="/junglepedia"
-            className="inline-flex items-center rounded-full border border-moss text-moss px-5 py-2 text-xs font-sans tracking-wider uppercase hover:bg-moss hover:text-warm-cream transition-all"
-          >
-            Jelajahi JunglePedia
-          </Link>
-        </div>
-      </SectionBody>
-      </div>
+      <div className="hub-zone-archive relative">
+        <SectionBody>
+          <div className="mb-10 max-w-xl">
+            <h2 className="font-heading text-4xl leading-tight text-jungle-deep sm:text-5xl">Arsip kehidupan kampus</h2>
+            <p className="mt-3 text-sm leading-relaxed text-moss sm:text-base">
+              Kenali tempat, komunitas, dan perangkat akademik sebelum hari pertamamu dimulai.
+            </p>
+          </div>
 
+          <div className="grid gap-4 md:grid-cols-12">
+            {JUNGLEPEDIA_CATEGORIES.map((item, index) => (
+              <motion.article
+                key={item.label}
+                whileInView={{ opacity: 1, y: 0 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08, duration: reduceMotion ? 0 : 0.5 }}
+                className={`archive-tile relative overflow-hidden rounded-2xl border p-6 ${
+                  index === 0
+                    ? "border-moss/20 bg-moss/10 md:col-span-7 md:min-h-44"
+                    : index === 1
+                      ? "border-sunlit-gold/30 bg-sunlit-gold/12 md:col-span-5"
+                      : "border-jungle-deep/15 bg-warm-cream/65 md:col-span-5 md:col-start-1 md:col-row-start-2 md:min-h-44"
+                }`}
+              >
+                <div>
+                  <div className={`flex size-12 items-center justify-center rounded-full ${item.bg}`}>{item.icon}</div>
+                </div>
+                <div className="relative mt-8 max-w-sm">
+                  <h3 className="font-heading text-2xl text-jungle-deep">{item.label}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-moss">{item.desc}</p>
+                </div>
+              </motion.article>
+            ))}
+
+            <Link
+              href="/junglepedia"
+              className="archive-tile group relative min-h-28 overflow-hidden rounded-2xl border border-jungle-deep/15 bg-jungle-deep p-6 text-warm-cream transition-transform hover:-translate-y-1 md:col-span-7 md:col-start-6 md:col-row-start-2 md:min-h-44"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <span className="flex size-12 items-center justify-center rounded-full bg-warm-cream/10 text-sunlit-gold">
+                  <Compass size={22} weight="duotone" />
+                </span>
+                <ArrowUpRight
+                  size={22}
+                  className="relative text-sunlit-gold transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
+              </div>
+              <div className="relative mt-8 max-w-sm">
+                <span className="block font-heading text-2xl leading-tight">Buka seluruh JunglePedia</span>
+                <span className="mt-2 block text-sm leading-relaxed text-warm-cream/58">
+                  Lihat semua fasilitas, organisasi, dan platform akademik.
+                </span>
+              </div>
+            </Link>
+          </div>
+        </SectionBody>
+      </div>
 
       {/* ============ GALERI ============ */}
-      <div className="bg-sunlit-gold/3 relative">
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/30 to-transparent" />
-      <SectionBody>
-        <SectionHeader title="Galeri" subtitle="Momen-momen seru di kampus" />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {GALLERY_PLACEHOLDERS.map((item, i) => (
-            <motion.div
-              key={item.id}
-              whileInView={{ opacity: 1, scale: 1 }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="aspect-square rounded-xl bg-linear-to-br from-sage/20 to-fern-mist/30 border border-fern-mist/60 flex items-center justify-center"
-            >
-              <div className="text-center p-2">
-                <Image className="w-8 h-8 text-sage/60 mx-auto mb-1" />
-                <p className="text-[10px] text-sage/60 font-sans">{item.label}</p>
+      <div className="hub-zone-gallery relative text-warm-cream">
+        <SectionBody>
+          <div className="mb-10 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
+            <div>
+              <div className="mb-5 flex size-14 items-center justify-center rounded-full border border-warm-cream/15 text-sunlit-gold">
+                <Camera size={27} weight="duotone" />
               </div>
-            </motion.div>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Link
-            href="/galeri"
-            className="inline-flex items-center rounded-full border border-moss text-moss px-5 py-2 text-xs font-sans tracking-wider uppercase hover:bg-moss hover:text-warm-cream transition-all"
-          >
-            Lihat Galeri
-          </Link>
-        </div>
-      </SectionBody>
+              <h2 className="font-heading text-4xl leading-tight sm:text-5xl">Potongan suasana kampus</h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-warm-cream/65">
+                Sebuah contact sheet kecil dari ruang, kegiatan, dan kehidupan mahasiswa.
+              </p>
+            </div>
+            <Link
+              href="/galeri"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-sunlit-gold hover:text-warm-cream"
+            >
+              Lihat semua foto
+              <ArrowUpRight size={16} weight="bold" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
+            {GALLERY_PLACEHOLDERS.map((item, index) => (
+              <motion.div
+                key={item.id}
+                whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1.5 : 1.5 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 24, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.07, duration: reduceMotion ? 0 : 0.45 }}
+                className="contact-frame bg-warm-cream p-2 pb-3 text-jungle-deep shadow-xl shadow-jungle-shadow/30 sm:p-3 sm:pb-4"
+              >
+                <div className="relative flex aspect-4/5 items-center justify-center overflow-hidden bg-sage/20">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_25%,rgba(243,196,107,0.32),transparent_30%),linear-gradient(145deg,rgba(26,58,43,0.08),rgba(78,112,83,0.28))]" />
+                  <ImageIcon className="relative size-8 text-jungle-deep/35" />
+                  <span className="absolute left-2 top-2 font-heading text-lg text-jungle-deep/30">0{index + 1}</span>
+                </div>
+                <p className="mt-3 text-[10px] font-medium leading-tight sm:text-xs">{item.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </SectionBody>
       </div>
 
-
       {/* ============ FAQ ============ */}
-      <div className="bg-fern-mist/4 relative">
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-fern-mist/40 to-transparent" />
-      <SectionBody>
-        <SectionHeader title="Ada Pertanyaan?" subtitle="Pertanyaan umum seputar PKKMB" />
-        <div className="space-y-3 max-w-2xl mx-auto">
-          {faqs.slice(0, 3).map((item, i) => (
-            <motion.details
-              key={item.id}
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 16 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.4 }}
-              className="group rounded-xl border border-fern-mist/60 bg-white/50 overflow-hidden"
-            >
-              <summary className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer text-lg font-heading text-jungle-deep hover:text-jungle-deep/80 transition-colors [&::-webkit-details-marker]:hidden">
-                {item.question}
-                <CaretDown size={16} className="shrink-0 text-moss transition-transform duration-200 group-open:rotate-180" />
-              </summary>
-              <div className="px-5 pb-4 text-sm text-moss font-sans leading-relaxed">
-                {item.answer}
+      <div className="hub-zone-faq relative">
+        <SectionBody>
+          <div className="grid gap-10 md:grid-cols-[0.78fr_1.22fr] md:gap-16">
+            <div>
+              <div className="relative mb-7 flex size-20 items-center justify-center rounded-full border border-jungle-deep/15 bg-warm-cream">
+                <Question size={38} weight="duotone" className="text-jungle-deep" />
+                <Leaf size={20} weight="fill" className="absolute -right-1 top-0 rotate-24 text-sunlit-gold" />
               </div>
-            </motion.details>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Link
-            href="/faq"
-            className="inline-flex items-center rounded-full border border-moss text-moss px-5 py-2 text-xs font-sans tracking-wider uppercase hover:bg-moss hover:text-warm-cream transition-all"
-          >
-            Lihat Semua FAQ
-          </Link>
-        </div>
-      </SectionBody>
+              <h2 className="font-heading text-4xl leading-tight text-jungle-deep sm:text-5xl">Bekal sebelum berangkat</h2>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-moss">
+                Jawaban singkat untuk hal yang paling sering ditanyakan mahasiswa baru.
+              </p>
+              <Link
+                href="/faq"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-jungle-deep hover:text-ember"
+              >
+                Buka pusat bantuan
+                <ArrowUpRight size={16} weight="bold" />
+              </Link>
+            </div>
+
+            <div className="border-t border-jungle-deep/15">
+              {faqs.slice(0, 3).map((item, index) => (
+                <motion.details
+                  key={item.id}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.07, duration: reduceMotion ? 0 : 0.42 }}
+                  className="group border-b border-jungle-deep/15"
+                >
+                  <summary className="flex cursor-pointer list-none items-start gap-4 py-5 text-jungle-deep [&::-webkit-details-marker]:hidden">
+                    <span className="mt-1 font-heading text-sm text-ember">0{index + 1}</span>
+                    <span className="flex-1 font-heading text-xl leading-snug">{item.question}</span>
+                    <CaretDown size={17} className="mt-1 shrink-0 text-moss transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="pb-6 pl-10 pr-5 text-sm leading-relaxed text-moss">{item.answer}</div>
+                </motion.details>
+              ))}
+            </div>
+          </div>
+        </SectionBody>
       </div>
 
       {/* Easter egg modal */}
@@ -573,7 +690,7 @@ export default function HubPage() {
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-sm bg-warm-cream rounded-2xl border border-fern-mist p-8 text-center shadow-xl"
             >
-              <div className="text-4xl mb-4">🌿</div>
+              <Leaf size={42} weight="duotone" className="mx-auto mb-4 text-moss" />
               <h3 className="font-heading text-xl text-jungle-deep mb-3">
                 Jalan Rahasia Terbuka!
               </h3>

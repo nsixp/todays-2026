@@ -26,6 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
+      data-scroll-behavior="smooth"
       className={`${sora.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-dvh flex flex-col">

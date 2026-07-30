@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
+import BackgroundFoliage from "@/components/background-foliage"
 
 interface LoadingScreenProps {
   duration?: number
@@ -16,9 +17,8 @@ const LEAVES = [
   { x: 50, y: 10, r: 6, delay: 1.2, dur: 3.2 },
 ]
 
-const CIRCUMFERENCE = 2 * Math.PI * 28
-
 export default function LoadingScreen({ duration = 2500, onComplete }: LoadingScreenProps) {
+  const reduceMotion = useReducedMotion()
   const [progress, setProgress] = useState(0)
   const [exiting, setExiting] = useState(false)
 
@@ -29,6 +29,8 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
 
   useEffect(() => {
     let finished = false
+    let frameId = 0
+    let completionTimer: ReturnType<typeof setTimeout> | undefined
     const start = performance.now()
     const frame = () => {
       const elapsed = performance.now() - start
@@ -36,16 +38,18 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
       setProgress(pct)
       if (pct >= 100 && !finished) {
         finished = true
-        setTimeout(finish, 400)
+        completionTimer = setTimeout(finish, 400)
       } else {
-        requestAnimationFrame(frame)
+        frameId = requestAnimationFrame(frame)
       }
     }
-    const id = requestAnimationFrame(frame)
-    return () => cancelAnimationFrame(id)
+    frameId = requestAnimationFrame(frame)
+    return () => {
+      cancelAnimationFrame(frameId)
+      if (completionTimer) clearTimeout(completionTimer)
+    }
   }, [duration, finish])
 
-  const offset = CIRCUMFERENCE * (1 - progress / 100)
   const showParticles = progress > 30
   const glowT = Math.min(progress / 30, 1)
   const glowBlur = 8 * (1 - glowT)
@@ -53,6 +57,13 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
 
   return (
     <div className="relative h-full w-full bg-jungle-shadow overflow-hidden">
+      <div className="loading-forest absolute inset-0" />
+      <BackgroundFoliage variant="canopy-top" opacity={0.1} color="var(--color-warm-cream)" />
+      <motion.div
+        className="absolute inset-x-[-15%] bottom-[12%] h-28 rounded-[50%] bg-jungle-mist/10 blur-3xl"
+        animate={reduceMotion ? undefined : { x: ["-3%", "3%", "-3%"], opacity: [0.12, 0.25, 0.12] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+      />
       {!exiting && (
         <>
           {showParticles && LEAVES.map((leaf, i) => (
@@ -65,7 +76,7 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
                 backgroundColor: "rgba(243,196,107,0.12)",
               }}
               initial={{ opacity: 0 }}
-              animate={{
+              animate={reduceMotion ? { opacity: 0.35, scale: 0.8 } : {
                 x: [0, 20, -10, 0],
                 y: [0, -15, 10, 0],
                 opacity: [0, 0.6, 0.3, 0],
@@ -101,28 +112,16 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
             </motion.div>
           </div>
 
-          <div className="absolute bottom-16 left-1/2 -translate-x-1/2">
-            <div className="relative w-20 h-20">
-              <svg width={80} height={80} viewBox="0 0 80 80" className="-rotate-90">
-                <circle
-                  cx={40} cy={40} r={28}
-                  fill="none"
-                  stroke="rgba(243,196,107,0.12)"
-                  strokeWidth={3}
-                />
-                <circle
-                  cx={40} cy={40} r={28}
-                  fill="none"
-                  stroke="#F3C46B"
-                  strokeWidth={3}
-                  strokeLinecap="round"
-                  strokeDasharray={CIRCUMFERENCE}
-                  strokeDashoffset={offset}
-                />
-              </svg>
-              <span className="absolute inset-0 flex items-center justify-center font-heading text-xl text-sunlit-gold">
-                {Math.round(progress)}
-              </span>
+          <div className="absolute bottom-16 left-1/2 w-[min(18rem,70vw)] -translate-x-1/2">
+            <div className="mb-2 flex items-center justify-between text-xs text-warm-cream/55">
+              <span>Menyiapkan jalur</span>
+              <span className="font-medium text-sunlit-gold">{Math.round(progress)}%</span>
+            </div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-warm-cream/10">
+              <motion.div
+                className="h-full origin-left rounded-full bg-sunlit-gold"
+                style={{ scaleX: progress / 100 }}
+              />
             </div>
           </div>
 
@@ -130,14 +129,14 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
             onClick={finish}
             className="absolute bottom-8 right-6 z-30 text-xs text-warm-cream/30 font-sans tracking-wider uppercase hover:text-warm-cream/60 transition-colors"
           >
-            Skip
+            Lewati
           </button>
         </>
       )}
 
       {exiting && (
         <motion.div
-          className="absolute inset-0 bg-white z-50"
+          className="absolute inset-0 bg-warm-cream z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, ease: "easeOut" }}

@@ -10,13 +10,16 @@ import {
   Sheet,
   SheetTrigger,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
 } from "@/components/ui/sheet"
 import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu"
-import { Compass, Image, CalendarBlank, Question, List, ArrowLeft } from "@phosphor-icons/react"
+import { Compass, Image as ImageIcon, CalendarBlank, Question, List, ArrowLeft } from "@phosphor-icons/react"
 
 const NAV_ITEMS = [
   { label: "JunglePedia", href: "/junglepedia" },
@@ -27,30 +30,14 @@ const NAV_ITEMS = [
 
 const ICONS: Record<string, React.ReactNode> = {
   "/junglepedia": <Compass size={16} />,
-  "/galeri": <Image size={16} />,
+  "/galeri": <ImageIcon size={16} />,
   "/jadwal": <CalendarBlank size={16} />,
   "/faq": <Question size={16} />,
-}
-
-const NAVBAR_BG: Record<string, string> = {
-  "/hub": "bg-warm-cream/85",
-  "/junglepedia": "bg-sage/20",
-  "/galeri": "bg-sunlit-gold/10",
-  "/jadwal": "bg-moss/20",
-  "/faq": "bg-fern-mist/30",
-}
-
-function getNavbarBg(pathname: string): string {
-  for (const [route, bg] of Object.entries(NAVBAR_BG)) {
-    if (pathname === route || pathname.startsWith(route + "/")) return bg
-  }
-  return "bg-warm-cream/85"
 }
 
 export default function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
-  const navbarBg = getNavbarBg(pathname)
 
   function close() {
     setOpen(false)
@@ -58,30 +45,37 @@ export default function Navbar() {
 
   return (
     <LayoutGroup>
-      <nav className={`fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 px-5 py-2.5 ${navbarBg} backdrop-blur-lg border border-fern-mist/40 rounded-2xl shadow-lg shadow-jungle-deep/5 w-[calc(100%-24px)] sm:w-auto sm:min-w-160 lg:min-w-180 max-w-4xl transition-colors duration-300`}>
-        <Link href="/hub" className="font-heading text-lg text-jungle-deep tracking-tight shrink-0">
-          TODAYS 2026
+      <nav className="forest-nav fixed left-1/2 top-3 z-50 flex w-[calc(100%-24px)] max-w-5xl -translate-x-1/2 items-center justify-between gap-4 rounded-2xl border border-fern-mist/70 bg-warm-cream/88 px-2.5 py-2 backdrop-blur-xl sm:top-4 sm:px-3">
+        <Link href="/hub" className="group flex shrink-0 items-center gap-2.5 rounded-xl px-1.5 py-1 text-jungle-deep">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-jungle-deep text-sunlit-gold transition-transform group-hover:-rotate-6">
+            <Compass size={17} weight="duotone" />
+          </span>
+          <span className="font-heading text-lg tracking-tight">TODAYS 2026</span>
         </Link>
 
         {/* Desktop */}
         <NavigationMenu className="hidden sm:flex">
-          <NavigationMenuList className="gap-1">
+          <NavigationMenuList className="gap-0.5 rounded-xl border border-jungle-deep/6 bg-jungle-deep/4 p-1">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
               return (
                 <NavigationMenuItem key={item.href}>
                   <Link
                     href={item.href}
-                    className="relative flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-sans tracking-wider uppercase transition-colors hover:bg-jungle-deep/5"
+                    aria-current={isActive ? "page" : undefined}
+                    className={`relative flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
+                      isActive ? "text-warm-cream" : "text-moss hover:bg-warm-cream/70 hover:text-jungle-deep"
+                    }`}
                   >
-                    {item.label}
                     {isActive && (
-                      <motion.div
-                        layoutId="nav-underline"
-                        className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-sunlit-gold"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      <motion.span
+                        layoutId="nav-active"
+                        className="absolute inset-0 rounded-lg bg-jungle-deep shadow-sm"
+                        transition={{ type: "spring", stiffness: 420, damping: 32 }}
                       />
                     )}
+                    <span className={`relative ${isActive ? "text-sunlit-gold" : "text-sage"}`}>{ICONS[item.href]}</span>
+                    <span className="relative">{item.label}</span>
                   </Link>
                 </NavigationMenuItem>
               )
@@ -94,19 +88,32 @@ export default function Navbar() {
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               render={
-                <Button variant="ghost" size="icon" aria-label="Buka menu">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-xl border border-jungle-deep/10 bg-jungle-deep/4 text-jungle-deep hover:bg-jungle-deep hover:text-warm-cream"
+                  aria-label="Buka menu"
+                >
                   <List size={20} />
                 </Button>
               }
             />
-            <SheetContent side="right" className="w-72 p-0 flex flex-col gap-0 bg-white border-l border-fern-mist/40 shadow-2xl">
+            <SheetContent side="right" className="flex w-80 flex-col gap-0 border-l border-fern-mist/60 bg-warm-cream p-0 shadow-2xl">
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-fern-mist/20">
-                <span className="font-heading text-lg text-jungle-deep">Menu</span>
-              </div>
+              <SheetHeader className="border-b border-fern-mist/35 px-6 py-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-9 items-center justify-center rounded-xl bg-jungle-deep text-sunlit-gold">
+                    <Compass size={18} weight="duotone" />
+                  </span>
+                  <SheetTitle className="font-heading text-xl text-jungle-deep">Navigasi Rimba</SheetTitle>
+                </div>
+                <SheetDescription className="mt-2 max-w-56 text-xs leading-relaxed text-moss">
+                  Temukan informasi kampus dan kebutuhan PKKMB.
+                </SheetDescription>
+              </SheetHeader>
 
-              {/* Links — no background, hanya teks */}
-              <div className="flex-1 flex flex-col gap-1 px-4 pt-4">
+              {/* Links */}
+              <div className="flex flex-1 flex-col gap-1.5 px-4 pt-5">
                 {NAV_ITEMS.map((item) => {
                   const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
                   const icon = ICONS[item.href]
@@ -115,16 +122,14 @@ export default function Navbar() {
                       key={item.href}
                       href={item.href}
                       onClick={close}
-                      className={`relative flex items-center gap-3 px-4 py-3.5 text-sm font-sans tracking-wider transition-all ${
+                      aria-current={isActive ? "page" : undefined}
+                      className={`relative flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all active:translate-y-px ${
                         isActive
-                          ? "text-jungle-deep font-medium"
-                          : "text-moss/70 hover:text-jungle-deep"
+                          ? "bg-jungle-deep text-warm-cream shadow-sm"
+                          : "text-moss hover:bg-sage/10 hover:text-jungle-deep"
                       }`}
                     >
-                      {isActive && (
-                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-sunlit-gold" />
-                      )}
-                      <span className={`w-4 h-4 shrink-0 ${isActive ? "text-sunlit-gold" : "text-sage"}`}>{icon}</span>
+                      <span className={`size-4 shrink-0 ${isActive ? "text-sunlit-gold" : "text-sage"}`}>{icon}</span>
                       {item.label}
                     </Link>
                   )
@@ -132,11 +137,11 @@ export default function Navbar() {
               </div>
 
               {/* Bottom */}
-              <div className="px-4 pb-6 pt-4 border-t border-fern-mist/20 mt-auto">
+              <div className="mt-auto border-t border-fern-mist/35 px-4 pb-6 pt-4">
                 <Link
                   href="/hub"
                   onClick={close}
-                  className="flex items-center gap-2.5 px-4 py-3 text-xs text-moss/50 font-sans tracking-wider hover:text-jungle-deep transition-colors"
+                  className="flex items-center gap-2.5 rounded-xl px-4 py-3 text-xs font-semibold text-moss transition-colors hover:bg-sage/10 hover:text-jungle-deep"
                 >
                   <ArrowLeft size={14} />
                   Kembali ke Hub

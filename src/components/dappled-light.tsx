@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 const DAPPLED_POSITIONS = [
   { x: 10, y: 15 },
@@ -17,6 +17,7 @@ export default function DappledLight({
   count?: number
   color?: string
 }) {
+  const reduceMotion = useReducedMotion()
   const positions = DAPPLED_POSITIONS.slice(0, count)
 
   return (
@@ -30,7 +31,7 @@ export default function DappledLight({
             height: `${140 + i * 40}px`,
             background: `radial-gradient(circle, ${color}22 0%, ${color}11 40%, transparent 70%)`,
           }}
-          animate={{
+          animate={reduceMotion ? { opacity: 0.32 } : {
             x: [0, 20 + i * 8, -15 - i * 5, 0],
             y: [0, -15 - i * 5, 12 + i * 6, 0],
             opacity: [0.2, 0.6, 0.3, 0.2],

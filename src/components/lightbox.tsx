@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 import type { GalleryItem } from "@/types"
 import { X, CaretLeft, CaretRight } from "@phosphor-icons/react"
 
@@ -53,13 +54,16 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
           className="relative max-h-[85vh] max-w-[90vw]"
           onClick={(e) => e.stopPropagation()}
         >
-          <img
+          <Image
             src={item.src}
             alt={item.alt}
+            width={900}
+            height={900}
+            sizes="90vw"
             className="max-h-[85vh] max-w-[90vw] rounded-2xl shadow-2xl object-contain"
           />
           <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-warm-cream/70 font-sans bg-jungle-shadow/50 px-3 py-1 rounded-full">
-            {item.alt} — {currentIndex + 1} / {items.length}
+            {item.alt}, {currentIndex + 1} / {items.length}
           </p>
         </motion.div>
 

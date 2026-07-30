@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
-import type { JejakRimbaPilihan, AvatarId } from "@/types"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { ArrowRight, CheckCircle } from "@phosphor-icons/react"
+import type { AvatarId, JejakRimbaPilihan } from "@/types"
 import Monyet from "@/components/icons/monyet"
 import Burung from "@/components/icons/burung"
 import Rusa from "@/components/icons/rusa"
@@ -24,12 +25,12 @@ interface CardStyle {
 }
 
 const CARD_STYLES: Record<AvatarId, CardStyle> = {
-  monyet: { border: "border-yellow-700/40", shadow: "rgba(161,98,7,0.15)" },
-  burung: { border: "border-sky-500/40", shadow: "rgba(14,165,233,0.15)" },
-  rusa: { border: "border-emerald-600/40", shadow: "rgba(5,150,105,0.15)" },
-  harimau: { border: "border-orange-500/40", shadow: "rgba(249,115,22,0.15)" },
-  "kupu-kupu": { border: "border-pink-400/50", shadow: "rgba(219,39,119,0.15)" },
-  ular: { border: "border-purple-500/40", shadow: "rgba(147,51,234,0.15)" },
+  monyet: { border: "border-yellow-700/45", shadow: "rgba(161,98,7,0.2)" },
+  burung: { border: "border-sky-600/45", shadow: "rgba(14,165,233,0.2)" },
+  rusa: { border: "border-emerald-700/45", shadow: "rgba(5,150,105,0.2)" },
+  harimau: { border: "border-orange-600/45", shadow: "rgba(249,115,22,0.2)" },
+  "kupu-kupu": { border: "border-pink-500/50", shadow: "rgba(219,39,119,0.2)" },
+  ular: { border: "border-purple-600/45", shadow: "rgba(147,51,234,0.2)" },
 }
 
 interface JejakRimbaCardProps {
@@ -41,78 +42,109 @@ interface JejakRimbaCardProps {
   selected?: boolean
 }
 
-export default function JejakRimbaCard({ pilihan, index, total, onSelect, disabled, selected }: JejakRimbaCardProps) {
+export default function JejakRimbaCard({
+  pilihan,
+  index,
+  total,
+  onSelect,
+  disabled,
+  selected = false,
+}: JejakRimbaCardProps) {
+  const reduceMotion = useReducedMotion()
   const Icon = ICON_MAP[pilihan.icon]
   const style = CARD_STYLES[pilihan.icon]
-  const fanAngle = total > 1 ? (index - (total - 1) / 2) * 3.5 : 0
-  const yOffset = total > 1 ? -Math.abs(index - (total - 1) / 2) * 3 : 0
+  const fanAngle = total > 1 ? (index - (total - 1) / 2) * 4.5 : 0
+  const yOffset = total > 1 ? -Math.abs(index - (total - 1) / 2) * 4 : 0
 
   return (
     <motion.button
-      layout
-      initial={{ opacity: 0, y: 80, rotate: fanAngle - 10 }}
+      layout={!reduceMotion}
+      initial={reduceMotion ? false : { opacity: 0, y: 64, rotate: fanAngle - 8 }}
       animate={
         selected
-          ? { opacity: 0, scale: 0.5, y: -80, rotate: 0 }
-          : { opacity: 1, y: yOffset, rotate: fanAngle }
+          ? { opacity: 1, scale: 0.96, y: -24, rotate: 0 }
+          : { opacity: 1, scale: 1, y: yOffset, rotate: fanAngle }
       }
-      exit={{ opacity: 0, scale: 0.5, y: -60, rotate: 0 }}
-      transition={{
-        type: "spring",
-        stiffness: 250,
-        damping: 22,
-        delay: index * 0.07,
-      }}
-      whileHover={
-        disabled || selected
-          ? {}
+      exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.86, y: -40, rotate: 0 }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
           : {
-              scale: 1.08,
-              y: yOffset - 18,
-              rotate: 0,
-              transition: { type: "spring", stiffness: 350, damping: 12 },
+              type: "spring",
+              stiffness: 250,
+              damping: 22,
+              delay: selected ? 0 : index * 0.07,
             }
       }
-      whileTap={disabled || selected ? {} : { scale: 0.95 }}
+      whileHover={
+        disabled || selected || reduceMotion
+          ? undefined
+          : {
+              scale: 1.055,
+              y: yOffset - 16,
+              rotate: 0,
+              transition: { type: "spring", stiffness: 350, damping: 18 },
+            }
+      }
+      whileTap={disabled || selected || reduceMotion ? undefined : { scale: 0.97 }}
       onClick={disabled ? undefined : onSelect}
       disabled={disabled}
-      className={`group relative flex flex-col items-center w-[8.5rem] sm:w-40 shrink-0 rounded-xl border-2 bg-white cursor-pointer disabled:cursor-default select-none transition-shadow duration-300 ${
-        style.border
-      } ${selected ? "opacity-0 pointer-events-none" : ""}`}
+      aria-label={`Pilih jalur ${index + 1}: ${pilihan.text}`}
+      className={`group relative flex min-h-52 w-[9.25rem] shrink-0 cursor-pointer select-none flex-col overflow-hidden rounded-2xl border-2 bg-warm-cream text-left transition-[box-shadow,border-color] duration-300 disabled:cursor-default sm:min-h-56 sm:w-44 ${style.border}`}
       style={{
-        boxShadow: `0 4px 16px ${style.shadow}, inset 0 0 0 1px rgba(255,255,255,0.6)`,
-        backgroundImage: `linear-gradient(to bottom, #fff, #fff)`,
+        boxShadow: `0 12px 30px ${style.shadow}, 0 2px 0 rgba(255,255,255,0.5) inset`,
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px), linear-gradient(135deg, rgba(255,255,255,0.6), rgba(247,241,222,0.85))",
+        backgroundSize: "100% 7px, 100% 100%",
       }}
     >
-      {/* Top accent strip */}
-      <div className="absolute top-0 left-2 right-2 h-[2px] rounded-full bg-linear-to-r from-transparent via-sunlit-gold/30 to-transparent" />
+      <div className="pointer-events-none absolute inset-1 rounded-[0.75rem] border border-jungle-deep/8" />
+      <div className="absolute inset-x-3 top-0 h-px bg-linear-to-r from-transparent via-sunlit-gold/70 to-transparent" />
 
-      {/* Corner top-left */}
-      <div className="absolute top-2 left-2 flex items-center gap-0.5">
-        <div className="w-4 h-4 opacity-50 group-hover:opacity-80 transition-opacity duration-300">
-          <Icon className="w-full h-full" />
+      <div className="relative z-10 flex items-center justify-between px-3.5 pt-3">
+        <span className="flex items-center gap-1.5 font-sans text-[9px] font-semibold uppercase tracking-[0.18em] text-jungle-deep/55">
+          <Icon className="size-3.5 opacity-70" />
+          Aksi
+        </span>
+        <span className="font-heading text-lg leading-none text-jungle-deep/35">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="relative z-10 flex flex-1 items-center justify-center py-2">
+        <div className="relative flex size-16 items-center justify-center rounded-full border border-jungle-deep/15 bg-white/45 shadow-[inset_0_0_0_5px_rgba(255,255,255,0.2)] sm:size-[4.5rem]">
+          <span className="absolute inset-1 rounded-full border border-dashed border-jungle-deep/12" />
+          <Icon className="relative size-11 opacity-90 transition-transform duration-300 group-hover:scale-105 sm:size-12" />
         </div>
       </div>
 
-      {/* Center icon */}
-      <div className="flex-1 flex items-center justify-center w-full pt-6 pb-2">
-        <div className="w-14 h-14 sm:w-16 sm:h-16 opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
-          <Icon className="w-full h-full" />
-        </div>
+      <div className="relative z-10 px-3.5">
+        <span className="line-clamp-2 block min-h-9 text-center font-heading text-sm leading-snug text-jungle-deep sm:text-[0.95rem]">
+          {pilihan.text}
+        </span>
       </div>
 
-      {/* Divider */}
-      <div className="w-12 h-px bg-linear-to-r from-transparent via-fern-mist/50 to-transparent" />
-
-      {/* Action text */}
-      <span className="text-xs sm:text-sm font-heading text-jungle-deep text-center leading-snug px-3 pb-4 pt-2 line-clamp-2">
-        {pilihan.text}
-      </span>
-
-      {/* Corner bottom-right */}
-      <div className="absolute bottom-2 right-2 w-4 h-4 rotate-180 opacity-50 group-hover:opacity-80 transition-opacity duration-300">
-        <Icon className="w-full h-full" />
+      <div className="relative z-10 mx-3.5 mt-3 flex items-center justify-between border-t border-jungle-deep/12 py-2.5 font-sans text-[9px] font-semibold uppercase tracking-[0.14em] text-jungle-deep/60">
+        <span>Pilih jalur</span>
+        <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" weight="bold" />
       </div>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.16 }}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2 bg-jungle-deep/94 text-warm-cream"
+          >
+            <CheckCircle className="size-8 text-sunlit-gold" weight="fill" />
+            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.18em]">
+              Jalur dipilih
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.button>
   )
 }

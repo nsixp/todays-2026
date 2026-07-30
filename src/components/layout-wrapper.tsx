@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import BackgroundFoliage from "@/components/background-foliage"
@@ -19,15 +19,14 @@ const FOLIAGE_ROUTES: Record<string, "canopy-top" | "vines-side" | "leaves-corne
   "/jejak-rimba": "canopy-top",
 }
 
-const NO_NAVBAR = ["/", "/guidebook", "/quiz", "/welcome", "/avatar", "/jejak-rimba", "/kelompok"]
-const NO_FOOTER = ["/", "/guidebook", "/quiz", "/welcome", "/avatar", "/jejak-rimba", "/kelompok"]
+const NO_NAVBAR = ["/", "/guidebook", "/quiz"]
+const NO_FOOTER = ["/", "/guidebook", "/quiz", "/jejak-rimba"]
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
+  const reduceMotion = useReducedMotion()
   const pathname = usePathname()
-  const isHub = pathname === "/hub"
   const showNavbar = !NO_NAVBAR.includes(pathname)
   const showFooter = !NO_FOOTER.includes(pathname)
-  const hasTopPadding = showNavbar && !isHub
   const foliageVariant = FOLIAGE_ROUTES[pathname]
 
   return (
@@ -38,11 +37,11 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15, ease: "easeInOut" }}
-            className={`relative flex-1 z-10${hasTopPadding ? " pt-14" : ""}`}
+            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -6 }}
+            transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 flex-1"
           >
             {children}
           </motion.div>
