@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -98,12 +98,10 @@ export default function HubPage() {
   const [easterClicks, setEasterClicks] = useState<Record<string, number>>({})
   const [easterModal, setEasterModal] = useState<{ label: string; href: string } | null>(null)
   const [shakingCard, setShakingCard] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => { setMounted(true) }, [])
 
-  const pagesRead = mounted ? progress.pagesRead.length : 0
+  const pagesRead = progress.pagesRead.length
   const guidebookDone = pagesRead >= 6
-  const quizDone = mounted ? progress.quizDone : false
+  const quizDone = progress.quizDone
 
   function handleLockedClick(label: string, href: string) {
     const next = { ...easterClicks, [label]: (easterClicks[label] || 0) + 1 }
@@ -251,7 +249,7 @@ export default function HubPage() {
               transition={{ delay: 0.45, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="font-heading text-3xl sm:text-4xl md:text-6xl text-jungle-deep/70 -mt-1 sm:-mt-2 text-wrap-balance"
             >
-              {mounted ? (progress.nama || "Pejuang Rimba") : "Pejuang Rimba"}
+              {progress.nama || "Pejuang Rimba"}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}

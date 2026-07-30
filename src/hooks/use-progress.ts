@@ -33,13 +33,17 @@ function getSnapshot(): Progress {
   }
 }
 
+function getServerSnapshot(): Progress {
+  return DEFAULT_PROGRESS
+}
+
 function subscribe(callback: () => void): () => void {
   window.addEventListener("storage", callback)
   return () => window.removeEventListener("storage", callback)
 }
 
 export function useProgress() {
-  const progress = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
+  const progress = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   const save = useCallback((update: Partial<Progress>) => {
     const current = getSnapshot()
