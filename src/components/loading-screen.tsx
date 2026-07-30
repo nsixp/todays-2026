@@ -112,7 +112,7 @@ export default function LoadingScreen({ duration = 3000, onComplete }: LoadingSc
             </motion.div>
           </div>
 
-          <div className="absolute bottom-16 left-1/2 w-[min(18rem,70vw)] -translate-x-1/2">
+          <div className="absolute bottom-[max(5rem,calc(env(safe-area-inset-bottom)+4rem))] left-1/2 w-[min(18rem,calc(100vw-2rem))] -translate-x-1/2">
             <div className="mb-2 flex items-center justify-between text-xs text-warm-cream/55">
               <span>Menyiapkan jalur</span>
               <span className="font-medium text-sunlit-gold">{Math.round(progress)}%</span>
@@ -127,7 +127,7 @@ export default function LoadingScreen({ duration = 3000, onComplete }: LoadingSc
 
           <button
             onClick={finish}
-            className="absolute bottom-8 right-6 z-30 text-xs text-warm-cream/30 font-sans tracking-wider uppercase hover:text-warm-cream/60 transition-colors"
+            className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-30 flex min-h-11 items-center px-2 text-xs font-sans uppercase tracking-wider text-warm-cream/55 transition-colors hover:text-warm-cream sm:right-6"
           >
             Lewati
           </button>

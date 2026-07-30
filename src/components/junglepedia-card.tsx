@@ -54,7 +54,7 @@ export default function JunglepediaCard({ item, index }: JunglepediaCardProps) {
         ease: [0.16, 1, 0.3, 1],
       }}
       whileHover={reduceMotion ? undefined : { y: -4 }}
-      className={`group relative min-h-44 overflow-hidden rounded-2xl border border-jungle-deep/12 p-4 transition-colors duration-300 hover:border-sunlit-gold/55 ${
+      className={`group relative min-h-48 overflow-hidden rounded-2xl border border-jungle-deep/12 p-3 transition-colors duration-300 hover:border-sunlit-gold/55 sm:min-h-44 sm:p-4 ${
         index % 4 === 1
           ? "bg-sage/14"
           : index % 4 === 2
@@ -72,7 +72,7 @@ export default function JunglepediaCard({ item, index }: JunglepediaCardProps) {
         <h3 className="font-heading text-lg leading-tight text-jungle-deep">
           {item.judul}
         </h3>
-        <p className="mt-2 line-clamp-3 font-sans text-xs leading-relaxed text-moss">
+        <p className="mt-2 line-clamp-4 font-sans text-sm leading-relaxed text-moss sm:line-clamp-3">
           {item.deskripsi}
         </p>
       </div>

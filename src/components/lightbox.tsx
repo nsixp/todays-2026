@@ -47,7 +47,7 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: reduceMotion ? 0 : 0.2 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-jungle-shadow/90 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-jungle-shadow/90 px-3 py-20 backdrop-blur-sm sm:px-16 sm:py-10"
         onClick={onClose}
       >
         <motion.div
@@ -56,7 +56,7 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92 }}
           transition={{ duration: reduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative max-h-[85vh] max-w-[90vw]"
+          className="relative max-h-[74dvh] max-w-full sm:max-h-[85dvh] sm:max-w-[90vw]"
           onClick={(e) => e.stopPropagation()}
         >
           <Image
@@ -64,10 +64,10 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
             alt={item.alt}
             width={900}
             height={900}
-            sizes="90vw"
-            className="max-h-[85vh] max-w-[90vw] rounded-2xl shadow-2xl object-contain"
+            sizes="(max-width: 639px) calc(100vw - 1.5rem), 90vw"
+            className="max-h-[74dvh] max-w-full rounded-2xl object-contain shadow-2xl sm:max-h-[85dvh] sm:max-w-[90vw]"
           />
-          <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-warm-cream/70 font-sans bg-jungle-shadow/50 px-3 py-1 rounded-full">
+          <p className="absolute bottom-3 left-1/2 max-w-[calc(100%-1rem)] -translate-x-1/2 truncate rounded-full bg-jungle-shadow/70 px-3 py-1 font-sans text-xs text-warm-cream/80">
             {item.alt}, {currentIndex + 1} / {items.length}
           </p>
         </motion.div>
@@ -76,7 +76,7 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
           onClick={onClose}
           whileHover={reduceMotion ? undefined : { rotate: 6, scale: 1.05 }}
           whileTap={reduceMotion ? undefined : { scale: 0.92 }}
-          className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-warm-cream/10 hover:bg-warm-cream/20 text-warm-cream transition-colors"
+          className="absolute right-3 top-[max(0.75rem,env(safe-area-inset-top))] flex size-12 items-center justify-center rounded-full bg-warm-cream/12 text-warm-cream transition-colors hover:bg-warm-cream/20 sm:right-4"
           aria-label="Tutup"
         >
           <X size={20} />
@@ -86,20 +86,18 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
           <>
             <motion.button
               onClick={onPrev}
-              style={{ y: "-50%" }}
               whileHover={reduceMotion ? undefined : { x: -3 }}
               whileTap={reduceMotion ? undefined : { scale: 0.92 }}
-              className="absolute left-4 top-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-warm-cream/10 hover:bg-warm-cream/20 text-warm-cream transition-colors"
+              className="absolute bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-[calc(50%-3.25rem)] flex size-12 items-center justify-center rounded-full bg-warm-cream/12 text-warm-cream transition-colors hover:bg-warm-cream/20 sm:bottom-auto sm:left-4 sm:top-1/2 sm:-translate-y-1/2"
               aria-label="Sebelumnya"
             >
               <CaretLeft size={20} />
             </motion.button>
             <motion.button
               onClick={onNext}
-              style={{ y: "-50%" }}
               whileHover={reduceMotion ? undefined : { x: 3 }}
               whileTap={reduceMotion ? undefined : { scale: 0.92 }}
-              className="absolute right-4 top-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-warm-cream/10 hover:bg-warm-cream/20 text-warm-cream transition-colors"
+              className="absolute bottom-[max(0.75rem,env(safe-area-inset-bottom))] right-[calc(50%-3.25rem)] flex size-12 items-center justify-center rounded-full bg-warm-cream/12 text-warm-cream transition-colors hover:bg-warm-cream/20 sm:bottom-auto sm:right-4 sm:top-1/2 sm:-translate-y-1/2"
               aria-label="Selanjutnya"
             >
               <CaretRight size={20} />

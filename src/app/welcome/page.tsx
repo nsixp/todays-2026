@@ -48,7 +48,7 @@ function BabakSatu() {
   return (
     <section
       ref={ref}
-      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden"
+      className="relative flex min-h-dvh snap-start items-center justify-center overflow-hidden px-4 py-10"
     >
       <motion.div style={reduceMotion ? undefined : { scale: canopyScale }} className="absolute inset-0 bg-linear-to-b from-jungle-canopy/50 via-jungle-deep/25 to-warm-cream pointer-events-none" />
       <ForestSilhouettes className="opacity-80" />
@@ -85,7 +85,7 @@ function BabakSatu() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-20px" }}
-        className="relative z-10 text-center px-6 max-w-lg"
+        className="relative z-10 max-w-lg px-2 text-center sm:px-6"
       >
         <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
           Babak satu
@@ -111,7 +111,7 @@ function BabakDua() {
   return (
     <section
       ref={ref}
-      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-linear-to-b from-warm-cream to-fern-mist/30"
+      className="relative flex min-h-dvh snap-start items-center justify-center overflow-hidden bg-linear-to-b from-warm-cream to-fern-mist/30 px-4 py-10"
     >
       <motion.div style={reduceMotion ? undefined : { y: bgY }} className="absolute inset-0 pointer-events-none">
         {[
@@ -168,7 +168,7 @@ function BabakDua() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-20px" }}
-        className="relative z-10 text-center px-6 max-w-lg"
+        className="relative z-10 max-w-lg px-2 text-center sm:px-6"
       >
         <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
           Babak dua
@@ -214,7 +214,7 @@ function BabakTiga() {
   return (
     <section
       ref={ref}
-      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-linear-to-b from-fern-mist/30 to-warm-cream"
+      className="relative flex min-h-dvh snap-start items-center justify-center overflow-hidden bg-linear-to-b from-fern-mist/30 to-warm-cream px-4 py-10"
     >
       <DappledLight count={3} color="#A3C4B5" />
       <motion.div style={reduceMotion ? undefined : { y: orbY }} className="absolute inset-0 pointer-events-none">
@@ -257,7 +257,7 @@ function BabakTiga() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-20px" }}
-        className="relative z-10 text-center px-6 max-w-lg"
+        className="relative z-10 max-w-lg px-2 text-center sm:px-6"
       >
         <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
           Babak tiga
@@ -285,7 +285,7 @@ export default function WelcomePage() {
   )
 
   return (
-    <div ref={containerRef} className="relative h-dvh overflow-y-scroll snap-y snap-mandatory">
+    <div ref={containerRef} className="relative h-dvh snap-y snap-mandatory overflow-y-auto overscroll-y-contain">
       <motion.div
         style={reduceMotion ? { opacity: 0 } : { opacity: fogOpacity }}
         className="fixed inset-0 pointer-events-none z-20 bg-linear-to-b from-jungle-mist/40 via-jungle-mist/20 to-transparent"
@@ -295,7 +295,7 @@ export default function WelcomePage() {
       <BabakDua />
       <BabakTiga />
 
-      <section className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-warm-cream">
+      <section className="relative flex min-h-dvh snap-start items-center justify-center overflow-hidden bg-warm-cream px-4 py-10">
         <div className="absolute inset-0 bg-linear-to-b from-sunlit-gold/5 via-transparent to-transparent pointer-events-none" />
         <ForestSilhouettes className="opacity-60" />
         <AmbientParticles count={4} colors={["#F3C46B", "#F5D590", "#C47A22"]} />
@@ -336,7 +336,7 @@ export default function WelcomePage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-20px" }}
-          className="relative z-10 text-center px-6 max-w-lg"
+          className="relative z-10 max-w-lg px-2 text-center sm:px-6"
         >
           <motion.span variants={childVariants} className="mb-3 block text-sm font-medium text-moss">
             Babak empat
@@ -352,7 +352,7 @@ export default function WelcomePage() {
               whileHover={reduceMotion ? undefined : { scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => router.push("/avatar")}
-              className="rounded-full bg-jungle-deep text-warm-cream px-10 py-3.5 text-sm font-sans font-medium tracking-wide hover:bg-moss transition-colors shadow-lg shadow-jungle-deep/20"
+              className="min-h-12 rounded-full bg-jungle-deep px-8 py-3.5 text-sm font-medium tracking-wide text-warm-cream shadow-lg shadow-jungle-deep/20 transition-colors hover:bg-moss sm:px-10"
             >
               Mulai Petualangan
             </motion.button>

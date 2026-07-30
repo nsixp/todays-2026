@@ -115,7 +115,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
   }
 
   return (
-    <main className="guidebook-surface relative min-h-dvh overflow-hidden px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <main className="guidebook-surface relative min-h-dvh overflow-hidden px-3 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
       <div className="pointer-events-none absolute -left-28 top-28 size-80 rounded-full border border-jungle-deep/8" />
       <div className="pointer-events-none absolute -left-16 top-40 size-56 rounded-full border border-jungle-deep/8" />
 
@@ -194,7 +194,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
             />
           </div>
 
-          <div className="guidebook-paper relative mt-4 min-h-136 overflow-hidden rounded-3xl border border-fern-mist/90">
+          <div className="guidebook-paper relative mt-4 min-h-120 overflow-hidden rounded-3xl border border-fern-mist/90 sm:min-h-136">
             <div className="absolute left-8 top-0 h-full w-px bg-ember/15 sm:left-12" />
             <AnimatePresence mode="wait" custom={direction}>
               <motion.article
@@ -205,7 +205,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
                 animate="center"
                 exit="exit"
                 transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.16, 1, 0.3, 1] }}
-                className="relative px-7 py-8 pl-12 sm:px-12 sm:py-11 sm:pl-16"
+                className="relative px-5 py-7 pl-10 sm:px-12 sm:py-11 sm:pl-16"
               >
                 <header className="mb-8 border-b border-jungle-deep/10 pb-7">
                   <div className="mb-5 flex items-center justify-between gap-4">
@@ -216,7 +216,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
                       {String(currentIndex + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h2 className="max-w-2xl text-balance font-heading text-4xl leading-[1.02] text-jungle-deep sm:text-5xl">
+                  <h2 className="max-w-2xl text-balance font-heading text-3xl leading-[1.04] text-jungle-deep sm:text-5xl">
                     {currentSection.title}
                   </h2>
                 </header>
@@ -255,19 +255,19 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
             </AnimatePresence>
           </div>
 
-          <div className="mt-5 flex items-center justify-between gap-3">
+          <div className="mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
             <Button
               variant="outline"
               onClick={goPrev}
               disabled={currentIndex === 0}
-              className="h-11 rounded-full border-jungle-deep/15 bg-warm-cream/70 px-5 text-moss hover:bg-white"
+              className="h-12 w-full rounded-full border-jungle-deep/15 bg-warm-cream/70 px-5 text-moss hover:bg-white sm:w-auto"
             >
               <ArrowLeft />
               Sebelumnya
             </Button>
             <Button
               onClick={goNext}
-              className="h-11 rounded-full bg-jungle-deep px-6 text-warm-cream hover:bg-moss"
+              className="h-12 w-full rounded-full bg-jungle-deep px-6 text-warm-cream hover:bg-moss sm:w-auto"
             >
               {isLastPage ? "Selesai membaca" : "Bab selanjutnya"}
               {isLastPage ? <Flag weight="fill" /> : <ArrowRight />}

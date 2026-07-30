@@ -34,7 +34,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     <>
       {showNavbar && <Navbar />}
       <PageTransition pathname={pathname} reduceMotion={Boolean(reduceMotion)} />
-      <div className="relative flex flex-col min-h-dvh">
+      <div className="relative flex min-h-dvh min-w-0 flex-col">
         {foliageVariant && (
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
             <BackgroundFoliage variant={foliageVariant} />
@@ -47,7 +47,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
             animate={{ opacity: 1 }}
             exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 flex-1"
+            className="relative z-10 min-w-0 flex-1"
           >
             {children}
           </motion.div>

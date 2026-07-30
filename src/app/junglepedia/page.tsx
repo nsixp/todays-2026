@@ -33,7 +33,7 @@ export default function JunglePediaPage() {
   return (
     <div className="junglepedia-surface min-h-dvh pb-24 pt-24">
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <section className="grid min-h-80 items-center gap-8 py-8 md:grid-cols-[1.2fr_0.8fr] md:py-10">
+        <section className="grid min-h-72 items-center gap-8 py-8 md:min-h-80 md:grid-cols-[1.2fr_0.8fr] md:py-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export default function JunglePediaPage() {
             initial={reduceMotion ? false : { opacity: 0, scale: 0.9, rotate: 4 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ delay: 0.12, duration: reduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto hidden aspect-square w-full max-w-60 sm:block"
+            className="relative mx-auto hidden aspect-square w-full max-w-60 md:block"
             aria-hidden="true"
           >
             <div className="archive-compass absolute inset-[5%] rounded-full">
@@ -62,10 +62,10 @@ export default function JunglePediaPage() {
               <div className="absolute left-1/2 top-[8%] h-[84%] w-px -translate-x-1/2 bg-jungle-deep/15" />
               <div className="absolute left-[8%] top-1/2 h-px w-[84%] -translate-y-1/2 bg-jungle-deep/15" />
               <CompassRose className="absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 text-jungle-deep" weight="duotone" />
-              <span className="absolute left-1/2 top-[6%] -translate-x-1/2 font-heading text-lg text-ember">F</span>
-              <span className="absolute bottom-[7%] left-1/2 -translate-x-1/2 font-heading text-lg text-moss">P</span>
-              <span className="absolute left-[7%] top-1/2 -translate-y-1/2 font-heading text-lg text-moss">U</span>
-              <span className="absolute right-[7%] top-1/2 -translate-y-1/2 font-heading text-4xl text-jungle-deep/20">{items.length}</span>
+              <span className="absolute left-1/2 top-[6%] -translate-x-1/2 font-heading text-2xl text-ember">N</span>
+              <span className="absolute bottom-[7%] left-1/2 -translate-x-1/2 font-heading text-2xl text-moss">S</span>
+              <span className="absolute left-[7%] top-1/2 -translate-y-1/2 font-heading text-2xl text-moss">W</span>
+              <span className="absolute right-[7%] top-1/2 -translate-y-1/2 font-heading text-2xl text-moss">E</span>
             </div>
           </motion.div>
         </section>
@@ -116,7 +116,7 @@ export default function JunglePediaPage() {
                   <p className="mt-3 text-sm text-moss">Belum ada catatan untuk kategori ini.</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
                   {filtered.map((item, index) => (
                     <JunglepediaCard
                       key={item.id}

@@ -199,7 +199,7 @@ export default function JejakRimbaPage() {
     <div className="min-h-dvh bg-jungle-deep flex flex-col overflow-x-hidden">
       {/* ============ NARRATIVE (60%) ============ */}
       <div
-        className="story-stage relative flex flex-1 items-center justify-center overflow-hidden"
+        className="story-stage relative flex min-h-88 flex-1 items-center justify-center overflow-x-hidden overflow-y-auto sm:min-h-96"
         data-latar={latar}
       >
         {/* Decorative overlays */}
@@ -321,7 +321,7 @@ export default function JejakRimbaPage() {
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
-          className={`fixed inset-0 z-40 flex items-center justify-center overflow-y-auto px-4 py-8 sm:px-6 ${endingCfg.shell}`}
+          className={`fixed inset-0 z-40 flex items-start justify-center overflow-y-auto px-4 py-[max(2rem,env(safe-area-inset-top))] sm:px-6 ${endingCfg.shell}`}
         >
           {currentNode.ending.tier === "good" && (
             <>
@@ -366,7 +366,7 @@ export default function JejakRimbaPage() {
             initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: reduceMotion ? 0 : 0.58, delay: reduceMotion ? 0 : 0.12, ease: [0.16, 1, 0.3, 1] }}
-            className={`relative z-10 grid w-full max-w-4xl overflow-hidden rounded-4xl border shadow-2xl shadow-black/20 md:grid-cols-[16rem_minmax(0,1fr)] ${endingCfg.panel}`}
+            className={`relative z-10 my-auto grid w-full max-w-4xl overflow-hidden rounded-4xl border shadow-2xl shadow-black/20 md:grid-cols-[16rem_minmax(0,1fr)] ${endingCfg.panel}`}
           >
             <aside className="flex flex-col justify-between border-b border-current/10 p-6 md:border-b-0 md:border-r md:p-8">
               <motion.div
@@ -433,7 +433,7 @@ export default function JejakRimbaPage() {
 
       {/* ============ CARD HAND (40%) ============ */}
       {transitionPhase === "playing" && (
-        <div className="game-deck-surface relative flex h-[44dvh] min-h-72 max-h-100 flex-col overflow-hidden border-t border-jungle-mist/20">
+        <div className="game-deck-surface relative flex h-[46dvh] min-h-72 max-h-100 flex-col overflow-hidden border-t border-jungle-mist/20">
           <div className="relative z-20 mx-auto flex h-14 w-full max-w-6xl shrink-0 items-center justify-between border-b border-warm-cream/10 px-4 sm:px-6">
             <div className="flex items-center gap-2 text-warm-cream">
               <CardsThree size={19} weight="duotone" className="text-sunlit-gold" />
@@ -454,7 +454,7 @@ export default function JejakRimbaPage() {
             </div>
           </div>
 
-          <div className="relative flex flex-1 items-end overflow-x-auto overflow-y-hidden px-4 sm:justify-center sm:px-6">
+          <div className="relative flex flex-1 snap-x snap-proximity scroll-px-4 items-end overflow-x-auto overflow-y-hidden px-4 sm:justify-center sm:px-6">
             <div className="pointer-events-none absolute inset-x-[8%] bottom-5 h-16 rounded-[50%] border border-sunlit-gold/10 bg-jungle-shadow/25" />
             <div className="pointer-events-none absolute bottom-0 left-1/2 h-28 w-80 -translate-x-1/2 rounded-full bg-sunlit-gold/8 blur-[55px]" />
 

@@ -57,21 +57,21 @@ export default function Navbar() {
         initial={reduceMotion ? false : { opacity: 0, y: -18, x: "-50%" }}
         animate={{ opacity: 1, y: 0, x: "-50%" }}
         transition={{ duration: reduceMotion ? 0 : 0.52, ease: [0.16, 1, 0.3, 1] }}
-        className="forest-nav fixed left-1/2 top-3 z-50 flex w-[calc(100%-24px)] max-w-5xl items-center justify-between gap-4 rounded-2xl border border-fern-mist/70 bg-warm-cream/88 px-2.5 py-2 backdrop-blur-xl sm:top-4 sm:px-3"
+        className="forest-nav fixed left-1/2 top-[max(0.75rem,env(safe-area-inset-top))] z-50 flex w-[calc(100%-16px)] max-w-5xl items-center justify-between gap-2 rounded-2xl border border-fern-mist/70 bg-warm-cream/88 px-2 py-2 backdrop-blur-xl sm:w-[calc(100%-24px)] sm:gap-4 sm:px-3"
       >
-        <Link href="/hub" className="group flex shrink-0 items-center gap-2.5 rounded-xl px-1.5 py-1 text-jungle-deep">
+        <Link href="/hub" className="group flex min-h-11 shrink-0 items-center gap-2 rounded-xl px-1.5 py-1 text-jungle-deep sm:gap-2.5">
           <motion.span
             whileHover={reduceMotion ? undefined : { rotate: -7, scale: 1.04 }}
             whileTap={reduceMotion ? undefined : { scale: 0.94 }}
-            className="flex size-8 items-center justify-center rounded-lg bg-jungle-deep text-sunlit-gold"
+            className="flex size-9 items-center justify-center rounded-lg bg-jungle-deep text-sunlit-gold"
           >
             <Compass size={17} weight="duotone" />
           </motion.span>
-          <span className="font-heading text-lg tracking-tight">TODAYS 2026</span>
+          <span className="whitespace-nowrap font-heading text-base tracking-tight sm:text-lg">TODAYS 2026</span>
         </Link>
 
         {/* Desktop */}
-        <NavigationMenu className="hidden sm:flex">
+        <NavigationMenu className="hidden md:flex">
           <NavigationMenuList className="gap-0.5 rounded-xl border border-jungle-deep/6 bg-jungle-deep/4 p-1">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
@@ -80,7 +80,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`relative flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
+                    className={`relative flex min-h-10 items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
                       isActive ? "text-warm-cream" : "text-moss hover:bg-warm-cream/70 hover:text-jungle-deep"
                     }`}
                   >
@@ -105,21 +105,21 @@ export default function Navbar() {
         </NavigationMenu>
 
         {/* Mobile */}
-        <div className="sm:hidden">
+        <div className="md:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               render={
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-xl border border-jungle-deep/10 bg-jungle-deep/4 text-jungle-deep hover:bg-jungle-deep hover:text-warm-cream"
+                  className="size-11 rounded-xl border border-jungle-deep/10 bg-jungle-deep/4 text-jungle-deep hover:bg-jungle-deep hover:text-warm-cream"
                   aria-label="Buka menu"
                 >
                   <List size={20} />
                 </Button>
               }
             />
-            <SheetContent side="right" className="flex w-80 flex-col gap-0 border-l border-fern-mist/60 bg-warm-cream p-0 shadow-2xl">
+            <SheetContent side="right" className="flex w-[min(20rem,calc(100vw-1rem))] flex-col gap-0 border-l border-fern-mist/60 bg-warm-cream p-0 pb-[env(safe-area-inset-bottom)] shadow-2xl">
               {/* Header */}
               <SheetHeader className="border-b border-fern-mist/35 px-6 py-6">
                 <div className="flex items-center gap-3">

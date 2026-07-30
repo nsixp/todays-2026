@@ -72,7 +72,7 @@ export default function Footer() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.08 }}
       variants={FOOTER_VARIANTS}
-      className="relative mt-auto overflow-hidden bg-jungle-deep px-4 pb-6 pt-14 font-sans text-warm-cream sm:px-6 lg:px-8"
+      className="relative mt-auto overflow-hidden bg-jungle-deep px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-12 font-sans text-warm-cream sm:px-6 sm:pt-14 lg:px-8"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-sunlit-gold/55 to-transparent" />
       <BackgroundFoliage variant="canopy-top" opacity={0.045} color="var(--color-warm-cream)" />
@@ -101,7 +101,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     whileHover={reduceMotion ? undefined : { y: -2, rotate: -3 }}
                     whileTap={reduceMotion ? undefined : { scale: 0.94 }}
-                    className="flex size-9 items-center justify-center rounded-xl border border-warm-cream/12 bg-warm-cream/5 text-warm-cream/62 transition-colors hover:border-sunlit-gold/45 hover:bg-sunlit-gold hover:text-jungle-deep"
+                    className="flex size-11 items-center justify-center rounded-xl border border-warm-cream/12 bg-warm-cream/5 text-warm-cream/62 transition-colors hover:border-sunlit-gold/45 hover:bg-sunlit-gold hover:text-jungle-deep"
                     aria-label={social.label}
                   >
                     <Icon size={17} />
@@ -113,7 +113,7 @@ export default function Footer() {
 
           <motion.nav variants={FOOTER_ITEM_VARIANTS} className="md:col-span-4" aria-label="Sitemap footer">
             <h2 className="mb-4 text-xs font-semibold text-sunlit-gold">Jelajahi</h2>
-            <div className="grid grid-cols-2 gap-x-5 gap-y-2.5">
+            <div className="grid grid-cols-1 gap-x-5 gap-y-1 min-[23rem]:grid-cols-2">
               {SITEMAP.map((item, index) => (
                 <motion.div
                   key={item.href}
@@ -124,7 +124,7 @@ export default function Footer() {
                 >
                   <Link
                     href={item.href}
-                    className="text-sm text-warm-cream/58 transition-colors hover:text-warm-cream"
+                    className="inline-flex min-h-10 items-center text-sm text-warm-cream/58 transition-colors hover:text-warm-cream"
                   >
                     {item.label}
                   </Link>
@@ -168,7 +168,7 @@ export default function Footer() {
             variant="ghost"
             size="sm"
             onClick={scrollToTop}
-            className="w-fit gap-2 rounded-xl px-3 text-xs text-warm-cream/48 hover:bg-warm-cream/8 hover:text-warm-cream"
+            className="min-h-11 w-fit gap-2 rounded-xl px-3 text-xs text-warm-cream/48 hover:bg-warm-cream/8 hover:text-warm-cream"
           >
             <ArrowUp size={13} />
             Kembali ke atas

@@ -117,7 +117,7 @@ export default function KelompokPage() {
           transition={{ duration: reduceMotion ? 0.18 : 0.52, ease: MOTION_EASE }}
           className="relative mx-auto grid w-full max-w-5xl overflow-hidden rounded-4xl border border-fern-mist bg-warm-cream shadow-2xl shadow-jungle-shadow/12 lg:grid-cols-[0.9fr_1.1fr]"
         >
-          <div className="relative flex min-h-80 items-center justify-center overflow-hidden bg-sunlit-gold p-8">
+          <div className="relative flex min-h-64 items-center justify-center overflow-hidden bg-sunlit-gold p-6 sm:min-h-80 sm:p-8">
             <div className="absolute size-72 rounded-full border border-jungle-deep/10" />
             <div className="absolute size-52 rounded-full border border-jungle-deep/10" />
             <div className="absolute size-32 rounded-full border border-jungle-deep/10" />
@@ -161,7 +161,7 @@ export default function KelompokPage() {
               <IdentificationBadge size={22} weight="duotone" />
               <span className="text-xs font-semibold">Pos pembagian kelompok</span>
             </div>
-            <h1 className="mt-6 max-w-lg text-balance font-heading text-5xl leading-[0.98] text-jungle-deep sm:text-6xl">
+            <h1 className="mt-6 max-w-lg text-balance font-heading text-4xl leading-[1.02] text-jungle-deep sm:text-6xl">
               Temukan regu perjalananmu
             </h1>
             <p className="mt-5 max-w-lg text-sm leading-7 text-moss">
@@ -248,7 +248,7 @@ export default function KelompokPage() {
                       <MapPinArea size={17} weight="duotone" />
                       Kelompok {kelompokInfo.nomor_kelompok}
                     </div>
-                    <h1 className="mt-4 max-w-xl text-balance font-heading text-5xl leading-[0.98] sm:text-6xl">
+                    <h1 className="mt-4 max-w-xl text-balance font-heading text-4xl leading-[1.02] sm:text-6xl">
                       {kelompokInfo.nama_kelompok}
                     </h1>
                     <p className="mt-5 max-w-xl text-sm leading-7 text-warm-cream/70">

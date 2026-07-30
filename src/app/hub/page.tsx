@@ -111,22 +111,22 @@ const AVATAR_ICONS: Record<AvatarId, typeof Monyet> = {
 
 const SIGNPOST_POSITIONS = [
   {
-    mobile: { x: 22, y: 20 },
+    mobile: { x: 24, y: 20 },
     desktop: { x: 18, y: 23 },
     rotation: -1.4,
   },
   {
-    mobile: { x: 77, y: 27 },
+    mobile: { x: 76, y: 27 },
     desktop: { x: 79, y: 30 },
     rotation: 1.1,
   },
   {
-    mobile: { x: 23, y: 72 },
+    mobile: { x: 24, y: 72 },
     desktop: { x: 23, y: 73 },
     rotation: 0.7,
   },
   {
-    mobile: { x: 78, y: 80 },
+    mobile: { x: 76, y: 80 },
     desktop: { x: 82, y: 78 },
     rotation: -0.9,
   },
@@ -194,7 +194,7 @@ function SectionBody({ children, className = "" }: { children: React.ReactNode; 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`snap-start shrink-0 px-4 sm:px-6 lg:px-8 py-24 sm:py-28 ${className}`}
+      className={`snap-start shrink-0 px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28 ${className}`}
     >
       <div className="mx-auto w-full max-w-6xl">{children}</div>
     </motion.section>
@@ -240,9 +240,9 @@ export default function HubPage() {
   }
 
   return (
-    <div className="relative h-dvh overflow-y-auto snap-y snap-mandatory scroll-pt-14 bg-warm-cream">
+    <div className="relative min-h-dvh overflow-x-hidden scroll-pt-20 bg-warm-cream">
       {/* ============ HERO ============ */}
-      <section className="relative snap-start min-h-dvh shrink-0 flex items-center overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
+      <section className="relative flex min-h-dvh shrink-0 snap-start items-center overflow-hidden px-4 pb-12 pt-24 sm:px-6 sm:py-20 lg:px-8">
         {/* Layer 1: Background gradient */}
         <div className="forest-hero absolute inset-0 pointer-events-none" />
         {/* Layer 2: Forest silhouettes */}
@@ -320,7 +320,7 @@ export default function HubPage() {
           />
         ))}
 
-        <div className="relative z-20 mx-auto grid w-full max-w-6xl items-center gap-8 md:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] md:gap-12">
+        <div className="relative z-20 mx-auto grid w-full max-w-6xl items-center gap-5 sm:gap-8 md:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)] md:gap-12">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
@@ -330,7 +330,7 @@ export default function HubPage() {
             <span className="mb-5 inline-block rounded-full border border-jungle-deep/10 bg-warm-cream/55 px-4 py-1.5 text-[10px] font-semibold tracking-[0.2em] text-moss backdrop-blur-sm">
               TODAYS 2026
             </span>
-            <h1 className="font-heading text-4xl leading-[1.04] text-jungle-deep text-wrap-balance sm:text-5xl lg:text-7xl">
+            <h1 className="font-heading text-3xl leading-[1.06] text-jungle-deep text-wrap-balance sm:text-5xl lg:text-7xl">
               Selamat datang di rimba, {progress.nama || "Pejuang Rimba"}
             </h1>
             <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-moss text-wrap-pretty sm:text-base md:mx-0">
@@ -357,7 +357,7 @@ export default function HubPage() {
             initial={reduceMotion ? false : { opacity: 0, scale: 0.88, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="order-1 mx-auto w-full max-w-68 md:order-2 md:max-w-104"
+            className="order-1 mx-auto w-full max-w-40 sm:max-w-68 md:order-2 md:max-w-104"
             aria-label={`Avatar ${progress.avatar}`}
           >
             <div className="relative aspect-square">
@@ -397,7 +397,7 @@ export default function HubPage() {
 
       <SectionBody>
         <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
-        <div className="relative mx-auto h-[38rem] w-full max-w-5xl sm:h-[42rem] md:h-[40rem]">
+        <div className="relative mx-auto h-[35rem] w-full max-w-5xl sm:h-[42rem] md:h-[40rem]">
           <TrailMap
             variant="mobile"
             className="md:hidden"
@@ -464,7 +464,7 @@ export default function HubPage() {
             return (
               <div
                 key={item.label}
-                className="hub-signpost-node absolute z-10 h-44 w-[8.75rem] sm:h-48 sm:w-44 md:w-48"
+                className="hub-signpost-node absolute z-10 h-40 w-32 sm:h-48 sm:w-44 md:w-48"
                 style={
                   {
                     "--signpost-x-mobile": `${position.mobile.x}%`,
@@ -488,7 +488,7 @@ export default function HubPage() {
                   {isLocked ? (
                     <button
                       onClick={item.onLockedClick}
-                      className={`woodgrain relative flex size-full cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border-2 border-jungle-deep/15 bg-jungle-shadow/80 p-4 grayscale sm:p-6 ${
+                      className={`woodgrain relative flex size-full cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-jungle-deep/15 bg-jungle-shadow/80 p-3 grayscale sm:gap-3 sm:p-6 ${
                         shakingCard === item.label ? "animate-[shake_200ms_ease-in-out]" : ""
                       }`}
                     >
@@ -497,10 +497,10 @@ export default function HubPage() {
                         className="absolute inset-0 opacity-10"
                         style={{ backgroundImage: pattern, backgroundSize: "8px 8px" }}
                       />
-                      <div className="relative flex size-12 items-center justify-center text-fern-mist/55">{item.icon}</div>
+                      <div className="relative flex size-10 items-center justify-center text-fern-mist/55 sm:size-12">{item.icon}</div>
                       <div className="text-center relative">
-                        <p className="font-heading text-xl text-fern-mist/65">{item.label}</p>
-                        <p className="mt-1 font-sans text-xs text-fern-mist/60">Terkunci</p>
+                        <p className="font-heading text-lg leading-tight text-fern-mist/65 sm:text-xl">{item.label}</p>
+                        <p className="mt-0.5 font-sans text-[11px] text-fern-mist/60 sm:mt-1 sm:text-xs">Terkunci</p>
                       </div>
                     </button>
                   ) : (
@@ -514,17 +514,17 @@ export default function HubPage() {
                           ],
                         }}
                         transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.18 }}
-                        className="forest-panel woodgrain relative flex size-full flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border-2 p-4 duration-300 hover:-translate-y-1 hover:border-sunlit-gold sm:p-6"
+                        className="forest-panel woodgrain relative flex size-full flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 p-3 duration-300 hover:-translate-y-1 hover:border-sunlit-gold sm:gap-3 sm:p-6"
                       >
                         <div
                           className="absolute inset-0 opacity-[0.35] transition-opacity duration-300 group-hover:opacity-20"
                           style={{ backgroundImage: pattern, backgroundSize: pattern.includes("radial") ? "8px 8px" : "12px 12px" }}
                         />
-                        <div className="relative flex size-12 items-center justify-center text-jungle-deep transition-colors group-hover:text-sunlit-gold">{item.icon}</div>
+                        <div className="relative flex size-10 items-center justify-center text-jungle-deep transition-colors group-hover:text-sunlit-gold sm:size-12">{item.icon}</div>
                         <div className="relative text-center">
-                          <p className="font-heading text-xl text-jungle-deep">{item.label}</p>
-                          <p className="mt-1 font-sans text-xs text-moss">{item.desc}</p>
-                          <p className="mt-0.5 font-sans text-[10px] text-sage/70">{item.status}</p>
+                          <p className="font-heading text-lg leading-tight text-jungle-deep sm:text-xl">{item.label}</p>
+                          <p className="mt-0.5 line-clamp-2 font-sans text-[11px] leading-tight text-moss sm:mt-1 sm:text-xs sm:leading-normal">{item.desc}</p>
+                          <p className="mt-0.5 font-sans text-[9px] text-sage/70 sm:text-[10px]">{item.status}</p>
                         </div>
                       </motion.div>
                     </Link>
@@ -771,7 +771,7 @@ export default function HubPage() {
                   : { type: "spring", stiffness: 300, damping: 20 }
               }
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-sm bg-warm-cream rounded-2xl border border-fern-mist p-8 text-center shadow-xl"
+              className="w-full max-w-sm rounded-2xl border border-fern-mist bg-warm-cream p-6 text-center shadow-xl sm:p-8"
             >
               <Leaf size={42} weight="duotone" className="mx-auto mb-4 text-moss" />
               <h3 className="font-heading text-xl text-jungle-deep mb-3">

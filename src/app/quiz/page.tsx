@@ -124,7 +124,7 @@ export default function QuizPage() {
 
   if (!started) {
     return (
-      <main className="quiz-surface relative flex min-h-dvh items-center overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
+      <main className="quiz-surface relative flex min-h-dvh items-center overflow-hidden px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="pointer-events-none absolute -right-32 -top-28 size-112 rounded-full border border-jungle-mist/25" />
         <div className="pointer-events-none absolute -right-12 -top-8 size-72 rounded-full border border-jungle-mist/20" />
 
@@ -134,16 +134,16 @@ export default function QuizPage() {
           transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="relative mx-auto grid w-full max-w-5xl overflow-hidden rounded-4xl border border-jungle-mist/20 bg-jungle-deep shadow-2xl shadow-jungle-shadow/20 lg:grid-cols-[1.08fr_0.92fr]"
         >
-          <div className="relative overflow-hidden px-6 py-9 text-warm-cream sm:px-10 sm:py-12">
+          <div className="relative overflow-hidden px-6 py-8 text-warm-cream sm:px-10 sm:py-12">
             <div className="absolute -bottom-40 -left-24 size-80 rounded-full bg-jungle-canopy/50 blur-3xl" />
             <div className="absolute right-6 top-8 size-24 rounded-full border border-sunlit-gold/20" />
             <div className="absolute right-12 top-14 size-12 rounded-full border border-sunlit-gold/20" />
 
             <div className="relative max-w-lg">
-              <div className="mb-9 flex size-14 items-center justify-center rounded-2xl bg-sunlit-gold text-jungle-deep">
+              <div className="mb-6 flex size-14 items-center justify-center rounded-2xl bg-sunlit-gold text-jungle-deep sm:mb-9">
                 <CheckCircle size={29} weight="duotone" />
               </div>
-              <h1 className="max-w-md text-balance font-heading text-5xl leading-[0.98] sm:text-6xl">
+              <h1 className="max-w-md text-balance font-heading text-4xl leading-[1.02] sm:text-6xl">
                 Uji bekalmu sebelum masuk rimba
               </h1>
               <p className="mt-5 max-w-md text-sm leading-7 text-warm-cream/72">
@@ -151,7 +151,7 @@ export default function QuizPage() {
                 Nilai akhir akan menentukan badge perjalananmu.
               </p>
 
-              <div className="mt-10 flex items-end gap-4 border-t border-warm-cream/12 pt-6">
+              <div className="mt-7 flex items-end gap-4 border-t border-warm-cream/12 pt-5 sm:mt-10 sm:pt-6">
                 <span className="font-heading text-6xl leading-none text-sunlit-gold">{total}</span>
                 <span className="pb-1 text-xs leading-relaxed text-jungle-mist">
                   soal
@@ -195,7 +195,7 @@ export default function QuizPage() {
   }
 
   return (
-    <main className="quiz-surface relative min-h-dvh overflow-hidden px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <main className="quiz-surface relative min-h-dvh overflow-hidden px-3 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
       <div className="relative mx-auto grid w-full max-w-6xl gap-5 lg:grid-cols-[15rem_minmax(0,1fr)] lg:items-start">
         <aside className="space-y-4 lg:sticky lg:top-8">
           <div className="overflow-hidden rounded-3xl bg-jungle-deep text-warm-cream">
@@ -273,7 +273,7 @@ export default function QuizPage() {
               animate="center"
               exit="exit"
               transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.16, 1, 0.3, 1] }}
-              className="quiz-question-card min-h-124 rounded-4xl border border-fern-mist/80 p-6 sm:p-9"
+              className="quiz-question-card min-h-116 rounded-4xl border border-fern-mist/80 p-5 sm:min-h-124 sm:p-9"
             >
               <header className="flex items-start justify-between gap-5 border-b border-jungle-deep/10 pb-7">
                 <div className="max-w-2xl">
@@ -324,12 +324,12 @@ export default function QuizPage() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-5 flex items-center justify-between gap-3">
+          <div className="mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
             <Button
               variant="outline"
               onClick={goPrev}
               disabled={currentIndex === 0}
-              className="h-11 rounded-full border-jungle-deep/15 bg-warm-cream/70 px-5 text-moss hover:bg-white"
+              className="h-12 w-full rounded-full border-jungle-deep/15 bg-warm-cream/70 px-5 text-moss hover:bg-white sm:w-auto"
             >
               <ArrowLeft />
               Sebelumnya
@@ -339,7 +339,7 @@ export default function QuizPage() {
               <Button
                 onClick={handleSubmit}
                 disabled={!answered || submitting}
-                className="h-11 rounded-full bg-jungle-deep px-6 text-warm-cream hover:bg-moss"
+                className="h-12 w-full rounded-full bg-jungle-deep px-6 text-warm-cream hover:bg-moss sm:w-auto"
               >
                 {submitting ? "Memproses..." : "Selesai dan Kumpulkan"}
                 {!submitting && <CheckCircle weight="fill" />}
@@ -347,7 +347,7 @@ export default function QuizPage() {
             ) : (
               <Button
                 onClick={goNext}
-                className="h-11 rounded-full bg-sunlit-gold px-6 text-jungle-deep hover:bg-ember hover:text-warm-cream"
+                className="h-12 w-full rounded-full bg-sunlit-gold px-6 text-jungle-deep hover:bg-ember hover:text-warm-cream sm:w-auto"
               >
                 Selanjutnya
                 <ArrowRight />

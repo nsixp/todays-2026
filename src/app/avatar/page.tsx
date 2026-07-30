@@ -80,7 +80,7 @@ export default function AvatarPage() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center overflow-hidden relative">
+    <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden overflow-y-auto px-4 py-10">
       {!nimDone && <div className="absolute inset-0 bg-warm-cream pointer-events-none" />}
       {nimDone && <div className="absolute inset-0 bg-linear-to-b from-jungle-deep via-jungle-canopy to-moss pointer-events-none" />}
 
@@ -107,7 +107,7 @@ export default function AvatarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 w-full max-w-sm mx-auto px-6 flex flex-col items-center gap-6"
+            className="relative z-10 mx-auto flex w-full max-w-sm flex-col items-center gap-6 px-2 sm:px-6"
           >
             <div className="text-center">
               <motion.h1
@@ -145,7 +145,7 @@ export default function AvatarPage() {
                   value={nim}
                   onChange={(e) => { setNim(e.target.value); setError("") }}
                   onKeyDown={(e) => e.key === "Enter" && handleNimSubmit()}
-                  className="w-full pl-4 pr-4 py-3 rounded-xl border-2 border-fern-mist bg-white/70 backdrop-blur-sm text-sm text-jungle-deep font-sans placeholder:text-sage/50 focus:border-sunlit-gold focus:outline-none transition-all duration-200 focus:bg-white focus:shadow-[0_0_24px_-8px_rgba(243,196,107,0.35)]"
+                  className="min-h-12 w-full rounded-xl border-2 border-fern-mist bg-white/70 px-4 py-3 font-sans text-base text-jungle-deep backdrop-blur-sm transition-all duration-200 placeholder:text-sage/70 focus:border-sunlit-gold focus:bg-white focus:outline-none focus:shadow-[0_0_24px_-8px_rgba(243,196,107,0.35)]"
                   autoFocus
                 />
               </div>
@@ -168,7 +168,7 @@ export default function AvatarPage() {
                 onClick={handleNimSubmit}
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
-                className="w-full rounded-xl bg-jungle-deep text-warm-cream py-3 text-sm font-sans font-semibold tracking-wide transition-all duration-200 shadow-lg shadow-jungle-deep/20 hover:bg-moss"
+                className="min-h-12 w-full rounded-xl bg-jungle-deep py-3 text-sm font-semibold tracking-wide text-warm-cream shadow-lg shadow-jungle-deep/20 transition-all duration-200 hover:bg-moss"
               >
                 Lanjutkan
               </motion.button>
@@ -181,7 +181,7 @@ export default function AvatarPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.3 }}
-            className="relative z-10 w-full max-w-lg mx-auto px-6 flex flex-col items-center gap-8"
+            className="relative z-10 mx-auto flex w-full max-w-lg flex-col items-center gap-6 px-0 sm:gap-8 sm:px-6"
           >
             <AnimatePresence>
               {selected && (
@@ -225,7 +225,7 @@ export default function AvatarPage() {
                 initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.15 }}
-                className="grid grid-cols-3 gap-5 sm:gap-6 w-full max-w-xs mx-auto"
+                className="mx-auto grid w-full max-w-xs grid-cols-3 gap-x-3 gap-y-5 sm:gap-6"
               >
                 {AVATARS.map(({ id, label, Icon }, i) => {
                   const color = AVATAR_COLORS[id]
@@ -246,7 +246,7 @@ export default function AvatarPage() {
                       className="flex flex-col items-center gap-2 cursor-pointer group"
                     >
                       <div
-                        className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center transition-all duration-300 group-hover:shadow-xl"
+                        className="relative flex size-18 items-center justify-center rounded-full transition-all duration-300 group-hover:shadow-xl min-[23rem]:size-20 sm:size-24"
                         style={{
                           background: `radial-gradient(circle at 35% 35%, ${color}25, ${color}08)`,
                           boxShadow: `0 4px 16px ${glow}15`,

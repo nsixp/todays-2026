@@ -17,7 +17,7 @@ export default function FAQPage() {
   return (
     <div className="faq-fielddesk-surface min-h-dvh pb-24 pt-24">
       <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <section className="grid min-h-88 items-center gap-8 py-8 md:grid-cols-[1fr_0.65fr] md:py-10">
+        <section className="grid min-h-72 items-center gap-8 py-8 md:min-h-88 md:grid-cols-[1fr_0.65fr] md:py-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export default function FAQPage() {
             initial={reduceMotion ? false : { opacity: 0, scale: 0.9, rotate: -4 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ delay: 0.12, duration: reduceMotion ? 0 : 0.65 }}
-            className="faq-note relative mx-auto hidden aspect-4/3 w-full max-w-64 items-center justify-center rounded-2xl border border-jungle-deep/15 bg-warm-cream sm:flex"
+            className="faq-note relative mx-auto hidden aspect-4/3 w-full max-w-64 items-center justify-center rounded-2xl border border-jungle-deep/15 bg-warm-cream md:flex"
             aria-hidden="true"
           >
             <Question size={104} weight="thin" className="text-jungle-deep/70" />
@@ -83,7 +83,7 @@ export default function FAQPage() {
                       <span>{item.question}</span>
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="pb-7 pl-10 pr-5 text-sm leading-relaxed text-moss">
+                  <AccordionContent className="pb-7 pl-0 pr-2 text-sm leading-relaxed text-moss min-[23rem]:pl-10 min-[23rem]:pr-5">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>

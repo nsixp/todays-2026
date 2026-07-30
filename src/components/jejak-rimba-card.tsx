@@ -93,7 +93,7 @@ export default function JejakRimbaCard({
       onClick={disabled ? undefined : onSelect}
       disabled={disabled}
       aria-label={`Pilih jalur ${index + 1}: ${pilihan.text}`}
-      className={`group relative flex min-h-52 w-[9.25rem] shrink-0 cursor-pointer select-none flex-col overflow-hidden rounded-2xl border-2 bg-warm-cream text-left transition-[box-shadow,border-color] duration-300 disabled:cursor-default sm:min-h-56 sm:w-44 ${style.border}`}
+      className={`group relative flex min-h-52 w-[8.5rem] shrink-0 snap-center cursor-pointer select-none flex-col overflow-hidden rounded-2xl border-2 bg-warm-cream text-left transition-[box-shadow,border-color] duration-300 disabled:cursor-default min-[23rem]:w-[9.25rem] sm:min-h-56 sm:w-44 ${style.border}`}
       style={{
         boxShadow: `0 12px 30px ${style.shadow}, 0 2px 0 rgba(255,255,255,0.5) inset`,
         backgroundImage:
