@@ -16,6 +16,7 @@ import {
   NavigationMenuList,
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu"
+import { Compass, Image, CalendarBlank, Question, List, ArrowLeft } from "@phosphor-icons/react"
 
 const NAV_ITEMS = [
   { label: "JunglePedia", href: "/junglepedia" },
@@ -25,34 +26,10 @@ const NAV_ITEMS = [
 ]
 
 const ICONS: Record<string, React.ReactNode> = {
-  "/junglepedia": (
-    <svg viewBox="0 0 20 20" fill="none">
-      <path d="M10 2l8 4v8l-8 4-8-4V6l8-4Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-      <path d="M10 2v8l8 4" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-      <path d="M2 6l8 4-8 4" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-    </svg>
-  ),
-  "/galeri": (
-    <svg viewBox="0 0 20 20" fill="none">
-      <rect x="2" y="4" width="16" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
-      <circle cx="7" cy="9" r="1.5" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M2 14l5-4 3 2.5 3-3.5 5 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  "/jadwal": (
-    <svg viewBox="0 0 20 20" fill="none">
-      <rect x="2" y="3" width="16" height="15" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M2 7h16M6 1v4M14 1v4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-      <path d="M6 11h2M10 11h2M14 11h2M6 14h2M10 14h2M14 14h2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  ),
-  "/faq": (
-    <svg viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="10" r="7.5" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M8 8.5c0-1.5 4-1.5 4 0 0 1.5-4 1-4 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-      <circle cx="10" cy="14.5" r="0.75" fill="currentColor" />
-    </svg>
-  ),
+  "/junglepedia": <Compass size={16} />,
+  "/galeri": <Image size={16} />,
+  "/jadwal": <CalendarBlank size={16} />,
+  "/faq": <Question size={16} />,
 }
 
 const NAVBAR_BG: Record<string, string> = {
@@ -118,9 +95,7 @@ export default function Navbar() {
             <SheetTrigger
               render={
                 <Button variant="ghost" size="icon" aria-label="Buka menu">
-                  <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
-                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
+                  <List size={20} />
                 </Button>
               }
             />
@@ -163,9 +138,7 @@ export default function Navbar() {
                   onClick={close}
                   className="flex items-center gap-2.5 px-4 py-3 text-xs text-moss/50 font-sans tracking-wider hover:text-jungle-deep transition-colors"
                 >
-                  <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <ArrowLeft size={14} />
                   Kembali ke Hub
                 </Link>
               </div>

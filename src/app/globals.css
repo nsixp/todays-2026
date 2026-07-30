@@ -112,6 +112,39 @@
   }
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@layer components {
+  .btn-jungle {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    transition: all 200ms ease;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.08);
+    cursor: pointer;
+  }
+  .btn-jungle:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.08), 0 4px 12px rgba(26,58,43,0.15);
+  }
+  .btn-jungle:active {
+    transform: scale(0.97);
+  }
+
+  .border-3 {
+    border-width: 3px;
+  }
+}
+
 body::after {
   content: "";
   position: fixed;

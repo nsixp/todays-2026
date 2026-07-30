@@ -3,6 +3,7 @@
 import { useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import type { GalleryItem } from "@/types"
+import { X, CaretLeft, CaretRight } from "@phosphor-icons/react"
 
 interface LightboxProps {
   items: GalleryItem[]
@@ -67,9 +68,7 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
           className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-warm-cream/10 hover:bg-warm-cream/20 text-warm-cream transition-colors"
           aria-label="Tutup"
         >
-          <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
-            <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
+          <X size={20} />
         </button>
 
         {items.length > 1 && (
@@ -79,18 +78,14 @@ export default function Lightbox({ items, currentIndex, onClose, onPrev, onNext 
               className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-warm-cream/10 hover:bg-warm-cream/20 text-warm-cream transition-colors"
               aria-label="Sebelumnya"
             >
-              <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
-                <path d="M12 5l-5 5 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <CaretLeft size={20} />
             </button>
             <button
               onClick={onNext}
               className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-warm-cream/10 hover:bg-warm-cream/20 text-warm-cream transition-colors"
               aria-label="Selanjutnya"
             >
-              <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
-                <path d="M8 5l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <CaretRight size={20} />
             </button>
           </>
         )}

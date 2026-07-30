@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
+import { BookOpen, Question, User } from "@phosphor-icons/react"
 
 const containerVariants = {
   visible: {
@@ -182,28 +183,19 @@ function BabakTiga() {
     {
       x: "20%", y: "25%",
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 text-jungle-deep">
-          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-        </svg>
+        <BookOpen className="w-8 h-8 sm:w-10 sm:h-10 text-jungle-deep" />
       ),
     },
     {
       x: "75%", y: "20%",
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 text-jungle-deep">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <path d="M12 17h.01" />
-        </svg>
+        <Question className="w-8 h-8 sm:w-10 sm:h-10 text-jungle-deep" />
       ),
     },
     {
       x: "45%", y: "65%",
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 sm:w-10 sm:h-10 text-jungle-deep">
-          <circle cx="12" cy="8" r="4" />
-          <path d="M20 21a8 8 0 1 0-16 0" />
-        </svg>
+        <User className="w-8 h-8 sm:w-10 sm:h-10 text-jungle-deep" />
       ),
     },
   ]

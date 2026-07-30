@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
 import { getQuiz } from "@/lib/data"
 import { getBadgeIcon, getBadgeTitle } from "@/lib/badge"
+import { CheckCircle } from "@phosphor-icons/react"
 
 const slideVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 280 : -280, opacity: 0 }),
@@ -69,16 +70,14 @@ export default function QuizPage() {
 
   if (!started) {
     return (
-      <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col items-center justify-center px-6 py-8">
+      <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-lg"
         >
           <div className="w-16 h-16 rounded-2xl bg-sunlit-gold/20 flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-sunlit-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <CheckCircle size={32} className="text-sunlit-gold" />
           </div>
           <h1 className="font-heading text-3xl text-jungle-deep mb-3 leading-tight">
             Quiz PKKMB
@@ -120,7 +119,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col px-6 py-8">
+    <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 flex flex-col px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex-1 flex flex-col mx-auto w-full max-w-lg">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">

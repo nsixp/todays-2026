@@ -23,7 +23,7 @@ export default function GaleriPage() {
 
   return (
     <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 pt-24 pb-20">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export default function GaleriPage() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40 mb-4">
             TODAYS 2026
           </span>
-          <h1 className="font-heading text-3xl sm:text-4xl text-jungle-deep leading-tight mb-3">
+          <h1 className="font-heading text-4xl sm:text-5xl text-jungle-deep leading-tight mb-3">
             Galeri
           </h1>
           <p className="text-sm text-moss font-sans max-w-lg mx-auto leading-relaxed">

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -10,6 +10,7 @@ import ForestSilhouettes from "@/components/forest-silhouettes"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
 import type { ScheduleItem, FAQItem, JunglePediaItem } from "@/types"
+import { ArrowRight, BookOpen, MegaphoneSimple, Crosshair, Stack, CaretDown, Image } from "@phosphor-icons/react"
 import junglepediaData from "@/../data/junglepedia.json"
 
 const junglepedia = junglepediaData as JunglePediaItem[]
@@ -84,7 +85,7 @@ function SectionBody({ children, className = "" }: { children: React.ReactNode; 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`snap-start shrink-0 px-6 py-20 sm:py-28 ${className}`}
+      className={`snap-start shrink-0 px-4 sm:px-6 lg:px-8 py-24 sm:py-28 ${className}`}
     >
       <div className="mx-auto max-w-4xl w-full">{children}</div>
     </motion.section>
@@ -96,19 +97,26 @@ export default function HubPage() {
   const { progress, save } = useProgress()
   const [easterClicks, setEasterClicks] = useState<Record<string, number>>({})
   const [easterModal, setEasterModal] = useState<{ label: string; href: string } | null>(null)
+  const [shakingCard, setShakingCard] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
 
-  const pagesRead = progress.pagesRead.length
+  const pagesRead = mounted ? progress.pagesRead.length : 0
   const guidebookDone = pagesRead >= 6
-  const quizDone = progress.quizDone
+  const quizDone = mounted ? progress.quizDone : false
 
   function handleLockedClick(label: string, href: string) {
     const next = { ...easterClicks, [label]: (easterClicks[label] || 0) + 1 }
     setEasterClicks(next)
     if (next[label] >= 3) {
-      const updatedEasterEggs = { ...progress.easterEggs, [label]: true }
-      save({ easterEggs: updatedEasterEggs })
-      setEasterModal({ label, href })
       setEasterClicks({})
+      setShakingCard(label)
+      setTimeout(() => {
+        setShakingCard(null)
+        const updatedEasterEggs = { ...progress.easterEggs, [label]: true }
+        save({ easterEggs: updatedEasterEggs })
+        setEasterModal({ label, href })
+      }, 200)
     }
   }
 
@@ -243,7 +251,7 @@ export default function HubPage() {
               transition={{ delay: 0.45, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="font-heading text-3xl sm:text-4xl md:text-6xl text-jungle-deep/70 -mt-1 sm:-mt-2 text-wrap-balance"
             >
-              {progress.nama || "Pejuang Rimba"}
+              {mounted ? (progress.nama || "Pejuang Rimba") : "Pejuang Rimba"}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
@@ -272,13 +280,13 @@ export default function HubPage() {
               <span className="relative z-10 flex items-center gap-2.5">
                 <span className="group-hover:hidden transition-all duration-300">Mulai Petualangan</span>
                 <span className="hidden group-hover:inline transition-all duration-300">Mulai Petualangan</span>
-                <motion.svg
-                  viewBox="0 0 16 16" fill="none" className="w-4 h-4"
+                <motion.span
                   animate={{ x: [0, 4, 0] }}
                   transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex"
                 >
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </motion.svg>
+                  <ArrowRight size={16} />
+                </motion.span>
               </span>
             </button>
           </motion.div>
@@ -306,13 +314,7 @@ export default function HubPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto relative">
           {[
             {
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <path d="M8 7h8M8 11h6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                </svg>
-              ),
+              icon: <BookOpen className="w-8 h-8" />,
               label: "Guidebook",
               href: "/guidebook",
               desc: "Baca panduan PKKMB",
@@ -322,12 +324,7 @@ export default function HubPage() {
               desktopClass: "md:justify-self-start md:self-start",
             },
             {
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
-                  <path d="M19.5 12.5a3 3 0 0 0-3-3V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8.5a2 2 0 0 0 2 2h2.5a3 3 0 0 0 6 0H18a2 2 0 0 0 2-2v-2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="10" cy="12" r="1.5" fill="currentColor" />
-                </svg>
-              ),
+              icon: <MegaphoneSimple className="w-8 h-8" />,
               label: "Quiz",
               href: "/quiz",
               desc: "Uji pemahaman guidebook",
@@ -338,14 +335,7 @@ export default function HubPage() {
               desktopClass: "md:justify-self-end md:self-center md:mt-8",
             },
             {
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
-                  <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <path d="M12 8 9 16l4-3 3-5Z" fill="currentColor" opacity="0.3" />
-                  <path d="m10 14 2-6 3 5-5 1Z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ),
+              icon: <Crosshair className="w-8 h-8" />,
               label: "Cari Kelompok",
               href: "/kelompok",
               desc: "Temukan kelompok PKKMB",
@@ -356,14 +346,7 @@ export default function HubPage() {
               desktopClass: "md:justify-self-start md:self-end",
             },
             {
-              icon: (
-                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
-                  <path d="M12 3 3 9l9 6 9-6-9-6Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                  <path d="M3 15 12 21 21 15" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                  <path d="M3 12 12 18 21 12" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                  <circle cx="12" cy="9" r="1.5" fill="currentColor" />
-                </svg>
-              ),
+              icon: <Stack className="w-8 h-8" />,
               label: "Jejak Rimba",
               href: "/jejak-rimba",
               desc: "Game petualangan interaktif",
@@ -389,16 +372,19 @@ export default function HubPage() {
                 {isLocked ? (
                   <button
                     onClick={item.onLockedClick}
-                    className="w-full flex flex-col items-center gap-3 p-5 sm:p-7 rounded-2xl border-2 border-fern-mist/50 bg-white/40 opacity-50 grayscale cursor-pointer hover:opacity-70 transition-opacity relative overflow-hidden"
+                    className={`w-full flex flex-col items-center gap-3 p-5 sm:p-7 rounded-2xl border-2 border-jungle-deep/15 bg-white/30 cursor-pointer relative overflow-hidden group ${
+                      shakingCard === item.label ? "animate-[shake_200ms_ease-in-out]" : ""
+                    }`}
                   >
+                    <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/50 to-jungle-shadow/30 pointer-events-none" />
                     <div
-                      className="absolute inset-0 opacity-20"
+                      className="absolute inset-0 opacity-10"
                       style={{ backgroundImage: pattern, backgroundSize: "8px 8px" }}
                     />
-                    <div className="relative w-12 h-12 flex items-center justify-center text-sage">{item.icon}</div>
+                    <div className="relative w-12 h-12 flex items-center justify-center text-sage/60">{item.icon}</div>
                     <div className="text-center relative">
-                      <p className="text-base font-heading text-sage">{item.label}</p>
-                      <p className="text-xs text-fern-mist font-sans mt-1">Terkunci</p>
+                      <p className="text-base font-heading text-sage/60">{item.label}</p>
+                      <p className="text-xs text-fern-mist/60 font-sans mt-1">Terkunci</p>
                     </div>
                   </button>
                 ) : (
@@ -517,11 +503,7 @@ export default function HubPage() {
               className="aspect-square rounded-xl bg-linear-to-br from-sage/20 to-fern-mist/30 border border-fern-mist/60 flex items-center justify-center"
             >
               <div className="text-center p-2">
-                <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8 text-sage/60 mx-auto mb-1">
-                  <rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                  <circle cx="12" cy="15" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="m4 21 6-4 5 3 5-5 8 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <Image className="w-8 h-8 text-sage/60 mx-auto mb-1" />
                 <p className="text-[10px] text-sage/60 font-sans">{item.label}</p>
               </div>
             </motion.div>
@@ -556,9 +538,7 @@ export default function HubPage() {
             >
               <summary className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer text-lg font-heading text-jungle-deep hover:text-jungle-deep/80 transition-colors [&::-webkit-details-marker]:hidden">
                 {item.question}
-                <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-moss transition-transform duration-200 group-open:rotate-180">
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <CaretDown size={16} className="shrink-0 text-moss transition-transform duration-200 group-open:rotate-180" />
               </summary>
               <div className="px-5 pb-4 text-sm text-moss font-sans leading-relaxed">
                 {item.answer}

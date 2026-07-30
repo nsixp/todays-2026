@@ -53,7 +53,7 @@ export default function BadgePage() {
   const pct = Math.round((progress.quizScore / total) * 100)
 
   return (
-    <div className="relative min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 flex items-center justify-center px-6 py-16 overflow-hidden">
+    <div className="relative min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
       <DappledLight count={3} />
       <AmbientParticles count={4} />
       <motion.div
@@ -61,30 +61,58 @@ export default function BadgePage() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-sm bg-white/70 rounded-3xl border border-fern-mist p-8 text-center shadow-lg"
+        className="relative w-full max-w-sm bg-white/70 rounded-3xl border-3 border-sunlit-gold/60 p-10 text-center shadow-lg overflow-hidden"
       >
+        {/* Ornamental corners */}
+        <svg className="absolute top-0 left-0 w-6 h-6 text-sunlit-gold/20 pointer-events-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M0 0h10v2H2v8H0V0Z" fill="currentColor" />
+          <path d="M0 0l10 10" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
+        <svg className="absolute top-0 right-0 w-6 h-6 text-sunlit-gold/20 rotate-90 pointer-events-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M0 0h10v2H2v8H0V0Z" fill="currentColor" />
+          <path d="M0 0l10 10" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
+        <svg className="absolute bottom-0 left-0 w-6 h-6 text-sunlit-gold/20 -rotate-90 pointer-events-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M0 0h10v2H2v8H0V0Z" fill="currentColor" />
+          <path d="M0 0l10 10" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
+        <svg className="absolute bottom-0 right-0 w-6 h-6 text-sunlit-gold/20 rotate-180 pointer-events-none" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M0 0h10v2H2v8H0V0Z" fill="currentColor" />
+          <path d="M0 0l10 10" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
+
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
-          className="w-24 h-24 mx-auto mb-4 rounded-full bg-sunlit-gold/20 border-2 border-sunlit-gold flex items-center justify-center"
+          className="relative w-24 h-24 mx-auto mb-4 rounded-full bg-sunlit-gold/10 border-2 border-sunlit-gold/40 flex items-center justify-center"
         >
-          <Icon className="w-14 h-14" />
+          {/* Sinar rays behind icon */}
+          <div className="absolute inset-0 rounded-full" aria-hidden="true"
+            style={{
+              background: `
+                conic-gradient(from 0deg, transparent 0deg, rgba(243,196,107,0.12) 5deg, transparent 12deg, transparent 55deg, rgba(243,196,107,0.1) 60deg, transparent 68deg, transparent 115deg, rgba(243,196,107,0.12) 120deg, transparent 130deg, transparent 175deg, rgba(243,196,107,0.1) 180deg, transparent 190deg, transparent 235deg, rgba(243,196,107,0.12) 240deg, transparent 250deg, transparent 295deg, rgba(243,196,107,0.1) 300deg, transparent 310deg, transparent 355deg, rgba(243,196,107,0.08) 360deg)
+              `,
+            }}
+          />
+          <div className="absolute inset-0 rounded-full bg-sunlit-gold/5 animate-pulse" />
+          <Icon className="w-14 h-14 relative z-10" />
         </motion.div>
         <h1 className="font-heading text-2xl text-jungle-deep mb-1">{progress.badgeTitle}</h1>
         <p className="text-xs text-moss font-sans mb-6">{progress.nama}</p>
-        <div className="text-4xl font-heading text-jungle-deep mb-2">{progress.quizScore}/{total}</div>
+        <div className="text-4xl font-heading text-jungle-deep mb-2 tracking-tight">{progress.quizScore}/{total}</div>
+        <div className="mx-auto w-16 h-px bg-sunlit-gold/20 mb-2" />
         <p className="text-sm text-moss font-sans mb-8">{pct}% benar</p>
         <div className="flex flex-col gap-3">
           <button
             onClick={handleSave}
-            className="rounded-full bg-sunlit-gold text-jungle-deep px-8 py-3 text-sm font-sans font-medium tracking-wide hover:bg-ember transition-colors"
+            className="btn-jungle bg-sunlit-gold text-jungle-deep px-8 py-3 hover:bg-ember"
           >
             Simpan Badge
           </button>
           <button
             onClick={() => router.push("/hub")}
-            className="rounded-full bg-jungle-deep text-warm-cream px-8 py-3 text-sm font-sans font-medium tracking-wide hover:bg-moss transition-colors"
+            className="btn-jungle bg-jungle-deep text-warm-cream px-8 py-3 hover:bg-moss"
           >
             Kembali ke Jungle Hub
           </button>

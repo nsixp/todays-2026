@@ -18,24 +18,22 @@ const VINES_SIDE = (
 )
 
 const LEAVES_CORNER_LEFT = (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-auto h-full">
+  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-full">
     <path d="M0 200c20-40 50-80 100-90s80-20 100-40-20-30-50-40C120 30 100 10 80 0L0 0v200Z" fill="currentColor" />
     <path d="M0 200c40-30 80-50 110-70s60-30 70-50-10-20-30-30c-20-10-50-20-70-30L0 0v200Z" fill="currentColor" opacity="0.4" />
   </svg>
 )
 
 const LEAVES_CORNER_RIGHT = (
-  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-auto h-full">
+  <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-full">
     <path d="M200 200c-20-40-50-80-100-90S20 90 0 70s20-30 50-40C80 30 100 10 120 0l80 0v200Z" fill="currentColor" />
     <path d="M200 200c-40-30-80-50-110-70s-60-30-70-50 10-20 30-30c20-10 50-20 70-30l80 0v200Z" fill="currentColor" opacity="0.4" />
   </svg>
 )
 
-const FOLIAGE_MAP: Record<Variant, { left?: React.ReactNode; right?: React.ReactNode }> = {
-  "canopy-top": { left: undefined, right: undefined },
+const FOLIAGE_MAP = {
   "vines-side": { left: VINES_SIDE, right: VINES_SIDE },
-  "leaves-corner": { left: LEAVES_CORNER_LEFT, right: LEAVES_CORNER_RIGHT },
-}
+} as const
 
 export default function BackgroundFoliage({
   variant,
@@ -52,6 +50,25 @@ export default function BackgroundFoliage({
     )
   }
 
+  if (variant === "leaves-corner") {
+    return (
+      <>
+        <div
+          className="absolute top-0 left-0 size-24 sm:size-32 lg:size-40 pointer-events-none z-0 overflow-hidden"
+          style={{ opacity, color: "#1A3A2B" }}
+        >
+          {LEAVES_CORNER_LEFT}
+        </div>
+        <div
+          className="absolute right-0 bottom-0 size-24 sm:size-32 lg:size-40 pointer-events-none z-0 overflow-hidden"
+          style={{ opacity, color: "#1A3A2B" }}
+        >
+          {LEAVES_CORNER_RIGHT}
+        </div>
+      </>
+    )
+  }
+
   const sides = FOLIAGE_MAP[variant]
 
   return (
@@ -62,7 +79,7 @@ export default function BackgroundFoliage({
         </div>
       )}
       {sides.right && (
-        <div className="absolute inset-y-0 right-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32" style={{ opacity, color: "#1A3A2B" }}>
+        <div className="absolute inset-y-0 right-0 pointer-events-none z-0 overflow-hidden w-16 sm:w-24 lg:w-32 flex justify-end" style={{ opacity, color: "#1A3A2B" }}>
           {sides.right}
         </div>
       )}

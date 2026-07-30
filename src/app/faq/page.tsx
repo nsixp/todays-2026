@@ -8,8 +8,8 @@ const faq = getFAQ()
 
 export default function FAQPage() {
   return (
-    <div className="min-h-dvh bg-linear-to-b from-warm-cream to-sage/20 pt-24 pb-20">
-      <div className="mx-auto max-w-2xl px-6">
+    <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 pt-24 pb-20">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -20,7 +20,7 @@ export default function FAQPage() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40 mb-4">
             TODAYS 2026
           </span>
-          <h1 className="font-heading text-3xl sm:text-4xl text-jungle-deep leading-tight mb-3">
+          <h1 className="font-heading text-4xl sm:text-5xl text-jungle-deep leading-tight mb-3">
             FAQ
           </h1>
           <p className="text-sm text-moss font-sans max-w-md mx-auto leading-relaxed">
@@ -42,7 +42,7 @@ export default function FAQPage() {
                 className="rounded-2xl border border-fern-mist/60 bg-white/60 overflow-hidden data-[state=open]:bg-white data-[state=open]:border-sunlit-gold/30 transition-all duration-300"
               >
                 <AccordionTrigger className="flex items-center justify-between w-full px-5 py-4 text-left text-sm font-heading text-jungle-deep hover:no-underline hover:text-jungle-deep/80 transition-colors [&[data-state=open]>svg]:rotate-180">
-                  <span className="pr-4">{item.question}</span>
+                  <span className="pr-4 text-lg">{item.question}</span>
                 </AccordionTrigger>
                 <AccordionContent className="px-5 pb-5 text-sm text-moss font-sans leading-relaxed">
                   {item.answer}

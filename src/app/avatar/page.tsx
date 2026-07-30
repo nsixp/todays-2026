@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
 import { getParticipantByNim } from "@/lib/data"
+import { Envelope } from "@phosphor-icons/react"
 import type { AvatarId } from "@/types"
 import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
@@ -133,10 +134,7 @@ export default function AvatarPage() {
               className="w-full space-y-3"
             >
               <div className="relative">
-                <svg viewBox="0 0 16 16" fill="none" className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sage/60 pointer-events-none">
-                  <rect x="1.5" y="3.5" width="13" height="10" rx="2" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M1.5 6L8 9.5L14.5 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <Envelope size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sage/60 pointer-events-none" />
                 <input
                   type="text"
                   inputMode="numeric"

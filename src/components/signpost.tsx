@@ -12,6 +12,12 @@ interface SignpostProps {
   onLockedClick?: () => void
 }
 
+const LOCK_HINTS: Record<string, string> = {
+  Quiz: "menyelesaikan Guidebook",
+  "Cari Kelompok": "menyelesaikan Quiz",
+  "Jejak Rimba": "mendapatkan Badge",
+}
+
 export default function Signpost({ icon, label, href, locked, index, onLockedClick }: SignpostProps) {
   const router = useRouter()
 
@@ -29,9 +35,7 @@ export default function Signpost({ icon, label, href, locked, index, onLockedCli
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.12 * index, duration: 0.5, ease: "easeOut" }}
       onClick={handleClick}
-      className={`relative flex flex-col items-center transition-all duration-300 ${
-        locked ? "cursor-pointer" : "cursor-pointer"
-      }`}
+      className="relative flex flex-col items-center transition-all duration-300 cursor-pointer group"
     >
       <motion.div
         animate={
@@ -50,19 +54,29 @@ export default function Signpost({ icon, label, href, locked, index, onLockedCli
             ? {}
             : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
         }
-        className={`flex flex-col items-center gap-2 px-5 py-4 rounded-2xl border-2 transition-all duration-300 ${
+        className={`relative flex flex-col items-center gap-2 px-5 py-4 rounded-2xl border-2 transition-all duration-300 overflow-hidden ${
           locked
-            ? "border-fern-mist/50 bg-white/40 opacity-50 grayscale"
+            ? "border-jungle-deep/15 bg-white/30"
             : "border-fern-mist bg-white/60 hover:border-sunlit-gold hover:shadow-lg hover:shadow-sunlit-gold/10"
         }`}
       >
-        <div className="w-9 h-9 flex items-center justify-center text-jungle-deep">
+        {locked && (
+          <>
+            <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/50 to-jungle-shadow/30 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-jungle-shadow/70 via-jungle-shadow/30 to-transparent pt-8 pb-2 px-2 text-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="text-[9px] text-warm-cream/50 font-sans leading-tight">
+                Temukan jalannya dengan {LOCK_HINTS[label] || "mencoba lagi"}
+              </p>
+            </div>
+          </>
+        )}
+        <div className="relative w-9 h-9 flex items-center justify-center text-jungle-deep">
           {icon}
         </div>
-        <div className="text-center">
+        <div className="text-center relative">
           <p
             className={`text-sm font-heading font-medium transition-colors duration-300 ${
-              locked ? "text-sage" : "text-jungle-deep"
+              locked ? "text-sage/70" : "text-jungle-deep"
             }`}
           >
             {label}

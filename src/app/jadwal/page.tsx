@@ -1,14 +1,15 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { Clock, MapPin } from "@phosphor-icons/react"
 import { getSchedule } from "@/lib/data"
 
 const schedule = getSchedule()
 
 export default function JadwalPage() {
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-warm-cream to-sage/20 pt-24 pb-20">
-      <div className="mx-auto max-w-2xl px-6">
+    <div className="relative w-full min-h-dvh overflow-x-hidden bg-linear-to-b from-warm-cream to-sage/20 pt-24 pb-20">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +20,7 @@ export default function JadwalPage() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40 mb-4">
             TODAYS 2026
           </span>
-          <h1 className="font-heading text-3xl sm:text-4xl text-jungle-deep leading-tight mb-3">
+          <h1 className="font-heading text-4xl sm:text-5xl text-jungle-deep leading-tight mb-3">
             Jadwal Kegiatan
           </h1>
           <p className="text-sm text-moss font-sans max-w-md mx-auto leading-relaxed">
@@ -65,17 +66,11 @@ export default function JadwalPage() {
 
                   <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-sans text-moss">
                     <span className="inline-flex items-center gap-1.5">
-                      <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-                        <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.3" />
-                        <path d="M8 4.5V8l2.5 1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                      </svg>
+                      <Clock size={14} className="text-moss shrink-0" />
                       {item.waktu}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-                        <path d="M8 2a4.5 4.5 0 0 0-4.5 4.5c0 3.5 4.5 7.5 4.5 7.5s4.5-4 4.5-7.5A4.5 4.5 0 0 0 8 2Z" stroke="currentColor" strokeWidth="1.3" />
-                        <circle cx="8" cy="6.5" r="1.5" fill="currentColor" opacity="0.4" />
-                      </svg>
+                      <MapPin size={14} className="text-moss shrink-0" />
                       {item.lokasi}
                     </span>
                   </div>

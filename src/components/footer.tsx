@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { ArrowUp } from "@phosphor-icons/react"
 
 const SITEMAP = [
   { label: "Hub", href: "/hub" },
@@ -55,7 +56,7 @@ function scrollToTop() {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-jungle-deep text-warm-cream font-sans px-6 pb-8 pt-16 mt-auto overflow-hidden">
+    <footer className="relative bg-jungle-deep text-warm-cream font-sans px-4 sm:px-6 lg:px-8 pb-8 pt-16 mt-auto overflow-hidden">
       {/* Decorative top line */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/40 to-transparent" />
 
@@ -130,9 +131,7 @@ export default function Footer() {
             className="flex items-center gap-1.5 text-[11px] text-warm-cream/35 hover:text-warm-cream/70 transition-colors"
             aria-label="Kembali ke atas"
           >
-            <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
-              <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ArrowUp size={12} />
             Kembali ke atas
           </button>
         </div>
