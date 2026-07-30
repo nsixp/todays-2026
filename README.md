@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TODAYS 2026
 
-## Getting Started
+Website interaktif untuk mendampingi mahasiswa baru dalam rangkaian PKKMB Telkom University Purwokerto. TODAYS 2026 menyajikan panduan kegiatan, informasi kampus, kuis, badge, dan pencarian kelompok dalam pengalaman bertema rimba.
 
-First, run the development server:
+## Fitur
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Onboarding mahasiswa baru melalui NIM dan pemilihan avatar.
+- Jungle Hub sebagai pusat navigasi.
+- Guidebook interaktif seputar PKKMB.
+- Kuis pemahaman dan badge personal.
+- Informasi kelompok dan mentor.
+- Jadwal kegiatan dan FAQ.
+- JunglePedia untuk mengenal lingkungan kampus.
+- Galeri kegiatan.
+- Jejak Rimba, petualangan interaktif dengan cerita bercabang.
+
+## Alur singkat
+
+```text
+Splash → Masukkan NIM → Pilih Avatar → Jungle Hub
+                                         ├── Guidebook
+                                         ├── Kuis & Badge
+                                         ├── Kelompok
+                                         ├── Jadwal
+                                         ├── FAQ
+                                         ├── JunglePedia
+                                         ├── Galeri
+                                         └── Jejak Rimba
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Progres pengguna tersimpan pada browser sehingga perjalanan dapat dilanjutkan ketika pengguna kembali menggunakan perangkat dan browser yang sama.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Teknologi
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js dengan App Router
+- React dan TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
 
-## Learn More
+## Menjalankan proyek
 
-To learn more about Next.js, take a look at the following resources:
+Pastikan Node.js dan npm sudah tersedia, kemudian jalankan:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Buka [http://localhost:3000](http://localhost:3000) pada browser.
 
-## Deploy on Vercel
+## Perintah
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Perintah | Keterangan |
+| --- | --- |
+| `npm run dev` | Menjalankan development server |
+| `npm run lint` | Memeriksa kualitas kode |
+| `npm run build` | Membuat production build |
+| `npm run start` | Menjalankan production build |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Dokumentasi internal
+
+Dokumentasi teknis dan aturan pengembangan tersedia di:
+
+- [Product Requirements Document](PRD.md)
+- [Panduan pengembangan](AGENTS.md)
+- [Dokumentasi proyek](docs/agents/)

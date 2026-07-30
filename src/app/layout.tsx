@@ -15,7 +15,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "TODAYS 2026",
+  title: "TODAYS - Telkom Orientation Days 2026",
   description:
     "Telkom Orientation Days 2026 interactive website to guide new students at Telkom University Purwokerto.",
 };
