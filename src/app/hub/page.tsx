@@ -109,6 +109,73 @@ const AVATAR_ICONS: Record<AvatarId, typeof Monyet> = {
   ular: Ular,
 }
 
+const SIGNPOST_POSITIONS = [
+  {
+    mobile: { x: 22, y: 20 },
+    desktop: { x: 18, y: 23 },
+    rotation: -1.4,
+  },
+  {
+    mobile: { x: 77, y: 27 },
+    desktop: { x: 79, y: 30 },
+    rotation: 1.1,
+  },
+  {
+    mobile: { x: 23, y: 72 },
+    desktop: { x: 23, y: 73 },
+    rotation: 0.7,
+  },
+  {
+    mobile: { x: 78, y: 80 },
+    desktop: { x: 82, y: 78 },
+    rotation: -0.9,
+  },
+] as const
+
+function TrailMap({
+  variant,
+  className,
+  reduceMotion,
+}: {
+  variant: "mobile" | "desktop"
+  className: string
+  reduceMotion: boolean
+}) {
+  return (
+    <svg
+      className={`pointer-events-none absolute inset-0 z-0 size-full overflow-visible ${className}`}
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      {SIGNPOST_POSITIONS.map((position, index) => {
+        const point = position[variant]
+        const path = `M${point.x},${point.y} L50,50`
+
+        return (
+          <motion.path
+            key={`${variant}-${path}`}
+            d={path}
+            stroke="var(--color-sage)"
+            strokeWidth="1.5"
+            strokeDasharray="8 7"
+            vectorEffect="non-scaling-stroke"
+            opacity="0.48"
+            fill="none"
+            animate={reduceMotion ? undefined : { strokeDashoffset: [0, -30] }}
+            transition={{
+              duration: 3,
+              delay: index * 0.12,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        )
+      })}
+    </svg>
+  )
+}
+
 function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="text-center mb-10 sm:mb-14">
@@ -330,35 +397,20 @@ export default function HubPage() {
 
       <SectionBody>
         <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
-        <div className="grid grid-cols-2 gap-10 sm:gap-12 md:gap-16 max-w-4xl mx-auto relative">
-          <svg
-            className="pointer-events-none absolute inset-0 z-0 size-full overflow-visible"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            {[
-              "M25,25 L50,50",
-              "M75,25 L50,50",
-              "M25,75 L50,50",
-              "M75,75 L50,50",
-            ].map((path) => (
-              <motion.path
-                key={path}
-                d={path}
-                stroke="var(--color-sage)"
-                strokeWidth="1.5"
-                strokeDasharray="8 7"
-                vectorEffect="non-scaling-stroke"
-                opacity="0.48"
-                fill="none"
-                animate={reduceMotion ? undefined : { strokeDashoffset: [0, -30] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
-            ))}
-          </svg>
+        <div className="relative mx-auto h-[38rem] w-full max-w-5xl sm:h-[42rem] md:h-[40rem]">
+          <TrailMap
+            variant="mobile"
+            className="md:hidden"
+            reduceMotion={Boolean(reduceMotion)}
+          />
+          <TrailMap
+            variant="desktop"
+            className="hidden md:block"
+            reduceMotion={Boolean(reduceMotion)}
+          />
           <motion.div
-            className="pointer-events-none absolute left-1/2 top-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-warm-cream bg-sunlit-gold/85 shadow-lg shadow-jungle-shadow/25 sm:size-20"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-20 flex size-16 items-center justify-center rounded-full border-4 border-warm-cream bg-sunlit-gold/85 shadow-lg shadow-jungle-shadow/25 sm:size-20"
+            style={{ x: "-50%", y: "-50%" }}
             animate={reduceMotion ? undefined : { scale: [1, 1.025, 1] }}
             transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
             aria-hidden="true"
@@ -374,7 +426,6 @@ export default function HubPage() {
               status: guidebookDone ? "Selesai" : `${pagesRead}/6 halaman`,
               unlocked: true,
               pattern: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(26,58,43,0.04) 2px, rgba(26,58,43,0.04) 3px)",
-              desktopClass: "md:justify-self-start md:self-start",
             },
             {
               icon: <MegaphoneSimple className="w-8 h-8" />,
@@ -385,7 +436,6 @@ export default function HubPage() {
               locked: !guidebookDone && !progress.easterEggs["Quiz"],
               onLockedClick: () => handleLockedClick("Quiz", "/quiz"),
               pattern: "radial-gradient(circle, rgba(243,196,107,0.10) 1px, transparent 1px)",
-              desktopClass: "md:justify-self-end md:self-center md:mt-8",
             },
             {
               icon: <Crosshair className="w-8 h-8" />,
@@ -396,7 +446,6 @@ export default function HubPage() {
               locked: !quizDone && !progress.easterEggs["Cari Kelompok"],
               onLockedClick: () => handleLockedClick("Cari Kelompok", "/kelompok"),
               pattern: "radial-gradient(circle, rgba(78,112,83,0.08) 1px, transparent 1px), linear-gradient(90deg, transparent, rgba(78,112,83,0.04) 50%, transparent 50%)",
-              desktopClass: "md:justify-self-start md:self-end",
             },
             {
               icon: <Stack className="w-8 h-8" />,
@@ -407,69 +456,81 @@ export default function HubPage() {
               locked: !quizDone && !progress.easterEggs["Jejak Rimba"],
               onLockedClick: () => handleLockedClick("Jejak Rimba", "/jejak-rimba"),
               pattern: "repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(163,196,181,0.10) 4px, rgba(163,196,181,0.10) 5px)",
-              desktopClass: "md:justify-self-end md:self-end",
             },
           ].map((item, i) => {
             const isLocked = "locked" in item ? (item as { locked?: boolean }).locked : false
             const pattern = (item as { pattern?: string }).pattern || "none"
-            const desktopClass = (item as { desktopClass?: string }).desktopClass || ""
+            const position = SIGNPOST_POSITIONS[i]
             return (
-              <motion.div
+              <div
                 key={item.label}
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 24 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12, duration: 0.5 }}
-                className={`relative z-10 ${desktopClass}`}
+                className="hub-signpost-node absolute z-10 h-44 w-[8.75rem] sm:h-48 sm:w-44 md:w-48"
+                style={
+                  {
+                    "--signpost-x-mobile": `${position.mobile.x}%`,
+                    "--signpost-y-mobile": `${position.mobile.y}%`,
+                    "--signpost-x-desktop": `${position.desktop.x}%`,
+                    "--signpost-y-desktop": `${position.desktop.y}%`,
+                    "--signpost-rotation": `${position.rotation}deg`,
+                  } as React.CSSProperties
+                }
               >
-                {isLocked ? (
-                  <button
-                    onClick={item.onLockedClick}
-                    className={`woodgrain w-full min-h-44 flex flex-col items-center justify-center gap-3 p-5 sm:p-7 rounded-2xl border-2 border-jungle-deep/15 bg-jungle-shadow/80 cursor-pointer relative overflow-hidden group grayscale ${
-                      shakingCard === item.label ? "animate-[shake_200ms_ease-in-out]" : ""
-                    }`}
-                  >
-                    <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/20 to-jungle-shadow/50 pointer-events-none" />
-                    <div
-                      className="absolute inset-0 opacity-10"
-                      style={{ backgroundImage: pattern, backgroundSize: "8px 8px" }}
-                    />
-                    <div className="relative w-12 h-12 flex items-center justify-center text-fern-mist/55">{item.icon}</div>
-                    <div className="text-center relative">
-                      <p className="text-xl font-heading text-fern-mist/65">{item.label}</p>
-                      <p className="text-xs text-fern-mist/60 font-sans mt-1">Terkunci</p>
-                    </div>
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className="block group"
-                  >
-                    <motion.div
-                      animate={reduceMotion ? undefined : {
-                        boxShadow: [
-                          "var(--jungle-panel-shadow)",
-                          "var(--jungle-panel-glow)",
-                          "var(--jungle-panel-shadow)",
-                        ],
-                      }}
-                      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.18 }}
-                      className="forest-panel woodgrain relative min-h-40 overflow-hidden flex flex-col items-center justify-center gap-3 p-3 sm:min-h-44 sm:p-7 rounded-2xl border-2 hover:border-sunlit-gold hover:-translate-y-1 duration-300"
+                <motion.div
+                  className="size-full"
+                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: reduceMotion ? 0 : i * 0.12,
+                    duration: reduceMotion ? 0 : 0.5,
+                  }}
+                >
+                  {isLocked ? (
+                    <button
+                      onClick={item.onLockedClick}
+                      className={`woodgrain relative flex size-full cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border-2 border-jungle-deep/15 bg-jungle-shadow/80 p-4 grayscale sm:p-6 ${
+                        shakingCard === item.label ? "animate-[shake_200ms_ease-in-out]" : ""
+                      }`}
                     >
+                      <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/20 to-jungle-shadow/50 pointer-events-none" />
                       <div
-                        className="absolute inset-0 opacity-[0.35] group-hover:opacity-20 transition-opacity duration-300"
-                        style={{ backgroundImage: pattern, backgroundSize: pattern.includes("radial") ? "8px 8px" : "12px 12px" }}
+                        className="absolute inset-0 opacity-10"
+                        style={{ backgroundImage: pattern, backgroundSize: "8px 8px" }}
                       />
-                      <div className="relative w-12 h-12 flex items-center justify-center text-jungle-deep group-hover:text-sunlit-gold transition-colors">{item.icon}</div>
+                      <div className="relative flex size-12 items-center justify-center text-fern-mist/55">{item.icon}</div>
                       <div className="text-center relative">
-                        <p className="text-xl font-heading text-jungle-deep">{item.label}</p>
-                        <p className="text-xs text-moss font-sans mt-1">{item.desc}</p>
-                        <p className="text-[10px] text-sage/70 font-sans mt-0.5">{item.status}</p>
+                        <p className="font-heading text-xl text-fern-mist/65">{item.label}</p>
+                        <p className="mt-1 font-sans text-xs text-fern-mist/60">Terkunci</p>
                       </div>
-                    </motion.div>
-                  </Link>
-                )}
-              </motion.div>
+                    </button>
+                  ) : (
+                    <Link href={item.href} className="group block size-full">
+                      <motion.div
+                        animate={reduceMotion ? undefined : {
+                          boxShadow: [
+                            "var(--jungle-panel-shadow)",
+                            "var(--jungle-panel-glow)",
+                            "var(--jungle-panel-shadow)",
+                          ],
+                        }}
+                        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.18 }}
+                        className="forest-panel woodgrain relative flex size-full flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border-2 p-4 duration-300 hover:-translate-y-1 hover:border-sunlit-gold sm:p-6"
+                      >
+                        <div
+                          className="absolute inset-0 opacity-[0.35] transition-opacity duration-300 group-hover:opacity-20"
+                          style={{ backgroundImage: pattern, backgroundSize: pattern.includes("radial") ? "8px 8px" : "12px 12px" }}
+                        />
+                        <div className="relative flex size-12 items-center justify-center text-jungle-deep transition-colors group-hover:text-sunlit-gold">{item.icon}</div>
+                        <div className="relative text-center">
+                          <p className="font-heading text-xl text-jungle-deep">{item.label}</p>
+                          <p className="mt-1 font-sans text-xs text-moss">{item.desc}</p>
+                          <p className="mt-0.5 font-sans text-[10px] text-sage/70">{item.status}</p>
+                        </div>
+                      </motion.div>
+                    </Link>
+                  )}
+                </motion.div>
+              </div>
             )
           })}
         </div>
@@ -693,17 +754,22 @@ export default function HubPage() {
       <AnimatePresence>
         {easterModal && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-jungle-shadow/60 backdrop-blur-sm px-6"
             onClick={() => setEasterModal(null)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { type: "spring", stiffness: 300, damping: 20 }
+              }
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-sm bg-warm-cream rounded-2xl border border-fern-mist p-8 text-center shadow-xl"
             >
@@ -715,12 +781,14 @@ export default function HubPage() {
                 Kamu menemukan jalan rahasia di balik dedaunan...{" "}
                 <span className="font-medium text-jungle-deep">{easterModal.label}</span> telah terbuka!
               </p>
-              <button
+              <motion.button
                 onClick={handleEasterGo}
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.96 }}
                 className="rounded-full bg-sunlit-gold text-jungle-deep px-8 py-3 text-sm font-sans font-medium tracking-wide hover:bg-ember transition-colors"
               >
                 Lanjutkan
-              </button>
+              </motion.button>
             </motion.div>
           </motion.div>
         )}

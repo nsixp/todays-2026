@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { toPng } from "html-to-image"
 import { useProgress } from "@/hooks/use-progress"
 import DappledLight from "@/components/dappled-light"
@@ -26,6 +26,7 @@ const ICON_MAP: Record<AvatarId, typeof Monyet> = {
 
 export default function BadgePage() {
   const router = useRouter()
+  const reduceMotion = useReducedMotion()
   const { progress } = useProgress()
   const [mounted, setMounted] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -58,9 +59,9 @@ export default function BadgePage() {
       <AmbientParticles count={4} />
       <motion.div
         ref={cardRef}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        initial={reduceMotion ? false : { opacity: 0, scale: 0.88, y: 24 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: reduceMotion ? 0 : 0.62, ease: [0.16, 1, 0.3, 1] }}
         className="forest-panel woodgrain relative w-full max-w-sm rounded-3xl border-3 border-sunlit-gold/60 p-10 text-center overflow-hidden"
       >
         {/* Ornamental corners */}
@@ -82,9 +83,13 @@ export default function BadgePage() {
         </svg>
 
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.45, rotate: -8 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { delay: 0.18, type: "spring", stiffness: 210, damping: 16 }
+          }
           className="relative w-24 h-24 mx-auto mb-4 rounded-full bg-sunlit-gold/10 border-2 border-sunlit-gold/40 flex items-center justify-center"
         >
           {/* Sinar rays behind icon */}
@@ -98,24 +103,45 @@ export default function BadgePage() {
           <div className="absolute inset-0 rounded-full bg-sunlit-gold/5 animate-pulse" />
           <Icon className="w-14 h-14 relative z-10" />
         </motion.div>
-        <h1 className="font-heading text-2xl text-jungle-deep mb-1">{progress.badgeTitle}</h1>
-        <p className="text-xs text-moss font-sans mb-6">{progress.nama}</p>
-        <div className="text-4xl font-heading text-jungle-deep mb-2 tracking-tight">{progress.quizScore}/{total}</div>
-        <div className="mx-auto w-16 h-px bg-sunlit-gold/20 mb-2" />
-        <p className="text-sm text-moss font-sans mb-8">{pct}% benar</p>
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: reduceMotion ? 0 : 0.3, duration: reduceMotion ? 0 : 0.42 }}
+        >
+          <h1 className="font-heading text-2xl text-jungle-deep mb-1">{progress.badgeTitle}</h1>
+          <p className="text-xs text-moss font-sans mb-6">{progress.nama}</p>
+          <div className="text-4xl font-heading text-jungle-deep mb-2 tracking-tight">{progress.quizScore}/{total}</div>
+          <motion.div
+            initial={reduceMotion ? false : { scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: reduceMotion ? 0 : 0.42, duration: reduceMotion ? 0 : 0.45 }}
+            className="mx-auto w-16 h-px origin-center bg-sunlit-gold/20 mb-2"
+          />
+          <p className="text-sm text-moss font-sans mb-8">{pct}% benar</p>
+        </motion.div>
         <div className="flex flex-col gap-3">
-          <button
+          <motion.button
             onClick={handleSave}
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: reduceMotion ? 0 : 0.44 }}
+            whileHover={reduceMotion ? undefined : { y: -2 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             className="btn-jungle bg-sunlit-gold text-jungle-deep px-8 py-3 hover:bg-ember"
           >
             Simpan Badge
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => router.push("/hub")}
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: reduceMotion ? 0 : 0.5 }}
+            whileHover={reduceMotion ? undefined : { y: -2 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.97 }}
             className="btn-jungle border border-jungle-deep/30 bg-transparent text-jungle-deep px-8 py-3 hover:border-jungle-deep/55 hover:bg-jungle-deep/6"
           >
             Kembali ke Jungle Hub
-          </button>
+          </motion.button>
         </div>
       </motion.div>
     </div>

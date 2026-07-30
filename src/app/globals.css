@@ -298,6 +298,14 @@
       var(--color-warm-cream);
   }
 
+  .hub-signpost-node {
+    left: var(--signpost-x-mobile);
+    top: var(--signpost-y-mobile);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--signpost-rotation));
+  }
+
   .hub-zone-itinerary {
     background:
       linear-gradient(90deg, color-mix(in srgb, var(--color-moss) 5%, transparent) 1px, transparent 1px),
@@ -516,6 +524,21 @@
       inset 0 1px 0 color-mix(in srgb, var(--color-warm-cream) 72%, transparent),
       0 18px 45px -30px color-mix(in srgb, var(--color-jungle-shadow) 55%, transparent);
   }
+
+  .page-transition-fog {
+    background:
+      radial-gradient(ellipse at 8% 42%, color-mix(in srgb, var(--color-jungle-mist) 82%, transparent) 0 18%, transparent 62%),
+      radial-gradient(ellipse at 54% 58%, color-mix(in srgb, var(--color-warm-cream) 78%, transparent) 0 20%, transparent 66%),
+      radial-gradient(ellipse at 94% 36%, color-mix(in srgb, var(--color-jungle-mist) 72%, transparent) 0 16%, transparent 58%),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-warm-cream) 32%, transparent), color-mix(in srgb, var(--color-jungle-mist) 20%, transparent));
+  }
+}
+
+@media (min-width: 48rem) {
+  .hub-signpost-node {
+    left: var(--signpost-x-desktop);
+    top: var(--signpost-y-desktop);
+  }
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -533,6 +556,7 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }

@@ -129,7 +129,7 @@ export default function QuizPage() {
         <div className="pointer-events-none absolute -right-12 -top-8 size-72 rounded-full border border-jungle-mist/20" />
 
         <motion.section
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="relative mx-auto grid w-full max-w-5xl overflow-hidden rounded-4xl border border-jungle-mist/20 bg-jungle-deep shadow-2xl shadow-jungle-shadow/20 lg:grid-cols-[1.08fr_0.92fr]"

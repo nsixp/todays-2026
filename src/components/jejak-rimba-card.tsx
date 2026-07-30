@@ -135,7 +135,7 @@ export default function JejakRimbaCard({
       <AnimatePresence>
         {selected && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.16 }}

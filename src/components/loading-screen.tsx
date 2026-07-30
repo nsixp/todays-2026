@@ -83,9 +83,9 @@ export default function LoadingScreen({ duration = 3000, onComplete }: LoadingSc
                 scale: [1, 1.2, 0.8, 0],
               }}
               transition={{
-                duration: leaf.dur,
-                delay: leaf.delay,
-                repeat: Infinity,
+                duration: reduceMotion ? 0 : leaf.dur,
+                delay: reduceMotion ? 0 : leaf.delay,
+                repeat: reduceMotion ? 0 : Infinity,
                 ease: "easeInOut",
               }}
             />
@@ -96,8 +96,8 @@ export default function LoadingScreen({ duration = 3000, onComplete }: LoadingSc
               className="text-center"
               style={{
                 opacity: glowT,
-                scale: glowScale,
-                filter: `blur(${glowBlur}px)`,
+                scale: reduceMotion ? 1 : glowScale,
+                filter: reduceMotion ? "none" : `blur(${glowBlur}px)`,
               }}
             >
               <h1 className="font-heading text-5xl sm:text-6xl text-warm-cream tracking-tight">
@@ -137,9 +137,9 @@ export default function LoadingScreen({ duration = 3000, onComplete }: LoadingSc
       {exiting && (
         <motion.div
           className="absolute inset-0 bg-warm-cream z-50"
-          initial={{ opacity: 0 }}
+          initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration: reduceMotion ? 0 : 0.3, ease: "easeOut" }}
         />
       )}
     </div>

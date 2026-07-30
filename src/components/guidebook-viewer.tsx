@@ -121,7 +121,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
 
       <div className="relative mx-auto grid w-full max-w-7xl gap-5 lg:grid-cols-[17rem_minmax(0,1fr)_14rem] lg:items-start">
         <motion.aside
-          initial={{ opacity: 0, x: -20 }}
+          initial={reduceMotion ? false : { opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: reduceMotion ? 0 : 0.45 }}
           className="forest-panel overflow-hidden rounded-3xl lg:sticky lg:top-8"
@@ -276,7 +276,7 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
         </section>
 
         <motion.aside
-          initial={{ opacity: 0, x: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.08 }}
           className="grid grid-cols-2 gap-3 lg:sticky lg:top-8 lg:grid-cols-1"

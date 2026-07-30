@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
 import { getParticipantByNim } from "@/lib/data"
 import { EnvelopeIcon as Envelope } from "@phosphor-icons/react"
@@ -45,6 +45,7 @@ const ANIMAL_GLOW: Record<AvatarId, string> = {
 
 export default function AvatarPage() {
   const router = useRouter()
+  const reduceMotion = useReducedMotion()
   const { save } = useProgress()
   const [nim, setNim] = useState("")
   const [error, setError] = useState("")
@@ -102,25 +103,25 @@ export default function AvatarPage() {
         {!nimDone ? (
           <motion.div
             key="nim"
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 w-full max-w-sm mx-auto px-6 flex flex-col items-center gap-6"
           >
             <div className="text-center">
               <motion.h1
-                initial={{ opacity: 0, y: -8 }}
+                initial={reduceMotion ? false : { opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.1 }}
                 className="font-heading text-4xl sm:text-5xl md:text-6xl text-jungle-deep leading-tight"
               >
                 Siapa Kamu?
               </motion.h1>
               <motion.p
-                initial={{ opacity: 0 }}
+                initial={reduceMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.15 }}
                 className="text-sm text-moss/80 font-sans mt-2"
               >
                 Masukkan NIM untuk memulai petualangan
@@ -128,14 +129,16 @@ export default function AvatarPage() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
+              transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.25 }}
               className="w-full space-y-3"
             >
               <div className="relative">
+                <label htmlFor="nim" className="sr-only">NIM</label>
                 <Envelope size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sage/60 pointer-events-none" />
                 <input
+                  id="nim"
                   type="text"
                   inputMode="numeric"
                   placeholder="Masukkan NIM kamu"
@@ -150,9 +153,10 @@ export default function AvatarPage() {
               <AnimatePresence>
                 {error && (
                   <motion.p
-                    initial={{ opacity: 0, y: -6 }}
+                    initial={reduceMotion ? false : { opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.22 }}
                     className="text-xs text-ember font-sans text-center"
                   >
                     {error}
@@ -162,8 +166,8 @@ export default function AvatarPage() {
 
               <motion.button
                 onClick={handleNimSubmit}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.97 }}
                 className="w-full rounded-xl bg-jungle-deep text-warm-cream py-3 text-sm font-sans font-semibold tracking-wide transition-all duration-200 shadow-lg shadow-jungle-deep/20 hover:bg-moss"
               >
                 Lanjutkan
@@ -173,23 +177,25 @@ export default function AvatarPage() {
         ) : (
           <motion.div
             key="avatar"
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: reduceMotion ? 0 : 0.3 }}
             className="relative z-10 w-full max-w-lg mx-auto px-6 flex flex-col items-center gap-8"
           >
             <AnimatePresence>
               {selected && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={reduceMotion ? false : { opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.24 }}
                   className="text-center"
                 >
                   <motion.p
-                    initial={{ opacity: 0 }}
+                    initial={reduceMotion ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.2 }}
                     className="text-xs text-warm-cream/50 font-sans tracking-wider uppercase mb-1"
                   >
                     Menuju ke hutan...
@@ -200,9 +206,9 @@ export default function AvatarPage() {
 
             {!selected && (
               <motion.div
-                initial={{ opacity: 0, y: -12 }}
+                initial={reduceMotion ? false : { opacity: 0, y: -12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4 }}
                 className="text-center"
               >
                 <p className="text-lg text-warm-cream/70 font-sans mb-1">
@@ -216,9 +222,9 @@ export default function AvatarPage() {
 
             {!selected && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.15 }}
                 className="grid grid-cols-3 gap-5 sm:gap-6 w-full max-w-xs mx-auto"
               >
                 {AVATARS.map(({ id, label, Icon }, i) => {
@@ -227,12 +233,16 @@ export default function AvatarPage() {
                   return (
                     <motion.button
                       key={id}
-                      initial={{ opacity: 0, y: 24 }}
+                      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.15 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{
+                        duration: reduceMotion ? 0 : 0.5,
+                        delay: reduceMotion ? 0 : 0.15 + i * 0.06,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
                       onClick={() => handleAvatarSelect(id)}
-                      whileHover={{ scale: 1.08, y: -6 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={reduceMotion ? undefined : { scale: 1.08, y: -6 }}
+                      whileTap={reduceMotion ? undefined : { scale: 0.95 }}
                       className="flex flex-col items-center gap-2 cursor-pointer group"
                     >
                       <div

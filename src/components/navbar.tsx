@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, LayoutGroup } from "framer-motion"
+import { motion, LayoutGroup, useReducedMotion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -44,6 +44,7 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export default function Navbar() {
   const pathname = usePathname()
+  const reduceMotion = useReducedMotion()
   const [open, setOpen] = useState(false)
 
   function close() {
@@ -52,11 +53,20 @@ export default function Navbar() {
 
   return (
     <LayoutGroup>
-      <nav className="forest-nav fixed left-1/2 top-3 z-50 flex w-[calc(100%-24px)] max-w-5xl -translate-x-1/2 items-center justify-between gap-4 rounded-2xl border border-fern-mist/70 bg-warm-cream/88 px-2.5 py-2 backdrop-blur-xl sm:top-4 sm:px-3">
+      <motion.nav
+        initial={reduceMotion ? false : { opacity: 0, y: -18, x: "-50%" }}
+        animate={{ opacity: 1, y: 0, x: "-50%" }}
+        transition={{ duration: reduceMotion ? 0 : 0.52, ease: [0.16, 1, 0.3, 1] }}
+        className="forest-nav fixed left-1/2 top-3 z-50 flex w-[calc(100%-24px)] max-w-5xl items-center justify-between gap-4 rounded-2xl border border-fern-mist/70 bg-warm-cream/88 px-2.5 py-2 backdrop-blur-xl sm:top-4 sm:px-3"
+      >
         <Link href="/hub" className="group flex shrink-0 items-center gap-2.5 rounded-xl px-1.5 py-1 text-jungle-deep">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-jungle-deep text-sunlit-gold transition-transform group-hover:-rotate-6">
+          <motion.span
+            whileHover={reduceMotion ? undefined : { rotate: -7, scale: 1.04 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+            className="flex size-8 items-center justify-center rounded-lg bg-jungle-deep text-sunlit-gold"
+          >
             <Compass size={17} weight="duotone" />
-          </span>
+          </motion.span>
           <span className="font-heading text-lg tracking-tight">TODAYS 2026</span>
         </Link>
 
@@ -78,7 +88,11 @@ export default function Navbar() {
                       <motion.span
                         layoutId="nav-active"
                         className="absolute inset-0 rounded-lg bg-jungle-deep shadow-sm"
-                        transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                        transition={
+                          reduceMotion
+                            ? { duration: 0 }
+                            : { type: "spring", stiffness: 420, damping: 32 }
+                        }
                       />
                     )}
                     <span className={`relative ${isActive ? "text-sunlit-gold" : "text-sage"}`}>{ICONS[item.href]}</span>
@@ -157,7 +171,7 @@ export default function Navbar() {
             </SheetContent>
           </Sheet>
         </div>
-      </nav>
+      </motion.nav>
     </LayoutGroup>
   )
 }

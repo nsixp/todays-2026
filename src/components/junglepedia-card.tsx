@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import {
   BooksIcon as Books,
   BuildingsIcon as Buildings,
@@ -41,14 +41,20 @@ const ITEM_ICONS: Record<string, Icon> = {
 }
 
 export default function JunglepediaCard({ item, index }: JunglepediaCardProps) {
+  const reduceMotion = useReducedMotion()
   const Icon = ITEM_ICONS[item.icon] ?? Buildings
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06, duration: 0.5, ease: "easeOut" }}
-      className={`group relative min-h-44 overflow-hidden rounded-2xl border border-jungle-deep/12 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-sunlit-gold/55 ${
+      transition={{
+        delay: reduceMotion ? 0 : index * 0.06,
+        duration: reduceMotion ? 0 : 0.5,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      whileHover={reduceMotion ? undefined : { y: -4 }}
+      className={`group relative min-h-44 overflow-hidden rounded-2xl border border-jungle-deep/12 p-4 transition-colors duration-300 hover:border-sunlit-gold/55 ${
         index % 4 === 1
           ? "bg-sage/14"
           : index % 4 === 2

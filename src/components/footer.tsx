@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { motion, useReducedMotion } from "framer-motion"
 import {
   ArrowUpIcon as ArrowUp,
   CompassIcon as Compass,
@@ -36,19 +37,49 @@ const SOCIALS = [
   },
 ]
 
+const FOOTER_VARIANTS = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.58,
+      ease: [0.16, 1, 0.3, 1] as const,
+      staggerChildren: 0.08,
+    },
+  },
+}
+
+const FOOTER_ITEM_VARIANTS = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.46, ease: [0.16, 1, 0.3, 1] as const },
+  },
+}
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
 export default function Footer() {
+  const reduceMotion = useReducedMotion()
+
   return (
-    <footer className="relative mt-auto overflow-hidden bg-jungle-deep px-4 pb-6 pt-14 font-sans text-warm-cream sm:px-6 lg:px-8">
+    <motion.footer
+      initial={reduceMotion ? false : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.08 }}
+      variants={FOOTER_VARIANTS}
+      className="relative mt-auto overflow-hidden bg-jungle-deep px-4 pb-6 pt-14 font-sans text-warm-cream sm:px-6 lg:px-8"
+    >
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-sunlit-gold/55 to-transparent" />
       <BackgroundFoliage variant="canopy-top" opacity={0.045} color="var(--color-warm-cream)" />
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid gap-10 border-b border-warm-cream/10 pb-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-5">
+          <motion.div variants={FOOTER_ITEM_VARIANTS} className="md:col-span-5">
             <Link href="/hub" className="inline-flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-xl bg-warm-cream/10 text-sunlit-gold ring-1 ring-warm-cream/12">
                 <Compass size={21} weight="duotone" />
@@ -63,37 +94,51 @@ export default function Footer() {
                 const Icon = social.icon
 
                 return (
-                  <a
+                  <motion.a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={reduceMotion ? undefined : { y: -2, rotate: -3 }}
+                    whileTap={reduceMotion ? undefined : { scale: 0.94 }}
                     className="flex size-9 items-center justify-center rounded-xl border border-warm-cream/12 bg-warm-cream/5 text-warm-cream/62 transition-colors hover:border-sunlit-gold/45 hover:bg-sunlit-gold hover:text-jungle-deep"
                     aria-label={social.label}
                   >
                     <Icon size={17} />
-                  </a>
+                  </motion.a>
                 )
               })}
             </div>
-          </div>
+          </motion.div>
 
-          <nav className="md:col-span-4" aria-label="Sitemap footer">
+          <motion.nav variants={FOOTER_ITEM_VARIANTS} className="md:col-span-4" aria-label="Sitemap footer">
             <h2 className="mb-4 text-xs font-semibold text-sunlit-gold">Jelajahi</h2>
             <div className="grid grid-cols-2 gap-x-5 gap-y-2.5">
-              {SITEMAP.map((item) => (
-                <Link
+              {SITEMAP.map((item, index) => (
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  className="text-sm text-warm-cream/58 transition-colors hover:text-warm-cream"
+                  initial={reduceMotion ? false : { opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: reduceMotion ? 0 : 0.16 + index * 0.035 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-warm-cream/58 transition-colors hover:text-warm-cream"
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
             </div>
-          </nav>
+          </motion.nav>
 
-          <div className="rounded-2xl border border-warm-cream/12 bg-warm-cream/5 p-5 md:col-span-3">
+          <motion.div
+            variants={FOOTER_ITEM_VARIANTS}
+            whileHover={reduceMotion ? undefined : { y: -3 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
+            className="rounded-2xl border border-warm-cream/12 bg-warm-cream/5 p-5 md:col-span-3"
+          >
             <h2 className="text-xs font-semibold text-sunlit-gold">Kontak panitia</h2>
             <div className="mt-4 space-y-3.5 text-sm text-warm-cream/58">
               <p className="flex items-start gap-2.5 leading-relaxed">
@@ -108,10 +153,13 @@ export default function Footer() {
                 pkkmb@telkomuniversity.ac.id
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <motion.div
+          variants={FOOTER_ITEM_VARIANTS}
+          className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between"
+        >
           <p className="text-[11px] text-warm-cream/35">
             TODAYS 2026. PKKMB Telkom University Purwokerto.
           </p>
@@ -125,8 +173,8 @@ export default function Footer() {
             <ArrowUp size={13} />
             Kembali ke atas
           </Button>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

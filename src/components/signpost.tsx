@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { useRouter } from "next/navigation"
 
 interface SignpostProps {
@@ -12,14 +12,9 @@ interface SignpostProps {
   onLockedClick?: () => void
 }
 
-const LOCK_HINTS: Record<string, string> = {
-  Quiz: "menyelesaikan Guidebook",
-  "Cari Kelompok": "menyelesaikan Quiz",
-  "Jejak Rimba": "mendapatkan Badge",
-}
-
 export default function Signpost({ icon, label, href, locked, index, onLockedClick }: SignpostProps) {
   const router = useRouter()
+  const reduceMotion = useReducedMotion()
 
   function handleClick() {
     if (locked) {
@@ -31,15 +26,21 @@ export default function Signpost({ icon, label, href, locked, index, onLockedCli
 
   return (
     <motion.button
-      initial={{ opacity: 0, y: 24 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.12 * index, duration: 0.5, ease: "easeOut" }}
+      transition={{
+        delay: reduceMotion ? 0 : 0.12 * index,
+        duration: reduceMotion ? 0 : 0.5,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      whileHover={reduceMotion ? undefined : { y: -4 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.97 }}
       onClick={handleClick}
       className="relative flex flex-col items-center transition-all duration-300 cursor-pointer group"
     >
       <motion.div
         animate={
-          locked
+          locked || reduceMotion
             ? {}
             : {
                 boxShadow: [
@@ -61,14 +62,7 @@ export default function Signpost({ icon, label, href, locked, index, onLockedCli
         }`}
       >
         {locked && (
-          <>
-            <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/50 to-jungle-shadow/30 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-jungle-shadow/70 via-jungle-shadow/30 to-transparent pt-8 pb-2 px-2 text-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <p className="text-[9px] text-warm-cream/50 font-sans leading-tight">
-                Temukan jalannya dengan {LOCK_HINTS[label] || "mencoba lagi"}
-              </p>
-            </div>
-          </>
+          <div className="absolute inset-0 bg-linear-to-b from-jungle-shadow/50 to-jungle-shadow/30 pointer-events-none" />
         )}
         <div className="relative w-9 h-9 flex items-center justify-center text-jungle-deep">
           {icon}

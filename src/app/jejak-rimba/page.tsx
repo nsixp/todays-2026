@@ -296,13 +296,13 @@ export default function JejakRimbaPage() {
           <motion.div
             key="transition-overlay"
             className="fixed inset-0 z-50 bg-jungle-shadow flex items-center justify-center pointer-events-none"
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: reduceMotion ? 0 : 0.5, ease: "easeInOut" }}
           >
             <motion.div
-              initial={{ scale: 0.6, opacity: 0 }}
+              initial={reduceMotion ? false : { scale: 0.6, opacity: 0 }}
               animate={reduceMotion ? { scale: 1, opacity: 1 } : { scale: 1, opacity: 1, rotate: 360 }}
               transition={reduceMotion
                 ? { duration: 0 }
@@ -318,7 +318,7 @@ export default function JejakRimbaPage() {
       {transitionPhase === "ending" && currentNode.ending && endingCfg && (
         <motion.div
           key="ending-screen"
-          initial={{ opacity: 0 }}
+          initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
           className={`fixed inset-0 z-40 flex items-center justify-center overflow-y-auto px-4 py-8 sm:px-6 ${endingCfg.shell}`}
@@ -363,14 +363,14 @@ export default function JejakRimbaPage() {
           )}
 
           <motion.section
-            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: reduceMotion ? 0 : 0.58, delay: reduceMotion ? 0 : 0.12, ease: [0.16, 1, 0.3, 1] }}
             className={`relative z-10 grid w-full max-w-4xl overflow-hidden rounded-4xl border shadow-2xl shadow-black/20 md:grid-cols-[16rem_minmax(0,1fr)] ${endingCfg.panel}`}
           >
             <aside className="flex flex-col justify-between border-b border-current/10 p-6 md:border-b-0 md:border-r md:p-8">
               <motion.div
-                initial={{ scale: 0.7, rotate: -18 }}
+                initial={reduceMotion ? false : { scale: 0.7, rotate: -18 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={
                   reduceMotion

@@ -85,10 +85,12 @@ export default function GaleriPage() {
                 key={item.id}
                 initial={reduceMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={reduceMotion ? undefined : { y: -3 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.985 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ delay: index * 0.045, duration: reduceMotion ? 0 : 0.45 }}
                 onClick={() => open(index)}
-                className={`group relative overflow-hidden rounded-2xl border border-warm-cream/12 bg-jungle-deep text-left active:translate-y-px ${FRAME_CLASSES[index] ?? ""}`}
+                className={`group relative overflow-hidden rounded-2xl border border-warm-cream/12 bg-jungle-deep text-left ${FRAME_CLASSES[index] ?? ""}`}
                 aria-label={`Buka foto ${item.alt}`}
               >
                 <Image

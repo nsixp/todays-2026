@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import BackgroundFoliage from "@/components/background-foliage"
+import PageTransition from "@/components/page-transition"
 
 const FOLIAGE_ROUTES: Record<string, "canopy-top" | "vines-side" | "leaves-corner"> = {
   "/hub": "canopy-top",
@@ -32,6 +33,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   return (
     <>
       {showNavbar && <Navbar />}
+      <PageTransition pathname={pathname} reduceMotion={Boolean(reduceMotion)} />
       <div className="relative flex flex-col min-h-dvh">
         {foliageVariant && (
           <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -41,10 +43,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
-            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -6 }}
-            transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.16, 1, 0.3, 1] }}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 flex-1"
           >
             {children}
