@@ -15,7 +15,7 @@ const FOLIAGE_ROUTES: Record<string, "canopy-top" | "vines-side" | "leaves-corne
   "/faq": "leaves-corner",
   "/avatar": "vines-side",
   "/kelompok": "leaves-corner",
-  "/junglepedia": "vines-side",
+  "/kompas": "vines-side",
   "/galeri": "vines-side",
   "/jejak-rimba": "canopy-top",
 }

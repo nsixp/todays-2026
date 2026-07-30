@@ -17,10 +17,10 @@ import {
   UsersThreeIcon as UsersThree,
   type Icon,
 } from "@phosphor-icons/react"
-import type { JunglePediaItem } from "@/types"
+import type { KompasItem } from "@/types"
 
-interface JunglepediaCardProps {
-  item: JunglePediaItem
+interface KompasCardProps {
+  item: KompasItem
   index: number
 }
 
@@ -40,7 +40,7 @@ const ITEM_ICONS: Record<string, Icon> = {
   "📧": Envelope,
 }
 
-export default function JunglepediaCard({ item, index }: JunglepediaCardProps) {
+export default function KompasCard({ item, index }: KompasCardProps) {
   const reduceMotion = useReducedMotion()
   const Icon = ITEM_ICONS[item.icon] ?? Buildings
 

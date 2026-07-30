@@ -29,14 +29,14 @@ import {
 } from "@phosphor-icons/react"
 
 const NAV_ITEMS = [
-  { label: "JunglePedia", href: "/junglepedia" },
-  { label: "Galeri", href: "/galeri" },
+  { label: "Kompas", href: "/kompas" },
   { label: "Jadwal", href: "/jadwal" },
+  { label: "Galeri", href: "/galeri" },
   { label: "FAQ", href: "/faq" },
 ]
 
 const ICONS: Record<string, React.ReactNode> = {
-  "/junglepedia": <Compass size={16} />,
+  "/kompas": <Compass size={16} />,
   "/galeri": <ImageIcon size={16} />,
   "/jadwal": <CalendarBlank size={16} />,
   "/faq": <Question size={16} />,

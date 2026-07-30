@@ -236,7 +236,7 @@ Navigasi antar halaman menggunakan arah yang konsisten:
 | hub → guidebook/quiz | Masuk lebih dalam | slide kiri |
 | guidebook/quiz → hub | Kembali ke base | slide kanan |
 | hub → kelompok/jadwal/faq | Buka samping | fade + scale(0.95→1) |
-| hub → junglepedia/galeri | Buka peta | fade + scale(0.95→1) |
+| hub → kompas/galeri | Buka peta | fade + scale(0.95→1) |
 | antar halaman navbar | Navigasi biasa | fade 200ms (existing) |
 
 ### 6.2 Overlay Transisi
@@ -249,7 +249,7 @@ Navigasi antar halaman menggunakan arah yang konsisten:
 
 - Background navbar mendapat subtle tint sesuai halaman aktif:
   - Hub → warm-cream (existing)
-  - JunglePedia → sage/20
+  - Kompas → sage/20
   - Galeri → sunlit-gold/10
   - Jadwal → moss/20
   - FAQ → fern-mist/30
@@ -302,7 +302,7 @@ Inner shadow: `box-shadow: inset 0 1px 2px rgba(255,255,255,0.08)`
 - Max-width:
   - Guidebook text: `max-w-prose` (65ch)
   - Halaman konten (faq, jadwal, kelompok): `max-w-2xl`
-  - Halaman grid (hub, galeri, junglepedia): `max-w-5xl`
+  - Halaman grid (hub, galeri, kompas): `max-w-5xl`
   - Welcome narration: `max-w-lg`
 
 ---

@@ -33,7 +33,7 @@ You are a senior Front-End Developer for this project.
 - **Design reference:** `docs/agents/DESIGN-SYSTEM.md` (palette tokens, fonts, visual spec)
 - **Architecture reference:** `docs/agents/ARCHITECTURE.md` (routes, data, component structure)
 - **Jejak Rimba reference:** `docs/agents/JEJAK-RIMBA.md` (game design, node structure, card mechanics)
-- **JunglePedia reference:** `docs/agents/JUNGLEPEDIA.md` (content categories, JSON structure, card spec)
+- **Kompas reference:** `docs/agents/KOMPAS.md` (content categories, JSON structure, card spec)
 
 ## Skills to use
 

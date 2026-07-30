@@ -100,35 +100,35 @@
   - Saat locked: grayscale + opacity lebih rendah dari sekarang
   - Trail path: dashed lines connecting signposts dengan animated dash offset
 - [ ] **10.3** Navbar expansion — `src/components/navbar.tsx`
-  - Tambah item: `JunglePedia | Galeri | Jadwal | FAQ`
+  - Tambah item: `Kompas | Galeri | Jadwal | FAQ`
   - Active state: highlight link sesuai halaman aktif (gunakan `usePathname()`)
 - [ ] **10.4** Footer component — `src/components/footer.tsx`
-  - Sitemap: Hub, Guidebook, Quiz, JunglePedia, Galeri, Jadwal, FAQ
+  - Sitemap: Hub, Guidebook, Quiz, Kompas, Galeri, Jadwal, FAQ
   - Kontak: informasi panitia / help desk
   - Sosial media: link Instagram, YouTube, dll (placeholder)
   - Credit: "TODAYS 2026 — PKKMB Telkom University Purwokerto"
   - Tampil di semua halaman kecuali splash, guidebook, quiz
   - Style: bg-jungle-deep, text-warm-cream, font-sans
 
-## Phase 11: JunglePedia
+## Phase 11: Kompas
 
 > Informasi kampus dalam format filterable card grid.
 
-- [ ] **11.1** Create `data/junglepedia.json`
+- [ ] **11.1** Create `data/kompas.json`
   - Struktur: `{ id, kategori, judul, deskripsi, icon }`
   - 3 kategori: `fasilitas`, `ukm`, `platform`
   - Minimal 3-4 item per kategori (dummy content)
   - Data mudah diupdate panitia tanpa deploy ulang
-- [ ] **11.2** Update types (`src/types/index.ts`) — tambah `JunglePediaItem` interface
-- [ ] **11.3** Update data loader (`src/lib/data.ts`) — tambah `getJunglePedia()`
-- [ ] **11.4** Create halaman `/junglepedia` — `src/app/junglepedia/page.tsx`
-  - Hero section: judul "JunglePedia" + deskripsi
+- [ ] **11.2** Update types (`src/types/index.ts`) — tambah `KompasItem` interface
+- [ ] **11.3** Update data loader (`src/lib/data.ts`) — tambah `getKompas()`
+- [ ] **11.4** Create halaman `/kompas` — `src/app/kompas/page.tsx`
+  - Hero section: judul "Kompas" + deskripsi
   - Filter tabs: Semua | Fasilitas | UKM | Platform Akademik
   - Card grid (2 kolom mobile, 3 kolom desktop)
   - Card: icon SVG inline + judul + deskripsi singkat
   - Animasi: staggered card entrance via Framer Motion
-- [ ] **11.5** Create `src/components/junglepedia-card.tsx`
-  - Props: `item: JunglePediaItem`, `index: number`
+- [ ] **11.5** Create `src/components/kompas-card.tsx`
+  - Props: `item: KompasItem`, `index: number`
   - Motion div with stagger delay
   - Border, icon, judul, deskripsi
 
@@ -291,7 +291,7 @@
 - [ ] **19.2** Transition overlays — overlay daun/kabut selama 150ms saat transisi
 - [ ] **19.3** Update `src/components/navbar.tsx`
   - Background tint berubah sesuai halaman aktif:
-    - Hub → warm-cream, JunglePedia → sage/20, Galeri → sunlit-gold/10
+    - Hub → warm-cream, Kompas → sage/20, Galeri → sunlit-gold/10
     - Jadwal → moss/20, FAQ → fern-mist/30
 - [ ] **19.4** `npm run build` — fix any type/build errors
 

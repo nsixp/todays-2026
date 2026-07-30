@@ -8,11 +8,11 @@ import {
   LaptopIcon as Laptop,
   UsersThreeIcon as UsersThree,
 } from "@phosphor-icons/react"
-import { getJunglePedia } from "@/lib/data"
-import type { JunglePediaItem } from "@/types"
-import JunglepediaCard from "@/components/junglepedia-card"
+import { getKompas } from "@/lib/data"
+import type { KompasItem } from "@/types"
+import KompasCard from "@/components/kompas-card"
 
-const items = getJunglePedia()
+const items = getKompas()
 
 const CATEGORIES = [
   { key: "semua", label: "Semua catatan", icon: CompassRose },
@@ -21,17 +21,17 @@ const CATEGORIES = [
   { key: "platform", label: "Platform akademik", icon: Laptop },
 ]
 
-export default function JunglePediaPage() {
+export default function KompasPage() {
   const reduceMotion = useReducedMotion()
   const [activeCategory, setActiveCategory] = useState("semua")
 
-  const filtered: JunglePediaItem[] =
+  const filtered: KompasItem[] =
     activeCategory === "semua"
       ? items
       : items.filter((item) => item.kategori === activeCategory)
 
   return (
-    <div className="junglepedia-surface min-h-dvh pb-24 pt-24">
+    <div className="kompas-surface min-h-dvh pb-24 pt-24">
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <section className="grid min-h-72 items-center gap-8 py-8 md:min-h-80 md:grid-cols-[1.2fr_0.8fr] md:py-10">
           <motion.div
@@ -118,7 +118,7 @@ export default function JunglePediaPage() {
               ) : (
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
                   {filtered.map((item, index) => (
-                    <JunglepediaCard
+                    <KompasCard
                       key={item.id}
                       item={item}
                       index={index}

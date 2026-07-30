@@ -10,7 +10,7 @@ Website interaktif untuk mendampingi mahasiswa baru dalam rangkaian PKKMB Telkom
 - Kuis pemahaman dan badge personal.
 - Informasi kelompok dan mentor.
 - Jadwal kegiatan dan FAQ.
-- JunglePedia untuk mengenal lingkungan kampus.
+- Kompas untuk mengenal lingkungan kampus.
 - Galeri kegiatan.
 - Jejak Rimba, petualangan interaktif dengan cerita bercabang.
 
@@ -23,7 +23,7 @@ Splash → Masukkan NIM → Pilih Avatar → Jungle Hub
                                          ├── Kelompok
                                          ├── Jadwal
                                          ├── FAQ
-                                         ├── JunglePedia
+                                         ├── Kompas
                                          ├── Galeri
                                          └── Jejak Rimba
 ```

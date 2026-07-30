@@ -6,8 +6,10 @@ import {
   ArrowUpIcon as ArrowUp,
   CompassIcon as Compass,
   EnvelopeSimpleIcon as EnvelopeSimple,
+  GlobeIcon as Globe,
   InstagramLogoIcon as InstagramLogo,
   MapPinIcon as MapPin,
+  PhoneIcon as Phone,
   YoutubeLogoIcon as YoutubeLogo,
 } from "@phosphor-icons/react"
 import BackgroundFoliage from "@/components/background-foliage"
@@ -17,7 +19,7 @@ const SITEMAP = [
   { label: "Hub", href: "/hub" },
   { label: "Guidebook", href: "/guidebook" },
   { label: "Quiz", href: "/quiz" },
-  { label: "JunglePedia", href: "/junglepedia" },
+  { label: "Kompas", href: "/kompas" },
   { label: "Galeri", href: "/galeri" },
   { label: "Jadwal", href: "/jadwal" },
   { label: "FAQ", href: "/faq" },
@@ -26,13 +28,18 @@ const SITEMAP = [
 
 const SOCIALS = [
   {
-    label: "Instagram",
-    href: "https://instagram.com",
+    label: "Telkom University Purwokerto Website",
+    href: "https://purwokerto.telkomuniversity.ac.id/",
+    icon: Globe,
+  },
+  {
+    label: "TODAYS Instagram",
+    href: "https://www.instagram.com/todays.telupurwokerto/",
     icon: InstagramLogo,
   },
   {
-    label: "YouTube",
-    href: "https://youtube.com",
+    label: "Telkom University Purwokerto Youtube",
+    href: "https://www.youtube.com/@TelkomUniversityPurwokerto",
     icon: YoutubeLogo,
   },
 ]
@@ -141,16 +148,23 @@ export default function Footer() {
           >
             <h2 className="text-xs font-semibold text-sunlit-gold">Kontak panitia</h2>
             <div className="mt-4 space-y-3.5 text-sm text-warm-cream/58">
-              <p className="flex items-start gap-2.5 leading-relaxed">
+              <a href="https://maps.app.goo.gl/8NskKq6Xjpg4Pf6s8" className="flex items-start gap-2.5 leading-relaxed transition-colors hover:text-warm-cream">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-warm-cream/38" weight="duotone" />
                 Telkom University Purwokerto
-              </p>
+              </a>
               <a
                 href="mailto:pkkmb@telkomuniversity.ac.id"
                 className="flex items-start gap-2.5 break-all leading-relaxed transition-colors hover:text-warm-cream"
               >
                 <EnvelopeSimple size={16} className="mt-0.5 shrink-0 text-warm-cream/38" weight="duotone" />
                 pkkmb@telkomuniversity.ac.id
+              </a>
+              <a
+                href="tel:(0281) 641 629"
+                className="flex items-start gap-2.5 break-all leading-relaxed transition-colors hover:text-warm-cream"
+              >
+                <Phone size={16} className="mt-0.5 shrink-0 text-warm-cream/38" weight="duotone" />
+                (0281) 641 629
               </a>
             </div>
           </motion.div>

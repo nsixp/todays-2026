@@ -15,7 +15,7 @@ import DappledLight from "@/components/dappled-light"
 import ForestSilhouettes from "@/components/forest-silhouettes"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
-import type { ScheduleItem, FAQItem, JunglePediaItem } from "@/types"
+import type { ScheduleItem, FAQItem, KompasItem } from "@/types"
 import {
   ArrowRightIcon as ArrowRight,
   ArrowUpRightIcon as ArrowUpRight,
@@ -35,7 +35,7 @@ import {
   StackIcon as Stack,
   UsersThreeIcon as UsersThree,
 } from "@phosphor-icons/react"
-import junglepediaData from "@/../data/junglepedia.json"
+import kompasData from "@/../data/kompas.json"
 import Monyet from "@/components/icons/monyet"
 import Burung from "@/components/icons/burung"
 import Rusa from "@/components/icons/rusa"
@@ -44,14 +44,14 @@ import KupuKupu from "@/components/icons/kupu-kupu"
 import Ular from "@/components/icons/ular"
 import type { AvatarId } from "@/types"
 
-const junglepedia = junglepediaData as JunglePediaItem[]
+const kompas = kompasData as KompasItem[]
 
-const JUNGLEPEDIA_CATEGORIES = [
+const KOMPAS_CATEGORIES = [
   {
     icon: <Buildings size={23} weight="duotone" className="text-jungle-deep" />,
     label: "Fasilitas",
     desc: "Gedung kuliah, laboratorium, perpustakaan, masjid, dan UKS",
-    count: junglepedia.filter((i) => i.kategori === "fasilitas").length,
+    count: kompas.filter((i) => i.kategori === "fasilitas").length,
     color: "border-l-moss",
     bg: "bg-moss/10",
   },
@@ -59,7 +59,7 @@ const JUNGLEPEDIA_CATEGORIES = [
     icon: <UsersThree size={23} weight="duotone" className="text-jungle-deep" />,
     label: "UKM & Organisasi",
     desc: "UKM, BEM, HIMA, dan organisasi kemahasiswaan lainnya",
-    count: junglepedia.filter((i) => i.kategori === "ukm").length,
+    count: kompas.filter((i) => i.kategori === "ukm").length,
     color: "border-l-sunlit-gold",
     bg: "bg-sunlit-gold/10",
   },
@@ -67,7 +67,7 @@ const JUNGLEPEDIA_CATEGORIES = [
     icon: <Laptop size={23} weight="duotone" className="text-jungle-deep" />,
     label: "Platform Akademik",
     desc: "E-learning, portal akademik, dan email kampus",
-    count: junglepedia.filter((i) => i.kategori === "platform").length,
+    count: kompas.filter((i) => i.kategori === "platform").length,
     color: "border-l-jungle-deep",
     bg: "bg-jungle-deep/10",
   },
@@ -592,7 +592,7 @@ export default function HubPage() {
         </SectionBody>
       </div>
 
-      {/* ============ JUNGLEPEDIA SPOTLIGHT ============ */}
+      {/* ============ KOMPAS SPOTLIGHT ============ */}
       <div className="hub-zone-archive relative">
         <SectionBody>
           <div className="mb-10 max-w-xl">
@@ -603,7 +603,7 @@ export default function HubPage() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-12">
-            {JUNGLEPEDIA_CATEGORIES.map((item, index) => (
+            {KOMPAS_CATEGORIES.map((item, index) => (
               <motion.article
                 key={item.label}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -629,7 +629,7 @@ export default function HubPage() {
             ))}
 
             <Link
-              href="/junglepedia"
+              href="/kompas"
               className="archive-tile group relative min-h-28 overflow-hidden rounded-2xl border border-jungle-deep/15 bg-jungle-deep p-6 text-warm-cream transition-transform hover:-translate-y-1 md:col-span-7 md:col-start-6 md:col-row-start-2 md:min-h-44"
             >
               <div className="flex items-start justify-between gap-5">
@@ -642,7 +642,7 @@ export default function HubPage() {
                 />
               </div>
               <div className="relative mt-8 max-w-sm">
-                <span className="block font-heading text-2xl leading-tight">Buka seluruh JunglePedia</span>
+                <span className="block font-heading text-2xl leading-tight">Buka seluruh Kompas</span>
                 <span className="mt-2 block text-sm leading-relaxed text-warm-cream/58">
                   Lihat semua fasilitas, organisasi, dan platform akademik.
                 </span>

@@ -111,10 +111,10 @@ Diurutkan berdasarkan prioritas:
 - Logic unlock antar-fitur + easter egg tersembunyi
 - Halaman jadwal kegiatan
 - Halaman FAQ (accordion)
-- Halaman JunglePedia (info kampus: fasilitas, UKM, platform akademik)
+- Halaman Kompas (info kampus: fasilitas, UKM, platform akademik)
 - Halaman Galeri dengan responsive grid + lightbox
 - Halaman Jejak Rimba (interactive fiction game dengan UI kartu, 3 ending)
-- Navbar expanded (JunglePedia, Galeri, Jadwal, FAQ)
+- Navbar expanded (Kompas, Galeri, Jadwal, FAQ)
 - Footer lengkap (sitemap, kontak, sosial media, credit)
 - Global page transitions
 - Responsif mobile-first
@@ -177,7 +177,7 @@ Diurutkan berdasarkan prioritas:
                                   ├── /jadwal
                                   ├── /faq
                                   ├── /kelompok (unlocked setelah quiz)
-                                  ├── /junglepedia (bebas)
+                                  ├── /kompas (bebas)
                                   ├── /galeri (bebas)
                                   └── /jejak-rimba (unlocked setelah badge)
 ```
@@ -196,7 +196,7 @@ Detail tiap halaman:
 | `/kelompok` | Info nomor kelompok, nama kelompok, mentor | Fade |
 | `/jadwal` | Card jadwal kegiatan | Fade |
 | `/faq` | Accordion FAQ | Accordion expand |
-| `/junglepedia` | Filterable card grid: Fasilitas, UKM, Platform Akademik | Stagger card entrance |
+| `/kompas` | Filterable card grid: Fasilitas, UKM, Platform Akademik | Stagger card entrance |
 | `/galeri` | Responsive grid + lightbox preview | Fade + scale |
 | `/jejak-rimba` | Interactive fiction dengan UI kartu (pilih petualangan) | Flip card, slide narasi |
 
@@ -275,7 +275,7 @@ Detail tiap halaman:
 ### 8.13 Navbar
 
 - **Muncul di:** Semua halaman kecuali splash, guidebook, dan quiz
-- **Item:** JunglePedia | Galeri | Jadwal | FAQ
+- **Item:** Kompas | Galeri | Jadwal | FAQ
 - **Posisi:** Fixed top (kecuali di halaman welcome yang full-screen)
 - **Active state:** Link yang sesuai halaman aktif di-highlight (gunakan `usePathname()`)
 - **Style:** bg-warm-cream/80 backdrop-blur, border-bottom fern-mist
@@ -302,7 +302,7 @@ Detail tiap halaman:
 | `data/quiz.json` | 8 soal: `{ id, question, options[], correctIndex }` |
 | `data/faq.json` | 6-8 FAQ: `{ id, question, answer }` |
 | `data/schedule.json` | Jadwal kegiatan |
-| `data/junglepedia.json` | Konten JunglePedia: `{ id, kategori, judul, deskripsi, icon }` |
+| `data/kompas.json` | Konten Kompas: `{ id, kategori, judul, deskripsi, icon }` |
 | `data/gallery.json` | Metadata galeri: `{ id, src, alt, kategori? }` |
 | `data/jejak-rimba.json` | Node cerita: `{ id, narasi, pilihan[], ending? }` |
 
@@ -316,7 +316,7 @@ todays-2026/
 │   ├── quiz.json
 │   ├── faq.json
 │   ├── schedule.json
-│   ├── junglepedia.json
+│   ├── kompas.json
 │   ├── gallery.json
 │   └── jejak-rimba.json
 ├── src/
@@ -333,7 +333,7 @@ todays-2026/
 │   │   ├── kelompok/page.tsx
 │   │   ├── jadwal/page.tsx
 │   │   ├── faq/page.tsx
-│   │   ├── junglepedia/page.tsx
+│   │   ├── kompas/page.tsx
 │   │   ├── galeri/page.tsx
 │   │   └── jejak-rimba/page.tsx
 │   ├── components/
@@ -349,7 +349,7 @@ todays-2026/
 │   │   ├── badge-result.tsx
 │   │   ├── navbar.tsx
 │   │   ├── footer.tsx
-│   │   ├── junglepedia-card.tsx
+│   │   ├── kompas-card.tsx
 │   │   ├── lightbox.tsx
 │   │   ├── jejak-rimba-card.tsx
 │   │   └── icons/
@@ -378,7 +378,7 @@ todays-2026/
 │   │   ├── DESIGN-SYSTEM.md
 │   │   ├── ARCHITECTURE.md
 │   │   ├── JEJAK-RIMBA.md
-│   │   └── JUNGLEPEDIA.md
+│   │   └── KOMPAS.md
 ├── tailwind.config.ts
 ├── tsconfig.json
 └── package.json
@@ -405,9 +405,9 @@ todays-2026/
 - **Unlock:** Setelah quiz badge (quizDone === true). Easter egg support.
 - **Animasi:** Slide narasi baru setelah pilih, kartu flip, fade ending card
 
-### 8.18 JunglePedia Spec
+### 8.18 Kompas Spec
 
-- **Route:** `/junglepedia` (bebas, tidak terkunci)
+- **Route:** `/kompas` (bebas, tidak terkunci)
 - **Konten:** Informasi kampus untuk mahasiswa baru
 - **Kategori (3):**
   - `fasilitas`: Gedung kuliah, lab, perpustakaan, masjid, UKS
@@ -418,7 +418,7 @@ todays-2026/
   - Filter tabs: Semua | Fasilitas | UKM | Platform Akademik
   - Card grid: 2 kolom mobile, 3 kolom desktop
   - Card: icon SVG + judul + deskripsi singkat
-- **Data:** `data/junglepedia.json` — `{ id, kategori, judul, deskripsi, icon }`
+- **Data:** `data/kompas.json` — `{ id, kategori, judul, deskripsi, icon }`
 - **Animasi:** Staggered card entrance via Framer Motion
 
 ### 8.19 Galeri Spec
@@ -458,7 +458,7 @@ todays-2026/
   - Font: sans (Sora)
 - **Sections:**
   - Kiri: Logo TODAYS + tagline
-  - Tengah: Sitemap (Hub, Guidebook, JunglePedia, Galeri, Jadwal, FAQ)
+  - Tengah: Sitemap (Hub, Guidebook, Kompas, Galeri, Jadwal, FAQ)
   - Kanan: Kontak panitia + sosial media (Instagram, YouTube — placeholder links)
 - **Bawah:** Copyright line — "TODAYS 2026 — PKKMB Telkom University Purwokerto"
 

@@ -1,4 +1,4 @@
-import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem, GalleryItem, JejakRimbaNode, KelompokInfo } from "@/types"
+import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, KompasItem, GalleryItem, JejakRimbaNode, KelompokInfo } from "@/types"
 
 import participantsData from "@/../data/participants.json"
 import kelompokData from "@/../data/kelompok.json"
@@ -6,7 +6,7 @@ import guidebookData from "@/../data/guidebook.json"
 import quizData from "@/../data/quiz.json"
 import faqData from "@/../data/faq.json"
 import scheduleData from "@/../data/schedule.json"
-import junglepediaData from "@/../data/junglepedia.json"
+import kompasData from "@/../data/kompas.json"
 import galleryData from "@/../data/gallery.json"
 import jejakRimbaData from "@/../data/jejak-rimba.json"
 
@@ -38,12 +38,12 @@ export function getSchedule(): ScheduleItem[] {
   return scheduleData as ScheduleItem[]
 }
 
-export function getJunglePedia(): JunglePediaItem[] {
-  return junglepediaData as JunglePediaItem[]
+export function getKompas(): KompasItem[] {
+  return kompasData as KompasItem[]
 }
 
 export function getGallery(): GalleryItem[] {
-  return galleryData as GalleryItem[]
+  return galleryData as GalleryItem[] 
 }
 
 export function getJejakRimba(): JejakRimbaNode[] {

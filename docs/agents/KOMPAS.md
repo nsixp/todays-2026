@@ -1,8 +1,8 @@
-# JunglePedia — Content Structure Spec
+# Kompas — Content Structure Spec
 
 ## Overview
 
-JunglePedia adalah halaman informasi kampus untuk mahasiswa baru, padanan dari PIONIRPEDIA milik UGM. Menampilkan informasi tentang fasilitas kampus, UKM/organisasi, dan platform akademik dalam format filterable card grid. Akses bebas tanpa unlock.
+Kompas adalah halaman informasi kampus untuk mahasiswa baru. Halaman ini menampilkan informasi tentang fasilitas kampus, UKM/organisasi, dan platform akademik dalam format filterable card grid. Akses bebas tanpa unlock.
 
 ## Categories
 
@@ -43,7 +43,7 @@ Informasi tentang platform digital kampus.
 
 ## Data JSON Structure
 
-File: `data/junglepedia.json`
+File: `data/kompas.json`
 
 ```json
 [
@@ -67,7 +67,7 @@ File: `data/junglepedia.json`
 ## UI Spec
 
 ### Page Layout
-- **Hero:** Judul "JunglePedia" + deskripsi "Kenali kampusmu lebih dekat"
+- **Hero:** Judul "Kompas" + deskripsi "Kenali kampusmu lebih dekat"
 - **Filter Tabs:** Tiga tombol kategory + "Semua"
   - Semua | Fasilitas | UKM | Platform Akademik
   - Active tab: bg-sunlit-gold, text-jungle-deep
@@ -92,7 +92,7 @@ File: `data/junglepedia.json`
 ## TypeScript Types
 
 ```typescript
-interface JunglePediaItem {
+interface KompasItem {
   id: number
   kategori: "fasilitas" | "ukm" | "platform"
   judul: string
@@ -105,14 +105,14 @@ interface JunglePediaItem {
 
 | File | Path |
 |------|------|
-| Data JSON | `data/junglepedia.json` |
-| Page | `src/app/junglepedia/page.tsx` |
-| Card component | `src/components/junglepedia-card.tsx` |
+| Data JSON | `data/kompas.json` |
+| Page | `src/app/kompas/page.tsx` |
+| Card component | `src/components/kompas-card.tsx` |
 | Types | `src/types/index.ts` |
 | Data loader | `src/lib/data.ts` |
 
 ## Content Notes
 
-- Semua konten dummy bisa diupdate panitia tanpa deploy ulang — cukup edit `data/junglepedia.json`
+- Semua konten dummy bisa diupdate panitia tanpa deploy ulang — cukup edit `data/kompas.json`
 - Ikon menggunakan inline SVG sederhana (bisa lucide-react atau custom SVG)
 - Hindari teks terlalu panjang di deskripsi (maks 2 kalimat per item)
