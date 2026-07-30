@@ -120,7 +120,7 @@ export default function LoadingScreen({ duration = 2500, onComplete }: LoadingSc
                   strokeDashoffset={offset}
                 />
               </svg>
-              <span className="absolute inset-0 flex items-center justify-center font-heading text-sm text-sunlit-gold">
+              <span className="absolute inset-0 flex items-center justify-center font-heading text-xl text-sunlit-gold">
                 {Math.round(progress)}
               </span>
             </div>

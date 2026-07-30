@@ -3,11 +3,11 @@
 import { motion } from "framer-motion"
 
 const DAPPLED_POSITIONS = [
-  { x: 15, y: 20 },
-  { x: 80, y: 25 },
-  { x: 50, y: 60 },
-  { x: 25, y: 70 },
-  { x: 70, y: 50 },
+  { x: 10, y: 15 },
+  { x: 82, y: 20 },
+  { x: 50, y: 55 },
+  { x: 20, y: 72 },
+  { x: 75, y: 48 },
 ]
 
 export default function DappledLight({
@@ -26,19 +26,19 @@ export default function DappledLight({
           style={{
             left: `${pos.x}%`,
             top: `${pos.y}%`,
-            width: `${120 + i * 30}px`,
-            height: `${120 + i * 30}px`,
+            width: `${140 + i * 40}px`,
+            height: `${140 + i * 40}px`,
             background: `radial-gradient(circle, ${color}22 0%, ${color}11 40%, transparent 70%)`,
           }}
           animate={{
-            x: [0, 15 + i * 5, -10 - i * 3, 0],
-            y: [0, -10 - i * 3, 8 + i * 4, 0],
-            opacity: [0.3, 0.7, 0.4, 0.3],
-            scale: [1, 1.08, 0.95, 1],
+            x: [0, 20 + i * 8, -15 - i * 5, 0],
+            y: [0, -15 - i * 5, 12 + i * 6, 0],
+            opacity: [0.2, 0.6, 0.3, 0.2],
+            scale: [1, 1.12, 0.92, 1],
           }}
           transition={{
-            duration: 6 + i * 1.5,
-            delay: i * 0.4,
+            duration: 8 + i * 2,
+            delay: i * 0.6,
             repeat: Infinity,
             ease: "easeInOut",
           }}

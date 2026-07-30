@@ -22,8 +22,8 @@ const FOLIAGE_ROUTES: Record<string, "canopy-top" | "vines-side" | "leaves-corne
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isHub = pathname === "/hub"
-  const hideNavbar = pathname === "/" || pathname === "/guidebook" || pathname === "/quiz"
-  const hideFooter = pathname === "/" || pathname === "/guidebook" || pathname === "/quiz"
+  const hideNavbar = pathname === "/" || pathname === "/guidebook" || pathname === "/quiz" || pathname === "/welcome" || pathname === "/avatar"
+  const hideFooter = pathname === "/" || pathname === "/guidebook" || pathname === "/quiz" || pathname === "/welcome" || pathname === "/avatar"
   const foliageVariant = FOLIAGE_ROUTES[pathname]
 
   return (

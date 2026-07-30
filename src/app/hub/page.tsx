@@ -1,20 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
-import Monyet from "@/components/icons/monyet"
-import Burung from "@/components/icons/burung"
-import Rusa from "@/components/icons/rusa"
-import Harimau from "@/components/icons/harimau"
-import KupuKupu from "@/components/icons/kupu-kupu"
-import Ular from "@/components/icons/ular"
 import DappledLight from "@/components/dappled-light"
 import ForestSilhouettes from "@/components/forest-silhouettes"
-import InventorySatchel from "@/components/inventory-satchel"
-import type { AvatarId } from "@/types"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
 import type { ScheduleItem, FAQItem, JunglePediaItem } from "@/types"
@@ -49,15 +41,6 @@ const JUNGLEPEDIA_CATEGORIES = [
   },
 ]
 
-const AVATAR_ICONS: Record<AvatarId, typeof Monyet> = {
-  monyet: Monyet,
-  burung: Burung,
-  rusa: Rusa,
-  harimau: Harimau,
-  "kupu-kupu": KupuKupu,
-  ular: Ular,
-}
-
 const schedule = scheduleData as ScheduleItem[]
 const faqs = faqData as FAQItem[]
 
@@ -87,9 +70,9 @@ const GALLERY_PLACEHOLDERS = [
 
 function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <div className="text-center mb-12">
-      <h2 className="font-heading text-2xl sm:text-3xl text-jungle-deep">{title}</h2>
-      {subtitle && <p className="mt-2 text-sm text-moss font-sans max-w-md mx-auto">{subtitle}</p>}
+    <div className="text-center mb-10 sm:mb-14">
+      <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-jungle-deep leading-tight text-wrap-balance">{title}</h2>
+      {subtitle && <p className="mt-2 sm:mt-3 text-sm sm:text-base text-moss font-sans max-w-lg mx-auto leading-relaxed text-wrap-pretty">{subtitle}</p>}
     </div>
   )
 }
@@ -111,17 +94,12 @@ function SectionBody({ children, className = "" }: { children: React.ReactNode; 
 export default function HubPage() {
   const router = useRouter()
   const { progress, save } = useProgress()
-  const [mounted, setMounted] = useState(false)
   const [easterClicks, setEasterClicks] = useState<Record<string, number>>({})
   const [easterModal, setEasterModal] = useState<{ label: string; href: string } | null>(null)
-
-  useEffect(() => { setMounted(true) }, [])
 
   const pagesRead = progress.pagesRead.length
   const guidebookDone = pagesRead >= 6
   const quizDone = progress.quizDone
-  const hasBadge = progress.badgeTitle.length > 0
-  const AvatarIcon = AVATAR_ICONS[progress.avatar]
 
   function handleLockedClick(label: string, href: string) {
     const next = { ...easterClicks, [label]: (easterClicks[label] || 0) + 1 }
@@ -155,14 +133,22 @@ export default function HubPage() {
         {/* Layer 3: Dappled light */}
         <DappledLight count={5} />
 
-        {/* Kabut */}
+        {/* Kabut — melayang perlahan */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at 50% 0%, rgba(163,196,181,0.3) 0%, transparent 60%)",
+            background: "radial-gradient(ellipse at 50% 0%, rgba(163,196,181,0.35) 0%, transparent 60%)",
           }}
-          animate={{ opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ opacity: [0.25, 0.5, 0.3, 0.5, 0.25], scale: [1, 1.05, 0.98, 1.03, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at 60% 20%, rgba(245,213,144,0.1) 0%, transparent 50%)",
+          }}
+          animate={{ opacity: [0, 0.3, 0, 0.2, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
 
         {/* Fireflies */}
@@ -223,172 +209,88 @@ export default function HubPage() {
           />
         ))}
 
-        {/* Hero content grid */}
-        <div className="relative z-20 w-full max-w-5xl lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
-          {/* Left column */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* Brand badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="mb-4"
+        {/* Hero content — center */}
+        <div className="relative z-20 w-full flex flex-col items-center text-center max-w-3xl mx-auto">
+          {/* Brand badge — fade turun */}
+          <motion.div
+            initial={{ opacity: 0, y: -16, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
+            className="mb-5"
+          >
+            <span className="inline-block px-5 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40">
+              TODAYS 2026
+            </span>
+          </motion.div>
+
+          {/* Greeting — narasi bertahap */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.01 }}
+          >
+            <motion.h1
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.25, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="font-heading text-4xl sm:text-5xl md:text-7xl text-jungle-deep leading-[1.1] text-wrap-balance"
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-jungle-deep/10 text-[10px] text-moss font-sans tracking-[0.2em] uppercase border border-fern-mist/40">
-                TODAYS 2026
+              Selamat Datang,
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="font-heading text-3xl sm:text-4xl md:text-6xl text-jungle-deep/70 -mt-1 sm:-mt-2 text-wrap-balance"
+            >
+              {progress.nama || "Pejuang Rimba"}
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
+              className="mt-4 text-sm sm:text-base text-moss font-sans max-w-md leading-relaxed mx-auto text-wrap-pretty"
+            >
+              Jelajahi hutan rimba PKKMB. Baca guidebook, kerjakan quiz, dan dapatkan badge eksklusif.
+            </motion.p>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
+            className="mt-8 sm:mt-9"
+          >
+            <button
+              onClick={scrollToJelajahi}
+              className="group relative overflow-hidden rounded-full bg-jungle-deep text-warm-cream px-10 py-3.5 sm:px-12 sm:py-4 text-sm sm:text-base font-sans font-medium tracking-wide transition-all duration-500 hover:bg-sunlit-gold hover:text-jungle-deep active:scale-[0.96]"
+              style={{
+                boxShadow: "0 4px 20px rgba(26,58,43,0.25), inset 0 1px 2px rgba(255,255,255,0.12)",
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-2.5">
+                <span className="group-hover:hidden transition-all duration-300">Mulai Petualangan</span>
+                <span className="hidden group-hover:inline transition-all duration-300">Mulai Petualangan</span>
+                <motion.svg
+                  viewBox="0 0 16 16" fill="none" className="w-4 h-4"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </motion.svg>
               </span>
-            </motion.div>
-
-            {/* Greeting */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl text-jungle-deep leading-tight text-wrap-balance">
-                Selamat Datang,
-              </h1>
-              <p className="font-heading text-2xl sm:text-3xl md:text-4xl text-jungle-deep/70 -mt-1 text-wrap-balance">
-                {mounted ? (progress.nama || "Pejuang Rimba") : "Pejuang Rimba"}
-              </p>
-              <p className="mt-3 text-sm text-moss font-sans max-w-xs leading-relaxed lg:mx-0 text-wrap-pretty">
-                Jelajahi hutan rimba PKKMB. Baca guidebook, kerjakan quiz, dan dapatkan badge eksklusif.
-              </p>
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.65, duration: 0.6 }}
-              className="mt-7"
-            >
-              <button
-                onClick={scrollToJelajahi}
-                className="group relative overflow-hidden rounded-full bg-jungle-deep text-warm-cream px-8 py-3 text-sm font-sans font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-jungle-deep/20 active:scale-[0.97]"
-                style={{ boxShadow: "inset 0 1px 2px rgba(255,255,255,0.1)" }}
-              >
-                <span className="relative z-10 flex items-center gap-2 group-hover:opacity-0 transition-opacity duration-300">
-                  Mulai Petualangan
-                  <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-                    <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-                <span className="absolute inset-0 flex items-center justify-center gap-2 bg-sunlit-gold text-jungle-deep opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
-                  Jelajahi Hutan
-                  <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </button>
-            </motion.div>
-          </div>
-
-          {/* Right column — avatar + progress */}
-          <div className="flex flex-col items-center lg:items-end gap-6 mt-8 lg:mt-0">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative z-20 w-full max-w-sm flex justify-center"
-            >
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-36 h-36 sm:w-44 sm:h-44"
-              >
-                <motion.div
-                  animate={{ rotate: 360, scale: [1.12, 1.18, 1.12] }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear", scale: { duration: 3, repeat: Infinity, ease: "easeInOut" } }}
-                  className="absolute inset-0"
-                  style={{
-                    background: "conic-gradient(from 0deg, rgba(243,196,107,0.35), rgba(78,112,83,0.2), rgba(245,213,144,0.35), rgba(243,196,107,0.35))",
-                    borderRadius: "50%",
-                    filter: "blur(12px)",
-                    transform: "scale(1.12)",
-                  }}
-                />
-                <div className="relative w-full h-full rounded-full bg-linear-to-br from-warm-cream to-white border-2 border-sunlit-gold/40 flex items-center justify-center shadow-lg shadow-sunlit-gold/15">
-                  <AvatarIcon className="w-20 h-20 sm:w-24 sm:h-24" />
-                  <InventorySatchel
-                    guidebookDone={guidebookDone}
-                    quizDone={quizDone}
-                    hasBadge={hasBadge}
-                    pagesRead={pagesRead}
-                  />
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Progress cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="w-full max-w-sm"
-            >
-              <div className="grid grid-cols-3 gap-2.5">
-                {/* Guidebook: buku dengan ketebalan */}
-                <div className="rounded-xl border border-fern-mist/60 bg-white/70 p-3 text-center backdrop-blur-sm hover:bg-white/90 transition-colors">
-                  <div className="flex justify-center items-end h-8 mb-1">
-                    <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-jungle-deep">
-                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                  <p className="text-xs font-heading text-jungle-deep">{pagesRead}/6</p>
-                  <p className="text-[9px] text-moss font-sans tracking-wider uppercase mt-0.5">Guidebook</p>
-                </div>
-                {/* Quiz: amplop → medali */}
-                <div className="rounded-xl border border-fern-mist/60 bg-white/70 p-3 text-center backdrop-blur-sm hover:bg-white/90 transition-colors">
-                  <div className="flex justify-center items-center h-8 mb-1">
-                    {quizDone ? (
-                      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-sunlit-gold">
-                        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.3" />
-                        <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                      </svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-sage">
-                        <path d="M4 4h16v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-                        <path d="M4 8h16" stroke="currentColor" strokeWidth="1.3" />
-                        <circle cx="12" cy="13" r="1.5" fill="currentColor" opacity="0.3" />
-                      </svg>
-                    )}
-                  </div>
-                  <p className={`text-xs font-heading ${quizDone ? "text-sunlit-gold" : "text-sage"}`}>
-                    {quizDone ? "Selesai" : "Tertutup"}
-                  </p>
-                  <p className="text-[9px] text-moss font-sans tracking-wider uppercase mt-0.5">Quiz</p>
-                </div>
-                {/* Badge: siluet → penuh */}
-                <div className="rounded-xl border border-fern-mist/60 bg-white/70 p-3 text-center backdrop-blur-sm hover:bg-white/90 transition-colors">
-                  <div className="flex justify-center items-center h-8 mb-1">
-                    {hasBadge ? (
-                      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-sunlit-gold">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="1.2" />
-                      </svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 text-sage">
-                        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.2" strokeDasharray="4 2" />
-                        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2" />
-                      </svg>
-                    )}
-                  </div>
-                  <p className={`text-xs font-heading truncate ${hasBadge ? "text-sunlit-gold" : "text-sage"}`}>
-                    {hasBadge ? progress.badgeTitle : "-"}
-                  </p>
-                  <p className="text-[9px] text-moss font-sans tracking-wider uppercase mt-0.5">Badge</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+            </button>
+          </motion.div>
         </div>
 
       </section>
 
 
       {/* ============ JELAJAHI ============ */}
-      <div id="jelajahi" className="scroll-mt-20 relative">
+      <div id="jelajahi" className="scroll-mt-20 relative bg-[#F8F6F0]">
+        {/* Decorative top */}
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/30 to-transparent" />
         {/* Trail paths SVG */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block" aria-hidden="true">
           <svg className="w-full h-full mt-24" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice">
@@ -527,6 +429,8 @@ export default function HubPage() {
 
 
       {/* ============ JADWAL ============ */}
+      <div className="bg-moss/3 relative">
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-moss/40 to-transparent" />
       <SectionBody>
         <SectionHeader title="Jadwal Kegiatan" subtitle="Rangkaian acara PKKMB Telkom University Purwokerto" />
         <div className="space-y-4">
@@ -559,9 +463,12 @@ export default function HubPage() {
           </Link>
         </div>
       </SectionBody>
+      </div>
 
 
       {/* ============ JUNGLEPEDIA SPOTLIGHT ============ */}
+      <div className="bg-jungle-canopy/3 relative">
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-jungle-canopy/30 to-transparent" />
       <SectionBody>
         <SectionHeader title="JunglePedia" subtitle="Kenali lebih dekat kampus Telkom University Purwokerto" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -591,9 +498,12 @@ export default function HubPage() {
           </Link>
         </div>
       </SectionBody>
+      </div>
 
 
       {/* ============ GALERI ============ */}
+      <div className="bg-sunlit-gold/3 relative">
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/30 to-transparent" />
       <SectionBody>
         <SectionHeader title="Galeri" subtitle="Momen-momen seru di kampus" />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -626,9 +536,12 @@ export default function HubPage() {
           </Link>
         </div>
       </SectionBody>
+      </div>
 
 
       {/* ============ FAQ ============ */}
+      <div className="bg-fern-mist/4 relative">
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-fern-mist/40 to-transparent" />
       <SectionBody>
         <SectionHeader title="Ada Pertanyaan?" subtitle="Pertanyaan umum seputar PKKMB" />
         <div className="space-y-3 max-w-2xl mx-auto">
@@ -662,6 +575,7 @@ export default function HubPage() {
           </Link>
         </div>
       </SectionBody>
+      </div>
 
       {/* Easter egg modal */}
       <AnimatePresence>
