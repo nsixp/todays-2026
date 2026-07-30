@@ -2,7 +2,12 @@
 
 import { useState } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { Buildings, CompassRose, Laptop, UsersThree } from "@phosphor-icons/react"
+import {
+  BuildingsIcon as Buildings,
+  CompassRoseIcon as CompassRose,
+  LaptopIcon as Laptop,
+  UsersThreeIcon as UsersThree,
+} from "@phosphor-icons/react"
 import { getJunglePedia } from "@/lib/data"
 import type { JunglePediaItem } from "@/types"
 import JunglepediaCard from "@/components/junglepedia-card"
@@ -28,7 +33,7 @@ export default function JunglePediaPage() {
   return (
     <div className="junglepedia-surface min-h-dvh pb-24 pt-24">
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <section className="grid min-h-[20rem] items-center gap-8 py-8 md:grid-cols-[1.2fr_0.8fr] md:py-10">
+        <section className="grid min-h-80 items-center gap-8 py-8 md:grid-cols-[1.2fr_0.8fr] md:py-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

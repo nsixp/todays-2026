@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 import {
-  ArrowUp,
-  Compass,
-  EnvelopeSimple,
-  InstagramLogo,
-  MapPin,
-  YoutubeLogo,
+  ArrowUpIcon as ArrowUp,
+  CompassIcon as Compass,
+  EnvelopeSimpleIcon as EnvelopeSimple,
+  InstagramLogoIcon as InstagramLogo,
+  MapPinIcon as MapPin,
+  YoutubeLogoIcon as YoutubeLogo,
 } from "@phosphor-icons/react"
 import BackgroundFoliage from "@/components/background-foliage"
 import { Button } from "@/components/ui/button"

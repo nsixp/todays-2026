@@ -19,7 +19,14 @@ import {
   NavigationMenuList,
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu"
-import { Compass, Image as ImageIcon, CalendarBlank, Question, List, ArrowLeft } from "@phosphor-icons/react"
+import {
+  ArrowLeftIcon as ArrowLeft,
+  CalendarBlankIcon as CalendarBlank,
+  CompassIcon as Compass,
+  ImageIcon,
+  ListIcon as List,
+  QuestionIcon as Question,
+} from "@phosphor-icons/react"
 
 const NAV_ITEMS = [
   { label: "JunglePedia", href: "/junglepedia" },

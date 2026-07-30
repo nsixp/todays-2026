@@ -5,30 +5,35 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { useProgress } from "@/hooks/use-progress"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import DappledLight from "@/components/dappled-light"
 import ForestSilhouettes from "@/components/forest-silhouettes"
 import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
 import type { ScheduleItem, FAQItem, JunglePediaItem } from "@/types"
 import {
-  ArrowRight,
-  BookOpen,
-  MegaphoneSimple,
-  Crosshair,
-  Stack,
-  CaretDown,
-  Image as ImageIcon,
-  Buildings,
-  UsersThree,
-  Laptop,
-  ArrowUpRight,
-  CalendarBlank,
-  Camera,
-  Clock,
-  Compass,
-  Leaf,
-  MapPin,
-  Question,
+  ArrowRightIcon as ArrowRight,
+  ArrowUpRightIcon as ArrowUpRight,
+  BookOpenIcon as BookOpen,
+  BuildingsIcon as Buildings,
+  CalendarBlankIcon as CalendarBlank,
+  CameraIcon as Camera,
+  ClockIcon as Clock,
+  CompassIcon as Compass,
+  CrosshairIcon as Crosshair,
+  ImageIcon,
+  LaptopIcon as Laptop,
+  LeafIcon as Leaf,
+  MapPinIcon as MapPin,
+  MegaphoneSimpleIcon as MegaphoneSimple,
+  QuestionIcon as Question,
+  StackIcon as Stack,
+  UsersThreeIcon as UsersThree,
 } from "@phosphor-icons/react"
 import junglepediaData from "@/../data/junglepedia.json"
 import Monyet from "@/components/icons/monyet"
@@ -322,14 +327,21 @@ export default function HubPage() {
       <div id="jelajahi" className="hub-zone-map scroll-mt-20 relative">
         {/* Decorative top */}
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-sunlit-gold/30 to-transparent" />
-        {/* Trail paths SVG */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <svg className="w-full h-full mt-24" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice">
+
+      <SectionBody>
+        <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
+        <div className="grid grid-cols-2 gap-10 sm:gap-12 md:gap-16 max-w-4xl mx-auto relative">
+          <svg
+            className="pointer-events-none absolute inset-0 z-0 size-full overflow-visible"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
             {[
-              "M120,120 L600,300",
-              "M1080,180 L600,300",
-              "M120,480 L600,300",
-              "M1080,480 L600,300",
+              "M25,25 L50,50",
+              "M75,25 L50,50",
+              "M25,75 L50,50",
+              "M75,75 L50,50",
             ].map((path) => (
               <motion.path
                 key={path}
@@ -337,6 +349,7 @@ export default function HubPage() {
                 stroke="var(--color-sage)"
                 strokeWidth="1.5"
                 strokeDasharray="8 7"
+                vectorEffect="non-scaling-stroke"
                 opacity="0.48"
                 fill="none"
                 animate={reduceMotion ? undefined : { strokeDashoffset: [0, -30] }}
@@ -344,14 +357,9 @@ export default function HubPage() {
               />
             ))}
           </svg>
-        </div>
-
-      <SectionBody>
-        <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
-        <div className="grid grid-cols-2 gap-10 sm:gap-12 md:gap-16 max-w-4xl mx-auto relative">
           <motion.div
             className="pointer-events-none absolute left-1/2 top-1/2 z-20 flex size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-warm-cream bg-sunlit-gold/85 shadow-lg shadow-jungle-shadow/25 sm:size-20"
-            animate={reduceMotion ? undefined : { y: [0, -4, 0] }}
+            animate={reduceMotion ? undefined : { scale: [1, 1.025, 1] }}
             transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
             aria-hidden="true"
           >
@@ -412,7 +420,7 @@ export default function HubPage() {
                 initial={{ opacity: 0, y: 24 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12, duration: 0.5 }}
-                className={desktopClass}
+                className={`relative z-10 ${desktopClass}`}
               >
                 {isLocked ? (
                   <button
@@ -644,30 +652,39 @@ export default function HubPage() {
                 href="/faq"
                 className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-jungle-deep hover:text-ember"
               >
-                Buka pusat bantuan
+                Buka pusat pertanyaan
                 <ArrowUpRight size={16} weight="bold" />
               </Link>
             </div>
 
-            <div className="border-t border-jungle-deep/15">
+            <Accordion className="border-t border-jungle-deep/15">
               {faqs.slice(0, 3).map((item, index) => (
-                <motion.details
+                <motion.div
                   key={item.id}
                   whileInView={{ opacity: 1, x: 0 }}
                   initial={reduceMotion ? false : { opacity: 0, x: 18 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.07, duration: reduceMotion ? 0 : 0.42 }}
-                  className="group border-b border-jungle-deep/15"
                 >
-                  <summary className="flex cursor-pointer list-none items-start gap-4 py-5 text-jungle-deep [&::-webkit-details-marker]:hidden">
-                    <span className="mt-1 font-heading text-sm text-ember">0{index + 1}</span>
-                    <span className="flex-1 font-heading text-xl leading-snug">{item.question}</span>
-                    <CaretDown size={17} className="mt-1 shrink-0 text-moss transition-transform group-open:rotate-180" />
-                  </summary>
-                  <div className="pb-6 pl-10 pr-5 text-sm leading-relaxed text-moss">{item.answer}</div>
-                </motion.details>
+                  <AccordionItem
+                    value={`hub-faq-${item.id}`}
+                    className="border-b border-jungle-deep/15"
+                  >
+                    <AccordionTrigger className="w-full items-start gap-4 py-5 font-heading text-xl leading-snug text-jungle-deep hover:no-underline">
+                      <span className="flex flex-1 items-start gap-4">
+                        <span className="mt-1 shrink-0 font-heading text-sm text-ember">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span>{item.question}</span>
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-6 pl-10 pr-5 text-sm leading-relaxed text-moss">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
               ))}
-            </div>
+            </Accordion>
           </div>
         </SectionBody>
       </div>

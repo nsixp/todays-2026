@@ -186,7 +186,7 @@ Detail tiap halaman:
 
 | Route | Konten | Animasi Transisi |
 |-------|--------|------------------|
-| `/` | Splash: loading screen progress bar + logo + fog background | Progress 0→100%, fade out 1s, auto redirect ~2s — ke `/hub` jika sudah punya progress, ke `/welcome` jika baru |
+| `/` | Splash: loading screen progress bar + logo + fog background | Progress 0→100%, fade out 1s, auto redirect ~3s — ke `/hub` jika sudah punya progress, ke `/welcome` jika baru |
 | `/welcome` | 4 babak full-screen scroll-storytelling dengan parallax depth (kanopi hutan, jalur setapak, titik cahaya, CTA) | Framer Motion `useScroll` + `useTransform`, parallax depth |
 | `/avatar` | Pilih 1 dari 6 ikon hewan hutan SVG + input NIM + lookup ke JSON | Slide up |
 | `/hub` | Jungle scene: 4 signpost + animated kabut + fireflies + daun jatuh | Stagger children, glow pulse |
@@ -439,7 +439,7 @@ todays-2026/
 
 - **Komponen:** `src/components/loading-screen.tsx`
 - **Kemunculan:** Di halaman splash (`/`)
-- **Durasi:** ~2 detik
+- **Durasi:** ~3 detik
 - **Visual:**
   - Logo TODAYS di tengah layar
   - Progress bar horizontal (warna sunlit-gold) dari 0% → 100%

@@ -1,7 +1,10 @@
 "use client"
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { ArrowRight, CheckCircle } from "@phosphor-icons/react"
+import {
+  ArrowRightIcon as ArrowRight,
+  CheckCircleIcon as CheckCircle,
+} from "@phosphor-icons/react"
 import type { AvatarId, JejakRimbaPilihan } from "@/types"
 import Monyet from "@/components/icons/monyet"
 import Burung from "@/components/icons/burung"

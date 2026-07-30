@@ -1,7 +1,12 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { CalendarBlank, Clock, FlagCheckered, MapPin } from "@phosphor-icons/react"
+import {
+  CalendarBlankIcon as CalendarBlank,
+  ClockIcon as Clock,
+  FlagCheckeredIcon as FlagCheckered,
+  MapPinIcon as MapPin,
+} from "@phosphor-icons/react"
 import { getSchedule } from "@/lib/data"
 
 const schedule = getSchedule()
@@ -12,7 +17,7 @@ export default function JadwalPage() {
   return (
     <div className="schedule-manifest-surface min-h-dvh pb-24 pt-24">
       <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <section className="grid min-h-[23rem] items-center gap-8 py-8 md:grid-cols-[1fr_auto] md:py-10">
+        <section className="grid min-h-92 items-center gap-8 py-8 md:grid-cols-[1fr_auto] md:py-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

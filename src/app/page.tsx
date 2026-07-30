@@ -26,7 +26,7 @@ export default function SplashPage() {
   return (
     <div className="fixed inset-0 overflow-hidden bg-jungle-shadow">
       <LoadingScreen
-        duration={2500}
+        duration={3000}
         onComplete={() => {
           resolveDestination()
           setDone(true)

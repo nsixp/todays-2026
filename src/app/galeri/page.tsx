@@ -3,7 +3,10 @@
 import { useCallback, useState } from "react"
 import Image from "next/image"
 import { motion, useReducedMotion } from "framer-motion"
-import { Aperture, CornersOut } from "@phosphor-icons/react"
+import {
+  ApertureIcon as Aperture,
+  CornersOutIcon as CornersOut,
+} from "@phosphor-icons/react"
 import { getGallery } from "@/lib/data"
 import Lightbox from "@/components/lightbox"
 
@@ -36,7 +39,7 @@ export default function GaleriPage() {
   return (
     <div className="gallery-dark-surface min-h-dvh pb-24 pt-24 text-warm-cream">
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <section className="grid min-h-[19rem] items-center gap-8 py-8 md:grid-cols-[1fr_auto] md:py-10">
+        <section className="grid min-h-76 items-center gap-8 py-8 md:grid-cols-[1fr_auto] md:py-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -76,7 +79,7 @@ export default function GaleriPage() {
             <span className="text-xs font-semibold text-sunlit-gold">{items.length} bingkai</span>
           </div>
 
-          <div className="grid grid-flow-dense auto-rows-[9rem] grid-cols-2 gap-2.5 sm:auto-rows-[10rem] sm:grid-cols-3 lg:grid-cols-5 lg:gap-3">
+          <div className="grid grid-flow-dense auto-rows-36 grid-cols-2 gap-2.5 sm:auto-rows-40 sm:grid-cols-3 lg:grid-cols-5 lg:gap-3">
             {items.map((item, index) => (
               <motion.button
                 key={item.id}

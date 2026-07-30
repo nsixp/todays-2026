@@ -2,7 +2,15 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Book, Clock, Star, Circle, PencilSimple, Backpack, Check } from "@phosphor-icons/react"
+import {
+  BackpackIcon as Backpack,
+  BookIcon as Book,
+  CheckIcon as Check,
+  CircleIcon as Circle,
+  ClockIcon as Clock,
+  PencilSimpleIcon as PencilSimple,
+  StarIcon as Star,
+} from "@phosphor-icons/react"
 
 interface InventorySatchelProps {
   guidebookDone: boolean

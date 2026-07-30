@@ -4,14 +4,14 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowsLeftRight,
-  Check,
-  CheckCircle,
-  Medal,
-  Question,
-  Timer,
+  ArrowLeftIcon as ArrowLeft,
+  ArrowRightIcon as ArrowRight,
+  ArrowsLeftRightIcon as ArrowsLeftRight,
+  CheckCircleIcon as CheckCircle,
+  CheckIcon as Check,
+  MedalIcon as Medal,
+  QuestionIcon as Question,
+  TimerIcon as Timer,
 } from "@phosphor-icons/react"
 import { useProgress } from "@/hooks/use-progress"
 import { getQuiz } from "@/lib/data"

@@ -4,15 +4,15 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { motion, useReducedMotion } from "framer-motion"
 import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle,
-  IdentificationBadge,
-  MapPinArea,
-  Student,
-  User,
-  UsersThree,
-  WhatsappLogo,
+  ArrowLeftIcon as ArrowLeft,
+  ArrowRightIcon as ArrowRight,
+  CheckCircleIcon as CheckCircle,
+  IdentificationBadgeIcon as IdentificationBadge,
+  MapPinAreaIcon as MapPinArea,
+  StudentIcon as Student,
+  UserIcon as User,
+  UsersThreeIcon as UsersThree,
+  WhatsappLogoIcon as WhatsappLogo,
 } from "@phosphor-icons/react"
 import { useProgress } from "@/hooks/use-progress"
 import { getParticipantByNim, getKelompok, getParticipants } from "@/lib/data"

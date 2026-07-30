@@ -7,7 +7,11 @@ import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
 import ForestSilhouettes from "@/components/forest-silhouettes"
-import { BookOpen, Question, User } from "@phosphor-icons/react"
+import {
+  BookOpenIcon as BookOpen,
+  QuestionIcon as Question,
+  UserIcon as User,
+} from "@phosphor-icons/react"
 
 const containerVariants = {
   visible: {
@@ -46,13 +50,13 @@ function BabakSatu() {
       ref={ref}
       className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden"
     >
-      <motion.div style={reduceMotion ? undefined : { scale: canopyScale }} className="absolute inset-0 bg-gradient-to-b from-jungle-canopy/50 via-jungle-deep/25 to-warm-cream pointer-events-none" />
+      <motion.div style={reduceMotion ? undefined : { scale: canopyScale }} className="absolute inset-0 bg-linear-to-b from-jungle-canopy/50 via-jungle-deep/25 to-warm-cream pointer-events-none" />
       <ForestSilhouettes className="opacity-80" />
       <div className="absolute inset-0 hidden sm:block">
         <BackgroundFoliage variant="canopy-top" opacity={0.12} />
       </div>
-      <motion.div style={reduceMotion ? undefined : { y: fogBgY }} className="absolute inset-0 hidden sm:block bg-gradient-to-b from-jungle-mist/20 via-transparent to-transparent pointer-events-none" />
-      <motion.div style={reduceMotion ? undefined : { y: fogFgY }} className="absolute inset-0 hidden sm:block bg-gradient-to-t from-jungle-mist/15 via-transparent to-transparent pointer-events-none" />
+      <motion.div style={reduceMotion ? undefined : { y: fogBgY }} className="absolute inset-0 hidden sm:block bg-linear-to-b from-jungle-mist/20 via-transparent to-transparent pointer-events-none" />
+      <motion.div style={reduceMotion ? undefined : { y: fogFgY }} className="absolute inset-0 hidden sm:block bg-linear-to-t from-jungle-mist/15 via-transparent to-transparent pointer-events-none" />
 
       {[0, 1, 2].map((i) => (
         <motion.div
@@ -107,7 +111,7 @@ function BabakDua() {
   return (
     <section
       ref={ref}
-      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-gradient-to-b from-warm-cream to-fern-mist/30"
+      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-linear-to-b from-warm-cream to-fern-mist/30"
     >
       <motion.div style={reduceMotion ? undefined : { y: bgY }} className="absolute inset-0 pointer-events-none">
         {[
@@ -210,7 +214,7 @@ function BabakTiga() {
   return (
     <section
       ref={ref}
-      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-gradient-to-b from-fern-mist/30 to-warm-cream"
+      className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-linear-to-b from-fern-mist/30 to-warm-cream"
     >
       <DappledLight count={3} color="#A3C4B5" />
       <motion.div style={reduceMotion ? undefined : { y: orbY }} className="absolute inset-0 pointer-events-none">
@@ -284,7 +288,7 @@ export default function WelcomePage() {
     <div ref={containerRef} className="relative h-dvh overflow-y-scroll snap-y snap-mandatory">
       <motion.div
         style={reduceMotion ? { opacity: 0 } : { opacity: fogOpacity }}
-        className="fixed inset-0 pointer-events-none z-20 bg-gradient-to-b from-jungle-mist/40 via-jungle-mist/20 to-transparent"
+        className="fixed inset-0 pointer-events-none z-20 bg-linear-to-b from-jungle-mist/40 via-jungle-mist/20 to-transparent"
       />
 
       <BabakSatu />
@@ -292,7 +296,7 @@ export default function WelcomePage() {
       <BabakTiga />
 
       <section className="relative min-h-dvh snap-start flex items-center justify-center overflow-hidden bg-warm-cream">
-        <div className="absolute inset-0 bg-gradient-to-b from-sunlit-gold/5 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-sunlit-gold/5 via-transparent to-transparent pointer-events-none" />
         <ForestSilhouettes className="opacity-60" />
         <AmbientParticles count={4} colors={["#F3C46B", "#F5D590", "#C47A22"]} />
 

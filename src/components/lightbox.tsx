@@ -4,7 +4,11 @@ import { useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import type { GalleryItem } from "@/types"
-import { X, CaretLeft, CaretRight } from "@phosphor-icons/react"
+import {
+  CaretLeftIcon as CaretLeft,
+  CaretRightIcon as CaretRight,
+  XIcon as X,
+} from "@phosphor-icons/react"
 
 interface LightboxProps {
   items: GalleryItem[]

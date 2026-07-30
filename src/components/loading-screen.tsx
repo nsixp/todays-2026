@@ -17,7 +17,7 @@ const LEAVES = [
   { x: 50, y: 10, r: 6, delay: 1.2, dur: 3.2 },
 ]
 
-export default function LoadingScreen({ duration = 2500, onComplete }: LoadingScreenProps) {
+export default function LoadingScreen({ duration = 3000, onComplete }: LoadingScreenProps) {
   const reduceMotion = useReducedMotion()
   const [progress, setProgress] = useState(0)
   const [exiting, setExiting] = useState(false)

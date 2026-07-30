@@ -1,7 +1,11 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { ChatCircleDots, Leaf, Question } from "@phosphor-icons/react"
+import {
+  ChatCircleDotsIcon as ChatCircleDots,
+  LeafIcon as Leaf,
+  QuestionIcon as Question,
+} from "@phosphor-icons/react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { getFAQ } from "@/lib/data"
 
@@ -13,7 +17,7 @@ export default function FAQPage() {
   return (
     <div className="faq-fielddesk-surface min-h-dvh pb-24 pt-24">
       <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <section className="grid min-h-[22rem] items-center gap-8 py-8 md:grid-cols-[1fr_0.65fr] md:py-10">
+        <section className="grid min-h-88 items-center gap-8 py-8 md:grid-cols-[1fr_0.65fr] md:py-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
