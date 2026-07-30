@@ -9,7 +9,19 @@ import JejakRimbaCard from "@/components/jejak-rimba-card"
 import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
-import { CardsThree, CaretLeft, CompassRose, MapPinArea, Path, Quotes } from "@phosphor-icons/react"
+import {
+  ArrowCounterClockwise,
+  CardsThree,
+  CaretLeft,
+  CompassRose,
+  Footprints,
+  HouseLine,
+  MapPinArea,
+  Path,
+  Quotes,
+  Sparkle,
+  SunHorizon,
+} from "@phosphor-icons/react"
 
 const LATAR_CONFIG: Record<string, { overlay: string; label: string }> = {
   canopy: {
@@ -33,6 +45,54 @@ const LATAR_CONFIG: Record<string, { overlay: string; label: string }> = {
     label: "Reruntuhan Kuno",
   },
 }
+
+const ENDING_CONFIG = {
+  good: {
+    label: "Akhir Gemilang",
+    caption: "Kamu menemukan jalan menuju padang cahaya.",
+    Icon: SunHorizon,
+    shell: "bg-[#DDE1C3]",
+    panel: "border-jungle-deep/10 bg-jungle-deep text-warm-cream",
+    iconWrap: "border-sunlit-gold/35 bg-sunlit-gold text-jungle-deep",
+    labelClass: "text-sunlit-gold",
+    titleClass: "text-warm-cream",
+    bodyClass: "text-warm-cream/72",
+    statClass: "border-warm-cream/12 bg-warm-cream/5",
+    secondaryButton:
+      "border-warm-cream/20 bg-transparent text-warm-cream hover:border-warm-cream/40 hover:bg-warm-cream/8",
+    primaryButton: "bg-sunlit-gold text-jungle-deep hover:bg-[#E9B64F]",
+  },
+  neutral: {
+    label: "Akhir Teduh",
+    caption: "Perjalanan selesai di jalur senja yang tenang.",
+    Icon: Path,
+    shell: "bg-[#454B36]",
+    panel: "border-[#C9B58F]/60 bg-[#F1E6D2] text-[#243326]",
+    iconWrap: "border-[#704B2E]/20 bg-[#704B2E] text-[#FFF4DF]",
+    labelClass: "text-[#704B2E]",
+    titleClass: "text-[#243326]",
+    bodyClass: "text-[#435543]",
+    statClass: "border-[#243326]/12 bg-[#243326]/5",
+    secondaryButton:
+      "border-[#243326]/18 bg-transparent text-[#344936] hover:border-[#243326]/35 hover:bg-[#243326]/6",
+    primaryButton: "bg-[#704B2E] text-[#FFF4DF] hover:bg-[#593C27]",
+  },
+  hidden: {
+    label: "Akhir Tersembunyi",
+    caption: "Kamu membuka rahasia yang tidak ditemukan semua penjelajah.",
+    Icon: Sparkle,
+    shell: "bg-[#07131C]",
+    panel: "border-[#9C8AD0]/35 bg-[#101F2B] text-[#FFF8E9]",
+    iconWrap: "border-[#B9A7EF]/35 bg-[#B9A7EF] text-[#101625]",
+    labelClass: "text-[#CDBFFD]",
+    titleClass: "text-[#FFF8E9]",
+    bodyClass: "text-[#E6E1D7]/75",
+    statClass: "border-[#CDBFFD]/18 bg-[#CDBFFD]/7",
+    secondaryButton:
+      "border-[#E6E1D7]/20 bg-transparent text-[#F7F0E4] hover:border-[#E6E1D7]/40 hover:bg-[#E6E1D7]/7",
+    primaryButton: "bg-[#CDBFFD] text-[#101625] hover:bg-[#B9A7EF]",
+  },
+} as const
 
 const storyVariants = {
   enter: { opacity: 0, x: 80, filter: "blur(4px)" },
@@ -133,6 +193,7 @@ export default function JejakRimbaPage() {
 
   const latar = currentNode.latar ?? "canopy"
   const latarCfg = LATAR_CONFIG[latar]
+  const endingCfg = currentNode.ending ? ENDING_CONFIG[currentNode.ending.tier] : null
 
   return (
     <div className="min-h-dvh bg-jungle-deep flex flex-col overflow-x-hidden">
@@ -186,10 +247,6 @@ export default function JejakRimbaPage() {
               className="relative z-10 mx-auto w-full max-w-2xl px-4 py-8 sm:px-6"
             >
               <div className="narrative-journal relative overflow-hidden rounded-[1.75rem] border border-warm-cream/70">
-                <div className="absolute inset-y-0 left-0 w-1.5 bg-linear-to-b from-sunlit-gold via-ember/70 to-moss" />
-                <div className="absolute -right-12 -top-12 size-40 rounded-full border border-jungle-deep/8" />
-                <div className="absolute -right-6 -top-6 size-28 rounded-full border border-dashed border-jungle-deep/10" />
-
                 <header className="relative flex items-center justify-between gap-4 border-b border-jungle-deep/10 px-5 py-4 sm:px-7">
                   <div className="flex items-center gap-3">
                     <div className="flex size-10 items-center justify-center rounded-full border border-jungle-deep/15 bg-jungle-deep/5 text-jungle-deep">
@@ -258,236 +315,119 @@ export default function JejakRimbaPage() {
       </AnimatePresence>
 
       {/* ============ ENDING SCREEN ============ */}
-      {transitionPhase === "ending" && currentNode.ending && (
+      {transitionPhase === "ending" && currentNode.ending && endingCfg && (
         <motion.div
           key="ending-screen"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className={`fixed inset-0 z-40 flex flex-col items-center justify-center overflow-hidden ${
-            currentNode.ending.tier === "good"
-              ? "bg-[radial-gradient(ellipse_at_40%_30%,#FDF3D6_0%,#F7E9C8_40%,#E8D4A8_70%,#D4BFA0_100%)]"
-              : currentNode.ending.tier === "neutral"
-                ? "bg-[radial-gradient(ellipse_at_50%_40%,#F0DCC0_0%,#DCC4A0_35%,#BFA07A_65%,#8B7355_100%)]"
-                : "bg-[radial-gradient(ellipse_at_50%_30%,#1E2940_0%,#121A2E_35%,#0A0F1A_65%,#050810_100%)]"
-          }`}
+          transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeOut" }}
+          className={`fixed inset-0 z-40 flex items-center justify-center overflow-y-auto px-4 py-8 sm:px-6 ${endingCfg.shell}`}
         >
-          {/* Atmospheric elements per tier */}
           {currentNode.ending.tier === "good" && (
             <>
-              {/* Golden glow layers */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-120 h-120 rounded-full bg-sunlit-gold/15 blur-[100px]" />
-                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-amber-300/10 blur-[80px]" />
-                <div className="absolute top-1/3 left-1/2 w-96 h-64 rounded-full bg-yellow-200/8 blur-[90px]" />
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute left-1/2 -top-72 size-168 -translate-x-1/2 rounded-full bg-sunlit-gold/55 blur-3xl" />
+                <div className="absolute left-1/2 -top-52 size-136 -translate-x-1/2 rounded-full border border-jungle-deep/10" />
+                <div className="absolute left-1/2 -top-32 size-96 -translate-x-1/2 rounded-full border border-jungle-deep/10" />
+                <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(175deg,transparent_34%,rgba(45,90,58,0.15)_35%,rgba(45,90,58,0.15)_55%,rgba(26,58,43,0.16)_56%)]" />
               </div>
-              {/* Golden sparkles */}
-              <div className="absolute inset-0 pointer-events-none">
-                {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 rounded-full"
-                    style={{
-                      left: `${12 + i * 14}%`,
-                      top: `${20 + (i % 3) * 25}%`,
-                      backgroundColor: "#F3C46B",
-                      boxShadow: "0 0 4px 2px rgba(243,196,107,0.3)",
-                    }}
-                    animate={{ y: [0, -30 - i * 10], opacity: [0, 0.6, 0], scale: [0, 1, 0] }}
-                    transition={{ duration: 3 + i * 0.4, delay: i * 0.3, repeat: Infinity, ease: "easeOut" }}
-                  />
-                ))}
-              </div>
-              <DappledLight count={5} color="#F3C46B" />
-              <AmbientParticles count={6} colors={["#F3C46B", "#F5D590", "#C47A22", "#FAE8A0"]} />
+              <DappledLight count={4} color="#F3C46B" />
+              <AmbientParticles count={5} colors={["#F3C46B", "#F5D590", "#8EA98D"]} />
             </>
           )}
+
           {currentNode.ending.tier === "neutral" && (
             <>
-              {/* Dusk glow layers */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/4 left-1/3 w-80 h-80 rounded-full bg-amber-500/12 blur-[90px]" />
-                <div className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-amber-600/8 blur-[80px]" />
-                <div className="absolute top-1/2 left-1/2 w-64 h-48 rounded-full bg-sage/10 blur-[70px]" />
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(ellipse_at_50%_0%,rgba(243,196,107,0.32),transparent_64%)]" />
+                <div className="absolute -bottom-52 left-1/2 h-136 w-36 -translate-x-1/2 rotate-6 rounded-[50%] border-x border-[#D8C49C]/25" />
+                <div className="absolute -bottom-52 left-1/2 h-136 w-72 -translate-x-1/2 rotate-6 rounded-[50%] border-x border-[#D8C49C]/12" />
+                <div className="absolute left-[12%] top-[18%] h-24 w-px bg-[#D8C49C]/18" />
+                <div className="absolute right-[12%] top-[28%] h-36 w-px bg-[#D8C49C]/18" />
               </div>
-              {/* Floating ember particles */}
-              <div className="absolute inset-0 pointer-events-none">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute rounded-full"
-                    style={{
-                      left: `${20 + i * 15}%`,
-                      top: `${60 + (i % 2) * 15}%`,
-                      width: `${2 + (i % 3)}px`,
-                      height: `${2 + (i % 3)}px`,
-                      backgroundColor: "#C47A22",
-                      boxShadow: "0 0 3px 1px rgba(196,122,34,0.2)",
-                    }}
-                    animate={{
-                      y: [0, -20 - i * 8, 0],
-                      x: [0, i % 2 === 0 ? 8 : -8, 0],
-                      opacity: [0, 0.5, 0],
-                    }}
-                    transition={{ duration: 4 + i * 0.5, delay: i * 0.4, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                ))}
-              </div>
-              <AmbientParticles count={5} colors={["#C47A22", "#8EA98D", "#A0785A"]} />
+              <AmbientParticles count={4} colors={["#D8C49C", "#C47A22", "#8EA98D"]} />
             </>
           )}
+
           {currentNode.ending.tier === "hidden" && (
             <>
-              {/* Mystical deep glow */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/4 left-1/3 w-96 h-96 rounded-full bg-indigo-500/12 blur-[100px]" />
-                <div className="absolute bottom-1/4 right-1/3 w-72 h-72 rounded-full bg-purple-400/10 blur-[80px]" />
-                <div className="absolute top-1/2 left-1/2 w-64 h-48 rounded-full bg-blue-500/8 blur-[70px]" />
-              </div>
-              {/* Stars */}
-              <div className="absolute inset-0 pointer-events-none">
-                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute rounded-full"
-                    style={{
-                      left: `${8 + i * 11}%`,
-                      top: `${10 + (i % 4) * 20}%`,
-                      width: `${1.5 + (i % 3)}px`,
-                      height: `${1.5 + (i % 3)}px`,
-                      backgroundColor: "#C4B5FD",
-                      boxShadow: "0 0 4px 2px rgba(196,181,253,0.2)",
-                    }}
-                    animate={{ opacity: [0, 0.7, 0.1, 0], scale: [0, 1.2, 0.5, 0] }}
-                    transition={{ duration: 4 + (i % 3) * 2, delay: i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                ))}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute left-1/2 top-1/2 size-136 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#CDBFFD]/9" />
+                <div className="absolute left-1/2 top-1/2 size-100 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#CDBFFD]/12" />
+                <div className="absolute left-1/2 top-1/2 size-68 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#CDBFFD]/16" />
+                <div className="absolute left-1/2 top-1/2 size-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7159A8]/18 blur-3xl" />
               </div>
               <BackgroundFoliage variant="canopy-top" opacity={0.08} />
-              <BackgroundFoliage variant="vines-side" opacity={0.04} />
-              <AmbientParticles count={6} colors={["#C4B5FD", "#A78BFA", "#818CF8", "#C084FC"]} />
+              <AmbientParticles count={5} colors={["#CDBFFD", "#9C8AD0", "#818CF8"]} />
             </>
           )}
 
-          <div className="relative z-10 w-full max-w-lg mx-auto px-6 text-center">
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 14 }}
-              className={`w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center ${
-                currentNode.ending.tier === "good"
-                  ? "bg-sunlit-gold/20 border-2 border-sunlit-gold/50"
-                  : currentNode.ending.tier === "neutral"
-                    ? "bg-amber-500/15 border-2 border-amber-500/40"
-                    : "bg-purple-400/15 border-2 border-purple-400/40"
-              }`}
-            >
-              {currentNode.ending.tier === "good" ? (
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 text-sunlit-gold">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor" />
-                </svg>
-              ) : currentNode.ending.tier === "neutral" ? (
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 text-amber-500">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                  <path d="M2 17l10 5 10-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                  <path d="M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 text-purple-300">
-                  <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.3" />
-                  <path d="M17.657 6.343l-1.414 1.414M7.757 16.243l-1.414 1.414M17.657 17.657l-1.414-1.414M7.757 7.757L6.343 6.343" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-                </svg>
-              )}
-            </motion.div>
-
-            <motion.span
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-              className={`inline-block text-[10px] font-sans tracking-[0.2em] uppercase mb-2 ${
-                currentNode.ending.tier === "good"
-                  ? "text-sunlit-gold/60"
-                  : currentNode.ending.tier === "neutral"
-                    ? "text-amber-600/60"
-                    : "text-purple-300/60"
-              }`}
-            >
-              {currentNode.ending.tier === "good" ? "Good Ending" : currentNode.ending.tier === "neutral" ? "Neutral Ending" : "Hidden Ending"}
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className={`font-heading text-3xl sm:text-4xl mb-4 leading-tight ${
-                currentNode.ending.tier === "good"
-                  ? "text-jungle-deep"
-                  : currentNode.ending.tier === "neutral"
-                    ? "text-jungle-deep"
-                    : "text-warm-cream"
-              }`}
-            >
-              {currentNode.ending.title}
-            </motion.h2>
-
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.65, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className={`h-px mx-auto mb-4 ${
-                currentNode.ending.tier === "good"
-                  ? "bg-sunlit-gold/30"
-                  : currentNode.ending.tier === "neutral"
-                    ? "bg-amber-500/25"
-                    : "bg-purple-400/25"
-              }`}
-              style={{ width: "40%" }}
-            />
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-              className={`text-sm font-sans leading-relaxed ${
-                currentNode.ending.tier === "good" || currentNode.ending.tier === "neutral"
-                  ? "text-moss"
-                  : "text-warm-cream/70"
-              }`}
-            >
-              {currentNode.ending.deskripsi}
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.4 }}
-              className="mt-10 flex flex-col sm:flex-row items-center gap-3 justify-center"
-            >
-              <button
-                onClick={() => router.push("/hub")}
-                className={`btn-jungle border-2 px-8 py-3 text-sm transition-all duration-300 ${
-                  currentNode.ending.tier === "good" || currentNode.ending.tier === "neutral"
-                    ? "border-jungle-deep/20 text-moss hover:bg-jungle-deep/5 hover:text-jungle-deep hover:border-jungle-deep/40"
-                    : "border-warm-cream/20 text-warm-cream/60 hover:bg-warm-cream/5 hover:text-warm-cream hover:border-warm-cream/40"
-                }`}
+          <motion.section
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: reduceMotion ? 0 : 0.58, delay: reduceMotion ? 0 : 0.12, ease: [0.16, 1, 0.3, 1] }}
+            className={`relative z-10 grid w-full max-w-4xl overflow-hidden rounded-4xl border shadow-2xl shadow-black/20 md:grid-cols-[16rem_minmax(0,1fr)] ${endingCfg.panel}`}
+          >
+            <aside className="flex flex-col justify-between border-b border-current/10 p-6 md:border-b-0 md:border-r md:p-8">
+              <motion.div
+                initial={{ scale: 0.7, rotate: -18 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : { delay: 0.28, type: "spring", stiffness: 120, damping: 14 }
+                }
+                className={`flex size-20 items-center justify-center rounded-3xl border ${endingCfg.iconWrap}`}
               >
-                Kembali ke Jungle Hub
-              </button>
-              <button
-                onClick={handleReset}
-                className={`btn-jungle px-8 py-3 text-sm ${
-                  currentNode.ending.tier === "good"
-                    ? "bg-sunlit-gold text-jungle-deep hover:bg-ember shadow-lg shadow-sunlit-gold/20"
-                    : currentNode.ending.tier === "neutral"
-                      ? "bg-amber-600 text-warm-cream hover:bg-amber-700 shadow-lg shadow-amber-600/20"
-                      : "bg-indigo-500 text-warm-cream hover:bg-indigo-600 shadow-lg shadow-indigo-500/20"
-                }`}
-              >
-                Main Lagi
-              </button>
-            </motion.div>
-          </div>
+                <endingCfg.Icon size={39} weight="duotone" />
+              </motion.div>
+
+              <div className="mt-12 grid grid-cols-2 gap-2 md:mt-20 md:grid-cols-1">
+                <div className={`rounded-2xl border p-4 ${endingCfg.statClass}`}>
+                  <Footprints size={18} weight="duotone" />
+                  <p className="mt-4 font-heading text-3xl">{state.history.length}</p>
+                  <p className="text-[10px] opacity-65">Langkah ditempuh</p>
+                </div>
+                <div className={`rounded-2xl border p-4 ${endingCfg.statClass}`}>
+                  <CompassRose size={18} weight="duotone" />
+                  <p className="mt-4 font-heading text-xl">Selesai</p>
+                  <p className="text-[10px] opacity-65">Status perjalanan</p>
+                </div>
+              </div>
+            </aside>
+
+            <div className="flex flex-col justify-center p-6 sm:p-9 md:p-12">
+              <p className={`text-xs font-semibold ${endingCfg.labelClass}`}>{endingCfg.label}</p>
+              <h2 className={`mt-3 text-balance font-heading text-4xl leading-[1.02] sm:text-5xl ${endingCfg.titleClass}`}>
+                {currentNode.ending.title}
+              </h2>
+              <p className={`mt-5 max-w-xl text-sm leading-7 ${endingCfg.bodyClass}`}>
+                {currentNode.ending.deskripsi}
+              </p>
+
+              <div className={`mt-7 flex items-start gap-3 rounded-2xl border p-4 ${endingCfg.statClass}`}>
+                <Quotes size={19} weight="duotone" className="mt-0.5 shrink-0" />
+                <p className="text-xs leading-6 opacity-75">{endingCfg.caption}</p>
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <button
+                  onClick={() => router.push("/hub")}
+                  className={`btn-jungle inline-flex min-h-12 items-center justify-center gap-2 border px-6 text-sm ${endingCfg.secondaryButton}`}
+                >
+                  <HouseLine size={18} weight="duotone" />
+                  Kembali ke Jungle Hub
+                </button>
+                <button
+                  onClick={handleReset}
+                  className={`btn-jungle inline-flex min-h-12 items-center justify-center gap-2 px-6 text-sm ${endingCfg.primaryButton}`}
+                >
+                  <ArrowCounterClockwise size={18} weight="bold" />
+                  Main Lagi
+                </button>
+              </div>
+            </div>
+          </motion.section>
         </motion.div>
       )}
 

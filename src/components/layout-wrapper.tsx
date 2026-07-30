@@ -19,7 +19,7 @@ const FOLIAGE_ROUTES: Record<string, "canopy-top" | "vines-side" | "leaves-corne
   "/jejak-rimba": "canopy-top",
 }
 
-const NO_NAVBAR = ["/", "/guidebook", "/quiz"]
+const NO_NAVBAR = ["/", "/guidebook", "/quiz", "/jejak-rimba"]
 const NO_FOOTER = ["/", "/guidebook", "/quiz", "/jejak-rimba"]
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -33,7 +33,11 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     <>
       {showNavbar && <Navbar />}
       <div className="relative flex flex-col min-h-dvh">
-        {foliageVariant && <BackgroundFoliage variant={foliageVariant} />}
+        {foliageVariant && (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+            <BackgroundFoliage variant={foliageVariant} />
+          </div>
+        )}
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
