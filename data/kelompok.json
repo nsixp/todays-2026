@@ -1,0 +1,42 @@
+[
+  {
+    "nomor_kelompok": 1,
+    "nama_kelompok": "Harimau Sumatra",
+    "deskripsi": "Harimau Sumatra melambangkan keberanian, kepemimpinan, dan ketangguhan. Seperti sang Raja Hutan, kelompok ini diharapkan menjadi pelopor yang tak gentar menghadapi tantangan dan membawa semangat juang dalam setiap langkah.",
+    "mentor": "Kak Rina",
+    "prodi_mentor": "S1 Manajemen",
+    "link_grup_wa": "https://chat.whatsapp.com/harimau1"
+  },
+  {
+    "nomor_kelompok": 2,
+    "nama_kelompok": "Rusa Jawa",
+    "deskripsi": "Rusa Jawa melambangkan kecepatan, keanggunan, dan keharmonisan. Seperti rusa yang lincah melewati rintangan, kelompok ini diharapkan mampu bergerak cepat dan adaptif dalam setiap situasi.",
+    "mentor": "Kak Dika",
+    "prodi_mentor": "S1 Teknik Informatika",
+    "link_grup_wa": "https://chat.whatsapp.com/rusa2"
+  },
+  {
+    "nomor_kelompok": 3,
+    "nama_kelompok": "Burung Cenderawasih",
+    "deskripsi": "Burung Cenderawasih melambangkan keindahan, keunikan, dan kreativitas. Dikenal sebagai Burung Surga, kelompok ini diharapkan menebarkan keindahan karya dan ide-ide cemerlang selama PKKMB.",
+    "mentor": "Kak Sari",
+    "prodi_mentor": "S1 Ilmu Komunikasi",
+    "link_grup_wa": "https://chat.whatsapp.com/cenderawasih3"
+  },
+  {
+    "nomor_kelompok": 4,
+    "nama_kelompok": "Monyet Ekor Panjang",
+    "deskripsi": "Monyet Ekor Panjang melambangkan kecerdasan, rasa ingin tahu, dan kelincahan. Seperti monyet yang cerdik dan penuh akal, kelompok ini diharapkan menjadi pemecah masalah yang kreatif dan inovatif.",
+    "mentor": "Kak Bayu",
+    "prodi_mentor": "S1 Akuntansi",
+    "link_grup_wa": "https://chat.whatsapp.com/monyet4"
+  },
+  {
+    "nomor_kelompok": 5,
+    "nama_kelompok": "Kupu-Kupu Raja",
+    "deskripsi": "Kupu-Kupu Raja melambangkan transformasi, keanggunan, dan kebebasan. Dari ulat menjadi kupu-kupu yang indah, kelompok ini melambangkan perjalanan mahasiswa baru bertransformasi menjadi pribadi yang lebih dewasa dan berdaya.",
+    "mentor": "Kak Intan",
+    "prodi_mentor": "S1 Desain Komunikasi Visual",
+    "link_grup_wa": "https://chat.whatsapp.com/kupu5"
+  }
+]

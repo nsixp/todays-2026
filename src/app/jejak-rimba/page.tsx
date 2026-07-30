@@ -46,7 +46,7 @@ export default function JejakRimbaPage() {
   const bgGradient = LATAR_BG[latar]
 
   return (
-    <div className="min-h-dvh bg-warm-cream flex flex-col">
+    <div className="min-h-dvh bg-warm-cream flex flex-col overflow-x-hidden">
       {/* Narrative Section (60%) */}
       <div className={`relative flex-1 flex items-center justify-center p-6 bg-linear-to-b ${bgGradient}`}>
         <AnimatePresence mode="wait">

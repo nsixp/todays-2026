@@ -86,7 +86,7 @@ export default function BadgePage() {
             onClick={() => router.push("/hub")}
             className="rounded-full bg-jungle-deep text-warm-cream px-8 py-3 text-sm font-sans font-medium tracking-wide hover:bg-moss transition-colors"
           >
-            Kembali ke Hub
+            Kembali ke Jungle Hub
           </button>
         </div>
       </motion.div>

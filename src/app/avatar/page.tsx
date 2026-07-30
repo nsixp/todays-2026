@@ -144,7 +144,7 @@ export default function AvatarPage() {
                   value={nim}
                   onChange={(e) => { setNim(e.target.value); setError("") }}
                   onKeyDown={(e) => e.key === "Enter" && handleNimSubmit()}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-fern-mist bg-white/70 backdrop-blur-sm text-sm text-jungle-deep font-sans placeholder:text-sage/50 focus:border-sunlit-gold focus:outline-none transition-all duration-200 focus:bg-white focus:shadow-[0_0_24px_-8px_rgba(243,196,107,0.35)]"
+                  className="w-full pl-4 pr-4 py-3 rounded-xl border-2 border-fern-mist bg-white/70 backdrop-blur-sm text-sm text-jungle-deep font-sans placeholder:text-sage/50 focus:border-sunlit-gold focus:outline-none transition-all duration-200 focus:bg-white focus:shadow-[0_0_24px_-8px_rgba(243,196,107,0.35)]"
                   autoFocus
                 />
               </div>

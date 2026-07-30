@@ -1,6 +1,7 @@
-import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem, GalleryItem, JejakRimbaNode } from "@/types"
+import type { Participant, GuidebookSection, QuizQuestion, FAQItem, ScheduleItem, JunglePediaItem, GalleryItem, JejakRimbaNode, KelompokInfo } from "@/types"
 
 import participantsData from "@/../data/participants.json"
+import kelompokData from "@/../data/kelompok.json"
 import guidebookData from "@/../data/guidebook.json"
 import quizData from "@/../data/quiz.json"
 import faqData from "@/../data/faq.json"
@@ -15,6 +16,10 @@ export function getParticipants(): Participant[] {
 
 export function getParticipantByNim(nim: string): Participant | undefined {
   return getParticipants().find((p) => p.nim === nim)
+}
+
+export function getKelompok(): KelompokInfo[] {
+  return kelompokData as KelompokInfo[]
 }
 
 export function getGuidebook(): GuidebookSection[] {

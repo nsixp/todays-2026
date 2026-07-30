@@ -61,9 +61,6 @@ export default function GuidebookViewer({ sections }: GuidebookViewerProps) {
               style={{ width: `${((currentIndex + 1) / total) * 100}%` }}
             />
           </div>
-          <span className="text-xs text-moss font-sans tabular-nums shrink-0">
-            {currentIndex + 1}/{total} halaman
-          </span>
         </div>
 
         <AnimatePresence mode="wait" custom={direction}>

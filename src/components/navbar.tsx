@@ -55,9 +55,25 @@ const ICONS: Record<string, React.ReactNode> = {
   ),
 }
 
+const NAVBAR_BG: Record<string, string> = {
+  "/hub": "bg-warm-cream/85",
+  "/junglepedia": "bg-sage/20",
+  "/galeri": "bg-sunlit-gold/10",
+  "/jadwal": "bg-moss/20",
+  "/faq": "bg-fern-mist/30",
+}
+
+function getNavbarBg(pathname: string): string {
+  for (const [route, bg] of Object.entries(NAVBAR_BG)) {
+    if (pathname === route || pathname.startsWith(route + "/")) return bg
+  }
+  return "bg-warm-cream/85"
+}
+
 export default function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const navbarBg = getNavbarBg(pathname)
 
   function close() {
     setOpen(false)
@@ -65,7 +81,7 @@ export default function Navbar() {
 
   return (
     <LayoutGroup>
-      <nav className="fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 px-5 py-2.5 bg-warm-cream/85 backdrop-blur-lg border border-fern-mist/40 rounded-2xl shadow-lg shadow-jungle-deep/5 w-[calc(100%-24px)] sm:w-auto sm:min-w-160 lg:min-w-180 max-w-4xl">
+      <nav className={`fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 px-5 py-2.5 ${navbarBg} backdrop-blur-lg border border-fern-mist/40 rounded-2xl shadow-lg shadow-jungle-deep/5 w-[calc(100%-24px)] sm:w-auto sm:min-w-160 lg:min-w-180 max-w-4xl transition-colors duration-300`}>
         <Link href="/hub" className="font-heading text-lg text-jungle-deep tracking-tight shrink-0">
           TODAYS 2026
         </Link>

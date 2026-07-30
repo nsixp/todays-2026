@@ -19,17 +19,21 @@ const FOLIAGE_ROUTES: Record<string, "canopy-top" | "vines-side" | "leaves-corne
   "/jejak-rimba": "canopy-top",
 }
 
+const NO_NAVBAR = ["/", "/guidebook", "/quiz", "/welcome", "/avatar", "/jejak-rimba", "/kelompok"]
+const NO_FOOTER = ["/", "/guidebook", "/quiz", "/welcome", "/avatar", "/jejak-rimba", "/kelompok"]
+
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isHub = pathname === "/hub"
-  const hideNavbar = pathname === "/" || pathname === "/guidebook" || pathname === "/quiz" || pathname === "/welcome" || pathname === "/avatar"
-  const hideFooter = pathname === "/" || pathname === "/guidebook" || pathname === "/quiz" || pathname === "/welcome" || pathname === "/avatar"
+  const showNavbar = !NO_NAVBAR.includes(pathname)
+  const showFooter = !NO_FOOTER.includes(pathname)
+  const hasTopPadding = showNavbar && !isHub
   const foliageVariant = FOLIAGE_ROUTES[pathname]
 
   return (
     <>
-      {!hideNavbar && <Navbar />}
-      <div className={`relative flex flex-col min-h-dvh ${!hideNavbar && !isHub ? "pt-14" : ""}`}>
+      {showNavbar && <Navbar />}
+      <div className="relative flex flex-col min-h-dvh">
         {foliageVariant && <BackgroundFoliage variant={foliageVariant} />}
         <AnimatePresence mode="wait">
           <motion.div
@@ -37,13 +41,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="relative flex-1 z-10"
+            transition={{ duration: 0.15, ease: "easeInOut" }}
+            className={`relative flex-1 z-10${hasTopPadding ? " pt-14" : ""}`}
           >
             {children}
           </motion.div>
         </AnimatePresence>
-        {!hideFooter && <Footer />}
+        {showFooter && <Footer />}
       </div>
     </>
   )

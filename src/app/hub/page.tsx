@@ -554,7 +554,7 @@ export default function HubPage() {
               transition={{ delay: i * 0.08, duration: 0.4 }}
               className="group rounded-xl border border-fern-mist/60 bg-white/50 overflow-hidden"
             >
-              <summary className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer text-sm font-heading text-jungle-deep hover:text-jungle-deep/80 transition-colors [&::-webkit-details-marker]:hidden">
+              <summary className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer text-lg font-heading text-jungle-deep hover:text-jungle-deep/80 transition-colors [&::-webkit-details-marker]:hidden">
                 {item.question}
                 <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-moss transition-transform duration-200 group-open:rotate-180">
                   <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

@@ -4,6 +4,7 @@ export interface Participant {
   nomor_kelompok: number
   nama_kelompok: string
   mentor: string
+  prodi: string
 }
 
 export interface GuidebookSection {
@@ -68,6 +69,15 @@ export interface JejakRimbaNode {
   latar?: "canopy" | "river" | "cave" | "clearing" | "ruins"
   pilihan: JejakRimbaPilihan[]
   ending?: JejakRimbaEnding
+}
+
+export interface KelompokInfo {
+  nomor_kelompok: number
+  nama_kelompok: string
+  deskripsi: string
+  mentor: string
+  prodi_mentor: string
+  link_grup_wa: string
 }
 
 export interface Progress {

@@ -4,69 +4,79 @@
     "nama": "Ahmad Fauzi",
     "nomor_kelompok": 1,
     "nama_kelompok": "Harimau Sumatra",
-    "mentor": "Kak Rina"
+    "mentor": "Kak Rina",
+    "prodi": "S1 Teknik Informatika"
   },
   {
     "nim": "24101002",
     "nama": "Siti Nurhaliza",
     "nomor_kelompok": 1,
     "nama_kelompok": "Harimau Sumatra",
-    "mentor": "Kak Rina"
+    "mentor": "Kak Rina",
+    "prodi": "S1 Manajemen"
   },
   {
     "nim": "24101003",
     "nama": "Budi Santoso",
     "nomor_kelompok": 2,
     "nama_kelompok": "Rusa Jawa",
-    "mentor": "Kak Dika"
+    "mentor": "Kak Dika",
+    "prodi": "S1 Akuntansi"
   },
   {
     "nim": "24101004",
     "nama": "Dewi Lestari",
     "nomor_kelompok": 2,
     "nama_kelompok": "Rusa Jawa",
-    "mentor": "Kak Dika"
+    "mentor": "Kak Dika",
+    "prodi": "S1 Ilmu Komunikasi"
   },
   {
     "nim": "24101005",
     "nama": "Rizky Pratama",
     "nomor_kelompok": 3,
     "nama_kelompok": "Burung Cenderawasih",
-    "mentor": "Kak Sari"
+    "mentor": "Kak Sari",
+    "prodi": "S1 Teknik Informatika"
   },
   {
     "nim": "24101006",
     "nama": "Fitri Handayani",
     "nomor_kelompok": 3,
     "nama_kelompok": "Burung Cenderawasih",
-    "mentor": "Kak Sari"
+    "mentor": "Kak Sari",
+    "prodi": "S1 Desain Komunikasi Visual"
   },
   {
     "nim": "24101007",
     "nama": "Adi Nugroho",
     "nomor_kelompok": 4,
     "nama_kelompok": "Monyet Ekor Panjang",
-    "mentor": "Kak Bayu"
+    "mentor": "Kak Bayu",
+    "prodi": "S1 Manajemen"
   },
   {
     "nim": "24101008",
     "nama": "Rina Wulandari",
     "nomor_kelompok": 4,
     "nama_kelompok": "Monyet Ekor Panjang",
-    "mentor": "Kak Bayu"
+    "mentor": "Kak Bayu",
+    "prodi": "S1 Akuntansi"
   },
   {
     "nim": "24101009",
     "nama": "Dimas Ardiansyah",
     "nomor_kelompok": 5,
     "nama_kelompok": "Kupu-Kupu Raja",
-    "mentor": "Kak Intan"
+    "mentor": "Kak Intan",
+    "prodi": "S1 Teknik Informatika"
   },
   {
     "nim": "24101010",
     "nama": "Nita Permata",
     "nomor_kelompok": 5,
     "nama_kelompok": "Kupu-Kupu Raja",
-    "mentor": "Kak Intan"
+    "mentor": "Kak Intan",
+    "prodi": "S1 Ilmu Komunikasi"
   }
 ]
