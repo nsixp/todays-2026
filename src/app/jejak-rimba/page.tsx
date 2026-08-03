@@ -10,18 +10,18 @@ import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
 import {
-  ArrowCounterClockwiseIcon as ArrowCounterClockwise,
-  CardsThreeIcon as CardsThree,
-  CaretLeftIcon as CaretLeft,
-  CompassRoseIcon as CompassRose,
-  FootprintsIcon as Footprints,
-  HouseLineIcon as HouseLine,
-  MapPinAreaIcon as MapPinArea,
-  PathIcon as Path,
-  QuotesIcon as Quotes,
-  SparkleIcon as Sparkle,
-  SunHorizonIcon as SunHorizon,
-} from "@phosphor-icons/react"
+  ArrowCounterClockwise,
+  CardsThree,
+  CaretLeft,
+  CompassRose,
+  Footprints,
+  HouseLine,
+  MapPinArea,
+  Path,
+  Quotes,
+  Sparkle,
+  SunHorizon,
+} from "@/components/icons/streamline"
 
 const LATAR_CONFIG: Record<string, { overlay: string; label: string }> = {
   canopy: {

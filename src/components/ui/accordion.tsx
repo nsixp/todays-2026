@@ -1,5 +1,5 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
-import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react"
+import { CaretDownIcon, CaretUpIcon } from "@/components/icons/streamline"
 
 import { cn } from "@/lib/utils"
 

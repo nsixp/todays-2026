@@ -1,12 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import {
-  CalendarBlankIcon as CalendarBlank,
-  ClockIcon as Clock,
-  FlagCheckeredIcon as FlagCheckered,
-  MapPinIcon as MapPin,
-} from "@phosphor-icons/react"
+import { CalendarBlank, Clock, FlagCheckered, MapPin } from "@/components/icons/streamline"
 import { getSchedule } from "@/lib/data"
 
 const schedule = getSchedule()

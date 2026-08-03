@@ -3,15 +3,15 @@
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import {
-  ArrowUpIcon as ArrowUp,
-  CompassIcon as Compass,
-  EnvelopeSimpleIcon as EnvelopeSimple,
-  GlobeIcon as Globe,
-  InstagramLogoIcon as InstagramLogo,
-  MapPinIcon as MapPin,
-  PhoneIcon as Phone,
-  YoutubeLogoIcon as YoutubeLogo,
-} from "@phosphor-icons/react"
+  ArrowUp,
+  Compass,
+  EnvelopeSimple,
+  Globe,
+  InstagramLogo,
+  MapPin,
+  Phone,
+  YoutubeLogo,
+} from "@/components/icons/streamline"
 import BackgroundFoliage from "@/components/background-foliage"
 import { Button } from "@/components/ui/button"
 
@@ -174,9 +174,17 @@ export default function Footer() {
           variants={FOOTER_ITEM_VARIANTS}
           className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between"
         >
-          <p className="text-[11px] text-warm-cream/35">
-            TODAYS 2026. PKKMB Telkom University Purwokerto.
-          </p>
+          <div className="space-y-1 text-[11px] text-warm-cream/35">
+            <p>TODAYS 2026. PKKMB Telkom University Purwokerto.</p>
+            <a
+              href="https://www.streamlinehq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-6 items-center transition-colors hover:text-warm-cream/65"
+            >
+              Ikon oleh Streamline
+            </a>
+          </div>
           <Button
             type="button"
             variant="ghost"

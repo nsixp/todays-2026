@@ -20,13 +20,13 @@ import {
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu"
 import {
-  ArrowLeftIcon as ArrowLeft,
-  CalendarBlankIcon as CalendarBlank,
-  CompassIcon as Compass,
+  ArrowLeft,
+  CalendarBlank,
+  Compass,
   ImageIcon,
-  ListIcon as List,
-  QuestionIcon as Question,
-} from "@phosphor-icons/react"
+  List,
+  Question,
+} from "@/components/icons/streamline"
 
 const NAV_ITEMS = [
   { label: "Kompas", href: "/kompas" },

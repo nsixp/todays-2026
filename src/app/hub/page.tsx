@@ -17,24 +17,24 @@ import scheduleData from "@/../data/schedule.json"
 import faqData from "@/../data/faq.json"
 import type { ScheduleItem, FAQItem, KompasItem } from "@/types"
 import {
-  ArrowRightIcon as ArrowRight,
-  ArrowUpRightIcon as ArrowUpRight,
-  BookOpenIcon as BookOpen,
-  BuildingsIcon as Buildings,
-  CalendarBlankIcon as CalendarBlank,
-  CameraIcon as Camera,
-  ClockIcon as Clock,
-  CompassIcon as Compass,
-  CrosshairIcon as Crosshair,
+  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  Buildings,
+  CalendarBlank,
+  Camera,
+  Clock,
+  Compass,
+  Crosshair,
   ImageIcon,
-  LaptopIcon as Laptop,
-  LeafIcon as Leaf,
-  MapPinIcon as MapPin,
-  MegaphoneSimpleIcon as MegaphoneSimple,
-  QuestionIcon as Question,
-  StackIcon as Stack,
-  UsersThreeIcon as UsersThree,
-} from "@phosphor-icons/react"
+  Laptop,
+  Leaf,
+  MapPin,
+  MegaphoneSimple,
+  Question,
+  Stack,
+  UsersThree,
+} from "@/components/icons/streamline"
 import kompasData from "@/../data/kompas.json"
 import Monyet from "@/components/icons/monyet"
 import Burung from "@/components/icons/burung"

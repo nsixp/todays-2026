@@ -2,21 +2,21 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import {
-  BooksIcon as Books,
-  BuildingsIcon as Buildings,
-  ChartBarIcon as ChartBar,
-  ClipboardTextIcon as ClipboardText,
-  EnvelopeIcon as Envelope,
-  FirstAidIcon as FirstAid,
-  FlaskIcon as Flask,
-  HandsPrayingIcon as HandsPraying,
-  LaptopIcon as Laptop,
-  MaskHappyIcon as MaskHappy,
-  MosqueIcon as Mosque,
-  SoccerBallIcon as SoccerBall,
-  UsersThreeIcon as UsersThree,
-  type Icon,
-} from "@phosphor-icons/react"
+  Books,
+  Buildings,
+  ChartBar,
+  ClipboardText,
+  Envelope,
+  FirstAid,
+  Flask,
+  HandsPraying,
+  Laptop,
+  MaskHappy,
+  Mosque,
+  SoccerBall,
+  UsersThree,
+  type StreamlineIcon,
+} from "@/components/icons/streamline"
 import type { KompasItem } from "@/types"
 
 interface KompasCardProps {
@@ -24,7 +24,7 @@ interface KompasCardProps {
   index: number
 }
 
-const ITEM_ICONS: Record<string, Icon> = {
+const ITEM_ICONS: Record<string, StreamlineIcon> = {
   "🏛️": Buildings,
   "🔬": Flask,
   "📚": Books,

@@ -4,19 +4,19 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import {
-  ArrowLeftIcon as ArrowLeft,
-  ArrowRightIcon as ArrowRight,
-  BookOpenTextIcon as BookOpenText,
-  CheckIcon as Check,
-  ClockIcon as Clock,
-  CompassIcon as Compass,
-  FlagIcon as Flag,
-  ListChecksIcon as ListChecks,
-  MapTrifoldIcon as MapTrifold,
-  MegaphoneIcon as Megaphone,
-  PhoneCallIcon as PhoneCall,
-  ShirtFoldedIcon as ShirtFolded,
-} from "@phosphor-icons/react"
+  ArrowLeft,
+  ArrowRight,
+  BookOpenText,
+  Check,
+  Clock,
+  Compass,
+  Flag,
+  ListChecks,
+  MapTrifold,
+  Megaphone,
+  PhoneCall,
+  ShirtFolded,
+} from "@/components/icons/streamline"
 import { useProgress } from "@/hooks/use-progress"
 import { Button } from "@/components/ui/button"
 import type { GuidebookSection } from "@/types"

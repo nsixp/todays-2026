@@ -1,11 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import {
-  ChatCircleDotsIcon as ChatCircleDots,
-  LeafIcon as Leaf,
-  QuestionIcon as Question,
-} from "@phosphor-icons/react"
+import { ChatCircleDots, Leaf, Question } from "@/components/icons/streamline"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { getFAQ } from "@/lib/data"
 

@@ -2,12 +2,7 @@
 
 import { useState } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import {
-  BuildingsIcon as Buildings,
-  CompassRoseIcon as CompassRose,
-  LaptopIcon as Laptop,
-  UsersThreeIcon as UsersThree,
-} from "@phosphor-icons/react"
+import { Buildings, CompassRose, Laptop, UsersThree } from "@/components/icons/streamline"
 import { getKompas } from "@/lib/data"
 import type { KompasItem } from "@/types"
 import KompasCard from "@/components/kompas-card"

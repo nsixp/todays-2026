@@ -7,11 +7,7 @@ import BackgroundFoliage from "@/components/background-foliage"
 import DappledLight from "@/components/dappled-light"
 import AmbientParticles from "@/components/ambient-particles"
 import ForestSilhouettes from "@/components/forest-silhouettes"
-import {
-  BookOpenIcon as BookOpen,
-  QuestionIcon as Question,
-  UserIcon as User,
-} from "@phosphor-icons/react"
+import { BookOpen, Question, User } from "@/components/icons/streamline"
 
 const containerVariants = {
   visible: {

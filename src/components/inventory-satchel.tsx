@@ -3,14 +3,14 @@
 import { useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import {
-  BackpackIcon as Backpack,
-  BookIcon as Book,
-  CheckIcon as Check,
-  CircleIcon as Circle,
-  ClockIcon as Clock,
-  PencilSimpleIcon as PencilSimple,
-  StarIcon as Star,
-} from "@phosphor-icons/react"
+  Backpack,
+  Book,
+  Check,
+  Circle,
+  Clock,
+  PencilSimple,
+  Star,
+} from "@/components/icons/streamline"
 
 interface InventorySatchelProps {
   guidebookDone: boolean

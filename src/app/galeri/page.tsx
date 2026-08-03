@@ -3,10 +3,7 @@
 import { useCallback, useState } from "react"
 import Image from "next/image"
 import { motion, useReducedMotion } from "framer-motion"
-import {
-  ApertureIcon as Aperture,
-  CornersOutIcon as CornersOut,
-} from "@phosphor-icons/react"
+import { Aperture, CornersOut } from "@/components/icons/streamline"
 import { getGallery } from "@/lib/data"
 import Lightbox from "@/components/lightbox"
 

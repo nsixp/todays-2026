@@ -1,5 +1,5 @@
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu"
-import { CaretDownIcon } from "@phosphor-icons/react"
+import { CaretDownIcon } from "@/components/icons/streamline"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
