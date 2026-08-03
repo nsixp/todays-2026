@@ -327,11 +327,8 @@ export default function HubPage() {
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="order-2 text-center md:order-1 md:text-left"
           >
-            <span className="mb-5 inline-block rounded-full border border-jungle-deep/10 bg-warm-cream/55 px-4 py-1.5 text-[10px] font-semibold tracking-[0.2em] text-moss backdrop-blur-sm">
-              TODAYS 2026
-            </span>
             <h1 className="font-heading text-3xl leading-[1.06] text-jungle-deep text-wrap-balance sm:text-5xl lg:text-7xl">
-              Selamat datang di rimba, {progress.nama || "Pejuang Rimba"}
+              Selamat datang, {progress.nama || "Pejuang Rimba"}
             </h1>
             <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-moss text-wrap-pretty sm:text-base md:mx-0">
               Baca panduan, uji pemahamanmu, lalu temukan kelompok PKKMB dalam satu perjalanan.
@@ -380,9 +377,6 @@ export default function HubPage() {
                 <AvatarIcon className="h-full w-full drop-shadow-[0_16px_18px_rgba(15,36,26,0.18)]" />
               </motion.div>
               <div className="absolute inset-x-[18%] bottom-[12%] h-8 rounded-[50%] bg-jungle-shadow/15 blur-lg" />
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full border border-fern-mist/70 bg-warm-cream/78 px-4 py-2 text-xs font-medium text-jungle-deep shadow-sm backdrop-blur-sm">
-                Penjelajah {progress.avatar}
-              </div>
             </div>
           </motion.div>
         </div>
@@ -397,7 +391,7 @@ export default function HubPage() {
 
       <SectionBody>
         <SectionHeader title="Jelajahi" subtitle="Pilih petualanganmu di hutan rimba" />
-        <div className="relative mx-auto h-[35rem] w-full max-w-5xl sm:h-[42rem] md:h-[40rem]">
+        <div className="relative mx-auto h-140 w-full max-w-5xl sm:h-168 md:h-160">
           <TrailMap
             variant="mobile"
             className="md:hidden"

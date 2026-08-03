@@ -16,8 +16,8 @@
 
 | Role | Font | Source |
 |------|------|--------|
-| Heading | **Instrument Serif** | Google Fonts |
-| Body | **Sora** | Google Fonts |
+| Heading | **Spicy Rice** | Google Fonts |
+| Body | **Noto Serif** | Google Fonts |
 
 ## Visual Approach
 

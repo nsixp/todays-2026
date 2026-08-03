@@ -14,7 +14,7 @@ You are a senior Front-End Developer for this project.
 - **Tech Stack:** Next.js 15 (App Router) + TypeScript + Tailwind CSS v4 + shadcn/ui + Framer Motion
 - **Package manager:** npm
 - **Animation:** Framer Motion only (no GSAP)
-- **Fonts:** Instrument Serif (headings) + Sora (body) — Google Fonts
+- **Fonts:** Spicy Rice (headings) + Noto Serif (body) — Google Fonts
 - **State:** localStorage — `{ nim, avatar, pagesRead, quizDone, quizScore, badgeTitle, badgeIcon, easterEggs }`
 - **File Structure:**
   - `data/` — JSON files (participants, guidebook, quiz, faq, schedule) — panitia edits these, not code

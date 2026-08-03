@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-noto-serif), ui-serif, Georgia, serif;
+  --font-heading: var(--font-spicy-rice), ui-serif, Georgia, serif;
 
   --color-jungle-deep: #1A3A2B;
   --color-moss: #4E7053;

@@ -8,7 +8,7 @@
 
 - [ ] **1.1** Init Next.js project + install dependencies
   - `create-next-app` + `framer-motion` + `shadcn/ui` init + `shadcn add button card progress accordion dialog`
-- [ ] **1.2** Global config — Tailwind palette tokens, font imports (Instrument Serif + Sora), CSS variables, `layout.tsx` shell
+- [ ] **1.2** Global config — Tailwind palette tokens, font imports (Spicy Rice + Noto Serif), CSS variables, `layout.tsx` shell
 - [ ] **1.3** Create `data/` JSON files — `participants.json`, `guidebook.json`, `quiz.json`, `faq.json`, `schedule.json` (dummy content)
 - [ ] **1.4** Types (`src/types/index.ts`) + data loader (`src/lib/data.ts`) + `use-progress` hook (`src/hooks/use-progress.ts`)
 
@@ -75,7 +75,7 @@
   - Babak 2: "Jalur Setapak" — parallax foreground/background (siluet hewan, jalur)
   - Babak 3: "Tiga Titik Cahaya" — floating glowing orbs dengan parallax
   - Babak 4: "Petualanganmu Dimulai" — CTA "Mulai Petualangan"
-  - Setiap babak: `min-h-dvh`, teks overlay dengan Instrument Serif
+  - Setiap babak: `min-h-dvh`, teks overlay dengan Spicy Rice
 - [ ] **9.5** Global page transitions — `src/components/layout-wrapper.tsx`
   - Wrap page content dengan `AnimatePresence mode="wait"` + `motion.div` fade/slide
   - Key berdasarkan `pathname` untuk trigger re-animasi tiap navigasi

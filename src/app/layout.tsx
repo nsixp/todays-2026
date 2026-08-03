@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Sora } from "next/font/google";
+import { Noto_Serif, Spicy_Rice } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/layout-wrapper";
 
-const sora = Sora({
-  variable: "--font-sora",
+const notoSerif = Noto_Serif({
+  variable: "--font-noto-serif",
   subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const spicyRice = Spicy_Rice({
+  variable: "--font-spicy-rice",
   weight: "400",
   subsets: ["latin"],
 });
@@ -27,7 +27,7 @@ export default function RootLayout({
     <html
       lang="id"
       data-scroll-behavior="smooth"
-      className={`${sora.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${notoSerif.variable} ${spicyRice.variable} h-full antialiased`}
     >
       <body className="min-h-dvh flex flex-col">
         <LayoutWrapper>{children}</LayoutWrapper>

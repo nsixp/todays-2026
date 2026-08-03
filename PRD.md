@@ -151,10 +151,10 @@ Diurutkan berdasarkan prioritas:
 
 | Role | Font | Sumber |
 |------|------|--------|
-| Heading | **Instrument Serif** | Google Fonts |
-| Body | **Sora** | Google Fonts |
+| Heading | **Spicy Rice** | Google Fonts |
+| Body | **Noto Serif** | Google Fonts |
 
-*Keputusan: menghindari Inter/Roboto/Open Sans (AI slop). Instrument Serif memberi karakter editorial hangat, Sora sebagai sans pendamping yang tidak berebut perhatian.*
+*Keputusan: menghindari Inter/Roboto/Open Sans (AI slop). Spicy Rice memberi karakter playful yang kuat untuk judul, sedangkan Noto Serif menjaga teks isi tetap hangat dan mudah dibaca.*
 
 ### 8.3 Color Palette (Hybrid A + C)
 
@@ -455,7 +455,7 @@ todays-2026/
 - **Tampilan:**
   - Background: bg-jungle-deep
   - Text: warm-cream
-  - Font: sans (Sora)
+  - Font: body (Noto Serif)
 - **Sections:**
   - Kiri: Logo TODAYS + tagline
   - Tengah: Sitemap (Hub, Guidebook, Kompas, Galeri, Jadwal, FAQ)

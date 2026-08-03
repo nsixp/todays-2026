@@ -11,7 +11,7 @@
 |-------|---------|
 | Arah visual | Game-like (illustrated, playful) + Minimalist natural (organic textures, intentional whitespace) |
 | Palette | Existing 11 jungle tokens — tidak ada warna baru |
-| Font | Instrument Serif (heading) + Sora (body) — existing |
+| Font | Spicy Rice (heading) + Noto Serif (body) — current |
 | Tone | Petualangan, hangat, misterius — bukan kartun |
 
 ### 1.1 Color Strategy
