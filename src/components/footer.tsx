@@ -174,16 +174,8 @@ export default function Footer() {
           variants={FOOTER_ITEM_VARIANTS}
           className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between"
         >
-          <div className="space-y-1 text-[11px] text-warm-cream/35">
+          <div className="text-xs text-warm-cream/35">
             <p>TODAYS 2026. PKKMB Telkom University Purwokerto.</p>
-            <a
-              href="https://www.streamlinehq.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-6 items-center transition-colors hover:text-warm-cream/65"
-            >
-              Ikon oleh Streamline
-            </a>
           </div>
           <Button
             type="button"
